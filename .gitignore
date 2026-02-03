@@ -3,3 +3,4 @@ out/
 .next/
 .env
 .vscode/
+pnpm-lock.yaml
