@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Publications } from "@/components/publications"
 import { ExternalLink } from "lucide-react"
+import Image from "next/image"
 
 export const metadata = {
   title: "About | Islam I. Abdulaal",
@@ -43,41 +44,53 @@ export default function AboutPage() {
     <main className="bg-background text-foreground">
       {/* Hero Section */}
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
           {/* Profile */}
           <div className="md:col-span-1">
             <div className="sticky top-24">
-              <div className="aspect-square bg-card rounded-lg border border-border flex items-center justify-center mb-6">
-                <div className="text-6xl">👨‍🔬</div>
-              </div>
-              <h1 className="text-3xl font-bold text-foreground mb-2">Islam I. Abdulaal</h1>
-              <div className="flex flex-wrap gap-3 mb-4 text-sm">
-                <a
-                  href="https://orcid.org/0009-0004-9300-3936"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent hover:text-accent/80 transition-colors flex items-center gap-1"
-                >
-                  ORCID: 0009-0004-9300-3936
-                </a>
-                <span className="text-muted-foreground">•</span>
-                <a
-                  href="https://publons.com/researcher"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent hover:text-accent/80 transition-colors flex items-center gap-1"
-                >
-                  ResearcherID: Available
-                </a>
-              </div>
-              <p className="text-accent font-semibold mb-4">Research Intern, Integrated Photonics</p>
-              <p className="text-muted-foreground text-sm mb-6">
-                Alexandria, Egypt • +20-120-460-9271 • eslam.ibrahim2026@alexu.edu.eg
-              </p>
-              <div className="flex gap-3">
-                <Link href="/contact">
-                  <Button className="bg-accent hover:bg-accent/90 text-accent-foreground flex-1">Get in Touch</Button>
-                </Link>
+              <div className="grid grid-cols-[auto,1fr] gap-4 items-center mb-6">
+                <div className="flex-shrink-0">
+                  <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-[270px] md:h-[270px] bg-card rounded-lg border border-border overflow-hidden">
+                    <Image
+                      src="/personal-pic.png"
+                      alt="Personal Picture"
+                      fill
+                      sizes="(max-width: 640px) 160px, (max-width: 1024px) 224px, 270px"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold text-foreground mb-2">Islam I. Abdulaal</h1>
+                  <div className="flex flex-wrap gap-3 mb-4 text-sm">
+                    <a
+                      href="https://orcid.org/0009-0004-9300-3936"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:text-accent/80 transition-colors flex items-center gap-1"
+                    >
+                      ORCID: 0009-0004-9300-3936
+                    </a>
+                    <span className="text-muted-foreground">•</span>
+                    <a
+                      href="https://publons.com/researcher"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:text-accent/80 transition-colors flex items-center gap-1"
+                    >
+                      ResearcherID: Available
+                    </a>
+                  </div>
+                  <p className="text-accent font-semibold mb-2">Research Intern, Integrated Photonics</p>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Alexandria, Egypt • +20-120-460-9271 • eslam.ibrahim2026@alexu.edu.eg
+                  </p>
+                  <div className="flex gap-3">
+                    <Link href="/contact">
+                      <Button className="bg-accent hover:bg-accent/90 text-accent-foreground flex-1">Get in Touch</Button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { Menu, X, Linkedin, Github, Mail } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
@@ -25,7 +26,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="font-bold text-xl text-foreground hover:text-accent transition-colors">
-            Islam Abdulaal
+          <Image src="/logo.png" alt="Logo" width={42} height={42} className="inline-block h-8 w-auto mr-2 align-middle" />
           </Link>
 
           {/* Desktop Navigation */}
