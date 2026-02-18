@@ -3,9 +3,6 @@ const nextConfig = {
   // Enable static export so the app can be deployed to GitHub Pages
   output: "export",
 
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
