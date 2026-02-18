@@ -151,8 +151,6 @@ export default function AboutPage() {
     },
   ]
 
-  const nameVariants = ["Islam I. Abdulaal", "Islam Ibrahim Abdulaal", "I. I. Abdulaal"]
-
   return (
     <main className="bg-background text-foreground">
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -170,7 +168,6 @@ export default function AboutPage() {
               </div>
               <h1 className="text-3xl font-bold mb-2">{personConfig.name}</h1>
               <p className="text-accent font-semibold mb-2">{personConfig.role}</p>
-              <p className="text-xs text-muted-foreground mb-1">Also published as: {nameVariants.join(" | ")}</p>
               <p className="text-sm text-muted-foreground mb-4">
                 {personConfig.location} | {personConfig.affiliation}
               </p>
