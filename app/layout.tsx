@@ -1,18 +1,35 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import { Source_Serif_4, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+})
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+})
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  metadataBase: new URL("https://iabdul-aal.github.io"),
+  title: "Islam I. Abdulaal | Integrated Photonics Research",
+  description:
+    "Research portfolio of Islam I. Abdulaal, focused on integrated photonics, quantum photonics, nonlinear optics, and photonic-electronic co-design.",
+  applicationName: "Islam Abdulaal Research Portfolio",
+  keywords: [
+    "integrated photonics",
+    "quantum photonics",
+    "nonlinear optics",
+    "silicon photonics",
+    "PINNs",
+    "Alexandria University",
+  ],
+  authors: [{ name: "Islam I. Abdulaal" }],
   icons: {
     icon: [
       {
@@ -39,11 +56,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className={`${spaceGrotesk.variable} ${sourceSerif.variable} font-sans antialiased`}>
         <Navigation />
         {children}
         <Footer />
-        <Analytics />
       </body>
     </html>
   )

@@ -95,8 +95,9 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: var(--font-space-grotesk), "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Consolas", "Courier New", monospace;
+  --font-display: var(--font-source-serif), "Times New Roman", serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -141,6 +142,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(900px circle at 15% -15%, rgba(182, 140, 97, 0.22), transparent 50%),
+      radial-gradient(650px circle at 90% 5%, rgba(45, 88, 132, 0.2), transparent 45%),
+      linear-gradient(180deg, #0a1723 0%, #0b1826 55%, #09131e 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
   
   /* Custom scrollbar styling */
@@ -166,5 +173,58 @@
   * {
     scrollbar-width: thin;
     scrollbar-color: #b68c61 #0a1723;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slow-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-grid {
+    background-image: linear-gradient(rgba(205, 205, 205, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(205, 205, 205, 0.06) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.75s ease-out both;
+  }
+
+  .animate-fade-up-delay {
+    animation: fade-up 0.85s ease-out 0.12s both;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: fade-up 0.95s ease-out 0.22s both;
+  }
+
+  .animate-slow-float {
+    animation: slow-float 6s ease-in-out infinite;
   }
 }

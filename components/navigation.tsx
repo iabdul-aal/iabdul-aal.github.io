@@ -15,18 +15,29 @@ export function Navigation() {
     { href: "/articles", label: "Articles" },
     { href: "/materials", label: "Materials" },
     { href: "/talks", label: "Talks" },
+    { href: "/news", label: "Achievements" },
     { href: "/mentorship", label: "Mentorship" },
     { href: "/services", label: "Services" },
     { href: "/contact", label: "Contact" },
   ]
 
   return (
-    <nav className="sticky top-0 z-50 bg-background border-b border-border">
+    <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="font-bold text-xl text-foreground hover:text-accent transition-colors">
-          <Image src="/logo.png" alt="Logo" width={42} height={42} className="inline-block h-8 w-auto mr-2 align-middle" />
+          <Link href="/" className="flex items-center gap-2 text-foreground hover:text-accent transition-colors">
+            <Image
+              src="/logo.png"
+              alt="Islam Abdulaal logo"
+              width={42}
+              height={42}
+              className="inline-block h-8 w-auto align-middle"
+            />
+            <div className="hidden md:block">
+              <p className="text-sm font-semibold leading-none">Islam I. Abdulaal</p>
+              <p className="text-[11px] text-muted-foreground leading-none mt-1">Integrated Photonics</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar, ExternalLink } from "lucide-react"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Articles | Islam Abdulaal",
@@ -15,7 +16,7 @@ export default function ArticlesPage() {
         "Deep dive into the fundamentals of integrated photonics, key technologies, and real-world applications in communications and computing.",
       date: "2024",
       readTime: "12 min read",
-      url: "https://medium.com/",
+      url: socialLinks.medium,
       featured: true,
     },
     {
@@ -24,7 +25,7 @@ export default function ArticlesPage() {
         "Exploring how machine learning and physics constraints can accelerate the design of optimal photonic devices.",
       date: "2024",
       readTime: "15 min read",
-      url: "https://medium.com/",
+      url: socialLinks.medium,
       featured: true,
     },
     {
@@ -33,7 +34,7 @@ export default function ArticlesPage() {
         "Technical overview of integrated quantum photonic devices and their role in quantum computing and quantum networks.",
       date: "2024",
       readTime: "10 min read",
-      url: "https://medium.com/",
+      url: socialLinks.medium,
       featured: true,
     },
   ]
@@ -52,7 +53,7 @@ export default function ArticlesPage() {
               Technical writing and research reflections published on Medium about integrated photonics and hardware
               innovation.
             </p>
-            <a href="https://medium.com/" target="_blank" rel="noopener noreferrer">
+            <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 Read on Medium <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
@@ -142,7 +143,7 @@ export default function ArticlesPage() {
             Follow my Medium profile to get notified when new articles are published on photonics research and hardware
             development.
           </p>
-          <a href="https://medium.com/" target="_blank" rel="noopener noreferrer">
+          <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
               Follow on Medium
             </Button>

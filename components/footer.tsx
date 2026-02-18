@@ -13,8 +13,8 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-foreground mb-4">About</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              ECE researcher and hardware designer specializing in integrated photonics, quantum photonics, and
-              photonic-electronic co-design.
+              Research-focused portfolio documenting work in integrated photonics, quantum devices, nonlinear optics,
+              and photonic-electronic co-design.
             </p>
           </div>
 
@@ -33,8 +33,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ventures" className="text-muted-foreground hover:text-accent transition-colors">
+                  Ventures
+                </Link>
+              </li>
+              <li>
                 <Link href="/materials" className="text-muted-foreground hover:text-accent transition-colors">
                   Materials
+                </Link>
+              </li>
+              <li>
+                <Link href="/news" className="text-muted-foreground hover:text-accent transition-colors">
+                  Achievements
                 </Link>
               </li>
               <li>
