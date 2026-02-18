@@ -59,7 +59,7 @@ export default function AboutPage() {
       summary: "Completed intensive research training in quantum photonics and independent problem execution.",
     },
     {
-      role: "Undergraduate Researcher",
+      role: "Research Intern",
       org: "OPST Group, Alexandria University",
       period: "Jul 2023 - Aug 2025",
       summary: "Worked on FBG-based sensing and photonic modeling for biomedical and communications use cases.",
@@ -77,7 +77,7 @@ export default function AboutPage() {
 
   const awards = [
     {
-      title: "Alexandria University Technology Park (AUTP) Research Grant",
+      title: "Alexandria University Technology Park (AUTP) Research Grant - Candidate (Withdrew due to time commitment)",
       period: "2025",
     },
     {
@@ -88,37 +88,21 @@ export default function AboutPage() {
       title: "ICMTC Artificial Intelligence Contest (AIC-2) - 4th Place",
       period: "2024",
     },
-    {
-      title: "Huawei ICT Skills Competition - National Finalist (AI Track)",
-      period: "2023",
-    },
-    {
-      title: "NASA Space Apps Challenge - Global Nominee",
-      period: "2021",
-    },
-    {
-      title: "International Youth Math Challenge (IYMC) - Finalist",
-      period: "2021",
-    },
-  ]
-
-  const leadership = [
-    {
-      role: "Chairman, IEEE SSCS Alexandria University SB Chapter",
-      period: "Feb 2025 - Oct 2025",
-      summary: "Led chapter growth, national outreach, and technical training programs.",
-    },
-    {
-      role: "General Coordinator, Education Clinic (USA-Registered NGO)",
-      period: "Aug 2021 - Sep 2023",
-      summary: "Managed 80+ volunteers and launched programs serving 250,000+ students across MENA.",
-    },
   ]
 
   const memberships = [
-    "Institute of Electrical and Electronics Engineers (IEEE) - Student Member (2025 - Present)",
-    "IEEE Solid-State Circuits Society (SSCS) (2025 - Present)",
-    "IEEE Photonics Society (2025 - Present)",
+    {
+      name: "Institute of Electrical and Electronics Engineers (IEEE)",
+      detail: "Student Member | 2025 - Present",
+    },
+    {
+      name: "IEEE Solid-State Circuits Society (SSCS)",
+      detail: "Member | 2025 - Present",
+    },
+    {
+      name: "IEEE Photonics Society",
+      detail: "Member | 2025 - Present",
+    },
   ]
 
   return (
@@ -265,25 +249,28 @@ export default function AboutPage() {
       <section className="py-16 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-6">Core Technical Stack</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="space-y-4">
             {[
               { label: "Photonics Tools", value: "Lumerical, COMSOL, MATLAB" },
               { label: "Programming", value: "Python, C/C++, MATLAB" },
               { label: "ML Workflow", value: "PyTorch, TensorFlow, PINNs" },
             ].map((item) => (
-              <div key={item.label} className="p-5 rounded-lg border border-border bg-background">
-                <p className="text-sm font-semibold text-accent mb-2">{item.label}</p>
-                <p className="text-sm text-muted-foreground">{item.value}</p>
-              </div>
+              <article
+                key={item.label}
+                className="p-5 rounded-xl border border-border bg-background sm:flex sm:items-center sm:justify-between gap-4"
+              >
+                <p className="text-sm font-semibold text-accent">{item.label}</p>
+                <p className="text-sm text-muted-foreground mt-2 sm:mt-0">{item.value}</p>
+              </article>
             ))}
           </div>
 
-          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="mt-12 space-y-10">
             <section>
               <h3 className="text-2xl font-bold mb-4">Awards</h3>
               <div className="space-y-4">
                 {awards.map((item) => (
-                  <article key={`${item.title}-${item.period}`} className="p-4 rounded-lg border border-border bg-background">
+                  <article key={`${item.title}-${item.period}`} className="p-5 rounded-xl border border-border bg-background">
                     <p className="text-sm font-semibold">{item.title}</p>
                     <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
                   </article>
@@ -292,26 +279,14 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-bold mb-4">Leadership</h3>
+              <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
-                {leadership.map((item) => (
-                  <article key={`${item.role}-${item.period}`} className="p-4 rounded-lg border border-border bg-background">
-                    <p className="text-sm font-semibold">{item.role}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{item.summary}</p>
+                {memberships.map((item) => (
+                  <article key={item.name} className="p-5 rounded-xl border border-border bg-background">
+                    <p className="text-sm font-semibold">{item.name}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
                   </article>
                 ))}
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-2xl font-bold mb-4">Memberships</h3>
-              <div className="p-4 rounded-lg border border-border bg-background">
-                <ul className="space-y-3 text-sm text-muted-foreground list-disc list-inside">
-                  {memberships.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
               </div>
             </section>
           </div>
