@@ -18,7 +18,6 @@ export function Navigation() {
     { href: "/articles", label: "Articles" },
     { href: "/materials", label: "Materials" },
     { href: "/talks", label: "Talks" },
-    { href: "/news", label: "Highlights" },
     { href: "/mentorship", label: "Mentorship" },
     { href: "/services", label: "Services" },
   ]
