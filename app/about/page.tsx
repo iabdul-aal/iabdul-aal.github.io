@@ -22,6 +22,24 @@ type OrcidPublication = {
   url?: string
 }
 
+type OrcidProfile = {
+  fetchedAt?: string
+  profile?: {
+    biography?: string
+    keywords?: string[]
+  }
+  educations?: Array<{
+    degree?: string
+    org?: string
+    period?: string
+    summary?: string
+  }>
+  memberships?: Array<{
+    organization?: string
+    detail?: string
+  }>
+}
+
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
 
 function extractArxivId(doi: string, url: string): string | undefined {
@@ -71,8 +89,60 @@ async function loadPublications(): Promise<Publication[]> {
   }
 }
 
+async function loadOrcidProfile(): Promise<OrcidProfile | null> {
+  try {
+    const filePath = join(process.cwd(), "orcid_profile.json")
+    const raw = await readFile(filePath, "utf8")
+    const parsed = JSON.parse(raw) as OrcidProfile
+
+    if (!parsed || typeof parsed !== "object") {
+      return null
+    }
+
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+function formatSyncedDate(rawValue?: string): string | null {
+  if (!rawValue) {
+    return null
+  }
+
+  const parsed = new Date(rawValue)
+  if (Number.isNaN(parsed.getTime())) {
+    return null
+  }
+
+  return parsed.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
+
+function biographyPreview(biography: string | undefined, fallback: string[]): string[] {
+  if (!biography) {
+    return fallback
+  }
+
+  const sentences = biography
+    .split(/(?<=[.!?])\s+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+
+  const first = sentences.slice(0, 2).join(" ")
+  const second = sentences.slice(2, 4).join(" ")
+  const combined = [first, second].filter(Boolean)
+
+  return combined.length > 0 ? combined : fallback
+}
+
 export default async function AboutPage() {
   const publications = await loadPublications()
+  const orcidProfile = await loadOrcidProfile()
+  const syncedDate = formatSyncedDate(orcidProfile?.fetchedAt)
 
   const focusAreas = [
     {
@@ -200,6 +270,33 @@ export default async function AboutPage() {
     },
   ]
 
+  const fallbackProfileParagraphs = [
+    "I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University with a research focus on integrated photonics and device-level engineering.",
+    "My recent work centers on physics-informed and optimization-guided workflows that support faster, more reliable design decisions for photonic devices.",
+    "I currently contribute at NanoPhoto Lab (A*STAR), where I work on integrated quantum photonics modeling flows that balance performance, robustness, and practical computation constraints.",
+  ]
+
+  const profileParagraphs = biographyPreview(orcidProfile?.profile?.biography, fallbackProfileParagraphs)
+  const orcidKeywords = (orcidProfile?.profile?.keywords ?? []).slice(0, 6)
+
+  const educationEntries = (orcidProfile?.educations && orcidProfile.educations.length > 0)
+    ? orcidProfile.educations.map((item) => ({
+        degree: item.degree ?? "Education",
+        org: item.org ?? "",
+        period: item.period ?? "",
+        summary: item.summary ?? "",
+        highlights: [] as string[],
+      }))
+    : education
+
+  const mainMembership =
+    orcidProfile?.memberships && orcidProfile.memberships.length > 0
+      ? {
+          name: orcidProfile.memberships[0].organization ?? memberships.main.name,
+          detail: orcidProfile.memberships[0].detail ?? memberships.main.detail,
+        }
+      : memberships.main
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -281,19 +378,11 @@ export default async function AboutPage() {
           <div className="lg:col-span-2 space-y-10">
             <section>
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
+              {syncedDate && <p className="text-xs text-muted-foreground mb-4">Auto-synced from ORCID on {syncedDate}</p>}
               <div className="space-y-4 text-muted-foreground">
-                <p>
-                  I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University with
-                  a research focus on integrated photonics and device-level engineering.
-                </p>
-                <p>
-                  My recent work centers on physics-informed and optimization-guided workflows that support faster,
-                  more reliable design decisions for photonic devices.
-                </p>
-                <p>
-                  I currently contribute at NanoPhoto Lab (A*STAR), where I work on integrated quantum photonics
-                  modeling flows that balance performance, robustness, and practical computation constraints.
-                </p>
+                {profileParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
               <div className="mt-5 p-5 rounded-xl border border-border bg-card/60">
                 <p className="text-sm font-semibold mb-3">Current Priorities</p>
@@ -319,12 +408,24 @@ export default async function AboutPage() {
                   </article>
                 ))}
               </div>
+              {orcidKeywords.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {orcidKeywords.map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="px-2.5 py-1 rounded-full border border-border text-xs text-muted-foreground bg-card/50"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              )}
             </section>
 
             <section>
               <h2 className="text-2xl font-bold mb-4">Education</h2>
               <div className="space-y-6">
-                {education.map((item) => (
+                {educationEntries.map((item) => (
                   <article key={`${item.degree}-${item.org}`} className="pb-6 border-b border-border last:border-b-0 last:pb-0">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                       <div>
@@ -333,12 +434,14 @@ export default async function AboutPage() {
                       </div>
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
-                    <p className="text-sm text-muted-foreground">{item.summary}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc list-inside">
-                      {item.highlights.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
+                    {item.summary && <p className="text-sm text-muted-foreground">{item.summary}</p>}
+                    {item.highlights.length > 0 && (
+                      <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                        {item.highlights.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
                   </article>
                 ))}
               </div>
@@ -422,8 +525,8 @@ export default async function AboutPage() {
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
-                  <p className="text-sm font-semibold">{memberships.main.name}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{memberships.main.detail}</p>
+                  <p className="text-sm font-semibold">{mainMembership.name}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{mainMembership.detail}</p>
                 </article>
                 <div className="relative space-y-4 sm:pl-8">
                   <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />

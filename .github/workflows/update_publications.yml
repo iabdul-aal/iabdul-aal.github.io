@@ -1,4 +1,4 @@
-name: Update ORCID Publications
+name: Update ORCID Academic Data
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  update-publications:
+  update-academic-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,23 +25,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Fetch latest publications from ORCID
-        run: python scripts/fetch_publications.py
+      - name: Fetch latest publications and profile data from ORCID
+        run: |
+          python scripts/fetch_publications.py
+          python scripts/fetch_orcid_profile.py
 
       - name: Detect changes
         id: diff
         run: |
-          if git diff --quiet -- publications.json; then
+          if git diff --quiet -- publications.json orcid_profile.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit and push publications.json
+      - name: Commit and push academic data files
         if: steps.diff.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add publications.json
-          git commit -m "chore: update publications from ORCID"
+          git add publications.json orcid_profile.json
+          git commit -m "chore: update ORCID academic data"
           git push
