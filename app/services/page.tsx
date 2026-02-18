@@ -26,6 +26,18 @@ export default function ServicesPage() {
       description: "Method-level support for physics-aware modeling and inverse-design style investigations.",
       scope: ["PINN problem setup guidance", "Model and objective selection", "Validation strategy review", "Iteration and trade-off analysis"],
     },
+    {
+      title: "Mentorship",
+      description: "1-on-1 guidance for students and early researchers in integrated photonics and research workflows.",
+      scope: [
+        "Research direction and milestone planning",
+        "Technical review of simulation approach",
+        "Feedback on project communication and structure",
+        "Session scheduling through mentorship page",
+      ],
+      badge: "Free Service",
+      href: "/mentorship",
+    },
   ]
 
   const process = [
@@ -67,10 +79,15 @@ export default function ServicesPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-12">Service Tracks</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
             {serviceTracks.map((track) => (
               <article key={track.title} className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors">
-                <h3 className="text-xl font-bold mb-3">{track.title}</h3>
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <h3 className="text-xl font-bold">{track.title}</h3>
+                  {"badge" in track && track.badge && (
+                    <span className="text-xs text-accent bg-accent/10 rounded-full px-2.5 py-1">{track.badge}</span>
+                  )}
+                </div>
                 <p className="text-sm text-muted-foreground mb-6">{track.description}</p>
                 <ul className="space-y-3">
                   {track.scope.map((item) => (
@@ -80,6 +97,11 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
+                {"href" in track && track.href && (
+                  <Link href={track.href} className="mt-6 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80">
+                    Book mentorship <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
               </article>
             ))}
           </div>
