@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Atom, BookOpenText, CircuitBoard, Microscope, Sparkles } from "lucide-react"
+import { ArrowRight, Atom, BookOpenText, CircuitBoard, GraduationCap, Handshake, Microscope, Newspaper, Sparkles } from "lucide-react"
 import { siteConfig } from "@/lib/site-config"
 import { socialLinks } from "@/lib/social-links"
 
@@ -53,6 +53,33 @@ export default function Home() {
     },
   ]
 
+  const visitorPaths = [
+    {
+      title: "Research Collaboration",
+      description:
+        "For labs, startups, and technical teams seeking support in photonic modeling, inverse design, and workflow execution.",
+      icon: Handshake,
+      href: "/services",
+      cta: "Explore Services",
+    },
+    {
+      title: "Learning and Mentorship",
+      description:
+        "For students and early researchers who want structured learning paths, mentorship sessions, and practical resources.",
+      icon: GraduationCap,
+      href: "/materials",
+      cta: "Start Learning",
+    },
+    {
+      title: "Updates and Evidence",
+      description:
+        "For reviewers and collaborators who want verified highlights, publications, and public technical outputs.",
+      icon: Newspaper,
+      href: "/news",
+      cta: "View Highlights",
+    },
+  ]
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -87,8 +114,8 @@ export default function Home() {
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
               I work on integrated photonics, nonlinear quantum photonics, and physics-informed design workflows for
-              photonic devices. This website presents my research track, publications, initiative portfolio, and
-              collaboration channels.
+              photonic devices. This website is structured to help you quickly review my profile, explore relevant
+              tracks, and move directly to collaboration.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
@@ -117,6 +144,38 @@ export default function Home() {
                 <p className="text-sm md:text-base text-foreground mt-2">{stat.value}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20 border-b border-border/70">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-8">
+            <h2 className="font-display text-3xl md:text-4xl mb-4">Choose Your Path</h2>
+            <p className="text-muted-foreground">
+              To reduce browsing time, start from the route that matches your goal.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {visitorPaths.map((path) => {
+              const Icon = path.icon
+              return (
+                <article
+                  key={path.title}
+                  className="rounded-xl border border-border bg-card/75 p-6 hover:border-accent transition-colors flex flex-col"
+                >
+                  <Icon className="w-7 h-7 text-accent mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">{path.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-6 flex-grow">{path.description}</p>
+                  <Button asChild variant="outline" className="w-full sm:w-auto">
+                    <Link href={path.href}>
+                      {path.cta}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -151,22 +210,35 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-display text-3xl md:text-4xl mb-8">Verified Public Footprint</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {highlights.map((item) => (
-              <a
-                key={item.title}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-xl border border-border bg-background/80 p-6 hover:border-accent transition-colors"
-              >
-                <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{item.title}</h3>
-                <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                <p className="text-xs text-accent mt-4 inline-flex items-center gap-2">
-                  {item.cta}
-                  <ArrowRight className="w-3 h-3" />
-                </p>
-              </a>
-            ))}
+            {highlights.map((item) => {
+              const isExternal = item.href.startsWith("http")
+              const cardClass =
+                "group rounded-xl border border-border bg-background/80 p-6 hover:border-accent transition-colors"
+
+              if (isExternal) {
+                return (
+                  <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                    <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
+                    <p className="text-xs text-accent mt-4 inline-flex items-center gap-2">
+                      {item.cta}
+                      <ArrowRight className="w-3 h-3" />
+                    </p>
+                  </a>
+                )
+              }
+
+              return (
+                <Link key={item.title} href={item.href} className={cardClass}>
+                  <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
+                  <p className="text-xs text-accent mt-4 inline-flex items-center gap-2">
+                    {item.cta}
+                    <ArrowRight className="w-3 h-3" />
+                  </p>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>

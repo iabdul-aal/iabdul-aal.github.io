@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowLeft, Presentation } from "lucide-react"
+import { JourneySection } from "@/components/journey-section"
 
 export const metadata = {
   title: "Slides | Materials | Islam Abdulaal",
@@ -47,6 +48,16 @@ export default function SlidesPage() {
           ))}
         </div>
       </section>
+
+      <JourneySection
+        title="After Slides, What Next?"
+        description="Continue with detailed summaries, roadmaps, or direct mentorship support."
+        actions={[
+          { href: "/materials/summaries", label: "Read Summaries" },
+          { href: "/materials/roadmaps", label: "View Roadmaps", variant: "outline" },
+          { href: "/mentorship", label: "Request Mentorship", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

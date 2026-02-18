@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, BookOpenText, FileText, LayoutTemplate, Route } from "lucide-react"
 
 export const metadata = {
@@ -85,20 +85,22 @@ export default function MaterialsPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <BookOpenText className="w-10 h-10 text-accent mx-auto mb-4" />
           <h2 className="text-4xl font-bold text-foreground mb-6">Designed for Students and Early Researchers</h2>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-lg text-muted-foreground mb-0">
             Materials focus on clarity, progressive depth, and direct usefulness for coursework, projects, and research
             onboarding.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link href="/mentorship">Ask for Guidance</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
-              <Link href="/contact">Request Specific Material</Link>
-            </Button>
-          </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Turn Learning Into Action"
+        description="After reviewing materials, continue with mentorship support, topic requests, or article deep-dives."
+        actions={[
+          { href: "/mentorship", label: "Ask for Mentorship" },
+          { href: "/contact", label: "Request Specific Material", variant: "outline" },
+          { href: "/articles", label: "Read Related Articles", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

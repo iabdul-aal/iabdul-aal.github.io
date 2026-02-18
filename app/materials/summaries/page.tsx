@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowLeft, FileSearch } from "lucide-react"
+import { JourneySection } from "@/components/journey-section"
 
 export const metadata = {
   title: "Summaries | Materials | Islam Abdulaal",
@@ -51,6 +52,16 @@ export default function SummariesPage() {
           ))}
         </div>
       </section>
+
+      <JourneySection
+        title="Continue the Research Workflow"
+        description="Move from summaries to practical roadmaps, materials overview, or direct discussion."
+        actions={[
+          { href: "/materials/roadmaps", label: "Go to Roadmaps" },
+          { href: "/materials", label: "Back to Materials", variant: "outline" },
+          { href: "/contact", label: "Discuss a Topic", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

@@ -149,6 +149,10 @@
     background-attachment: fixed;
     min-height: 100vh;
   }
+
+  a:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
   
   /* Custom scrollbar styling */
   ::-webkit-scrollbar {

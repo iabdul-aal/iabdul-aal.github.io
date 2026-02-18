@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, Building2, FlaskConical, Handshake, Rocket, Users2 } from "lucide-react"
 
 export const metadata = {
@@ -163,18 +164,15 @@ export default function VenturesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-card border-t border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-6">Interested in Collaboration?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Open to partnerships, pilot studies, and venture conversations in photonics innovation.
-          </p>
-          <Button asChild size="lg">
-            <Link href="/contact">Get in Touch</Link>
-          </Button>
-        </div>
-      </section>
+      <JourneySection
+        title="Move to the Right Venture Track"
+        description="Continue to startup concepts, technical service scoping, or direct collaboration outreach."
+        actions={[
+          { href: "/ventures/startups", label: "Review Startup Track" },
+          { href: "/services", label: "Check Service Formats", variant: "outline" },
+          { href: "/contact", label: "Start Collaboration", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

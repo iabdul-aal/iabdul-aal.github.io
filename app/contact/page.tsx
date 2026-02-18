@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { Mail, MapPin, MessageSquareText, Phone } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
@@ -29,7 +30,6 @@ export default function ContactPage() {
       title: "Location",
       value: "Alexandria, Egypt",
       description: "Open to remote collaboration",
-      href: "#",
     },
   ]
 
@@ -51,13 +51,31 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {contactMethods.map((method) => {
               const Icon = method.icon
-              return (
-                <a key={method.title} href={method.href} className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors">
+              const content = (
+                <>
                   <Icon className="w-8 h-8 text-accent mb-4" />
                   <h2 className="text-xl font-bold mb-2">{method.title}</h2>
                   <p className="text-accent font-semibold mb-2">{method.value}</p>
                   <p className="text-sm text-muted-foreground">{method.description}</p>
-                </a>
+                </>
+              )
+
+              if (method.href) {
+                return (
+                  <a
+                    key={method.title}
+                    href={method.href}
+                    className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors"
+                  >
+                    {content}
+                  </a>
+                )
+              }
+
+              return (
+                <article key={method.title} className="p-8 rounded-xl border border-border bg-card">
+                  {content}
+                </article>
               )
             })}
           </div>
@@ -118,8 +136,34 @@ export default function ContactPage() {
               <p className="text-xs text-muted-foreground mt-6">Typical response window: 24-72 hours.</p>
             </div>
           </div>
+
+          <div className="mt-8 p-8 rounded-xl border border-border bg-card">
+            <h2 className="text-2xl font-bold mb-4">How to Get a Faster, Better Response</h2>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {[
+                "State your objective in one sentence (collaboration, mentorship, speaking, or consultation).",
+                "Include your timeline and expected deliverable.",
+                "Add relevant links or context files to avoid extra back-and-forth.",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Need More Context Before Reaching Out?"
+        description="You can review services, profile details, and recent highlights first, then return to contact."
+        actions={[
+          { href: "/services", label: "Review Services" },
+          { href: "/about", label: "Read Full Profile", variant: "outline" },
+          { href: "/news", label: "See Highlights", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

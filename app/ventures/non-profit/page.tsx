@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowLeft, Users } from "lucide-react"
 
 export const metadata = {
@@ -77,17 +77,15 @@ export default function NonProfitPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-card border-t border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-6">Interested in Community Collaboration?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Open to programs that connect students and early researchers with practical engineering opportunities.
-          </p>
-          <Button asChild size="lg">
-            <Link href="/contact">Get in Touch</Link>
-          </Button>
-        </div>
-      </section>
+      <JourneySection
+        title="Continue the Community Track"
+        description="If you are planning community programs, continue to contact, venture overview, or mentorship pathways."
+        actions={[
+          { href: "/contact", label: "Start Community Discussion" },
+          { href: "/ventures", label: "Back to Ventures", variant: "outline" },
+          { href: "/mentorship", label: "Mentorship Programs", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

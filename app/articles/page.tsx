@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, ExternalLink } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
@@ -97,6 +98,16 @@ export default function ArticlesPage() {
           </Button>
         </div>
       </section>
+
+      <JourneySection
+        title="Continue Through the Knowledge Track"
+        description="After reading articles, move to structured materials, workshops, or direct discussion."
+        actions={[
+          { href: "/materials", label: "Open Materials" },
+          { href: "/talks", label: "Browse Talks", variant: "outline" },
+          { href: "/contact", label: "Discuss a Topic", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

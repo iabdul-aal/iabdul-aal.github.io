@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, Check } from "lucide-react"
 
 export const metadata = {
@@ -101,6 +102,16 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Ready to Scope a Project?"
+        description="Use contact for project context and timeline, or review profile and venture tracks before starting."
+        actions={[
+          { href: "/contact", label: "Start a Project Discussion" },
+          { href: "/about", label: "Review Full Profile", variant: "outline" },
+          { href: "/ventures", label: "See Venture Tracks", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

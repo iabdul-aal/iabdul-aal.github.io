@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { MessageCircle } from "lucide-react"
 
 export const metadata = {
@@ -86,6 +87,16 @@ export default function MentorshipPage() {
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Build Your Next Learning Step"
+        description="Continue with structured materials, direct contact, or talks and workshops based on your current stage."
+        actions={[
+          { href: "/materials", label: "Open Learning Materials" },
+          { href: "/contact", label: "Send a Mentorship Request", variant: "outline" },
+          { href: "/talks", label: "Browse Talks", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

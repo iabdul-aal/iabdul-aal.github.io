@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowLeft, Milestone } from "lucide-react"
+import { JourneySection } from "@/components/journey-section"
 
 export const metadata = {
   title: "Roadmaps | Materials | Islam Abdulaal",
@@ -55,6 +56,16 @@ export default function RoadmapsPage() {
           ))}
         </div>
       </section>
+
+      <JourneySection
+        title="Move From Roadmap to Execution"
+        description="Continue with mentorship support, full materials navigation, or direct outreach for guidance."
+        actions={[
+          { href: "/mentorship", label: "Book Mentorship Path" },
+          { href: "/materials", label: "Back to Materials", variant: "outline" },
+          { href: "/contact", label: "Request Guidance", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, MessageSquareText, Presentation, Users } from "lucide-react"
 
 export const metadata = {
@@ -95,6 +96,16 @@ export default function TalksPage() {
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Plan the Right Session"
+        description="Move forward by requesting a talk, reviewing service scope, or opening a mentorship conversation."
+        actions={[
+          { href: "/contact", label: "Invite for a Talk" },
+          { href: "/services", label: "Review Service Scope", variant: "outline" },
+          { href: "/mentorship", label: "Mentorship Path", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowLeft, Rocket } from "lucide-react"
 
 export const metadata = {
@@ -69,16 +69,17 @@ export default function StartupsPage() {
           ))}
         </div>
 
-        <div className="p-8 rounded-xl border border-border bg-card mt-8">
-          <h3 className="text-2xl font-semibold mb-3">Partnership Interest</h3>
-          <p className="text-muted-foreground mb-6">
-            Looking for collaborators in photonic product strategy, applied R&D, and prototype-to-pilot execution.
-          </p>
-          <Button asChild>
-            <Link href="/contact">Discuss Opportunities</Link>
-          </Button>
-        </div>
       </section>
+
+      <JourneySection
+        title="Discuss a Startup Direction"
+        description="Continue with collaboration scoping, service alignment, or review of the broader venture portfolio."
+        actions={[
+          { href: "/contact", label: "Discuss Opportunities" },
+          { href: "/services", label: "Match to Service Tracks", variant: "outline" },
+          { href: "/ventures", label: "Back to Ventures", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

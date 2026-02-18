@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { Publications } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
@@ -319,6 +320,16 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Where Should You Go Next?"
+        description="If you reviewed my profile, the next step depends on your objective: collaboration, venture discussion, or direct contact."
+        actions={[
+          { href: "/services", label: "View Services" },
+          { href: "/ventures", label: "Explore Ventures", variant: "outline" },
+          { href: "/contact", label: "Contact Directly", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

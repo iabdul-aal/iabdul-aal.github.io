@@ -1,4 +1,6 @@
+import Link from "next/link"
 import { ExternalLink } from "lucide-react"
+import { JourneySection } from "@/components/journey-section"
 import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
@@ -105,21 +107,36 @@ export default function HighlightsPage() {
                   <p className="text-sm text-muted-foreground">{item.date}</p>
                 </div>
                 <p className="text-sm text-muted-foreground">{item.description}</p>
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-                  >
-                    View source <ExternalLink className="w-4 h-4" />
-                  </a>
-                )}
+                {item.link &&
+                  (item.link.startsWith("/") ? (
+                    <Link href={item.link} className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80">
+                      Open related page <ExternalLink className="w-4 h-4" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+                    >
+                      View source <ExternalLink className="w-4 h-4" />
+                    </a>
+                  ))}
               </article>
             ))}
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Go From Highlights to Action"
+        description="After reviewing recent milestones, continue to profile details, venture activity, or direct contact."
+        actions={[
+          { href: "/about", label: "Review Full Profile" },
+          { href: "/ventures", label: "Explore Venture Work", variant: "outline" },
+          { href: "/contact", label: "Start a Conversation", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }
