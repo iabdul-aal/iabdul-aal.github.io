@@ -6,7 +6,7 @@ import { socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "Articles",
   description:
-    "Technical writing by Islam I. Abdulaal on integrated photonics, nonlinear optics, and practical photonics education.",
+    "Technical writing by Islam I. Abdulaal on integrated photonics, nonlinear quantum photonics, and practical photonics education.",
 }
 
 export default function ArticlesPage() {
@@ -47,7 +47,7 @@ export default function ArticlesPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Articles and Writing</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Technical explainers and public writing on integrated photonics, nonlinear optics, and photonic systems.
+              Technical explainers and public writing on integrated photonics, nonlinear quantum photonics, and photonic systems.
             </p>
             <Button asChild size="lg">
               <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">

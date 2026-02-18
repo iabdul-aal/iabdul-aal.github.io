@@ -7,7 +7,7 @@ import { socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "Integrated Photonics Research Portfolio",
   description:
-    "Islam I. Abdulaal's portfolio in integrated photonics, quantum and nonlinear optics, physics-informed photonic design, and research mentorship.",
+    "Islam I. Abdulaal's portfolio in integrated photonics, nonlinear quantum photonics, physics-informed photonic design, and research mentorship.",
 }
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
       icon: CircuitBoard,
     },
     {
-      title: "Quantum and Nonlinear Optics",
+      title: "Nonlinear Quantum Photonics",
       description: "SPDC-oriented architectures, quasi-BIC concepts, and quantum-compatible device design.",
       icon: Atom,
     },
@@ -78,7 +78,7 @@ export default function Home() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs md:text-sm text-muted-foreground animate-fade-up">
               <Microscope className="w-4 h-4 text-accent" />
-              Integrated Photonics Researcher | Alexandria University | NanoPhoto Lab (A*STAR)
+              Integrated Photonics Researcher | ECE, Alexandria University | NanoPhoto Lab (A*STAR)
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mt-6 animate-fade-up-delay">
@@ -86,7 +86,7 @@ export default function Home() {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
-              I work on integrated photonics, quantum and nonlinear optics, and physics-informed design workflows for
+              I work on integrated photonics, nonlinear quantum photonics, and physics-informed design workflows for
               photonic devices. This website presents my research track, publications, initiative portfolio, and
               collaboration channels.
             </p>
@@ -108,8 +108,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 animate-fade-up-delay-2">
             {[
-              { label: "Current Focus", value: "Integrated + Quantum Photonics" },
-              { label: "Current Affiliation", value: "NanoPhoto Lab, A*STAR" },
+              { label: "Current Focus", value: "Integrated Quantum Photonics" },
+              { label: "Current Affiliation", value: "ECE, Alexandria University" },
               { label: "Initiative Highlights", value: "HW Carnival, Si-Cast, Si-Clash, AlexDuino" },
             ].map((stat) => (
               <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5">

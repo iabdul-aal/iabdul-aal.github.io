@@ -47,7 +47,7 @@ export default function AboutPage() {
       desc: "Silicon photonics, waveguide engineering, and PIC-level system design.",
     },
     {
-      title: "Quantum and Nonlinear Optics",
+      title: "Nonlinear Quantum Photonics",
       desc: "SPDC-oriented architectures and nonlinear effects for quantum-compatible platforms.",
     },
     {
@@ -183,11 +183,11 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  I am an Electronics and Communications Engineering undergraduate at Alexandria University, focused on
-                  integrated photonics research and device-level engineering.
+                  I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University,
+                  focused on integrated photonics research and device-level engineering.
                 </p>
                 <p>
-                  My recent research direction centers on silicon photonics, quantum and nonlinear optics, and
+                  My recent research direction centers on silicon photonics, nonlinear quantum photonics, and
                   physics-informed design methods for photonic structures.
                 </p>
                 <p>

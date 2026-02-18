@@ -5,7 +5,7 @@ import { ArrowRight, MessageSquareText, Presentation, Users } from "lucide-react
 export const metadata = {
   title: "Talks",
   description:
-    "Speaking topics and workshop formats by Islam I. Abdulaal across integrated photonics, nonlinear optics, and research methodology.",
+    "Speaking topics and workshop formats by Islam I. Abdulaal across integrated photonics, nonlinear quantum photonics, and research methodology.",
 }
 
 export default function TalksPage() {
@@ -53,7 +53,7 @@ export default function TalksPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks and Workshops</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Speaking sessions focused on integrated photonics, nonlinear optics, and research skill development.
+              Speaking sessions focused on integrated photonics, nonlinear quantum photonics, and research skill development.
             </p>
             <Button asChild size="lg">
               <Link href="/contact">
