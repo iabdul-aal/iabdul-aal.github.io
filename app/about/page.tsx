@@ -96,6 +96,31 @@ export default function AboutPage() {
       period: "Jul 2023 - Aug 2025",
       summary: "Worked on FBG-based sensing and photonic modeling for biomedical and communication use cases.",
     },
+    {
+      role: "Chapter Chair",
+      org: "IEEE SSCS Alexandria University Student Branch Chapter",
+      period: "2025",
+      summary:
+        "Led chapter-scale technical programs including HW Carnival, a funded initiative with approximately USD 10,000 support.",
+    },
+  ]
+
+  const leadershipAndAwards = [
+    {
+      title: "HW Carnival (Funded Initiative)",
+      detail:
+        "Organized and led HW Carnival as a hardware-focused initiative supported by approximately USD 10,000 funding.",
+      links: [
+        { label: "Feature Article", href: socialLinks.hwCarnivalFeature },
+        { label: "Event Listing", href: socialLinks.hwCarnivalEvent },
+      ],
+    },
+    {
+      title: "SSCS STGA Award",
+      detail:
+        "Recipient of SSCS STGA recognition for chapter and technical contribution activity.",
+      links: [{ label: "Profile", href: socialLinks.linkedin }],
+    },
   ]
 
   return (
@@ -198,6 +223,31 @@ export default function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Leadership and Awards</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {leadershipAndAwards.map((item) => (
+                  <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
+                    <h3 className="font-semibold mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{item.detail}</p>
+                    <div className="flex flex-wrap gap-3">
+                      {item.links.map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-accent hover:text-accent/80"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
                   </article>
                 ))}
               </div>

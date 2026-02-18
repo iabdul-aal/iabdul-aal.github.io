@@ -10,6 +10,22 @@ export const metadata = {
 export default function HighlightsPage() {
   const highlights = [
     {
+      title: "HW Carnival Initiative (USD 10,000 Funding)",
+      date: "2025",
+      category: "Initiative",
+      description:
+        "Led HW Carnival as a funded hardware initiative with approximately USD 10,000 in support, with public feature coverage.",
+      link: socialLinks.hwCarnivalFeature,
+    },
+    {
+      title: "SSCS STGA Award",
+      date: "2025",
+      category: "Award",
+      description:
+        "Received recognition under SSCS Student Travel Grant Award (STGA) track for active technical and chapter contributions.",
+      link: socialLinks.linkedin,
+    },
+    {
       title: "arXiv Preprint Published",
       date: "2025",
       category: "Publication",
@@ -36,6 +52,7 @@ export default function HighlightsPage() {
       date: "2025",
       category: "Funding",
       description: "Co-developed technical work packages that supported a funded research direction in photonic sensing.",
+      link: socialLinks.hwCarnivalEvent,
     },
     {
       title: "IEEE Student Leadership",

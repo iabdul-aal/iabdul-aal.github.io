@@ -113,7 +113,7 @@ export default function Home() {
             {[
               { label: "Current Focus", value: "Integrated + Quantum Photonics" },
               { label: "Current Affiliation", value: "NanoPhoto Lab, A*STAR" },
-              { label: "Academic Home", value: "Alexandria University" },
+              { label: "Initiative Highlight", value: "HW Carnival (USD 10k funded)" },
             ].map((stat) => (
               <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5">
                 <p className="text-sm font-semibold text-accent">{stat.label}</p>
