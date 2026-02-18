@@ -102,6 +102,19 @@ Flow:
 2. Workflow installs dependencies and builds static export
 3. `out/` artifact is deployed to GitHub Pages
 
+Scheduled refresh:
+- The deploy workflow also runs every 6 hours (`cron`) to refresh Medium RSS-driven article content without requiring a new code push.
+
+## Medium RSS Integration
+
+Articles page can ingest Medium posts from:
+- `https://medium.com/feed/@iabdul-aal`
+
+Implementation details:
+- Feed URL is centralized in `lib/social-links.ts` as `socialLinks.mediumRss`
+- RSS parsing and normalization live in `lib/medium-feed.ts`
+- `app/articles/page.tsx` renders live feed results first and falls back to curated static entries if feed retrieval fails
+
 ## Content Maintenance Workflow
 
 When updating the website:
