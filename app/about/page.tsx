@@ -386,11 +386,13 @@ export default async function AboutPage() {
               </div>
               <div className="mt-5 p-5 rounded-xl border border-border bg-card/60">
                 <p className="text-sm font-semibold mb-3">Current Priorities</p>
-                <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                <div className="space-y-2 text-sm text-muted-foreground">
                   {currentPriorities.map((item) => (
-                    <li key={item}>{item}</li>
+                    <p key={item} className="px-3 py-2 rounded-md border border-border/60 bg-background/40">
+                      {item}
+                    </p>
                   ))}
-                </ul>
+                </div>
               </div>
             </section>
 
@@ -436,11 +438,13 @@ export default async function AboutPage() {
                     </div>
                     {item.summary && <p className="text-sm text-muted-foreground">{item.summary}</p>}
                     {item.highlights.length > 0 && (
-                      <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                      <div className="mt-3 space-y-2 text-sm text-muted-foreground">
                         {item.highlights.map((point) => (
-                          <li key={point}>{point}</li>
+                          <p key={point} className="pl-3 border-l-2 border-border/70">
+                            {point}
+                          </p>
                         ))}
-                      </ul>
+                      </div>
                     )}
                   </article>
                 ))}
@@ -460,11 +464,13 @@ export default async function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                    <div className="mt-3 space-y-2 text-sm text-muted-foreground">
                       {item.highlights.map((point) => (
-                        <li key={point}>{point}</li>
+                        <p key={point} className="pl-3 border-l-2 border-border/70">
+                          {point}
+                        </p>
                       ))}
-                    </ul>
+                    </div>
                   </article>
                 ))}
               </div>
