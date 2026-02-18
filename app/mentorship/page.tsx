@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
-import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Mentorship",
@@ -62,7 +61,7 @@ export default function MentorshipPage() {
           <div className="text-center mb-10">
             <h2 className="text-4xl font-bold mb-4">Quick Questions</h2>
             <p className="text-lg text-muted-foreground">
-              For short questions, you can reach out directly on Telegram or via the contact page.
+              For short questions, reach out through the contact page or LinkedIn.
             </p>
           </div>
 
@@ -75,12 +74,12 @@ export default function MentorshipPage() {
               For concise technical questions, send a short context summary with your current objective and challenge.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
-              <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Message on Telegram</Button>
-              </a>
               <Link href="/contact">
-                <Button variant="outline">Use Contact Page</Button>
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Use Contact Page</Button>
               </Link>
+              <a href="https://www.linkedin.com/in/iabdul-aal" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline">Message on LinkedIn</Button>
+              </a>
             </div>
           </div>
         </div>

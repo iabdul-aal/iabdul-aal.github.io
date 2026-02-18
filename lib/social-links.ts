@@ -5,17 +5,8 @@ export const socialLinks = {
   scholar: "https://scholar.google.com/citations?user=CPmqNv4AAAAJ&hl=en",
   semanticScholar: "https://www.semanticscholar.org/author/Islam-I.-Abdulaal",
   researchGate: "https://www.researchgate.net/profile/Islam-Abdulaal",
-  academia: "https://alex.academia.edu/IslamAbdulaal",
-  frontiersLoop: "https://loop.frontiersin.org/people/3361076/overview",
-  sciprofiles: "https://sciprofiles.com/profile/iabdul-aal",
-  collabratec: "https://collabratec.ieee.org/iabdul-aal",
   medium: "https://medium.com/@iabdul-aal",
   twitter: "https://x.com/iabdul_aal",
-  bluesky: "https://iabdul-aal.bsky.social",
-  telegram: "https://t.me/iabdul_aal",
-  linktree: "https://linktr.ee/iabdul-aal",
-  gravatar: "https://gravatar.com/iabdul-aal",
-  f6s: "https://www.f6s.com/iabdul-aal",
   arxiv: "https://arxiv.org/abs/2510.00357",
   nanophoto: "https://www.nanophoto.sg/team",
   hwCarnivalEvent: "https://events.vtools.ieee.org/m/498695",
@@ -28,13 +19,13 @@ export const socialLinks = {
 }
 
 export const professionalProfiles = {
-  ieeeCollabratec: socialLinks.collabratec,
+  linkedin: socialLinks.linkedin,
+  github: socialLinks.github,
+  medium: socialLinks.medium,
+  x: socialLinks.twitter,
   scholar: socialLinks.scholar,
-  semanticscholar: socialLinks.semanticScholar,
+  semanticScholar: socialLinks.semanticScholar,
   researchGate: socialLinks.researchGate,
-  academia: socialLinks.academia,
-  loop: socialLinks.frontiersLoop,
-  sciprofiles: socialLinks.sciprofiles,
   orcid: socialLinks.orcid,
 }
 

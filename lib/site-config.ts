@@ -26,17 +26,8 @@ export const siteConfig = {
     socialLinks.scholar,
     socialLinks.semanticScholar,
     socialLinks.researchGate,
-    socialLinks.academia,
-    socialLinks.frontiersLoop,
-    socialLinks.sciprofiles,
-    socialLinks.collabratec,
     socialLinks.medium,
     socialLinks.twitter,
-    socialLinks.bluesky,
-    socialLinks.telegram,
-    socialLinks.linktree,
-    socialLinks.gravatar,
-    socialLinks.f6s,
   ],
 } as const
 

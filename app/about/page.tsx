@@ -30,31 +30,16 @@ export default function AboutPage() {
     },
   ]
 
-  const coreProfiles = [
+  const professionalProfiles = [
     { name: "LinkedIn", url: socialLinks.linkedin },
+    { name: "GitHub", url: socialLinks.github },
     { name: "ORCID", url: socialLinks.orcid },
     { name: "Google Scholar", url: socialLinks.scholar },
     { name: "Semantic Scholar", url: socialLinks.semanticScholar },
     { name: "ResearchGate", url: socialLinks.researchGate },
-    { name: "IEEE Collabratec", url: socialLinks.collabratec },
-    { name: "Frontiers Loop", url: socialLinks.frontiersLoop },
-    { name: "SciProfiles", url: socialLinks.sciprofiles },
-    { name: "Academia", url: socialLinks.academia },
-    { name: "arXiv", url: socialLinks.arxiv },
-  ]
-
-  const professionalChannels = [
     { name: "Medium", url: socialLinks.medium },
     { name: "X (Twitter)", url: socialLinks.twitter },
-    { name: "Bluesky", url: socialLinks.bluesky },
-    { name: "Telegram", url: socialLinks.telegram },
-    { name: "GitHub", url: socialLinks.github },
-  ]
-
-  const profileCollections = [
-    { name: "Linktree", url: socialLinks.linktree },
-    { name: "Gravatar", url: socialLinks.gravatar },
-    { name: "F6S", url: socialLinks.f6s },
+    { name: "arXiv", url: socialLinks.arxiv },
   ]
 
   const focusAreas = [
@@ -254,58 +239,22 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4">Academic and Professional Profiles</h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">Research Identity</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {coreProfiles.map((profile) => (
-                      <a
-                        key={profile.name}
-                        href={profile.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
-                      >
-                        {profile.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">Professional Channels</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {professionalChannels.map((profile) => (
-                      <a
-                        key={profile.name}
-                        href={profile.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
-                      >
-                        {profile.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">Profile Collections</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {profileCollections.map((profile) => (
-                      <a
-                        key={profile.name}
-                        href={profile.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
-                      >
-                        {profile.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
+              <h2 className="text-2xl font-bold mb-4">Professional Profiles</h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                Focused set of standard professional and research platforms.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {professionalProfiles.map((profile) => (
+                  <a
+                    key={profile.name}
+                    href={profile.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
+                  >
+                    {profile.name}
+                  </a>
+                ))}
               </div>
               <p className="mt-5 text-sm text-muted-foreground">
                 Web of Science ResearcherID:{" "}
