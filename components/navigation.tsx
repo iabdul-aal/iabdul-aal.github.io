@@ -4,9 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
-import { Menu, X, Mail } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { socialLinks } from "@/lib/social-links"
 import { cn } from "@/lib/utils"
 
 export function Navigation() {
@@ -22,7 +21,6 @@ export function Navigation() {
     { href: "/news", label: "Highlights" },
     { href: "/mentorship", label: "Mentorship" },
     { href: "/services", label: "Services" },
-    { href: "/contact", label: "Contact" },
   ]
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
@@ -67,13 +65,6 @@ export function Navigation() {
             <Button asChild size="sm">
               <Link href="/contact">Contact</Link>
             </Button>
-            <a
-              href={`mailto:${socialLinks.email}`}
-              aria-label="Email"
-              className="text-muted-foreground hover:text-accent transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
