@@ -114,20 +114,22 @@ export default function AboutPage() {
     },
   ]
 
-  const memberships = [
-    {
+  const memberships = {
+    main: {
       name: "IEEE (Institute of Electrical and Electronics Engineers)",
-      detail: "Base Membership: Student Member | 2025 - Present",
+      detail: "Student Member | 2025 - Present",
     },
-    {
-      name: "IEEE Society Add-On: Solid-State Circuits Society (SSCS)",
-      detail: "Requires IEEE membership first | 2025 - Present",
-    },
-    {
-      name: "IEEE Society Add-On: Photonics Society",
-      detail: "Requires IEEE membership first | 2025 - Present",
-    },
-  ]
+    subs: [
+      {
+        name: "Solid-State Circuits Society (SSCS)",
+        detail: "IEEE Society Membership | 2025 - Present",
+      },
+      {
+        name: "Photonics Society",
+        detail: "IEEE Society Membership | 2025 - Present",
+      },
+    ],
+  }
 
   const currentPriorities = [
     "Physics-informed inverse design for compact integrated photonic components.",
@@ -365,12 +367,20 @@ export default function AboutPage() {
                 Professional membership structure follows IEEE base membership first, then society add-ons.
               </p>
               <div className="space-y-4">
-                {memberships.map((item) => (
-                  <article key={item.name} className="p-5 rounded-xl border border-border bg-background">
-                    <p className="text-sm font-semibold">{item.name}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
-                  </article>
-                ))}
+                <article className="p-5 rounded-xl border border-border bg-background">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-2">Main Membership</p>
+                  <p className="text-sm font-semibold">{memberships.main.name}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{memberships.main.detail}</p>
+                </article>
+                <div className="space-y-4 sm:pl-6">
+                  {memberships.subs.map((item) => (
+                    <article key={item.name} className="p-5 rounded-xl border border-border/80 bg-background/90">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-2">Sub Membership</p>
+                      <p className="text-sm font-semibold">IEEE {item.name}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
             </section>
           </div>
