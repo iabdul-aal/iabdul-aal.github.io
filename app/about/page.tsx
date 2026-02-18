@@ -81,6 +81,10 @@ export default function AboutPage() {
       period: "2025",
     },
     {
+      title: "SSCS Student Travel Award (Withdrew due to visa issues)",
+      period: "Nov 2025",
+    },
+    {
       title: "Distinction Grade - Dean's Honors for Academic Excellence",
       period: "2021 - 2025",
     },
