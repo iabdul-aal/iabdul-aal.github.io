@@ -1,8 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 import { ArrowUpRight, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Publications } from "@/components/publications"
+import { Publications, type Publication } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
 
@@ -12,23 +14,65 @@ export const metadata = {
     "Background, research direction, affiliations, publications, initiatives, and technical competencies of Islam I. Abdulaal.",
 }
 
-export default function AboutPage() {
-  const publications = [
-    {
-      title: "Terahertz quasi-BIC metasurfaces for ultra-sensitive biosensing and high-speed wireless communications",
-      arxiv: "2510.00357",
-      status: "arXiv preprint, 2025",
-      url: socialLinks.arxiv,
-    },
-    {
-      title: "Physics-informed SPDC inverse design for integrated quantum photonics",
-      status: "In preparation",
-    },
-    {
-      title: "Physics-informed multiphysics workflows for photonic forward and inverse modeling",
-      status: "In preparation",
-    },
-  ]
+type OrcidPublication = {
+  title?: string
+  venue?: string
+  year?: string
+  doi?: string
+  url?: string
+}
+
+const ARXIV_DOI_PREFIX = "10.48550/arxiv."
+
+function extractArxivId(doi: string, url: string): string | undefined {
+  const normalizedDoi = doi.trim().toLowerCase()
+  if (normalizedDoi.startsWith(ARXIV_DOI_PREFIX)) {
+    return doi.trim().slice(ARXIV_DOI_PREFIX.length)
+  }
+
+  const absMarker = "/abs/"
+  const absIndex = url.indexOf(absMarker)
+  if (absIndex >= 0) {
+    return url.slice(absIndex + absMarker.length).trim() || undefined
+  }
+
+  return undefined
+}
+
+function toPublicationStatus(venue: string, year: string): string {
+  const parts = [venue.trim(), year.trim()].filter(Boolean)
+  return parts.join(", ") || "Publication"
+}
+
+async function loadPublications(): Promise<Publication[]> {
+  try {
+    const filePath = join(process.cwd(), "publications.json")
+    const raw = await readFile(filePath, "utf8")
+    const parsed = JSON.parse(raw) as OrcidPublication[]
+
+    if (!Array.isArray(parsed)) {
+      return []
+    }
+
+    return parsed.map((item) => {
+      const doi = (item.doi ?? "").trim()
+      const url = (item.url ?? "").trim()
+      const resolvedUrl = url || (doi ? `https://doi.org/${doi}` : undefined)
+
+      return {
+        title: (item.title ?? "").trim() || "Untitled",
+        status: toPublicationStatus(item.venue ?? "", item.year ?? ""),
+        arxiv: extractArxivId(doi, url),
+        url: resolvedUrl,
+      }
+    })
+  } catch {
+    return []
+  }
+}
+
+export default async function AboutPage() {
+  const publications = await loadPublications()
 
   const focusAreas = [
     {
