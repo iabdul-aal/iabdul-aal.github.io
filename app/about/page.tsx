@@ -96,16 +96,16 @@ export default function AboutPage() {
 
   const memberships = [
     {
-      name: "Institute of Electrical and Electronics Engineers (IEEE)",
-      detail: "Student Member | 2025 - Present",
+      name: "IEEE (Institute of Electrical and Electronics Engineers)",
+      detail: "Base Membership: Student Member | 2025 - Present",
     },
     {
-      name: "IEEE Solid-State Circuits Society (SSCS)",
-      detail: "Member | 2025 - Present",
+      name: "IEEE Society Add-On: Solid-State Circuits Society (SSCS)",
+      detail: "Requires IEEE membership first | 2025 - Present",
     },
     {
-      name: "IEEE Photonics Society",
-      detail: "Member | 2025 - Present",
+      name: "IEEE Society Add-On: Photonics Society",
+      detail: "Requires IEEE membership first | 2025 - Present",
     },
   ]
 
