@@ -185,13 +185,18 @@ export default async function AboutPage() {
   const technicalStack = [
     {
       label: "Photonics & Simulation",
-      level: 4,
-      items: ["Lumerical", "COMSOL Multiphysics", "MATLAB"],
+      items: [
+        { name: "Lumerical", level: 5 },
+        { name: "COMSOL Multiphysics", level: 4 },
+        { name: "MATLAB", level: 4 },
+      ],
     },
     {
       label: "Programming & ML",
-      level: 4,
-      items: ["Python", "PyTorch"],
+      items: [
+        { name: "Python", level: 5 },
+        { name: "PyTorch", level: 4 },
+      ],
     },
   ]
 
@@ -374,23 +379,23 @@ export default async function AboutPage() {
           <p className="text-sm text-muted-foreground mb-4">
             Technical domains and tools I currently use in day-to-day research and prototyping.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {technicalStack.map((item) => (
               <article key={item.label} className="p-5 rounded-xl border border-border bg-background">
-                <div className="flex items-center justify-between gap-3 mb-3">
-                  <p className="text-sm font-semibold text-accent">{item.label}</p>
-                  <div className="flex items-center gap-1" aria-label={`Skill level ${item.level} out of 5`}>
-                    {[1, 2, 3, 4, 5].map((rank) => (
-                      <Star
-                        key={rank}
-                        className={`w-3.5 h-3.5 ${rank <= item.level ? "text-accent fill-current" : "text-muted-foreground/30"}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                <p className="text-sm font-semibold text-accent mb-3">{item.label}</p>
+                <ul className="space-y-3 text-sm text-muted-foreground">
                   {item.items.map((tool) => (
-                    <li key={tool}>{tool}</li>
+                    <li key={tool.name} className="flex items-center justify-between gap-3">
+                      <span>{tool.name}</span>
+                      <span className="flex items-center gap-1" aria-label={`${tool.name} level ${tool.level} out of 5`}>
+                        {[1, 2, 3, 4, 5].map((rank) => (
+                          <Star
+                            key={rank}
+                            className={`w-3.5 h-3.5 ${rank <= tool.level ? "text-accent fill-current" : "text-muted-foreground/30"}`}
+                          />
+                        ))}
+                      </span>
+                    </li>
                   ))}
                 </ul>
               </article>
