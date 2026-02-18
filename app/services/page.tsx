@@ -26,19 +26,20 @@ export default function ServicesPage() {
       description: "Method-level support for physics-aware modeling and inverse-design style investigations.",
       scope: ["PINN problem setup guidance", "Model and objective selection", "Validation strategy review", "Iteration and trade-off analysis"],
     },
-    {
-      title: "Mentorship",
-      description: "1-on-1 guidance for students and early researchers in integrated photonics and research workflows.",
-      scope: [
-        "Research direction and milestone planning",
-        "Technical review of simulation approach",
-        "Feedback on project communication and structure",
-        "Session scheduling through mentorship page",
-      ],
-      badge: "Free Service",
-      href: "/mentorship",
-    },
   ]
+
+  const mentorship = {
+    title: "Mentorship",
+    badge: "Free Service",
+    description:
+      "1-on-1 guidance for students and early researchers in integrated photonics and research workflows.",
+    scope: [
+      "Research direction and milestone planning",
+      "Technical review of simulation approach",
+      "Feedback on project communication and structure",
+      "Session scheduling through mentorship page",
+    ],
+  }
 
   const process = [
     {
@@ -79,15 +80,10 @@ export default function ServicesPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-12">Service Tracks</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {serviceTracks.map((track) => (
               <article key={track.title} className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors">
-                <div className="flex items-center justify-between gap-3 mb-3">
-                  <h3 className="text-xl font-bold">{track.title}</h3>
-                  {"badge" in track && track.badge && (
-                    <span className="text-xs text-accent bg-accent/10 rounded-full px-2.5 py-1">{track.badge}</span>
-                  )}
-                </div>
+                <h3 className="text-xl font-bold mb-3">{track.title}</h3>
                 <p className="text-sm text-muted-foreground mb-6">{track.description}</p>
                 <ul className="space-y-3">
                   {track.scope.map((item) => (
@@ -97,14 +93,32 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-                {"href" in track && track.href && (
-                  <Link href={track.href} className="mt-6 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80">
-                    Book mentorship <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                )}
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-background border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4 mb-6">
+            <h2 className="text-3xl font-bold">{mentorship.title}</h2>
+            <span className="text-xs text-accent bg-accent/10 rounded-full px-3 py-1.5">{mentorship.badge}</span>
+          </div>
+          <article className="p-8 rounded-xl border border-border bg-background">
+            <p className="text-sm text-muted-foreground mb-6 max-w-3xl">{mentorship.description}</p>
+            <ul className="space-y-3 mb-6">
+              {mentorship.scope.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/mentorship" className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80">
+              Book mentorship <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </article>
         </div>
       </section>
 
