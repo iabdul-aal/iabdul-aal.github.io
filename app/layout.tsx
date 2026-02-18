@@ -18,6 +18,7 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  manifest: "/manifest.webmanifest",
   title: {
     default: siteConfig.title,
     template: "%s | Islam I. Abdulaal",

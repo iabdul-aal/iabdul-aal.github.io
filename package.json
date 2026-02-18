@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "check": "npm run lint && npm run typecheck",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
