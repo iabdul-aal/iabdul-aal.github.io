@@ -408,15 +408,14 @@ export default async function AboutPage() {
             <section>
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
-                <article className="p-5 rounded-xl border border-border bg-background">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-2">Main Membership</p>
+                <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
                   <p className="text-sm font-semibold">{memberships.main.name}</p>
                   <p className="text-sm text-muted-foreground mt-1">{memberships.main.detail}</p>
                 </article>
-                <div className="space-y-4 sm:pl-6">
+                <div className="relative space-y-4 sm:pl-8">
+                  <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
                   {memberships.subs.map((item) => (
-                    <article key={item.name} className="p-5 rounded-xl border border-border/80 bg-background/90">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-2">Sub Membership</p>
+                    <article key={item.name} className="relative p-5 rounded-xl border border-border/80 bg-background/90 sm:ml-4">
                       <p className="text-sm font-semibold">IEEE {item.name}</p>
                       <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
                     </article>
