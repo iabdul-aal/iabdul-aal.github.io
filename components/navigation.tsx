@@ -4,8 +4,9 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
-import { Menu, X, Linkedin, Github, Mail } from "lucide-react"
+import { Menu, X, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SocialProfileIconRow } from "@/components/social-profile-links"
 import { socialLinks } from "@/lib/social-links"
 import { cn } from "@/lib/utils"
 
@@ -67,24 +68,7 @@ export function Navigation() {
             <Button asChild size="sm">
               <Link href="/contact">Collaborate</Link>
             </Button>
-            <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="text-muted-foreground hover:text-accent transition-colors"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href={socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="text-muted-foreground hover:text-accent transition-colors"
-            >
-              <Github className="w-5 h-5" />
-            </a>
+            <SocialProfileIconRow limit={4} />
             <a
               href={`mailto:${socialLinks.email}`}
               aria-label="Email"
@@ -131,25 +115,8 @@ export function Navigation() {
 
             <div className="px-4 py-4 border-t border-border mt-4">
               <p className="text-xs font-semibold text-muted-foreground mb-3">Connect</p>
-              <div className="flex gap-4">
-                <a
-                  href={socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href={socialLinks.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
+              <div className="flex flex-wrap gap-4">
+                <SocialProfileIconRow limit={4} />
                 <a
                   href={`mailto:${socialLinks.email}`}
                   aria-label="Email"

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
+import { SocialProfileGrid } from "@/components/social-profile-links"
 import { Publications } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
@@ -29,17 +30,6 @@ export default function AboutPage() {
       title: "Physics-informed multiphysics workflows for photonic forward and inverse modeling",
       status: "In preparation",
     },
-  ]
-
-  const professionalProfiles = [
-    { name: "LinkedIn", url: socialLinks.linkedin },
-    { name: "GitHub", url: socialLinks.github },
-    { name: "ORCID", url: socialLinks.orcid },
-    { name: "Google Scholar", url: socialLinks.scholar },
-    { name: "Semantic Scholar", url: socialLinks.semanticScholar },
-    { name: "ResearchGate", url: socialLinks.researchGate },
-    { name: "Medium", url: socialLinks.medium },
-    { name: "arXiv", url: socialLinks.arxiv },
   ]
 
   const focusAreas = [
@@ -268,21 +258,9 @@ export default function AboutPage() {
             <section>
               <h2 className="text-2xl font-bold mb-4">Professional Profiles</h2>
               <p className="text-sm text-muted-foreground mb-4">
-                Focused set of standard professional and research platforms.
+                Verified professional and research profiles with consistent links.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {professionalProfiles.map((profile) => (
-                  <a
-                    key={profile.name}
-                    href={profile.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
-                  >
-                    {profile.name}
-                  </a>
-                ))}
-              </div>
+              <SocialProfileGrid />
               <p className="mt-5 text-sm text-muted-foreground">
                 Web of Science ResearcherID:{" "}
                 <span className="text-accent">{contactInfo.webOfScienceResearcherID}</span>

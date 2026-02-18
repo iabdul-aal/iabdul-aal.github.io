@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Linkedin, Mail, Github } from "lucide-react"
+import { Mail } from "lucide-react"
+import { SocialProfileIconRow } from "@/components/social-profile-links"
 import { socialLinks } from "@/lib/social-links"
 
 export function Footer() {
@@ -82,29 +83,13 @@ export function Footer() {
           {/* Connect */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Connect</h3>
-            <div className="flex gap-4">
-              <a
-                href={socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href={socialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
+            <SocialProfileIconRow limit={6} />
+            <div className="mt-3 flex gap-4">
               <a
                 href={`mailto:${socialLinks.email}`}
                 className="text-muted-foreground hover:text-accent transition-colors"
                 aria-label="Email"
+                title="Email"
               >
                 <Mail className="w-5 h-5" />
               </a>

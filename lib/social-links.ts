@@ -17,15 +17,18 @@ export const socialLinks = {
   whatsapp: "https://wa.me/20120460921",
 }
 
-export const professionalProfiles = {
-  linkedin: socialLinks.linkedin,
-  github: socialLinks.github,
-  medium: socialLinks.medium,
-  scholar: socialLinks.scholar,
-  semanticScholar: socialLinks.semanticScholar,
-  researchGate: socialLinks.researchGate,
-  orcid: socialLinks.orcid,
-}
+export const professionalSocialProfiles = [
+  { key: "linkedin", name: "LinkedIn", url: socialLinks.linkedin },
+  { key: "github", name: "GitHub", url: socialLinks.github },
+  { key: "orcid", name: "ORCID", url: socialLinks.orcid },
+  { key: "scholar", name: "Google Scholar", url: socialLinks.scholar },
+  { key: "semanticScholar", name: "Semantic Scholar", url: socialLinks.semanticScholar },
+  { key: "researchGate", name: "ResearchGate", url: socialLinks.researchGate },
+  { key: "medium", name: "Medium", url: socialLinks.medium },
+  { key: "arxiv", name: "arXiv", url: socialLinks.arxiv },
+] as const
+
+export type ProfessionalSocialProfileKey = (typeof professionalSocialProfiles)[number]["key"]
 
 export const contactInfo = {
   email: socialLinks.email,

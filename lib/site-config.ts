@@ -35,6 +35,7 @@ export const siteConfig = {
     socialLinks.semanticScholar,
     socialLinks.researchGate,
     socialLinks.medium,
+    socialLinks.arxiv,
   ],
 } as const
 
