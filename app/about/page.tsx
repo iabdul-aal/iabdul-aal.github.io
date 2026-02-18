@@ -318,6 +318,18 @@ export default async function AboutPage() {
                 {personConfig.location} | {personConfig.affiliation}
               </p>
               <div className="mt-5 space-y-3">
+                {orcidKeywords.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {orcidKeywords.map((keyword) => (
+                      <span
+                        key={keyword}
+                        className="px-2.5 py-1 rounded-full border border-border text-xs text-muted-foreground bg-card/50"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <p className="text-sm font-semibold text-foreground">Academic Profiles</p>
                 <ul className="text-sm border border-border rounded-lg divide-y divide-border">
                   <li className="py-2.5 px-3">
@@ -410,18 +422,6 @@ export default async function AboutPage() {
                   </article>
                 ))}
               </div>
-              {orcidKeywords.length > 0 && (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {orcidKeywords.map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="px-2.5 py-1 rounded-full border border-border text-xs text-muted-foreground bg-card/50"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              )}
             </section>
 
             <section>
