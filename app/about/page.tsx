@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Download } from "lucide-react"
+import { ArrowUpRight, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Publications } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
@@ -66,28 +66,6 @@ export default function AboutPage() {
     },
   ]
 
-  const highlights = [
-    {
-      title: "HW Carnival",
-      detail:
-        "Led a funded technical initiative (approximately USD 10,000) with a technical day at Bibliotheca Alexandrina on December 25, 2025.",
-      links: [
-        { label: "Feature", href: socialLinks.hwCarnivalFeature },
-        { label: "Event", href: socialLinks.hwCarnivalEvent },
-      ],
-    },
-    {
-      title: "SSCS STGA Award",
-      detail: "Recognized by IEEE SSCS for chapter leadership and technical contribution.",
-      links: [{ label: "LinkedIn", href: socialLinks.linkedin }],
-    },
-    {
-      title: "Initiatives",
-      detail: "Built and supported Si-Cast, Si-Clash, and AlexDuino tracks for practical engineering training.",
-      links: [{ label: "Ventures", href: "/ventures" }],
-    },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,33 +88,41 @@ export default function AboutPage() {
               </p>
               <div className="mt-5 space-y-3">
                 <p className="text-sm font-semibold text-foreground">Academic Profiles</p>
-                <div className="space-y-2 text-sm">
-                  <a
-                    href={socialLinks.scholar}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-accent hover:text-accent/80 transition-colors"
-                  >
-                    Google Scholar
-                  </a>
-                  <p className="text-muted-foreground">Scopus Author Profile: Not available yet</p>
-                  <a
-                    href="https://www.webofscience.com/wos/author/record/OLP-9224-2025"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-accent hover:text-accent/80 transition-colors"
-                  >
-                    ResearcherID (Web of Science): {contactInfo.webOfScienceResearcherID}
-                  </a>
-                  <a
-                    href={socialLinks.orcid}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-accent hover:text-accent/80 transition-colors"
-                  >
-                    ORCID: {personConfig.orcid}
-                  </a>
-                </div>
+                <ul className="text-sm border border-border rounded-lg divide-y divide-border">
+                  <li className="py-2.5 px-3">
+                    <a
+                      href={socialLinks.orcid}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
+                    >
+                      ORCID: {personConfig.orcid}
+                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                  </li>
+                  <li className="py-2.5 px-3">
+                    <a
+                      href={socialLinks.scholar}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
+                    >
+                      Google Scholar Profile
+                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                  </li>
+                  <li className="py-2.5 px-3">
+                    <a
+                      href="https://www.webofscience.com/wos/author/record/OLP-9224-2025"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
+                    >
+                      Researcher ID: {contactInfo.webOfScienceResearcherID}
+                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                  </li>
+                </ul>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
@@ -148,20 +134,6 @@ export default function AboutPage() {
                     CV
                   </a>
                 </Button>
-              </div>
-              <div className="mt-5 text-sm text-muted-foreground space-y-2">
-                <p>
-                  IEEE Email:{" "}
-                  <a href={`mailto:${socialLinks.email}`} className="text-accent hover:text-accent/80">
-                    {socialLinks.email}
-                  </a>
-                </p>
-                <p>
-                  WhatsApp:{" "}
-                  <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80">
-                    {contactInfo.phone}
-                  </a>
-                </p>
               </div>
             </div>
           </aside>
@@ -206,42 +178,6 @@ export default function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4">Selected Highlights</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {highlights.map((item) => (
-                  <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
-                    <h3 className="font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{item.detail}</p>
-                    <div className="flex flex-wrap gap-3">
-                      {item.links.map((link) => {
-                        const isExternal = link.href.startsWith("http")
-                        if (isExternal) {
-                          return (
-                            <a
-                              key={link.label}
-                              href={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-xs text-accent hover:text-accent/80"
-                            >
-                              {link.label}
-                            </a>
-                          )
-                        }
-
-                        return (
-                          <Link key={link.label} href={link.href} className="text-xs text-accent hover:text-accent/80">
-                            {link.label}
-                          </Link>
-                        )
-                      })}
-                    </div>
                   </article>
                 ))}
               </div>
