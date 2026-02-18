@@ -66,6 +66,61 @@ export default function AboutPage() {
     },
   ]
 
+  const education = [
+    {
+      degree: "B.Sc. in Electronics and Communications Engineering",
+      org: "Alexandria University, Faculty of Engineering",
+      period: "Aug 2021 - Aug 2026",
+      summary: "CGPA: 3.39/4.0 (Distinct with Honors). Thesis focus: integrated Si transceiver and waveguide-based Ge/Si PIN photodetector modeling and design.",
+    },
+  ]
+
+  const awards = [
+    {
+      title: "Alexandria University Technology Park (AUTP) Research Grant",
+      period: "2025",
+    },
+    {
+      title: "Distinction Grade - Dean's Honors for Academic Excellence",
+      period: "2021 - 2025",
+    },
+    {
+      title: "ICMTC Artificial Intelligence Contest (AIC-2) - 4th Place",
+      period: "2024",
+    },
+    {
+      title: "Huawei ICT Skills Competition - National Finalist (AI Track)",
+      period: "2023",
+    },
+    {
+      title: "NASA Space Apps Challenge - Global Nominee",
+      period: "2021",
+    },
+    {
+      title: "International Youth Math Challenge (IYMC) - Finalist",
+      period: "2021",
+    },
+  ]
+
+  const leadership = [
+    {
+      role: "Chairman, IEEE SSCS Alexandria University SB Chapter",
+      period: "Feb 2025 - Oct 2025",
+      summary: "Led chapter growth, national outreach, and technical training programs.",
+    },
+    {
+      role: "General Coordinator, Education Clinic (USA-Registered NGO)",
+      period: "Aug 2021 - Sep 2023",
+      summary: "Managed 80+ volunteers and launched programs serving 250,000+ students across MENA.",
+    },
+  ]
+
+  const memberships = [
+    "Institute of Electrical and Electronics Engineers (IEEE) - Student Member (2025 - Present)",
+    "IEEE Solid-State Circuits Society (SSCS) (2025 - Present)",
+    "IEEE Photonics Society (2025 - Present)",
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -166,6 +221,24 @@ export default function AboutPage() {
             </section>
 
             <section>
+              <h2 className="text-2xl font-bold mb-4">Education</h2>
+              <div className="space-y-6">
+                {education.map((item) => (
+                  <article key={`${item.degree}-${item.org}`} className="pb-6 border-b border-border last:border-b-0 last:pb-0">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                      <div>
+                        <h3 className="font-semibold">{item.degree}</h3>
+                        <p className="text-sm text-accent">{item.org}</p>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{item.period}</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{item.summary}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
               <h2 className="text-2xl font-bold mb-4">Experience</h2>
               <div className="space-y-6">
                 {experience.map((item) => (
@@ -203,6 +276,44 @@ export default function AboutPage() {
                 <p className="text-sm text-muted-foreground">{item.value}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <section>
+              <h3 className="text-2xl font-bold mb-4">Awards</h3>
+              <div className="space-y-4">
+                {awards.map((item) => (
+                  <article key={`${item.title}-${item.period}`} className="p-4 rounded-lg border border-border bg-background">
+                    <p className="text-sm font-semibold">{item.title}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-bold mb-4">Leadership</h3>
+              <div className="space-y-4">
+                {leadership.map((item) => (
+                  <article key={`${item.role}-${item.period}`} className="p-4 rounded-lg border border-border bg-background">
+                    <p className="text-sm font-semibold">{item.role}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{item.summary}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-bold mb-4">Memberships</h3>
+              <div className="p-4 rounded-lg border border-border bg-background">
+                <ul className="space-y-3 text-sm text-muted-foreground list-disc list-inside">
+                  {memberships.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
           </div>
         </div>
       </section>
