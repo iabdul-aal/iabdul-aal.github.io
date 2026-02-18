@@ -1,0 +1,51 @@
+import { socialLinks } from "@/lib/social-links"
+
+export const siteConfig = {
+  name: "Islam I. Abdulaal",
+  title: "Islam I. Abdulaal | Integrated Photonics Research",
+  description:
+    "Official website of Islam I. Abdulaal, integrated photonics researcher focused on silicon photonics, quantum and nonlinear optics, and physics-informed design.",
+  url: "https://iabdul-aal.github.io",
+  locale: "en_US",
+  ogImage: "/personal-pic.png",
+  keywords: [
+    "Islam I. Abdulaal",
+    "integrated photonics",
+    "silicon photonics",
+    "quantum photonics",
+    "nonlinear optics",
+    "PINNs",
+    "Alexandria University",
+    "A*STAR",
+    "NanoPhoto Lab",
+  ],
+  sameAs: [
+    socialLinks.linkedin,
+    socialLinks.github,
+    socialLinks.orcid,
+    socialLinks.medium,
+    socialLinks.twitter,
+    socialLinks.telegram,
+  ],
+} as const
+
+export const personConfig = {
+  name: "Islam I. Abdulaal",
+  givenName: "Islam",
+  familyName: "Abdulaal",
+  role: "Integrated Photonics Researcher",
+  affiliation: "Alexandria University",
+  lab: "NanoPhoto Lab, A*STAR",
+  location: "Alexandria, Egypt",
+  email: socialLinks.email,
+  phone: "+20-120-460-9271",
+  orcid: "0009-0004-9300-3936",
+  focusAreas: [
+    "Integrated photonics",
+    "Silicon photonics",
+    "Quantum photonics",
+    "Nonlinear optics",
+    "Physics-informed machine learning",
+    "Photonic-electronic co-design",
+  ],
+} as const

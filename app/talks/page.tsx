@@ -1,75 +1,59 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Users, ArrowRight } from "lucide-react"
+import { ArrowRight, MessageSquareText, Presentation, Users } from "lucide-react"
 
 export const metadata = {
-  title: "Talks & Speaking | Islam Abdulaal",
+  title: "Talks",
   description:
-    "Conference talks, presentations, and speaking engagements on integrated photonics and hardware innovation.",
+    "Speaking topics and workshop formats by Islam I. Abdulaal across integrated photonics, nonlinear optics, and research methodology.",
 }
 
 export default function TalksPage() {
-  const talks = [
+  const topics = [
     {
-      id: 1,
-      title: "Silicon Photonics for Data Center Communications",
-      event: "SPIE Photonics Europe 2024",
-      date: "April 22, 2024",
-      location: "Strasbourg, France",
-      type: "Keynote",
-      audience: "500+ attendees",
-      description:
-        "Keynote on how silicon photonics is reshaping data center interconnects and enabling next-generation network infrastructure.",
-      featured: true,
+      title: "Integrated Photonics Fundamentals",
+      description: "From waveguides to PIC architectures, with engineering trade-offs and practical design framing.",
     },
     {
-      id: 2,
-      title: "Quantum Photonics: Building the Quantum Internet",
-      event: "Quantum Technology Conference 2024",
-      date: "February 28, 2024",
-      location: "Virtual",
-      type: "Presentation",
-      audience: "300+ participants",
-      description:
-        "Technical presentation on quantum photonic systems, integrated quantum circuits, and distributed quantum computing networks.",
-      featured: true,
+      title: "Physics-Informed Photonic Design",
+      description: "How physics-aware ML methods can complement classical simulation and optimization workflows.",
     },
     {
-      id: 3,
-      title: "Physics-Informed Machine Learning for Photonic Design",
-      event: "Advanced Photonics Workshop",
-      date: "March 10, 2024",
-      location: "Berlin, Germany",
-      type: "Workshop",
-      audience: "100+ researchers",
-      description:
-        "Hands-on workshop on using neural networks with physics constraints to optimize photonic device designs.",
-      featured: false,
+      title: "Photonics for Data and Communication Systems",
+      description: "Device-to-system view of why integrated photonics matters in modern digital infrastructure.",
     },
     {
-      id: 4,
-      title: "Fiber Bragg Grating Sensors for Biomedical Applications",
-      event: "Optical Sensors Conference",
-      date: "January 15, 2024",
-      location: "San Jose, CA",
-      type: "Presentation",
-      audience: "150+ professionals",
-      description:
-        "Technical presentation on FBG-based sensing systems for continuous biomedical monitoring and early disease detection.",
-      featured: false,
+      title: "Research Skill Building for Students",
+      description: "How to move from coursework to literature-based technical projects and early publication readiness.",
+    },
+  ]
+
+  const formats = [
+    {
+      title: "Technical Talks",
+      icon: Presentation,
+      detail: "Short focused sessions for student chapters, research groups, and technical communities.",
+    },
+    {
+      title: "Interactive Workshops",
+      icon: Users,
+      detail: "Applied sessions on problem framing, simulation planning, and research execution patterns.",
+    },
+    {
+      title: "Mentorship Q&A",
+      icon: MessageSquareText,
+      detail: "Open-format sessions for early researchers seeking direction in photonics-related work.",
     },
   ]
 
   return (
     <main className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center pt-20 pb-12">
+      <section className="min-h-[55vh] flex items-center pt-20 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks & Presentations</h1>
+          <div className="space-y-6 max-w-4xl">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks and Workshops</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Conference presentations and speaking engagements on integrated photonics, quantum photonics, and hardware
-              innovation.
+              Speaking sessions focused on integrated photonics, nonlinear optics, and research skill development.
             </p>
             <Link href="/contact">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -80,65 +64,35 @@ export default function TalksPage() {
         </div>
       </section>
 
-      {/* All Talks */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-foreground mb-12">Speaking Engagements</h2>
-          <div className="space-y-8">
-            {talks.map((talk) => (
-              <div
-                key={talk.id}
-                className="p-8 rounded-lg border border-border bg-card hover:border-accent transition-colors"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                  <div className="flex-grow">
-                    <span className="inline-block px-3 py-1 rounded-full bg-accent/20 text-accent text-xs font-semibold mb-3">
-                      {talk.type}
-                    </span>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">{talk.title}</h3>
-                    <p className="text-lg text-accent font-semibold">{talk.event}</p>
-                  </div>
-                  {talk.featured && (
-                    <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold">
-                      Featured
-                    </span>
-                  )}
-                </div>
-
-                <p className="text-muted-foreground mb-6">{talk.description}</p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-border">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Calendar className="w-4 h-4 text-accent" />
-                    <span className="text-sm">{talk.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <MapPin className="w-4 h-4 text-accent" />
-                    <span className="text-sm">{talk.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Users className="w-4 h-4 text-accent" />
-                    <span className="text-sm">{talk.audience}</span>
-                  </div>
-                </div>
-              </div>
+          <h2 className="text-4xl font-bold mb-12">Speaking Topics</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {topics.map((topic) => (
+              <article key={topic.title} className="p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors">
+                <h3 className="text-xl font-semibold mb-3">{topic.title}</h3>
+                <p className="text-sm text-muted-foreground">{topic.description}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-card border-t border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-6">Speaking Opportunities</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Available for keynotes, technical presentations, workshops, and panel discussions at conferences and events.
-          </p>
-          <Link href="/contact">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              Contact for Speaking Engagement
-            </Button>
-          </Link>
+      <section className="py-20 bg-card border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold mb-10">Formats</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {formats.map((item) => {
+              const Icon = item.icon
+              return (
+                <article key={item.title} className="p-6 rounded-xl border border-border bg-background">
+                  <Icon className="w-7 h-7 text-accent mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.detail}</p>
+                </article>
+              )
+            })}
+          </div>
         </div>
       </section>
     </main>

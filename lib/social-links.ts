@@ -2,6 +2,8 @@ export const socialLinks = {
   linkedin: "https://linkedin.com/in/iabdul-aal",
   github: "https://github.com/iabdul-aal",
   orcid: "https://orcid.org/0009-0004-9300-3936",
+  arxiv: "https://arxiv.org/abs/2510.00357",
+  nanophoto: "https://www.nanophoto.sg/team",
   email: "eslam.ibrahim2026@alexu.edu.eg",
   twitter: "https://twitter.com/iabdul_aal",
   medium: "https://medium.com/@iabdul-aal",

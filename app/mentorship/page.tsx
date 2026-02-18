@@ -1,149 +1,87 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
-  title: "Mentorship | Islam Abdulaal",
-  description: "One-on-one mentorship sessions and technical guidance. Ask questions via Telegram bot.",
+  title: "Mentorship",
+  description:
+    "Mentorship support by Islam I. Abdulaal for students and early researchers in integrated photonics and research skills.",
 }
 
 export default function MentorshipPage() {
+  const sessions = [
+    {
+      title: "Research Direction",
+      description: "Clarify topic scope, reading priorities, and milestone planning for photonics-related projects.",
+    },
+    {
+      title: "Technical Guidance",
+      description: "Discuss simulation strategy, modeling assumptions, and practical implementation trade-offs.",
+    },
+    {
+      title: "Academic Growth",
+      description: "Support for portfolio building, writing habits, and transitioning from learning to research output.",
+    },
+    {
+      title: "Project Review",
+      description: "Feedback on current work, bottlenecks, and how to improve technical communication.",
+    },
+  ]
+
   return (
     <main className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center pt-20 pb-12">
+      <section className="min-h-[55vh] flex items-center pt-20 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-3xl">
+          <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Mentorship</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Free one-on-one mentorship sessions and technical guidance in integrated photonics, hardware design, and
-              research methodology.
+              Mentorship support for students and early researchers working in integrated photonics and adjacent fields.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Mentorship Sessions */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-foreground mb-12">1-on-1 Sessions</h2>
+          <h2 className="text-4xl font-bold mb-12">1-on-1 Session Themes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Research Guidance",
-                description: "Discuss research methodology, literature review, and problem-solving approaches.",
-              },
-              {
-                title: "Technical Mentoring",
-                description: "Get guidance on photonics design, simulation tools, and technical challenges.",
-              },
-              {
-                title: "Career Development",
-                description: "Explore career paths in research, industry, and entrepreneurship.",
-              },
-              {
-                title: "Project Collaboration",
-                description: "Collaborate on research projects and technical initiatives.",
-              },
-            ].map((session, idx) => (
-              <div
-                key={idx}
-                className="p-8 rounded-lg border border-border bg-card hover:border-accent transition-colors"
-              >
-                <h3 className="text-xl font-bold text-foreground mb-3">{session.title}</h3>
-                <p className="text-muted-foreground mb-6">{session.description}</p>
-                <span className="text-accent font-semibold">Free • By appointment</span>
-              </div>
+            {sessions.map((session) => (
+              <article key={session.title} className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors">
+                <h3 className="text-xl font-bold mb-3">{session.title}</h3>
+                <p className="text-muted-foreground">{session.description}</p>
+                <p className="text-accent text-sm font-semibold mt-5">By appointment</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Q&A via Telegram */}
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Q&A Community</h2>
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold mb-4">Quick Questions</h2>
             <p className="text-lg text-muted-foreground">
-              Have quick questions? Ask via our Telegram bot and get answers posted on the community channel.
+              For short questions, you can reach out directly on Telegram or via the contact page.
             </p>
           </div>
 
-          <div className="p-8 rounded-lg border border-border bg-background">
+          <div className="p-8 rounded-xl border border-border bg-background">
             <div className="flex items-center justify-center gap-4 mb-6">
               <MessageCircle className="w-8 h-8 text-accent" />
-              <h3 className="text-2xl font-bold text-foreground">Telegram Q&A Bot</h3>
+              <h3 className="text-2xl font-bold">Direct Message Options</h3>
             </div>
             <p className="text-center text-muted-foreground mb-6">
-              Submit your questions through our Telegram bot. Selected questions and answers will be featured on the
-              community channel and featured on this website.
+              For concise technical questions, send a short context summary with your current objective and challenge.
             </p>
-            <div className="flex justify-center gap-4">
-              <a href="https://t.me/islambotQA" target="_blank" rel="noopener noreferrer">
-                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Ask a Question</Button>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer">
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Message on Telegram</Button>
               </a>
-              <a href="https://t.me/islamchannel" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline">Join Community</Button>
-              </a>
+              <Link href="/contact">
+                <Button variant="outline">Use Contact Page</Button>
+              </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20 bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-foreground mb-12">How to Get Started</h2>
-          <div className="space-y-6">
-            {[
-              {
-                step: 1,
-                title: "Book a Session",
-                description: "Reach out via email or contact form to schedule a 1-on-1 mentorship session.",
-              },
-              {
-                step: 2,
-                title: "Ask Questions",
-                description: "Send quick questions via our Telegram bot for community Q&A.",
-              },
-              {
-                step: 3,
-                title: "Get Answers",
-                description: "Receive guidance in mentorship sessions or see answers on our community channel.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="flex gap-6 p-6 rounded-lg border border-border bg-card">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent text-accent-foreground font-bold flex-shrink-0">
-                  {item.step}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-card border-t border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-6">Ready to Get Started?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Whether it's a one-on-one session or a quick question, I'm here to help.
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                Book a Session
-              </Button>
-            </Link>
-            <a href="https://t.me/islambotQA" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="outline">
-                Ask via Telegram
-              </Button>
-            </a>
           </div>
         </div>
       </section>

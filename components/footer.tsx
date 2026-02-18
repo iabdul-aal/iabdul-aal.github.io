@@ -44,7 +44,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/news" className="text-muted-foreground hover:text-accent transition-colors">
-                  Achievements
+                  Highlights
                 </Link>
               </li>
               <li>
