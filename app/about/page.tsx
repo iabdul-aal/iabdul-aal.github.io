@@ -407,9 +407,6 @@ export default async function AboutPage() {
 
             <section>
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Professional membership structure follows IEEE base membership first, then society add-ons.
-              </p>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border border-border bg-background">
                   <p className="text-xs font-semibold uppercase tracking-wide text-accent mb-2">Main Membership</p>
