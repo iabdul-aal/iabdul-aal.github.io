@@ -71,8 +71,8 @@ export default function AboutPage() {
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <aside className="lg:col-span-1">
-            <div className="sticky top-24">
-              <div className="relative w-full max-w-[300px] aspect-square bg-card rounded-xl border border-border overflow-hidden mb-6">
+            <div className="sticky top-24 w-full max-w-[300px]">
+              <div className="relative w-full aspect-square bg-card rounded-xl border border-border overflow-hidden mb-6">
                 <Image
                   src="/personal-pic.png"
                   alt="Islam I. Abdulaal"
