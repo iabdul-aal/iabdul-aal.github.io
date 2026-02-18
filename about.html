@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Islam I. Abdulaal</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --line: #dbe2ea;
+        --accent: #0b5dd7;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px 64px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        margin: 0 0 28px;
+        color: var(--muted);
+      }
+
+      #publications {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 24px;
+      }
+
+      #publications h2 {
+        margin: 0 0 12px;
+        font-size: 1.35rem;
+      }
+
+      .publication-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .publication-item {
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .publication-item:first-child {
+        border-top: 0;
+        padding-top: 4px;
+      }
+
+      .pub-title {
+        margin: 0 0 4px;
+        font-weight: 600;
+      }
+
+      .pub-meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .pub-links {
+        margin-top: 6px;
+        font-size: 0.92rem;
+      }
+
+      .pub-links a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .pub-links a:hover {
+        text-decoration: underline;
+      }
+
+      .empty-state {
+        color: var(--muted);
+        margin: 8px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>About</h1>
+      <p class="subtitle">Research profile and publication record.</p>
+
+      <section id="publications"></section>
+    </main>
+
+    <script>
+      function createHeading() {
+        const heading = document.createElement("h2");
+        heading.textContent = "Publications";
+        return heading;
+      }
+
+      function createMessage(text) {
+        const paragraph = document.createElement("p");
+        paragraph.className = "empty-state";
+        paragraph.textContent = text;
+        return paragraph;
+      }
+
+      function createPublicationItem(pub) {
+        const item = document.createElement("li");
+        item.className = "publication-item";
+
+        const title = document.createElement("p");
+        title.className = "pub-title";
+        title.textContent = pub.title || "Untitled";
+        item.appendChild(title);
+
+        const meta = document.createElement("p");
+        meta.className = "pub-meta";
+        meta.textContent = `${pub.venue || "Unspecified venue"}, ${pub.year || "n.d."}`;
+        item.appendChild(meta);
+
+        const links = [];
+
+        if (pub.doi) {
+          const doiLink = document.createElement("a");
+          doiLink.href = `https://doi.org/${encodeURIComponent(pub.doi)}`;
+          doiLink.target = "_blank";
+          doiLink.rel = "noopener noreferrer";
+          doiLink.textContent = `DOI: ${pub.doi}`;
+          links.push(doiLink);
+        }
+
+        if (pub.url) {
+          const viewLink = document.createElement("a");
+          viewLink.href = pub.url;
+          viewLink.target = "_blank";
+          viewLink.rel = "noopener noreferrer";
+          viewLink.textContent = "View";
+          links.push(viewLink);
+        }
+
+        if (links.length > 0) {
+          const linksRow = document.createElement("p");
+          linksRow.className = "pub-links";
+          links.forEach((link, index) => {
+            if (index > 0) {
+              linksRow.appendChild(document.createTextNode(" | "));
+            }
+            linksRow.appendChild(link);
+          });
+          item.appendChild(linksRow);
+        }
+
+        return item;
+      }
+
+      async function loadPublications() {
+        const section = document.getElementById("publications");
+        section.replaceChildren(createHeading(), createMessage("Loading publications..."));
+
+        try {
+          const response = await fetch("./publications.json", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error(`Failed to load publications.json (${response.status})`);
+          }
+
+          const publications = await response.json();
+          section.replaceChildren(createHeading());
+
+          if (!Array.isArray(publications) || publications.length === 0) {
+            section.appendChild(createMessage("No publications found."));
+            return;
+          }
+
+          const list = document.createElement("ol");
+          list.className = "publication-list";
+          publications.forEach((pub) => {
+            list.appendChild(createPublicationItem(pub));
+          });
+          section.appendChild(list);
+        } catch (error) {
+          section.replaceChildren(createHeading(), createMessage("Could not load publications right now."));
+          console.error(error);
+        }
+      }
+
+      loadPublications();
+    </script>
+  </body>
+</html>
