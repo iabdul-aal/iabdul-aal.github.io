@@ -18,6 +18,12 @@ export const siteConfig = {
     "Alexandria University",
     "A*STAR",
     "NanoPhoto Lab",
+    "HW Carnival",
+    "Si-Cast",
+    "Si-Clash",
+    "AlexDuino",
+    "engineering initiatives",
+    "hardware innovation",
   ],
   sameAs: [
     socialLinks.linkedin,

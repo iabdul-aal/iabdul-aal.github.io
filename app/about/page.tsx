@@ -107,6 +107,21 @@ export default function AboutPage() {
     },
   ]
 
+  const initiatives = [
+    {
+      title: "Si-Cast",
+      detail: "Technical initiative centered on engineering content development and structured knowledge transfer.",
+    },
+    {
+      title: "Si-Clash",
+      detail: "Challenge-driven initiative built around collaborative problem solving and practical engineering execution.",
+    },
+    {
+      title: "AlexDuino",
+      detail: "Hands-on initiative for electronics prototyping and embedded systems practice.",
+    },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -232,6 +247,18 @@ export default function AboutPage() {
                         </a>
                       ))}
                     </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Initiative Portfolio</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {initiatives.map((item) => (
+                  <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
+                    <h3 className="font-semibold mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.detail}</p>
                   </article>
                 ))}
               </div>

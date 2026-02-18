@@ -4,7 +4,7 @@ import { ArrowRight, Building2, FlaskConical, Handshake, Rocket, Users2 } from "
 
 export const metadata = {
   title: "Ventures | Islam Abdulaal",
-  description: "Startups and initiatives in photonics and hardware innovation.",
+  description: "Startups and initiatives including HW Carnival, Si-Cast, Si-Clash, and AlexDuino.",
 }
 
 export default function VenturesPage() {
@@ -35,6 +35,33 @@ export default function VenturesPage() {
       href: "/ventures/non-profit",
       cta: "See Community Impact",
       stage: "Stage: Active engagement",
+    },
+  ]
+
+  const flagshipInitiatives = [
+    {
+      name: "HW Carnival",
+      summary:
+        "A funded hardware initiative and community program with broad student engagement and public feature coverage.",
+      status: "Flagship",
+    },
+    {
+      name: "Si-Cast",
+      summary:
+        "An initiative track focused on structured technical content and engineering knowledge transfer.",
+      status: "Active",
+    },
+    {
+      name: "Si-Clash",
+      summary:
+        "A challenge-oriented initiative model designed to strengthen practical engineering problem solving.",
+      status: "Active",
+    },
+    {
+      name: "AlexDuino",
+      summary:
+        "A practical prototyping initiative centered on embedded systems and hands-on electronics development.",
+      status: "Active",
     },
   ]
 
@@ -85,6 +112,23 @@ export default function VenturesPage() {
       </section>
 
       <section className="py-20 bg-card border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-foreground mb-10">Flagship Initiatives</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {flagshipInitiatives.map((item) => (
+              <article key={item.name} className="p-6 rounded-xl border border-border bg-background">
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <h3 className="text-xl font-semibold text-foreground">{item.name}</h3>
+                  <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{item.status}</span>
+                </div>
+                <p className="text-sm text-muted-foreground">{item.summary}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-foreground mb-10">Collaboration Models</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

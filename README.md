@@ -5,12 +5,14 @@ Professional website and research portfolio for **Islam I. Abdulaal**, focused o
 - Quantum and nonlinear optics
 - Physics-informed photonic design
 - Mentorship and technical outreach
+- Flagship initiatives: HW Carnival, Si-Cast, Si-Clash, AlexDuino
 
 Live website: **https://iabdul-aal.github.io**
 
 ## Core Goals
 
 - Present a credible, professional research profile
+- Showcase initiative leadership across research, hardware, and engineering communities
 - Provide clear access to verified academic and professional profiles
 - Publish highlights, writing, services, and mentorship pathways
 - Maintain SEO-friendly structure for discoverability

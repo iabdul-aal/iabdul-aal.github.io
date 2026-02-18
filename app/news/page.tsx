@@ -18,6 +18,14 @@ export default function HighlightsPage() {
       link: socialLinks.hwCarnivalFeature,
     },
     {
+      title: "Expansion of Initiative Portfolio (Si-Cast, Si-Clash, AlexDuino)",
+      date: "Ongoing",
+      category: "Initiatives",
+      description:
+        "Expanded initiative portfolio with Si-Cast, Si-Clash, and AlexDuino to broaden technical education, challenge-based learning, and applied prototyping activity.",
+      link: "/ventures",
+    },
+    {
       title: "SSCS STGA Award",
       date: "2025",
       category: "Award",

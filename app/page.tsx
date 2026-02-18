@@ -45,10 +45,11 @@ export default function Home() {
       cta: "View profile",
     },
     {
-      title: "Medium Technical Writing",
-      description: "Public educational writing on photonics fundamentals and emerging photonic technologies.",
-      href: socialLinks.medium,
-      cta: "Read articles",
+      title: "Initiatives Portfolio",
+      description:
+        "Flagship initiatives include HW Carnival, Si-Cast, Si-Clash, and AlexDuino across engineering education and innovation.",
+      href: "/ventures",
+      cta: "Explore ventures",
     },
   ]
 
@@ -86,8 +87,8 @@ export default function Home() {
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
               I work on integrated photonics, quantum and nonlinear optics, and physics-informed design workflows for
-              photonic devices. This website presents my research track, publications, writing, and collaboration
-              channels.
+              photonic devices. This website presents my research track, publications, initiative portfolio, and
+              collaboration channels.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
@@ -113,7 +114,7 @@ export default function Home() {
             {[
               { label: "Current Focus", value: "Integrated + Quantum Photonics" },
               { label: "Current Affiliation", value: "NanoPhoto Lab, A*STAR" },
-              { label: "Initiative Highlight", value: "HW Carnival (USD 10k funded)" },
+              { label: "Initiative Highlights", value: "HW Carnival, Si-Cast, Si-Clash, AlexDuino" },
             ].map((stat) => (
               <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5">
                 <p className="text-sm font-semibold text-accent">{stat.label}</p>
