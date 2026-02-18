@@ -1,10 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Download, ExternalLink } from "lucide-react"
+import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Publications } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
-import { socialLinks } from "@/lib/social-links"
+import { contactInfo, socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "About",
@@ -30,13 +30,31 @@ export default function AboutPage() {
     },
   ]
 
-  const profiles = [
-    { name: "ORCID", url: socialLinks.orcid },
+  const coreProfiles = [
     { name: "LinkedIn", url: socialLinks.linkedin },
-    { name: "GitHub", url: socialLinks.github },
-    { name: "Medium", url: socialLinks.medium },
-    { name: "NanoPhoto Lab", url: socialLinks.nanophoto },
+    { name: "ORCID", url: socialLinks.orcid },
+    { name: "Google Scholar", url: socialLinks.scholar },
+    { name: "Semantic Scholar", url: socialLinks.semanticScholar },
+    { name: "ResearchGate", url: socialLinks.researchGate },
+    { name: "IEEE Collabratec", url: socialLinks.collabratec },
+    { name: "Frontiers Loop", url: socialLinks.frontiersLoop },
+    { name: "SciProfiles", url: socialLinks.sciprofiles },
+    { name: "Academia", url: socialLinks.academia },
     { name: "arXiv", url: socialLinks.arxiv },
+  ]
+
+  const professionalChannels = [
+    { name: "Medium", url: socialLinks.medium },
+    { name: "X (Twitter)", url: socialLinks.twitter },
+    { name: "Bluesky", url: socialLinks.bluesky },
+    { name: "Telegram", url: socialLinks.telegram },
+    { name: "GitHub", url: socialLinks.github },
+  ]
+
+  const profileCollections = [
+    { name: "Linktree", url: socialLinks.linktree },
+    { name: "Gravatar", url: socialLinks.gravatar },
+    { name: "F6S", url: socialLinks.f6s },
   ]
 
   const focusAreas = [
@@ -119,6 +137,20 @@ export default function AboutPage() {
                   </Button>
                 </a>
               </div>
+              <div className="mt-5 text-sm text-muted-foreground space-y-2">
+                <p>
+                  IEEE Email:{" "}
+                  <a href={`mailto:${socialLinks.email}`} className="text-accent hover:text-accent/80">
+                    {socialLinks.email}
+                  </a>
+                </p>
+                <p>
+                  WhatsApp:{" "}
+                  <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80">
+                    {contactInfo.phone}
+                  </a>
+                </p>
+              </div>
             </div>
           </aside>
 
@@ -173,27 +205,62 @@ export default function AboutPage() {
 
             <section>
               <h2 className="text-2xl font-bold mb-4">Academic and Professional Profiles</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {profiles.map((profile) => (
-                  <a
-                    key={profile.name}
-                    href={profile.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
-                  >
-                    {profile.name}
-                  </a>
-                ))}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">Research Identity</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {coreProfiles.map((profile) => (
+                      <a
+                        key={profile.name}
+                        href={profile.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
+                      >
+                        {profile.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">Professional Channels</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {professionalChannels.map((profile) => (
+                      <a
+                        key={profile.name}
+                        href={profile.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
+                      >
+                        {profile.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">Profile Collections</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {profileCollections.map((profile) => (
+                      <a
+                        key={profile.name}
+                        href={profile.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 rounded-lg border border-border bg-card hover:border-accent transition-colors text-sm font-semibold text-center"
+                      >
+                        {profile.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <a
-                href="https://www.collabratec.ieee.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-              >
-                IEEE Collabratec <ExternalLink className="w-4 h-4" />
-              </a>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Web of Science ResearcherID:{" "}
+                <span className="text-accent">{contactInfo.webOfScienceResearcherID}</span>
+              </p>
             </section>
           </div>
         </div>

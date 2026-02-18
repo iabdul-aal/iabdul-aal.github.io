@@ -12,17 +12,17 @@ export default function ContactPage() {
   const contactMethods = [
     {
       icon: Mail,
-      title: "Email",
-      value: "eslam.ibrahim2026@alexu.edu.eg",
+      title: "IEEE Email",
+      value: socialLinks.email,
       description: "Primary channel for collaboration and professional inquiries",
-      href: "mailto:eslam.ibrahim2026@alexu.edu.eg",
+      href: `mailto:${socialLinks.email}`,
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+20-120-460-9271",
-      description: "Available by prior scheduling",
-      href: "tel:+201204609271",
+      value: socialLinks.phone,
+      description: "WhatsApp-enabled number",
+      href: `tel:${socialLinks.phone}`,
     },
     {
       icon: MapPin,
@@ -94,6 +94,18 @@ export default function ContactPage() {
                   <Button size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
                     <Mail className="w-5 h-5 mr-2" />
                     Send Email
+                  </Button>
+                </a>
+                <a href={`mailto:${socialLinks.academicEmail}?subject=Academic Inquiry`}>
+                  <Button size="lg" variant="outline" className="w-full">
+                    <Mail className="w-5 h-5 mr-2" />
+                    Academic Email
+                  </Button>
+                </a>
+                <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="outline" className="w-full">
+                    <Phone className="w-5 h-5 mr-2" />
+                    WhatsApp
                   </Button>
                 </a>
                 <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
