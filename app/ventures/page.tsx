@@ -53,6 +53,7 @@ export default function VenturesPage() {
       summary:
         "Track focused on structured technical content and practical engineering communication.",
       status: "Active",
+      href: socialLinks.siCastYoutube,
     },
     {
       name: "Si-Clash",
@@ -132,7 +133,7 @@ export default function VenturesPage() {
                     rel="noopener noreferrer"
                     className="mt-4 inline-flex items-center gap-2 text-xs text-accent hover:text-accent/80"
                   >
-                    View event details <ArrowRight className="w-3 h-3" />
+                    {item.name === "Si-Cast" ? "View YouTube channel" : "View event details"} <ArrowRight className="w-3 h-3" />
                   </a>
                 )}
               </article>

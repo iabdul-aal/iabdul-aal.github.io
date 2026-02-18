@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, MessageSquareText, Presentation, Users } from "lucide-react"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Talks",
@@ -94,6 +95,26 @@ export default function TalksPage() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold mb-6">Featured Talk</h2>
+          <article className="p-7 rounded-xl border border-border bg-card">
+            <h3 className="text-xl font-semibold mb-3">Recent Public Talk</h3>
+            <p className="text-sm text-muted-foreground mb-5">
+              A public session covering practical research thinking and technical communication for engineering learners.
+            </p>
+            <a
+              href={socialLinks.featuredTalkYoutube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+            >
+              Watch on YouTube <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </article>
         </div>
       </section>
 

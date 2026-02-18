@@ -12,6 +12,8 @@ export const socialLinks = {
   hwCarnivalEvent: "https://events.vtools.ieee.org/m/526669",
   hwCarnivalFeature: "https://www.bibalex.org/en/MediaGallery/Default/specialevents",
   hwCarnivalFeatureBA: "https://www.bibalex.org/en/event/details?documentid=44040&keywords=HW-Carnival",
+  siCastYoutube: "https://www.youtube.com/@si-cast",
+  featuredTalkYoutube: "https://www.youtube.com/watch?v=mEboydO5pEk&t=4s",
   email: "iabdul-aal@ieee.org",
   academicEmail: "eslam.ibrahim2026@alexu.edu.eg",
   phone: "+20120460921",
