@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { JourneySection } from "@/components/journey-section"
 import { ArrowLeft, Users } from "lucide-react"
 
 export const metadata = {
@@ -16,6 +15,14 @@ export default function NonProfitPage() {
       description:
         "Led a full chapter restructuring, coordinated volunteers, and organized technical events with industry and academic experts.",
       impact: ["500+ students served", "30 universities reached", "80+ events organized"],
+    },
+    {
+      name: "HW Carnival Technical Day",
+      role: "Program Lead (SSCS Chapter)",
+      period: "Dec 25, 2025",
+      description:
+        "Delivered competition finals and technical activities at Bibliotheca Alexandrina under the HW Carnival initiative.",
+      impact: ["AlexDuino track", "Si-Clash track", "Si-Cast track"],
     },
     {
       name: "Education Clinic",
@@ -35,20 +42,20 @@ export default function NonProfitPage() {
             <ArrowLeft className="w-4 h-4" />
             Back to Ventures
           </Link>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance mb-6">Non-Profit Initiatives</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance mb-6">Non-Profit Initiatives</h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
             Education and community initiatives aimed at widening access to technical learning and research exposure.
           </p>
         </div>
       </section>
 
-      <section className="py-20 bg-background">
+      <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
             {initiatives.map((initiative) => (
               <article
                 key={initiative.name}
-                className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors"
+                className="p-6 md:p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors"
               >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                   <div>
@@ -76,16 +83,6 @@ export default function NonProfitPage() {
           </div>
         </div>
       </section>
-
-      <JourneySection
-        title="Continue the Community Track"
-        description="If you are planning community programs, continue to contact, venture overview, or mentorship pathways."
-        actions={[
-          { href: "/contact", label: "Start Community Discussion" },
-          { href: "/ventures", label: "Back to Ventures", variant: "outline" },
-          { href: "/mentorship", label: "Mentorship Programs", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

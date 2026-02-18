@@ -14,10 +14,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-foreground mb-4">About</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Personal website for research, initiatives, collaboration opportunities, and technical community impact.
-            </p>
-            <p className="text-xs text-muted-foreground mt-4">
-              Built for clear navigation from profile review to direct collaboration.
+              Research portfolio and collaboration hub for integrated and nonlinear quantum photonics.
             </p>
           </div>
 
@@ -83,7 +80,7 @@ export function Footer() {
           {/* Connect */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Connect</h3>
-            <SocialProfileIconRow limit={6} />
+            <SocialProfileIconRow limit={4} />
             <div className="mt-3 flex gap-4">
               <a
                 href={`mailto:${socialLinks.email}`}
@@ -100,7 +97,6 @@ export function Footer() {
                 {socialLinks.email}
               </a>
             </p>
-            <p className="text-xs text-muted-foreground mt-2">Typical response: 24-72 hours</p>
           </div>
         </div>
 

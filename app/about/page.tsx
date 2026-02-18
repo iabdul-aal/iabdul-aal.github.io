@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { JourneySection } from "@/components/journey-section"
 import { SocialProfileGrid } from "@/components/social-profile-links"
 import { Publications } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
@@ -11,7 +10,7 @@ import { contactInfo, socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "About",
   description:
-    "Background, research direction, affiliations, publications, and technical competencies of Islam I. Abdulaal.",
+    "Background, research direction, affiliations, publications, initiatives, and technical competencies of Islam I. Abdulaal.",
 }
 
 export default function AboutPage() {
@@ -42,12 +41,8 @@ export default function AboutPage() {
       desc: "SPDC-oriented architectures and nonlinear effects for quantum-compatible platforms.",
     },
     {
-      title: "Physics-Informed ML",
-      desc: "PINN-based methods for inverse design and multiphysics-aware optimization.",
-    },
-    {
-      title: "Photonic-Electronic Co-design",
-      desc: "Cross-domain integration between photonic subsystems and electronic readout/control.",
+      title: "Physics-Informed Design",
+      desc: "PINN-assisted inverse design and multiphysics-aware optimization.",
     },
   ]
 
@@ -56,60 +51,41 @@ export default function AboutPage() {
       role: "Research Intern",
       org: "NanoPhoto Lab, IMRE, A*STAR",
       period: "Sep 2025 - Present",
-      summary:
-        "Working on physics-informed optimization and integrated quantum photonics design workflows.",
+      summary: "Working on optimization and integrated quantum photonics design workflows.",
     },
     {
       role: "Research Intern",
       org: "Egypt Scholars Advanced Labs Program",
       period: "Jul 2025 - Sep 2025",
-      summary: "Completed intensive research training focused on quantum photonics and independent problem execution.",
+      summary: "Completed intensive research training in quantum photonics and independent problem execution.",
     },
     {
       role: "Undergraduate Researcher",
       org: "OPST Group, Alexandria University",
       period: "Jul 2023 - Aug 2025",
-      summary: "Worked on FBG-based sensing and photonic modeling for biomedical and communication use cases.",
-    },
-    {
-      role: "Chapter Chair",
-      org: "IEEE SSCS Alexandria University Student Branch Chapter",
-      period: "2025",
-      summary:
-        "Led chapter-scale technical programs including HW Carnival, a funded initiative with approximately USD 10,000 support.",
+      summary: "Worked on FBG-based sensing and photonic modeling for biomedical and communications use cases.",
     },
   ]
 
-  const leadershipAndAwards = [
+  const highlights = [
     {
-      title: "HW Carnival (Funded Initiative)",
+      title: "HW Carnival",
       detail:
-        "Organized and led HW Carnival as a hardware-focused initiative supported by approximately USD 10,000 funding.",
+        "Led a funded technical initiative (approximately USD 10,000) with a technical day at Bibliotheca Alexandrina on December 25, 2025.",
       links: [
-        { label: "Feature Article", href: socialLinks.hwCarnivalFeature },
-        { label: "Event Listing", href: socialLinks.hwCarnivalEvent },
+        { label: "Feature", href: socialLinks.hwCarnivalFeature },
+        { label: "Event", href: socialLinks.hwCarnivalEvent },
       ],
     },
     {
       title: "SSCS STGA Award",
-      detail:
-        "Recipient of SSCS STGA recognition for chapter and technical contribution activity.",
-      links: [{ label: "Profile", href: socialLinks.linkedin }],
-    },
-  ]
-
-  const initiatives = [
-    {
-      title: "Si-Cast",
-      detail: "Technical initiative centered on engineering content development and structured knowledge transfer.",
+      detail: "Recognized by IEEE SSCS for chapter leadership and technical contribution.",
+      links: [{ label: "LinkedIn", href: socialLinks.linkedin }],
     },
     {
-      title: "Si-Clash",
-      detail: "Challenge-driven initiative built around collaborative problem solving and practical engineering execution.",
-    },
-    {
-      title: "AlexDuino",
-      detail: "Hands-on initiative for electronics prototyping and embedded systems practice.",
+      title: "Initiatives",
+      detail: "Built and supported Si-Cast, Si-Clash, and AlexDuino tracks for practical engineering training.",
+      links: [{ label: "Ventures", href: "/ventures" }],
     },
   ]
 
@@ -174,23 +150,19 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University,
-                  focused on integrated photonics research and device-level engineering.
+                  I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University
+                  focused on integrated photonics and device-level research engineering.
                 </p>
                 <p>
-                  My recent research direction centers on silicon photonics, nonlinear quantum photonics, and
-                  physics-informed design methods for photonic structures.
-                </p>
-                <p>
-                  I currently contribute as a Research Intern at NanoPhoto Lab (A*STAR), where I work on optimization
-                  workflows and modeling methods for integrated quantum photonics.
+                  I currently contribute at NanoPhoto Lab (A*STAR) on optimization and modeling workflows for
+                  integrated quantum photonics.
                 </p>
               </div>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {focusAreas.map((item) => (
                   <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
                     <h3 className="font-semibold mb-2">{item.title}</h3>
@@ -219,24 +191,35 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4">Leadership and Awards</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {leadershipAndAwards.map((item) => (
+              <h2 className="text-2xl font-bold mb-4">Selected Highlights</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {highlights.map((item) => (
                   <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
                     <h3 className="font-semibold mb-2">{item.title}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{item.detail}</p>
                     <div className="flex flex-wrap gap-3">
-                      {item.links.map((link) => (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-accent hover:text-accent/80"
-                        >
-                          {link.label}
-                        </a>
-                      ))}
+                      {item.links.map((link) => {
+                        const isExternal = link.href.startsWith("http")
+                        if (isExternal) {
+                          return (
+                            <a
+                              key={link.label}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-accent hover:text-accent/80"
+                            >
+                              {link.label}
+                            </a>
+                          )
+                        }
+
+                        return (
+                          <Link key={link.label} href={link.href} className="text-xs text-accent hover:text-accent/80">
+                            {link.label}
+                          </Link>
+                        )
+                      })}
                     </div>
                   </article>
                 ))}
@@ -244,22 +227,7 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4">Initiative Portfolio</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {initiatives.map((item) => (
-                  <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
-                    <h3 className="font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.detail}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section>
               <h2 className="text-2xl font-bold mb-4">Professional Profiles</h2>
-              <p className="text-sm text-muted-foreground mb-4">
-                Verified professional and research profiles with consistent links.
-              </p>
               <SocialProfileGrid />
               <p className="mt-5 text-sm text-muted-foreground">
                 Web of Science ResearcherID:{" "}
@@ -272,42 +240,23 @@ export default function AboutPage() {
 
       <Publications publications={publications} />
 
-      <section className="py-20 bg-card border-t border-border">
+      <section className="py-16 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-4">Technical Competencies</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Key tools and technical stack used across photonics research, simulation workflows, and
-                photonic-electronic studies.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: "Photonics Tools", value: "Lumerical, COMSOL, MATLAB" },
-                { label: "Programming", value: "Python, C/C++, MATLAB" },
-                { label: "ML Stack", value: "PyTorch, TensorFlow, PINNs" },
-                { label: "Systems", value: "FPGA/ASIC workflow exposure" },
-              ].map((item) => (
-                <div key={item.label} className="p-5 rounded-lg border border-border bg-background">
-                  <p className="text-sm font-semibold text-accent mb-2">{item.label}</p>
-                  <p className="text-sm text-muted-foreground">{item.value}</p>
-                </div>
-              ))}
-            </div>
+          <h2 className="text-3xl font-bold mb-6">Core Technical Stack</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { label: "Photonics Tools", value: "Lumerical, COMSOL, MATLAB" },
+              { label: "Programming", value: "Python, C/C++, MATLAB" },
+              { label: "ML Workflow", value: "PyTorch, TensorFlow, PINNs" },
+            ].map((item) => (
+              <div key={item.label} className="p-5 rounded-lg border border-border bg-background">
+                <p className="text-sm font-semibold text-accent mb-2">{item.label}</p>
+                <p className="text-sm text-muted-foreground">{item.value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-
-      <JourneySection
-        title="Where Should You Go Next?"
-        description="If you reviewed my profile, the next step depends on your objective: collaboration, venture discussion, or direct contact."
-        actions={[
-          { href: "/services", label: "View Services" },
-          { href: "/ventures", label: "Explore Ventures", variant: "outline" },
-          { href: "/contact", label: "Contact Directly", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

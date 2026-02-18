@@ -6,7 +6,6 @@ import { useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SocialProfileIconRow } from "@/components/social-profile-links"
 import { socialLinks } from "@/lib/social-links"
 import { cn } from "@/lib/utils"
 
@@ -63,12 +62,11 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Desktop Social Links */}
+          {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-4">
             <Button asChild size="sm">
-              <Link href="/contact">Collaborate</Link>
+              <Link href="/contact">Contact</Link>
             </Button>
-            <SocialProfileIconRow limit={4} />
             <a
               href={`mailto:${socialLinks.email}`}
               aria-label="Email"
@@ -109,22 +107,8 @@ export function Navigation() {
 
             <div className="px-4 pt-2">
               <Button asChild className="w-full" onClick={() => setIsOpen(false)}>
-                <Link href="/contact">Start Collaboration</Link>
+                <Link href="/contact">Contact</Link>
               </Button>
-            </div>
-
-            <div className="px-4 py-4 border-t border-border mt-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-3">Connect</p>
-              <div className="flex flex-wrap gap-4">
-                <SocialProfileIconRow limit={4} />
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  aria-label="Email"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                </a>
-              </div>
             </div>
           </div>
         )}
