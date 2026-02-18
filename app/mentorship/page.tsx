@@ -74,12 +74,14 @@ export default function MentorshipPage() {
               For concise technical questions, send a short context summary with your current objective and challenge.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
-              <Link href="/contact">
-                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Use Contact Page</Button>
-              </Link>
-              <a href="https://www.linkedin.com/in/iabdul-aal" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline">Message on LinkedIn</Button>
-              </a>
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/contact">Use Contact Page</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <a href="https://www.linkedin.com/in/iabdul-aal" target="_blank" rel="noopener noreferrer">
+                  Message on LinkedIn
+                </a>
+              </Button>
             </div>
           </div>
         </div>

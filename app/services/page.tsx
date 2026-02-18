@@ -54,11 +54,11 @@ export default function ServicesPage() {
             <p className="text-xl md:text-2xl text-muted-foreground">
               Practical support for integrated photonics research, simulation planning, and technical delivery.
             </p>
-            <Link href="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button asChild size="lg">
+              <Link href="/contact">
                 Start a Discussion <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

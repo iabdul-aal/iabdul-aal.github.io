@@ -90,30 +90,30 @@ export default function ContactPage() {
                 Choose your preferred channel and include your inquiry details to speed up response quality.
               </p>
               <div className="space-y-4">
-                <a href={`mailto:${socialLinks.email}?subject=Collaboration Inquiry`}>
-                  <Button size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Button asChild size="lg" className="w-full">
+                  <a href={`mailto:${socialLinks.email}?subject=Collaboration Inquiry`}>
                     <Mail className="w-5 h-5 mr-2" />
                     Send Email
-                  </Button>
-                </a>
-                <a href={`mailto:${socialLinks.academicEmail}?subject=Academic Inquiry`}>
-                  <Button size="lg" variant="outline" className="w-full">
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="w-full">
+                  <a href={`mailto:${socialLinks.academicEmail}?subject=Academic Inquiry`}>
                     <Mail className="w-5 h-5 mr-2" />
                     Academic Email
-                  </Button>
-                </a>
-                <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="outline" className="w-full">
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="w-full">
+                  <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer">
                     <Phone className="w-5 h-5 mr-2" />
                     WhatsApp
-                  </Button>
-                </a>
-                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="outline" className="w-full">
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="w-full">
+                  <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
                     <MessageSquareText className="w-5 h-5 mr-2" />
                     Message on LinkedIn
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </div>
               <p className="text-xs text-muted-foreground mt-6">Typical response window: 24-72 hours.</p>
             </div>

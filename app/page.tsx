@@ -92,21 +92,17 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
-              <Link href="/about">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                  View Research Profile
-                </Button>
-              </Link>
-              <Link href="/news">
-                <Button size="lg" variant="outline">
-                  Key Highlights
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="ghost" className="text-accent hover:text-accent-foreground">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <Link href="/about">View Research Profile</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+                <Link href="/news">Key Highlights</Link>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="w-full sm:w-auto">
+                <Link href="/contact">
                   Contact <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
 
@@ -184,21 +180,17 @@ export default function Home() {
             students entering integrated photonics.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/services">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                Research Services
-              </Button>
-            </Link>
-            <Link href="/mentorship">
-              <Button size="lg" variant="outline">
-                Mentorship
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="ghost" className="text-accent hover:text-accent-foreground">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link href="/services">Research Services</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+              <Link href="/mentorship">Mentorship</Link>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="w-full sm:w-auto">
+              <Link href="/contact">
                 Get in touch <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

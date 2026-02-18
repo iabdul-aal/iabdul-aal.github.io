@@ -151,15 +151,15 @@ export default function AboutPage() {
                 ORCID: {personConfig.orcid}
               </a>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/contact">
-                  <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Contact</Button>
-                </Link>
-                <a href="/cv.pdf" download>
-                  <Button variant="outline">
+                <Button asChild>
+                  <Link href="/contact">Contact</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <a href="/cv.pdf" download>
                     <Download className="w-4 h-4 mr-2" />
                     CV
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </div>
               <div className="mt-5 text-sm text-muted-foreground space-y-2">
                 <p>

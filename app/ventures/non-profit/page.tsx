@@ -83,11 +83,9 @@ export default function NonProfitPage() {
           <p className="text-lg text-muted-foreground mb-8">
             Open to programs that connect students and early researchers with practical engineering opportunities.
           </p>
-          <Link href="/contact">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              Get in Touch
-            </Button>
-          </Link>
+          <Button asChild size="lg">
+            <Link href="/contact">Get in Touch</Link>
+          </Button>
         </div>
       </section>
     </main>

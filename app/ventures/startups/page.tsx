@@ -74,9 +74,9 @@ export default function StartupsPage() {
           <p className="text-muted-foreground mb-6">
             Looking for collaborators in photonic product strategy, applied R&D, and prototype-to-pilot execution.
           </p>
-          <Link href="/contact">
-            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Discuss Opportunities</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/contact">Discuss Opportunities</Link>
+          </Button>
         </div>
       </section>
     </main>

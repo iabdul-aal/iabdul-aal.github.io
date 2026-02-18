@@ -90,16 +90,12 @@ export default function MaterialsPage() {
             onboarding.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/mentorship">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                Ask for Guidance
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline">
-                Request Specific Material
-              </Button>
-            </Link>
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link href="/mentorship">Ask for Guidance</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+              <Link href="/contact">Request Specific Material</Link>
+            </Button>
           </div>
         </div>
       </section>

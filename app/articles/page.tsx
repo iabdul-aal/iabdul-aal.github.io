@@ -49,11 +49,11 @@ export default function ArticlesPage() {
             <p className="text-xl md:text-2xl text-muted-foreground">
               Technical explainers and public writing on integrated photonics, nonlinear optics, and photonic systems.
             </p>
-            <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button asChild size="lg">
+              <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
                 Visit Medium Profile <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
       </section>
@@ -90,11 +90,11 @@ export default function ArticlesPage() {
           <p className="text-lg text-muted-foreground mb-8">
             New explainers and research-oriented articles are published on Medium.
           </p>
-          <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button asChild size="lg">
+            <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
               Follow on Medium
-            </Button>
-          </a>
+            </a>
+          </Button>
         </div>
       </section>
     </main>

@@ -55,11 +55,11 @@ export default function TalksPage() {
             <p className="text-xl md:text-2xl text-muted-foreground">
               Speaking sessions focused on integrated photonics, nonlinear optics, and research skill development.
             </p>
-            <Link href="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button asChild size="lg">
+              <Link href="/contact">
                 Invite Me to Speak <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

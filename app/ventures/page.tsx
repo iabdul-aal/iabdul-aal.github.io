@@ -76,11 +76,11 @@ export default function VenturesPage() {
               Venture paths that translate integrated photonics research into technical pilots, products, and social
               impact.
             </p>
-            <Link href="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button asChild size="lg">
+              <Link href="/contact">
                 Start a Collaboration <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -170,11 +170,9 @@ export default function VenturesPage() {
           <p className="text-lg text-muted-foreground mb-8">
             Open to partnerships, pilot studies, and venture conversations in photonics innovation.
           </p>
-          <Link href="/contact">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              Get in Touch
-            </Button>
-          </Link>
+          <Button asChild size="lg">
+            <Link href="/contact">Get in Touch</Link>
+          </Button>
         </div>
       </section>
     </main>
