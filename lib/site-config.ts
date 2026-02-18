@@ -27,7 +27,6 @@ export const siteConfig = {
     socialLinks.semanticScholar,
     socialLinks.researchGate,
     socialLinks.medium,
-    socialLinks.twitter,
   ],
 } as const
 

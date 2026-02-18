@@ -38,7 +38,6 @@ export default function AboutPage() {
     { name: "Semantic Scholar", url: socialLinks.semanticScholar },
     { name: "ResearchGate", url: socialLinks.researchGate },
     { name: "Medium", url: socialLinks.medium },
-    { name: "X (Twitter)", url: socialLinks.twitter },
     { name: "arXiv", url: socialLinks.arxiv },
   ]
 
