@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SocialProfileGrid } from "@/components/social-profile-links"
 import { Publications } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
@@ -109,14 +108,36 @@ export default function AboutPage() {
               <p className="text-sm text-muted-foreground mb-4">
                 {personConfig.location} | {personConfig.affiliation}
               </p>
-              <a
-                href={socialLinks.orcid}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-accent hover:text-accent/80 transition-colors"
-              >
-                ORCID: {personConfig.orcid}
-              </a>
+              <div className="mt-5 space-y-3">
+                <p className="text-sm font-semibold text-foreground">Academic Profiles</p>
+                <div className="space-y-2 text-sm">
+                  <a
+                    href={socialLinks.scholar}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-accent hover:text-accent/80 transition-colors"
+                  >
+                    Google Scholar
+                  </a>
+                  <p className="text-muted-foreground">Scopus Author Profile: Not available yet</p>
+                  <a
+                    href="https://www.webofscience.com/wos/author/record/OLP-9224-2025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-accent hover:text-accent/80 transition-colors"
+                  >
+                    ResearcherID (Web of Science): {contactInfo.webOfScienceResearcherID}
+                  </a>
+                  <a
+                    href={socialLinks.orcid}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-accent hover:text-accent/80 transition-colors"
+                  >
+                    ORCID: {personConfig.orcid}
+                  </a>
+                </div>
+              </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
                   <Link href="/contact">Contact</Link>
@@ -226,14 +247,6 @@ export default function AboutPage() {
               </div>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-bold mb-4">Professional Profiles</h2>
-              <SocialProfileGrid />
-              <p className="mt-5 text-sm text-muted-foreground">
-                Web of Science ResearcherID:{" "}
-                <span className="text-accent">{contactInfo.webOfScienceResearcherID}</span>
-              </p>
-            </section>
           </div>
         </div>
       </section>
