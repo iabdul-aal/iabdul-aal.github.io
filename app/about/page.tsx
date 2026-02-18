@@ -33,15 +33,15 @@ export default function AboutPage() {
   const focusAreas = [
     {
       title: "Integrated Photonics",
-      desc: "Silicon photonics, waveguide engineering, and PIC-level system design.",
+      desc: "Silicon photonics, waveguide engineering, and PIC-level component development for compact and scalable optical systems.",
     },
     {
       title: "Nonlinear Photonics",
-      desc: "SPDC-oriented architectures and nonlinear effects for quantum-compatible platforms.",
+      desc: "SPDC-oriented architectures, nonlinear light-matter interactions, and design choices aligned with quantum photonics use cases.",
     },
     {
       title: "Physics-Informed Design",
-      desc: "PINN-assisted inverse design and multiphysics-aware optimization.",
+      desc: "PINN-assisted inverse design and multiphysics-aware optimization to improve both model quality and design efficiency.",
     },
   ]
 
@@ -50,19 +50,34 @@ export default function AboutPage() {
       role: "Research Intern",
       org: "NanoPhoto Lab, IMRE, A*STAR",
       period: "Sep 2025 - Present",
-      summary: "Working on optimization and integrated quantum photonics design workflows.",
+      summary:
+        "Contributing to optimization-driven integrated quantum photonics workflows with emphasis on model reliability and practical design iteration.",
+      highlights: [
+        "Build simulation-to-learning pipelines for parameter exploration and fast design screening.",
+        "Study trade-offs among optical performance, robustness, and computational cost.",
+      ],
     },
     {
       role: "Research Intern",
       org: "Egypt Scholars Advanced Labs Program",
       period: "Jul 2025 - Sep 2025",
-      summary: "Completed intensive research training in quantum photonics and independent problem execution.",
+      summary:
+        "Completed intensive research training in quantum photonics, including independent problem framing, simulation, and technical reporting.",
+      highlights: [
+        "Executed mentor-guided and self-directed technical tasks under research timelines.",
+        "Strengthened communication of assumptions, methods, and model limitations.",
+      ],
     },
     {
       role: "Research Intern",
       org: "OPST Group, Alexandria University",
       period: "Jul 2023 - Aug 2025",
-      summary: "Worked on FBG-based sensing and photonic modeling for biomedical and communications use cases.",
+      summary:
+        "Worked on FBG-based sensing and photonic modeling for biomedical and communications contexts across both analysis and implementation tracks.",
+      highlights: [
+        "Modeled and analyzed FBG response under changing sensing conditions.",
+        "Developed reproducible workflows for simulation setup and result interpretation.",
+      ],
     },
   ]
 
@@ -71,7 +86,12 @@ export default function AboutPage() {
       degree: "B.Sc. in Electronics and Communications Engineering",
       org: "Alexandria University, Faculty of Engineering",
       period: "Aug 2021 - Aug 2026",
-      summary: "CGPA: 3.39/4.0 (Distinct with Honors). Thesis focus: integrated Si transceiver and waveguide-based Ge/Si PIN photodetector modeling and design.",
+      summary:
+        "CGPA: 3.39/4.0 (Distinct with Honors). Thesis focus: integrated Si transceiver and waveguide-based Ge/Si PIN photodetector modeling and design.",
+      highlights: [
+        "Training emphasis in electromagnetics, communications, semiconductor devices, and signal processing.",
+        "Current thesis work combines device modeling with system-level photonic integration goals.",
+      ],
     },
   ]
 
@@ -106,6 +126,28 @@ export default function AboutPage() {
     {
       name: "IEEE Society Add-On: Photonics Society",
       detail: "Requires IEEE membership first | 2025 - Present",
+    },
+  ]
+
+  const currentPriorities = [
+    "Physics-informed inverse design for compact integrated photonic components.",
+    "Multiphysics workflows that connect device behavior to system-level constraints.",
+    "Optimization strategies for quantum photonics building blocks and design robustness.",
+    "Reproducible research pipelines for simulation, data generation, and validation.",
+  ]
+
+  const technicalStack = [
+    {
+      label: "Photonics & Simulation",
+      items: ["Lumerical FDTD/MODE", "COMSOL Multiphysics", "MATLAB", "Device and waveguide modeling"],
+    },
+    {
+      label: "Programming & Compute",
+      items: ["Python", "C/C++", "MATLAB scripting", "Data analysis workflows"],
+    },
+    {
+      label: "ML & Optimization",
+      items: ["PyTorch", "TensorFlow", "Physics-Informed Neural Networks (PINNs)", "Design-space optimization"],
     },
   ]
 
@@ -177,6 +219,12 @@ export default function AboutPage() {
                     CV
                   </a>
                 </Button>
+                <Button asChild variant="outline">
+                  <a href={socialLinks.linktree} target="_blank" rel="noopener noreferrer">
+                    More Profiles
+                    <ArrowUpRight className="w-4 h-4 ml-2" />
+                  </a>
+                </Button>
               </div>
             </div>
           </aside>
@@ -186,18 +234,34 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University
-                  focused on integrated photonics and device-level research engineering.
+                  I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University with
+                  a research focus on integrated photonics and device-level engineering.
                 </p>
                 <p>
-                  I currently contribute at NanoPhoto Lab (A*STAR) on optimization and modeling workflows for
-                  integrated quantum photonics.
+                  My recent work centers on physics-informed and optimization-guided workflows that support faster,
+                  more reliable design decisions for photonic devices.
                 </p>
+                <p>
+                  I currently contribute at NanoPhoto Lab (A*STAR), where I work on integrated quantum photonics
+                  modeling flows that balance performance, robustness, and practical computation constraints.
+                </p>
+              </div>
+              <div className="mt-5 p-5 rounded-xl border border-border bg-card/60">
+                <p className="text-sm font-semibold mb-3">Current Priorities</p>
+                <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                  {currentPriorities.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </div>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                My research interests connect photonic device physics, inverse design, and robust computational
+                workflows for both classical and quantum-oriented platforms.
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {focusAreas.map((item) => (
                   <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
@@ -221,6 +285,11 @@ export default function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
+                    <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                      {item.highlights.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
                   </article>
                 ))}
               </div>
@@ -239,6 +308,11 @@ export default function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
+                    <ul className="mt-3 space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                      {item.highlights.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
                   </article>
                 ))}
               </div>
@@ -253,18 +327,18 @@ export default function AboutPage() {
       <section className="py-16 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-6">Core Technical Stack</h2>
-          <div className="space-y-4">
-            {[
-              { label: "Photonics Tools", value: "Lumerical, COMSOL, MATLAB" },
-              { label: "Programming", value: "Python, C/C++, MATLAB" },
-              { label: "ML Workflow", value: "PyTorch, TensorFlow, PINNs" },
-            ].map((item) => (
-              <article
-                key={item.label}
-                className="p-5 rounded-xl border border-border bg-background sm:flex sm:items-center sm:justify-between gap-4"
-              >
-                <p className="text-sm font-semibold text-accent">{item.label}</p>
-                <p className="text-sm text-muted-foreground mt-2 sm:mt-0">{item.value}</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Technical domains and tools I currently use in day-to-day research and prototyping.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            {technicalStack.map((item) => (
+              <article key={item.label} className="p-5 rounded-xl border border-border bg-background">
+                <p className="text-sm font-semibold text-accent mb-3">{item.label}</p>
+                <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                  {item.items.map((tool) => (
+                    <li key={tool}>{tool}</li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
@@ -272,6 +346,9 @@ export default function AboutPage() {
           <div className="mt-12 space-y-10">
             <section>
               <h3 className="text-2xl font-bold mb-4">Awards</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Selected recognitions and candidacies relevant to my academic and research track.
+              </p>
               <div className="space-y-4">
                 {awards.map((item) => (
                   <article key={`${item.title}-${item.period}`} className="p-5 rounded-xl border border-border bg-background">
@@ -284,6 +361,9 @@ export default function AboutPage() {
 
             <section>
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Professional membership structure follows IEEE base membership first, then society add-ons.
+              </p>
               <div className="space-y-4">
                 {memberships.map((item) => (
                   <article key={item.name} className="p-5 rounded-xl border border-border bg-background">

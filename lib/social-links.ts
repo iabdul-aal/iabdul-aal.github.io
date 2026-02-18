@@ -5,6 +5,7 @@ export const socialLinks = {
   scholar: "https://scholar.google.com/citations?user=CPmqNv4AAAAJ&hl=en",
   semanticScholar: "https://www.semanticscholar.org/author/Islam-I.-Abdulaal",
   researchGate: "https://www.researchgate.net/profile/Islam-Abdulaal",
+  linktree: "https://linktr.ee/iabdul-aal",
   medium: "https://iabdul-aal.medium.com/",
   mediumRss: "https://medium.com/feed/@iabdul-aal",
   arxiv: "https://arxiv.org/abs/2510.00357",
