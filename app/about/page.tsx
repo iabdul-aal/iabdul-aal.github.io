@@ -36,7 +36,7 @@ export default function AboutPage() {
       desc: "Silicon photonics, waveguide engineering, and PIC-level system design.",
     },
     {
-      title: "Nonlinear Quantum Photonics",
+      title: "Nonlinear Photonics",
       desc: "SPDC-oriented architectures and nonlinear effects for quantum-compatible platforms.",
     },
     {
