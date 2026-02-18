@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
-import { ArrowUpRight, Download } from "lucide-react"
+import { ArrowUpRight, Download, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Publications, type Publication } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
@@ -185,15 +185,13 @@ export default async function AboutPage() {
   const technicalStack = [
     {
       label: "Photonics & Simulation",
-      items: ["Lumerical FDTD/MODE", "COMSOL Multiphysics", "MATLAB", "Device and waveguide modeling"],
+      level: 4,
+      items: ["Lumerical", "COMSOL Multiphysics", "MATLAB"],
     },
     {
-      label: "Programming & Compute",
-      items: ["Python", "C/C++", "MATLAB scripting", "Data analysis workflows"],
-    },
-    {
-      label: "ML & Optimization",
-      items: ["PyTorch", "TensorFlow", "Physics-Informed Neural Networks (PINNs)", "Design-space optimization"],
+      label: "Programming & ML",
+      level: 4,
+      items: ["Python", "PyTorch"],
     },
   ]
 
@@ -379,7 +377,17 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {technicalStack.map((item) => (
               <article key={item.label} className="p-5 rounded-xl border border-border bg-background">
-                <p className="text-sm font-semibold text-accent mb-3">{item.label}</p>
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <p className="text-sm font-semibold text-accent">{item.label}</p>
+                  <div className="flex items-center gap-1" aria-label={`Skill level ${item.level} out of 5`}>
+                    {[1, 2, 3, 4, 5].map((rank) => (
+                      <Star
+                        key={rank}
+                        className={`w-3.5 h-3.5 ${rank <= item.level ? "text-accent fill-current" : "text-muted-foreground/30"}`}
+                      />
+                    ))}
+                  </div>
+                </div>
                 <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
                   {item.items.map((tool) => (
                     <li key={tool}>{tool}</li>
