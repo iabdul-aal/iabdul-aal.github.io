@@ -26,7 +26,7 @@ export const logoSlots: LogoSlot[] = [
   },
   {
     name: "Alexandria University",
-    filePath: "/logos/affiliations/Alexandria Univeristy.png",
+    filePath: "/logos/affiliations/Alexandria Univeristy.webp",
     website: "https://alexu.edu.eg/",
     group: "Affiliations",
   },
