@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { PageHero } from "@/components/page-hero"
 import { Users } from "lucide-react"
 
@@ -6,16 +7,11 @@ export const metadata = {
   description: "Community and non-profit initiatives focused on technical education access and student support.",
 }
 
+const ACCENT_LOGO_FILTER =
+  "brightness(0) saturate(100%) invert(68%) sepia(18%) saturate(744%) hue-rotate(352deg) brightness(94%) contrast(89%)"
+
 export default function NonProfitPage() {
   const initiatives = [
-    {
-      name: "HW Carnival Technical Day",
-      role: "Founder and Chair",
-      period: "Oct 2025 - Dec 2025",
-      description:
-        "Founded the initiative and led competition finals and technical activities at Bibliotheca Alexandrina.",
-      impact: ["AlexDuino track", "Si-Clash track", "Si-Cast track"],
-    },
     {
       name: "IEEE SSCS Student Chapter",
       role: "Chapter Chair",
@@ -23,6 +19,7 @@ export default function NonProfitPage() {
       description:
         "Supported chapter restructuring, coordinated volunteers, and helped organize technical events with industry and academic experts.",
       impact: ["500+ students served", "30 universities reached", "80+ events organized"],
+      logoPath: "/logos/platforms/SSCS AUSC.png",
     },
     {
       name: "Education Clinic",
@@ -31,6 +28,7 @@ export default function NonProfitPage() {
       description:
         "Coordinated a volunteer organization focused on educational access and upskilling programs across MENA.",
       impact: ["250k+ students reached", "80+ team members", "3 core programs"],
+      logoPath: "/logos/platforms/Education Clinic.png",
     },
   ]
 
@@ -56,6 +54,18 @@ export default function NonProfitPage() {
               >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                   <div>
+                    {initiative.logoPath && (
+                      <span className="mb-3 inline-flex h-11 min-w-24 items-center justify-center rounded-md border border-border/70 bg-background/60 px-3">
+                        <Image
+                          src={initiative.logoPath}
+                          alt={`${initiative.name} logo`}
+                          width={112}
+                          height={32}
+                          className="max-h-full w-auto object-contain"
+                          style={{ filter: ACCENT_LOGO_FILTER }}
+                        />
+                      </span>
+                    )}
                     <div className="inline-flex items-center gap-2 text-accent text-sm mb-2">
                       <Users className="w-4 h-4" />
                       Community Work
