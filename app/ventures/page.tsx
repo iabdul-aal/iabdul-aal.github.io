@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
@@ -15,8 +16,10 @@ export default function VenturesPage() {
     {
       title: "Startup Exploration",
       description:
-        "Exploring how photonics and sensing ideas can be shaped into realistic early-stage product hypotheses.",
+        "Exploring how photonics and sensing ideas can be shaped into realistic early-stage product hypotheses, including Octides.",
       icon: Rocket,
+      logo: "/logos/platforms/Octides.webp",
+      logoAlt: "Octides logo",
       href: "/ventures/startups",
       cta: "View Startup Track",
       stage: "Concept to Prototype",
@@ -70,13 +73,6 @@ export default function VenturesPage() {
     },
   ]
 
-  const summaryStats = [
-    { label: "Venture Tracks", value: String(ventureTracks.length) },
-    { label: "Founded Initiatives", value: String(foundedInitiatives.length) },
-    { label: "Orientation", value: "Learning + Execution" },
-    { label: "Status", value: "Founder | Not currently active" },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
@@ -99,15 +95,6 @@ export default function VenturesPage() {
 
       <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {summaryStats.map((item) => (
-              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-                <p className="text-lg font-bold leading-none">{item.value}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-              </article>
-            ))}
-          </div>
-
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Current Venture Directions</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {ventureTracks.map((track) => {
@@ -117,7 +104,19 @@ export default function VenturesPage() {
                   key={track.title}
                   className="p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors flex flex-col"
                 >
-                  <Icon className="w-7 h-7 text-accent mb-5" />
+                  {track.logo ? (
+                    <div className="relative h-8 w-28 mb-5">
+                      <Image
+                        src={track.logo}
+                        alt={track.logoAlt ?? `${track.title} logo`}
+                        fill
+                        sizes="112px"
+                        className="object-contain object-left"
+                      />
+                    </div>
+                  ) : (
+                    <Icon className="w-7 h-7 text-accent mb-5" />
+                  )}
                   <h3 className="text-xl font-bold text-foreground mb-3">{track.title}</h3>
                   <p className="text-muted-foreground text-sm mb-6 flex-grow">{track.description}</p>
                   <p className="text-xs text-accent mb-5">{track.stage}</p>

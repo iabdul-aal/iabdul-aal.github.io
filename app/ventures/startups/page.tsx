@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { JourneySection } from "@/components/journey-section"
 import { ArrowLeft, Rocket } from "lucide-react"
@@ -10,7 +11,7 @@ export const metadata = {
 export default function StartupsPage() {
   const startupConcepts = [
     {
-      title: "Photonic Sensor Intelligence Stack",
+      title: "Octides | Photonic Sensor Intelligence Stack",
       status: "Discovery",
       summary:
         "A software and sensing workflow for translating FBG measurement streams into actionable biomedical indicators.",
@@ -32,12 +33,6 @@ export default function StartupsPage() {
     },
   ]
 
-  const summaryStats = [
-    { label: "Concepts", value: String(startupConcepts.length) },
-    { label: "Current Stage", value: "Discovery to Validation" },
-    { label: "Orientation", value: "Learning and Validation" },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,15 +45,12 @@ export default function StartupsPage() {
           <p className="text-xl text-muted-foreground max-w-2xl">
             These are exploratory concepts I am currently developing to test feasibility and practical relevance.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
-          {summaryStats.map((item) => (
-            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-              <p className="text-lg font-bold leading-none">{item.value}</p>
-              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-            </article>
-          ))}
+          <div className="mt-6 inline-flex items-center gap-3 rounded-xl border border-border bg-card/70 px-4 py-3">
+            <div className="relative h-7 w-24">
+              <Image src="/logos/platforms/Octides.webp" alt="Octides logo" fill sizes="96px" className="object-contain object-left" />
+            </div>
+            <span className="text-sm text-muted-foreground">Current startup identity</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
