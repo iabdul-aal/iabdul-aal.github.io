@@ -173,11 +173,11 @@ export default function ContactPage() {
 
       <JourneySection
         title="Need More Context Before Reaching Out?"
-        description="You can review services, profile details, and recent highlights first, then return to contact."
+        description="You can review services, profile details, and home-page highlights first, then return to contact."
         actions={[
           { href: "/services", label: "Review Services" },
           { href: "/about", label: "Read Full Profile", variant: "outline" },
-          { href: "/news", label: "See Highlights", variant: "ghost" },
+          { href: "/#highlights", label: "See Highlights", variant: "ghost" },
         ]}
       />
     </main>

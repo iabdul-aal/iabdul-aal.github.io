@@ -14,7 +14,6 @@ export function Navigation() {
 
   const links = [
     { href: "/about", label: "About" },
-    { href: "/news", label: "Highlights" },
     { href: "/ventures", label: "Ventures" },
     { href: "/articles", label: "Articles" },
     { href: "/materials", label: "Materials" },

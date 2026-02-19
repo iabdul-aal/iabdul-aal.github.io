@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Atom, CircuitBoard, Microscope, Sparkles } from "lucide-react"
+import { HighlightsSlider } from "@/components/highlights-slider"
+import { highlights } from "@/lib/highlights"
 import { siteConfig } from "@/lib/site-config"
-import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Integrated Photonics and Research Work",
@@ -26,30 +27,6 @@ export default function Home() {
       title: "Physics-Informed Design",
       description: "PINN-assisted inverse design and multiphysics optimization for photonic components.",
       icon: Sparkles,
-    },
-  ]
-
-  const highlights = [
-    {
-      title: "arXiv Preprint",
-      description:
-        "Terahertz quasi-BIC metasurfaces for biosensing and high-speed wireless communication applications.",
-      href: socialLinks.arxiv,
-      cta: "Read preprint",
-    },
-    {
-      title: "NanoPhoto Team Listing",
-      description:
-        "Public team profile covering research activity in integrated quantum photonics and student supervision.",
-      href: socialLinks.nanophoto,
-      cta: "View listing",
-    },
-    {
-      title: "Initiatives Overview",
-      description:
-        "I founded HW Carnival, Si-Cast, Si-Clash, and AlexDuino; the HW Carnival technical day was held at Bibliotheca Alexandrina on December 25, 2025.",
-      href: "/ventures",
-      cta: "Explore ventures",
     },
   ]
 
@@ -143,40 +120,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 border-y border-border/70 bg-card/40">
+      <section id="highlights" className="py-16 border-y border-border/70 bg-card/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-3xl md:text-4xl mb-8">Public Records and Profiles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {highlights.map((item) => {
-              const isExternal = item.href.startsWith("http")
-              const cardClass =
-                "group rounded-xl border border-border bg-background/80 p-6 hover:border-accent transition-colors"
-
-              if (isExternal) {
-                return (
-                  <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" className={cardClass}>
-                    <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                    <p className="text-xs text-accent mt-4 inline-flex items-center gap-2">
-                      {item.cta}
-                      <ArrowRight className="w-3 h-3" />
-                    </p>
-                  </a>
-                )
-              }
-
-              return (
-                <Link key={item.title} href={item.href} className={cardClass}>
-                  <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                  <p className="text-xs text-accent mt-4 inline-flex items-center gap-2">
-                    {item.cta}
-                    <ArrowRight className="w-3 h-3" />
-                  </p>
-                </Link>
-              )
-            })}
+          <div className="flex items-center justify-between gap-4 mb-8">
+            <h2 className="font-display text-3xl md:text-4xl">Highlights</h2>
+            <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
+              View full profile
+            </Link>
           </div>
+          <HighlightsSlider items={highlights} />
         </div>
       </section>
 

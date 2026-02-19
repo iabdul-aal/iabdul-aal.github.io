@@ -89,7 +89,6 @@ app/
   ventures/page.tsx
   services/page.tsx
   mentorship/page.tsx
-  news/page.tsx
 components/
   footer.tsx
   journey-section.tsx

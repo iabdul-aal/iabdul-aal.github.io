@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/materials/roadmaps",
     "/materials/templates",
     "/mentorship",
-    "/news",
     "/services",
     "/talks",
     "/ventures",
