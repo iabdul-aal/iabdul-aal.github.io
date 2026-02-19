@@ -409,6 +409,22 @@ export default async function AboutPage() {
             </section>
 
             <section>
+              <h2 className="text-2xl font-bold mb-4">Ventures</h2>
+              <p className="text-sm text-muted-foreground">
+                I build and support venture tracks that translate research, hardware, and community initiatives into
+                practical products, programs, and measurable impact.
+              </p>
+              <div className="mt-4">
+                <Button asChild variant="outline">
+                  <Link href="/ventures">
+                    Explore Ventures
+                    <ArrowUpRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </section>
+
+            <section>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
               <p className="text-sm text-muted-foreground mb-4">
                 My research interests connect photonic device physics, inverse design, and robust computational
