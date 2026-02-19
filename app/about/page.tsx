@@ -371,13 +371,6 @@ export default async function AboutPage() {
         }
       : memberships.main
 
-  const summaryStats = [
-    { label: "Publications", value: String(publications.length) },
-    { label: "Focus Areas", value: String(focusAreas.length) },
-    { label: "Awards", value: String(awards.length) },
-    { label: "Memberships", value: String(1 + memberships.subs.length) },
-  ]
-
   const resolveMembershipLogo = (name: string): LogoSlotWithStatus | undefined => {
     const lowerName = name.toLowerCase()
     if (lowerName.includes("solid-state") || lowerName.includes("sscs")) {
@@ -479,15 +472,6 @@ export default async function AboutPage() {
           </aside>
 
           <div className="lg:col-span-2 space-y-6">
-            <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {summaryStats.map((item) => (
-                <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-                  <p className="text-xl font-bold leading-none">{item.value}</p>
-                  <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-                </article>
-              ))}
-            </section>
-
             <section id="profile" className={sectionCardClass}>
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -635,7 +619,18 @@ export default async function AboutPage() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-bold mb-4">Memberships</h3>
+              <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <h3 className="text-2xl font-bold">Memberships</h3>
+                <a
+                  href="https://ieee-collabratec.ieee.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent/80 transition-colors"
+                >
+                  IEEE Collabratec
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </a>
+              </div>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
                   <div className="flex items-start gap-3">
