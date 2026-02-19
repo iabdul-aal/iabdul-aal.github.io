@@ -493,8 +493,8 @@ export default async function AboutPage() {
             <section id="ventures" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Ventures</h2>
               <p className="text-sm text-muted-foreground">
-                Alongside research, I am exploring venture and community projects to test practical applications of what I
-                am learning.
+                Alongside research, I founded several venture and community projects to test practical applications of
+                technical ideas. I am currently not active in day-to-day initiative operations.
               </p>
               <div className="mt-4">
                 <Button asChild variant="outline">

@@ -7,7 +7,7 @@ import { socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "Ventures",
   description:
-    "Early-stage venture directions across startup exploration, technical pilots, and student community programs.",
+    "Founded initiatives and venture directions across startup exploration, technical pilots, and student community programs.",
 }
 
 export default function VenturesPage() {
@@ -36,45 +36,45 @@ export default function VenturesPage() {
         "Student-focused education and technical capacity-building programs in volunteer engineering communities.",
       icon: Users2,
       href: "/ventures/non-profit",
-      cta: "See Community Impact",
-      stage: "Active engagement",
+      cta: "See Initiative Background",
+      stage: "Founded | Not currently active",
     },
   ]
 
-  const ongoingInitiatives = [
+  const foundedInitiatives = [
     {
       name: "HW Carnival",
       summary:
-        "Student competition and technical day hosted at Bibliotheca Alexandrina on December 25, 2025, covering AlexDuino, Si-Clash, and Si-Cast tracks.",
-      status: "Ongoing",
+        "Founded initiative with a technical day hosted at Bibliotheca Alexandrina on December 25, 2025, covering AlexDuino, Si-Clash, and Si-Cast tracks.",
+      status: "Founded | Inactive",
       href: socialLinks.hwCarnivalEvent,
     },
     {
       name: "Si-Cast",
       summary:
-        "Technical content track focused on practical engineering communication and peer learning.",
-      status: "Ongoing",
+        "Founded technical content track focused on practical engineering communication and peer learning.",
+      status: "Founded | Inactive",
       href: socialLinks.siCastYoutube,
     },
     {
       name: "Si-Clash",
       summary:
-        "Challenge-oriented track for improving practical design thinking and implementation skills.",
-      status: "Ongoing",
+        "Founded challenge-oriented track for improving practical design thinking and implementation skills.",
+      status: "Founded | Inactive",
     },
     {
       name: "AlexDuino",
       summary:
-        "Hands-on prototyping track centered on embedded systems and real hardware execution.",
-      status: "Ongoing",
+        "Founded hands-on prototyping track centered on embedded systems and real hardware execution.",
+      status: "Founded | Inactive",
     },
   ]
 
   const summaryStats = [
     { label: "Venture Tracks", value: String(ventureTracks.length) },
-    { label: "Ongoing Initiatives", value: String(ongoingInitiatives.length) },
+    { label: "Founded Initiatives", value: String(foundedInitiatives.length) },
     { label: "Orientation", value: "Learning + Execution" },
-    { label: "Status", value: "Active" },
+    { label: "Status", value: "Founder | Not currently active" },
   ]
 
   return (
@@ -85,8 +85,8 @@ export default function VenturesPage() {
           <div className="space-y-6 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance">Ventures</h1>
             <p className="text-lg md:text-2xl text-muted-foreground">
-              I am using ventures as a learning and execution track to test technical ideas through small pilots and
-              student-focused programs.
+              I founded these initiatives to build practical student-focused technical programs. I am currently not
+              active in daily initiative operations.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -134,9 +134,9 @@ export default function VenturesPage() {
 
       <section className="py-16 md:py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10">Ongoing Initiatives</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10">Founded Initiatives</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {ongoingInitiatives.map((item) => (
+            {foundedInitiatives.map((item) => (
               <article key={item.name} className="p-6 rounded-xl border border-border bg-background">
                 <div className="flex items-center justify-between gap-3 mb-3">
                   <h3 className="text-xl font-semibold text-foreground">{item.name}</h3>

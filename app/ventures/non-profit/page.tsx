@@ -4,14 +4,14 @@ import { ArrowLeft, Users } from "lucide-react"
 
 export const metadata = {
   title: "Community Initiatives",
-  description: "Community and non-profit work focused on technical education access and student support.",
+  description: "Founded community and non-profit initiatives focused on technical education access and student support.",
 }
 
 export default function NonProfitPage() {
   const initiatives = [
     {
       name: "IEEE SSCS Student Chapter",
-      role: "Chapter Chair",
+      role: "Former Chapter Chair",
       period: "Feb 2025 - Oct 2025",
       description:
         "Supported chapter restructuring, coordinated volunteers, and helped organize technical events with industry and academic experts.",
@@ -19,26 +19,26 @@ export default function NonProfitPage() {
     },
     {
       name: "HW Carnival Technical Day",
-      role: "Program Lead (SSCS Chapter)",
+      role: "Founder (Former Program Lead)",
       period: "Dec 25, 2025",
       description:
-        "Helped deliver competition finals and technical activities at Bibliotheca Alexandrina under the HW Carnival initiative.",
+        "Founded the initiative and helped deliver competition finals and technical activities at Bibliotheca Alexandrina.",
       impact: ["AlexDuino track", "Si-Clash track", "Si-Cast track"],
     },
     {
       name: "Education Clinic",
-      role: "General Coordinator",
+      role: "Founder and Former General Coordinator",
       period: "Aug 2021 - Sep 2023",
       description:
-        "Contributed to coordinating a volunteer organization focused on educational access and upskilling programs across MENA.",
+        "Founded and coordinated a volunteer organization focused on educational access and upskilling programs across MENA.",
       impact: ["250k+ students reached", "80+ team members", "3 core programs"],
     },
   ]
 
   const summaryStats = [
-    { label: "Initiatives", value: String(initiatives.length) },
+    { label: "Founded Initiatives", value: String(initiatives.length) },
     { label: "Focus", value: "Community Impact" },
-    { label: "Mode", value: "Education + Volunteer Work" },
+    { label: "Mode", value: "Founder | Not currently active" },
   ]
 
   return (
@@ -51,7 +51,8 @@ export default function NonProfitPage() {
           </Link>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance mb-6">Non-Profit Initiatives</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            I contribute to these initiatives to widen access to technical learning, research exposure, and engineering mentorship.
+            I founded these initiatives to widen access to technical learning, research exposure, and engineering mentorship.
+            I am currently not active in operating these programs.
           </p>
         </div>
 

@@ -47,7 +47,7 @@ export default function Home() {
     {
       title: "Initiatives Overview",
       description:
-        "HW Carnival student initiative held a technical day at Bibliotheca Alexandrina on December 25, 2025 with AlexDuino, Si-Clash, and Si-Cast tracks.",
+        "I founded HW Carnival, Si-Cast, Si-Clash, and AlexDuino; the HW Carnival technical day was held at Bibliotheca Alexandrina on December 25, 2025.",
       href: "/ventures",
       cta: "Explore ventures",
     },

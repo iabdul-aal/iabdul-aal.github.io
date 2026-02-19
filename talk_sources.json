@@ -6,11 +6,5 @@
       "format": "Technical Talk"
     }
   ],
-  "youtubeChannels": [
-    {
-      "name": "Si-Cast",
-      "url": "https://www.youtube.com/@si-cast",
-      "format": "Talk and Workshop"
-    }
-  ]
+  "youtubeChannels": []
 }

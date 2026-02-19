@@ -7,7 +7,7 @@ import { loadTalks } from "@/lib/talks"
 export const metadata = {
   title: "Talks",
   description:
-    "Talk and workshop sessions by Islam I. Abdulaal for student and early-career audiences in photonics and research methods.",
+    "Speaking sessions by Islam I. Abdulaal for student and early-career audiences in photonics and research methods.",
 }
 
 function formatTalkDate(date: string, year: string) {
@@ -72,8 +72,8 @@ export default async function TalksPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks and Workshops</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              I share sessions on integrated photonics, research execution, and technical communication, mainly for
-              students and early-career engineers.
+              This page lists sessions where I was a speaker, focused on integrated photonics, research execution, and
+              technical communication for student and early-career audiences.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -131,7 +131,7 @@ export default async function TalksPage() {
             <div>
               <h2 className="text-3xl font-bold">Latest Public Sessions</h2>
               <p className="text-sm text-muted-foreground mt-2">
-                This list auto-updates from public sources in `talks.json`.
+                This list auto-updates from public sources in `talks.json` and excludes host or intro-only appearances.
               </p>
             </div>
             <p className="text-xs text-muted-foreground">{talks.length} sessions listed</p>

@@ -16,15 +16,15 @@ export default function HighlightsPage() {
       date: "2025",
       category: "Initiative",
       description:
-        "Contributed to organizing HW Carnival, a funded student hardware initiative with public feature coverage.",
+        "Founded HW Carnival, a funded student hardware initiative with public feature coverage.",
       link: socialLinks.hwCarnivalFeature,
     },
     {
       title: "Expansion of Initiative Tracks (Si-Cast, Si-Clash, AlexDuino)",
-      date: "Ongoing",
+      date: "Founded in 2025 (currently inactive)",
       category: "Initiatives",
       description:
-        "Continued development of Si-Cast, Si-Clash, and AlexDuino as student-facing technical learning tracks.",
+        "Founded Si-Cast, Si-Clash, and AlexDuino as student-facing technical learning tracks; I am no longer active in daily operations.",
       link: "/ventures",
     },
     {
@@ -93,7 +93,7 @@ export default function HighlightsPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Highlights</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Selected updates from my ongoing research, training, and student-led technical activities.
+              Selected updates from my research, training, and initiative history.
             </p>
           </div>
         </div>
