@@ -33,13 +33,6 @@ export default function ContactPage() {
     },
   ]
 
-  const summaryStats = [
-    { label: "Channels", value: String(contactMethods.length) },
-    { label: "Response Window", value: "24-72h" },
-    { label: "Location", value: "Alexandria" },
-    { label: "Mode", value: "Remote-first" },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[50vh] flex items-center pt-20 pb-12">
@@ -55,15 +48,6 @@ export default function ContactPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {summaryStats.map((item) => (
-              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-                <p className="text-lg font-bold leading-none">{item.value}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-              </article>
-            ))}
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {contactMethods.map((method) => {
               const Icon = method.icon

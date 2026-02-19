@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Link2, Linkedin, Twitter } from "lucide-react"
+import { ArrowRight, Link2, Linkedin, Mail, Send, Twitter } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { contactInfo, socialLinks } from "@/lib/social-links"
 
 export function Footer() {
@@ -19,6 +20,7 @@ export function Footer() {
   const connectLinks = [
     { name: "LinkedIn", href: socialLinks.linkedin, icon: Linkedin },
     { name: "X", href: socialLinks.twitter, icon: Twitter },
+    { name: "Telegram", href: socialLinks.telegramBot, icon: Send },
     { name: "All Profiles", href: socialLinks.linktree, icon: Link2 },
   ]
 
@@ -32,10 +34,13 @@ export function Footer() {
               I use this website to document my current academic work, research learning progress, and technical
               activities. If you would like to connect, the contact page is the fastest path.
             </p>
-            <div className="mt-4">
-              <Link href="/contact" className="text-sm text-accent hover:text-accent/80">
-                Start a conversation
-              </Link>
+            <div className="mt-5">
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/contact">
+                  Start a conversation
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
             </div>
           </section>
 
@@ -71,6 +76,14 @@ export function Footer() {
               })}
             </div>
             <p className="mt-4 text-xs text-muted-foreground">{contactInfo.location}</p>
+            <div className="mt-4">
+              <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
+                <a href={`mailto:${contactInfo.email}`}>
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email Me
+                </a>
+              </Button>
+            </div>
           </section>
         </div>
 

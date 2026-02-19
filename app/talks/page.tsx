@@ -1,29 +1,18 @@
 ﻿import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
-import { ArrowRight, CalendarDays, MessageSquareText, Presentation, Users } from "lucide-react"
+import { TalksStack } from "@/components/talks-stack"
+import { ArrowRight, MessageSquareText, Presentation, Users } from "lucide-react"
 import { loadTalks } from "@/lib/talks"
 
 export const metadata = {
   title: "Talks",
   description:
-    "Speaking sessions by Islam I. Abdulaal for student and early-career audiences in photonics and research methods.",
-}
-
-function formatTalkDate(date: string, year: string) {
-  if (date) {
-    const parsed = new Date(date)
-    if (!Number.isNaN(parsed.getTime())) {
-      return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format(parsed)
-    }
-  }
-
-  return year || "Date not listed"
+    "Speaking sessions by Islam I. Abdulaal across technical topics, entrepreneurship, and practical growth for students and early-career audiences.",
 }
 
 export default async function TalksPage() {
   const talks = await loadTalks()
-  const selectedTalk = talks.find((item) => item.featured) ?? talks[0]
 
   const themes = [
     {
@@ -35,8 +24,12 @@ export default async function TalksPage() {
       description: "I share practical methods for moving from theory and papers to reproducible technical execution.",
     },
     {
-      title: "Engineering Communication",
-      description: "I cover how to present technical work with clarity for students, teams, and mixed audiences.",
+      title: "Entrepreneurship and Execution",
+      description: "I discuss how to validate ideas, build initiatives, and move from concept to practical impact.",
+    },
+    {
+      title: "Career and Life Wisdom",
+      description: "I share practical lessons on discipline, consistency, and decision-making through different career phases.",
     },
   ]
 
@@ -58,13 +51,6 @@ export default async function TalksPage() {
     },
   ]
 
-  const summaryStats = [
-    { label: "Published Sessions", value: String(talks.length) },
-    { label: "Themes", value: String(themes.length) },
-    { label: "Formats", value: String(formats.length) },
-    { label: "Delivery", value: "Onsite / Remote" },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[55vh] flex items-center pt-20 pb-12">
@@ -72,8 +58,8 @@ export default async function TalksPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks and Workshops</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              This page lists sessions where I was a speaker, focused on integrated photonics, research execution, and
-              technical communication for student and early-career audiences.
+              This page lists sessions where I speak about technical topics, entrepreneurship, and practical growth for
+              student and early-career audiences.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -86,17 +72,8 @@ export default async function TalksPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {summaryStats.map((item) => (
-              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-                <p className="text-lg font-bold leading-none">{item.value}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-              </article>
-            ))}
-          </div>
-
           <h2 className="text-4xl font-bold mb-12">What I Cover</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {themes.map((theme) => (
               <article key={theme.title} className="p-7 rounded-xl border border-border bg-card">
                 <h3 className="text-xl font-semibold mb-3">{theme.title}</h3>
@@ -127,65 +104,20 @@ export default async function TalksPage() {
 
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-            <div>
-              <h2 className="text-3xl font-bold">Latest Public Sessions</h2>
-              <p className="text-sm text-muted-foreground mt-2">
-                This list auto-updates from public sources in `talks.json` and excludes host or intro-only appearances.
-              </p>
-            </div>
-            <p className="text-xs text-muted-foreground">{talks.length} sessions listed</p>
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold">Talk Stack</h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Filter by format, source, and year, or search by event and session title.
+            </p>
           </div>
 
-          <div className="space-y-4">
-            {talks.map((talk) => (
-              <article key={talk.url} className="p-5 rounded-xl border border-border bg-card">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
-                  <div>
-                    <h3 className="text-lg font-semibold leading-snug">{talk.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2">{talk.event}</p>
-                    <p className="text-xs text-accent mt-2">{talk.source} | {talk.format}</p>
-                  </div>
-                  <div className="text-sm text-muted-foreground inline-flex items-center gap-2">
-                    <CalendarDays className="w-4 h-4 text-accent" />
-                    {formatTalkDate(talk.date, talk.year)}
-                  </div>
-                </div>
-                <a
-                  href={talk.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-                >
-                  Watch Session <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </article>
-            ))}
-          </div>
-
-          {selectedTalk && (
-            <article className="mt-8 p-6 rounded-xl border border-accent/40 bg-background">
-              <p className="text-xs text-accent font-semibold">Selected Session</p>
-              <h3 className="text-xl font-semibold mt-2">{selectedTalk.title}</h3>
-              <p className="text-sm text-muted-foreground mt-2">
-                One recent public session that reflects my current talk style and technical scope.
-              </p>
-              <a
-                href={selectedTalk.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-              >
-                Open Session <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </article>
-          )}
+          <TalksStack talks={talks} />
         </div>
       </section>
 
       <JourneySection
         title="Plan the Right Session"
-        description="If you share your audience level and objective, I can shape the talk format and depth accordingly."
+        description="If you share your audience level and objective, I can shape a session across technical, entrepreneurial, or personal-development themes."
         actions={[
           { href: "/contact", label: "Invite for a Talk" },
           { href: "/services", label: "Review Service Scope", variant: "outline" },

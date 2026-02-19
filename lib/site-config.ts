@@ -31,6 +31,7 @@ export const siteConfig = {
   ],
   sameAs: [
     socialLinks.linkedin,
+    socialLinks.twitter,
     socialLinks.github,
     socialLinks.orcid,
     socialLinks.scholar,

@@ -19,7 +19,7 @@ export function Publications({ publications }: PublicationsProps) {
         {publications.length === 0 ? (
           <article className="p-6 rounded-lg border border-border bg-card">
             <p className="text-sm text-muted-foreground">
-              Publication records will appear here automatically after the next ORCID sync.
+              Publication records will be added here soon.
             </p>
           </article>
         ) : (

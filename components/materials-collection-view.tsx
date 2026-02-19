@@ -82,7 +82,7 @@ export async function MaterialsCollectionView({
               <div>
                 <h2 className="text-lg font-semibold mb-2">No files published yet</h2>
                 <p className="text-sm text-muted-foreground">
-                  Add files to this collection folder, push to the repository, and the list will appear automatically.
+                  This collection is being prepared and will be updated soon.
                 </p>
               </div>
             </div>

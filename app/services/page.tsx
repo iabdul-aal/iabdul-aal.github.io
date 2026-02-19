@@ -59,13 +59,6 @@ export default function ServicesPage() {
     },
   ]
 
-  const summaryStats = [
-    { label: "Service Tracks", value: String(serviceTracks.length) },
-    { label: "Mentorship", value: mentorship.badge },
-    { label: "Engagement Steps", value: String(process.length) },
-    { label: "Working Style", value: "Structured" },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[55vh] flex items-center pt-20 pb-12">
@@ -86,15 +79,6 @@ export default function ServicesPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {summaryStats.map((item) => (
-              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-                <p className="text-lg font-bold leading-none">{item.value}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-              </article>
-            ))}
-          </div>
-
           <h2 className="text-4xl font-bold mb-12">Service Tracks</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {serviceTracks.map((track) => (

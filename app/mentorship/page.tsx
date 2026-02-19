@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
 import { MessageCircle } from "lucide-react"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Mentorship",
@@ -29,13 +30,6 @@ export default function MentorshipPage() {
     },
   ]
 
-  const summaryStats = [
-    { label: "Session Themes", value: String(sessions.length) },
-    { label: "Format", value: "1-on-1" },
-    { label: "Audience", value: "Early Researchers" },
-    { label: "Booking", value: "By Appointment" },
-  ]
-
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[55vh] flex items-center pt-20 pb-12">
@@ -51,15 +45,6 @@ export default function MentorshipPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {summaryStats.map((item) => (
-              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-                <p className="text-lg font-bold leading-none">{item.value}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-              </article>
-            ))}
-          </div>
-
           <h2 className="text-4xl font-bold mb-12">1-on-1 Session Themes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {sessions.map((session) => (
@@ -78,7 +63,7 @@ export default function MentorshipPage() {
           <div className="text-center mb-10">
             <h2 className="text-4xl font-bold mb-4">Quick Questions</h2>
             <p className="text-lg text-muted-foreground">
-              For short questions, reach out through the contact page or LinkedIn.
+              For short questions, you can use the contact page, LinkedIn, or the Telegram bot pathway.
             </p>
           </div>
 
@@ -89,14 +74,26 @@ export default function MentorshipPage() {
             </div>
             <p className="text-center text-muted-foreground mb-6">
               For concise technical questions, send a short context summary with your current objective and challenge.
+              You can submit privately via Telegram bot, and I reply on the Telegram channel without exposing your
+              identity.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <Button asChild className="w-full sm:w-auto">
                 <Link href="/contact">Use Contact Page</Link>
               </Button>
               <Button asChild variant="outline" className="w-full sm:w-auto">
-                <a href="https://www.linkedin.com/in/iabdul-aal" target="_blank" rel="noopener noreferrer">
+                <a href={socialLinks.telegramBot} target="_blank" rel="noopener noreferrer">
+                  Ask via Telegram Bot
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
                   Message on LinkedIn
+                </a>
+              </Button>
+              <Button asChild variant="ghost" className="w-full sm:w-auto">
+                <a href={socialLinks.telegramChannel} target="_blank" rel="noopener noreferrer">
+                  View Telegram Channel
                 </a>
               </Button>
             </div>

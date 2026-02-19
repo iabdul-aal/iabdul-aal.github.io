@@ -75,6 +75,14 @@ function toPublicationStatus(venue: string, year: string): string {
   return parts.join(", ") || "Publication"
 }
 
+function parseMembershipDetail(detail: string): { role: string; period: string } {
+  const [rolePart, periodPart] = detail.split("|").map((part) => part.trim())
+  return {
+    role: rolePart || detail.trim(),
+    period: periodPart || "",
+  }
+}
+
 async function loadPublications(): Promise<Publication[]> {
   try {
     const filePath = join(process.cwd(), "publications.json")
@@ -370,6 +378,8 @@ export default async function AboutPage() {
           detail: shouldUseOrcidMembershipDetail ? orcidPrimaryMembershipDetail : memberships.main.detail,
         }
       : memberships.main
+  const mainMembershipDetail = parseMembershipDetail(mainMembership.detail)
+  const showMainMembershipCommunityLink = mainMembership.name.toLowerCase().includes("ieee")
 
   const resolveMembershipLogo = (name: string): LogoSlotWithStatus | undefined => {
     const lowerName = name.toLowerCase()
@@ -516,7 +526,7 @@ export default async function AboutPage() {
                       <div>
                         <h3 className="font-semibold">{item.degree}</h3>
                         {item.org && (
-                          <p className="mt-1 inline-flex items-center gap-2 text-sm text-accent">
+                          <p className="mt-1 inline-flex flex-col items-start gap-1 text-sm text-accent">
                             <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
                             <span>{item.org}</span>
                           </p>
@@ -538,7 +548,7 @@ export default async function AboutPage() {
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                       <div>
                         <h3 className="font-semibold">{item.role}</h3>
-                        <p className="mt-1 inline-flex items-center gap-2 text-sm text-accent">
+                        <p className="mt-1 inline-flex flex-col items-start gap-1 text-sm text-accent">
                           <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
                           <span>{item.org}</span>
                         </p>
@@ -619,41 +629,54 @@ export default async function AboutPage() {
             </section>
 
             <section>
-              <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                <h3 className="text-2xl font-bold">Memberships</h3>
-                <a
-                  href="https://ieee-collabratec.ieee.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent/80 transition-colors"
-                >
-                  IEEE Collabratec
-                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                </a>
-              </div>
+              <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
-                  <div className="flex items-start gap-3">
-                    <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
-                    <div>
-                      <p className="text-sm font-semibold">{mainMembership.name}</p>
-                      <p className="text-sm text-muted-foreground mt-1">{mainMembership.detail}</p>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                    <div className="flex items-start gap-3 min-w-0">
+                      <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
+                      <div className="w-full min-w-0">
+                        <p className="text-sm font-semibold">{mainMembership.name}</p>
+                        <div className="mt-1 grid grid-cols-[1fr_auto] items-start gap-2 text-sm text-muted-foreground">
+                          <span>{mainMembershipDetail.role}</span>
+                          {mainMembershipDetail.period && (
+                            <span className="whitespace-nowrap text-right">{mainMembershipDetail.period}</span>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                    {showMainMembershipCommunityLink && (
+                      <a
+                        href="https://ieee-collabratec.ieee.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
+                      >
+                        Collabratec
+                        <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                      </a>
+                    )}
                   </div>
                 </article>
                 <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4 sm:pl-8">
                   <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
-                  {memberships.subs.map((item) => (
-                    <article key={item.name} className="relative p-5 rounded-xl border border-border/80 bg-background/90 sm:ml-4">
-                      <div className="flex items-start gap-3">
-                        <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
-                        <div>
-                          <p className="text-sm font-semibold">IEEE {item.name}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                  {memberships.subs.map((item) => {
+                    const itemDetail = parseMembershipDetail(item.detail)
+                    return (
+                      <article key={item.name} className="relative p-5 rounded-xl border border-border/80 bg-background/90 sm:ml-4">
+                        <div className="flex items-start gap-3">
+                          <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
+                          <div className="w-full min-w-0">
+                            <p className="text-sm font-semibold">{item.name}</p>
+                            <div className="mt-1 grid grid-cols-[1fr_auto] items-start gap-2 text-sm text-muted-foreground">
+                              <span>{itemDetail.role}</span>
+                              {itemDetail.period && <span className="whitespace-nowrap text-right">{itemDetail.period}</span>}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </article>
-                  ))}
+                      </article>
+                    )
+                  })}
                 </div>
               </div>
             </section>
