@@ -1,5 +1,6 @@
-import { ArrowRight, FileText } from "lucide-react"
+import { FileText } from "lucide-react"
 import { JourneySection } from "@/components/journey-section"
+import { MaterialsFilesStack } from "@/components/materials-files-stack"
 import { PageHero } from "@/components/page-hero"
 import { getCollectionAssets, type MaterialCollectionSlug } from "@/lib/materials-library"
 
@@ -50,27 +51,7 @@ export async function MaterialsCollectionView({
         </div>
 
         {assets.length > 0 ? (
-          <div className="space-y-4">
-            {assets.map((asset) => (
-              <article key={asset.fileName} className="p-5 rounded-xl border border-border bg-card">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                  <div>
-                    <h2 className="text-lg font-semibold">{asset.displayName}</h2>
-                    <p className="text-sm text-muted-foreground mt-1">{asset.extension} | {asset.sizeLabel}</p>
-                    <p className="text-xs text-muted-foreground mt-2">Updated: {asset.updatedAt}</p>
-                  </div>
-                  <a
-                    href={asset.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-                  >
-                    Open File <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
+          <MaterialsFilesStack assets={assets} />
         ) : (
           <article className="p-8 rounded-xl border border-border bg-card">
             <div className="flex items-start gap-3">

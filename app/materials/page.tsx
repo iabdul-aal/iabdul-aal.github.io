@@ -35,7 +35,7 @@ export default async function MaterialsPage() {
           <div className="mb-12">
             <h2 className="text-4xl font-bold text-foreground">Resource Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Use search and filters at the top, then browse full-width material blocks below.
+              Start with a collection below. Each collection has its own file-level search and filters.
             </p>
           </div>
           <MaterialsStack items={collectionCards} />
