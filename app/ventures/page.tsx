@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PageHero } from "@/components/page-hero"
-import { ArrowRight, ArrowUpRight, FlaskConical, Users2 } from "lucide-react"
+import { ArrowRight, FlaskConical, Rocket, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
@@ -14,15 +14,14 @@ export const metadata = {
 export default function VenturesPage() {
   const startupPortfolio = [
     {
-      name: "Octides",
-      relation: "Founded / Worked On",
+      name: "Photonic Sensor Intelligence Stack",
+      relation: "Discovery",
       description:
-        "Octides is developing an AI-powered design engine for optimizing cell-free crude extract systems, dramatically accelerating synthetic biology workflows from weeks to hours.",
+        "A software and sensing workflow for translating FBG measurement streams into actionable biomedical indicators.",
       supportNote:
-        "Part of Seedstars and CTCN, with support from the Irish and Netherlands embassies.",
+        "Current direction: sensor architecture mapping, signal-processing baseline, and pilot partner scouting.",
       href: "/ventures/startups",
-      linkedin: socialLinks.octidesLinkedIn,
-      logo: "/logos/platforms/Octides.webp",
+      logo: "",
     },
   ]
 
@@ -94,15 +93,21 @@ export default function VenturesPage() {
             {startupPortfolio.map((startup) => (
               <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 p-1">
-                    <Image
-                      src={startup.logo}
-                      alt={`${startup.name} logo`}
-                      width={48}
-                      height={48}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
+                  {startup.logo ? (
+                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 p-1">
+                      <Image
+                        src={startup.logo}
+                        alt={`${startup.name} logo`}
+                        width={48}
+                        height={48}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60">
+                      <Rocket className="w-6 h-6 text-accent" />
+                    </div>
+                  )}
                   <span className="inline-flex h-8 items-center text-xs text-accent bg-accent/10 rounded-md px-2.5">
                     {startup.relation}
                   </span>
@@ -116,12 +121,6 @@ export default function VenturesPage() {
                       Open Startup Track
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
-                  </Button>
-                  <Button asChild size="sm" variant="outline">
-                    <a href={startup.linkedin} target="_blank" rel="noopener noreferrer">
-                      LinkedIn
-                      <ArrowUpRight className="w-4 h-4 ml-2" />
-                    </a>
                   </Button>
                 </div>
               </article>
