@@ -36,14 +36,17 @@ export function MaterialsStack({ items }: MaterialsStackProps) {
       {items.map((item) => {
         const Icon = iconMap[item.slug]
         return (
-          <article key={item.slug} className="w-full rounded-xl border border-border bg-card p-6">
+          <article
+            key={item.slug}
+            className="group w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/80 hover:bg-card/95 transition-all"
+          >
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
               <div className="flex items-start gap-4 min-w-0">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/70 bg-background/60 shrink-0">
                   <Icon className="w-5 h-5 text-accent" />
                 </span>
                 <div className="min-w-0">
-                  <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">{item.title}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {item.tags.map((tag) => (

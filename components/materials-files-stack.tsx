@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, CalendarDays } from "lucide-react"
 import type { MaterialAsset } from "@/lib/materials-library"
 
 const ALL_TYPES = "All file types"
@@ -42,7 +42,7 @@ export function MaterialsFilesStack({ assets }: MaterialsFilesStackProps) {
   return (
     <div className="space-y-4">
       <div className="p-5 rounded-xl border border-border bg-card/60">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Search This Collection</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Search and Filters</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <label className="space-y-1.5">
             <span className="text-xs text-muted-foreground">Search</span>
@@ -92,23 +92,36 @@ export function MaterialsFilesStack({ assets }: MaterialsFilesStackProps) {
       {filteredAssets.length > 0 ? (
         <div className="space-y-4">
           {filteredAssets.map((asset) => (
-            <article key={asset.fileName} className="p-5 rounded-xl border border-border bg-card">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                <div>
-                  <h2 className="text-lg font-semibold">{asset.displayName}</h2>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {asset.extension} | {asset.sizeLabel}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-2">Updated: {asset.updatedAt}</p>
+            <article
+              key={asset.fileName}
+              className="group p-4 sm:p-6 rounded-xl border border-border bg-card hover:border-accent/80 hover:bg-card/95 transition-all"
+            >
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                    {asset.extension}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground md:whitespace-nowrap">
+                    <CalendarDays className="w-3.5 h-3.5 text-accent" />
+                    Updated {asset.updatedAt}
+                  </span>
                 </div>
-                <a
-                  href={asset.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-                >
-                  Open File <ArrowRight className="w-3.5 h-3.5" />
-                </a>
+
+                <div>
+                  <h2 className="text-xl font-bold leading-snug group-hover:text-accent transition-colors">{asset.displayName}</h2>
+                  <p className="text-sm text-muted-foreground mt-2">Size: {asset.sizeLabel}</p>
+                </div>
+
+                <div>
+                  <a
+                    href={asset.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+                  >
+                    Open File <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
               </div>
             </article>
           ))}

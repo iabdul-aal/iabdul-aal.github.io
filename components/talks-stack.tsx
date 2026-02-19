@@ -167,26 +167,36 @@ export function TalksStack({ talks }: TalksStackProps) {
       {filteredTalks.length > 0 ? (
         <div className="space-y-4">
           {filteredTalks.map((talk) => (
-            <article key={talk.url} className="w-full rounded-xl border border-border bg-card p-6">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <article
+              key={talk.url}
+              className="group w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/80 hover:bg-card/95 transition-all"
+            >
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                    {talk.format}
+                  </span>
+                  <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground md:whitespace-nowrap">
+                    <CalendarDays className="w-3.5 h-3.5 text-accent" />
+                    {formatTalkDate(talk.date, talk.year)}
+                  </div>
+                </div>
+
                 <div className="min-w-0">
-                  <h3 className="text-lg font-semibold leading-snug">{talk.title}</h3>
+                  <h3 className="text-xl font-bold leading-snug group-hover:text-accent transition-colors">{talk.title}</h3>
                   <p className="text-sm text-muted-foreground mt-2">{talk.event}</p>
-                  <p className="text-xs text-accent mt-2">
-                    {talk.source} | {talk.format}
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-2">{talk.source}</p>
+                </div>
+
+                <div>
                   <a
                     href={talk.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+                    className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
                   >
                     Watch Session <ArrowRight className="w-3.5 h-3.5" />
                   </a>
-                </div>
-                <div className="text-sm text-muted-foreground inline-flex items-center gap-2 md:whitespace-nowrap">
-                  <CalendarDays className="w-4 h-4 text-accent" />
-                  {formatTalkDate(talk.date, talk.year)}
                 </div>
               </div>
             </article>
