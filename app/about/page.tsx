@@ -202,31 +202,31 @@ function LogoMark({
   const containerClass =
     size === "sm"
       ? isSiemensLogo
-        ? "h-10 min-w-36 rounded-md border border-border/65 bg-card/60 px-1.5"
-        : "h-10 min-w-24 rounded-md border border-border/65 bg-card/60 px-2.5"
+        ? "h-10 min-w-36 px-0"
+        : "h-10 min-w-24 px-2.5"
       : isSiemensLogo
-        ? "h-14 min-w-[13.5rem] rounded-lg border border-accent/35 bg-accent/10 px-2 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.65)]"
-        : "h-14 min-w-32 rounded-lg border border-accent/35 bg-accent/10 px-4 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.65)]"
+        ? "h-14 min-w-[13.5rem] px-0"
+        : "h-14 min-w-32 px-4"
   const imageWidth =
     size === "sm"
       ? isSiemensLogo
-        ? 184
+        ? 160
         : 96
       : isSiemensLogo
-        ? 224
+        ? 196
         : 136
   const imageHeight =
     size === "sm"
       ? isSiemensLogo
-        ? 28
+        ? 24
         : 28
       : isSiemensLogo
-        ? 38
+        ? 30
         : 40
   const imageClassName = isSiemensLogo
     ? size === "sm"
-      ? "h-[23px] w-auto object-contain"
-      : "h-[30px] w-auto object-contain"
+      ? "h-[20px] w-auto object-contain"
+      : "h-[24px] w-auto object-contain"
     : size === "sm"
       ? "h-[26px] w-auto object-contain"
       : "h-[34px] w-auto object-contain"
