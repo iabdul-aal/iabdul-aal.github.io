@@ -670,16 +670,18 @@ export default async function AboutPage() {
                           href="https://ieee-collabratec.ieee.org/app/p/iabdul-aal"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
+                          className="self-center sm:self-auto inline-flex items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
                         >
                           Collabratec
                           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </a>
                       </div>
                       <span aria-hidden="true" />
-                      <div className="flex w-full items-center justify-between gap-3 text-sm text-muted-foreground">
+                      <div className="flex w-full flex-col items-start gap-0.5 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                         <span>{mainMembershipDetail.role}</span>
-                        {mainMembershipDetail.period && <span className="whitespace-nowrap text-right">{mainMembershipDetail.period}</span>}
+                        {mainMembershipDetail.period && (
+                          <span className="whitespace-nowrap text-left sm:text-right">{mainMembershipDetail.period}</span>
+                        )}
                       </div>
                     </div>
                   ) : (
@@ -687,10 +689,10 @@ export default async function AboutPage() {
                       <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
                       <div className="w-full min-w-0">
                         <p className="text-sm font-semibold">{mainMembershipDisplayName}</p>
-                        <div className="mt-1 flex w-full items-start gap-2 text-sm text-muted-foreground">
+                        <div className="mt-1 flex w-full flex-col items-start gap-0.5 text-sm text-muted-foreground sm:flex-row sm:items-start sm:gap-2">
                           <span>{mainMembershipDetail.role}</span>
                           {mainMembershipDetail.period && (
-                            <span className="ml-auto whitespace-nowrap text-right">{mainMembershipDetail.period}</span>
+                            <span className="whitespace-nowrap text-left sm:ml-auto sm:text-right">{mainMembershipDetail.period}</span>
                           )}
                         </div>
                       </div>
@@ -708,9 +710,11 @@ export default async function AboutPage() {
                           <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
                           <div className="w-full min-w-0">
                             <p className="text-sm font-semibold">{membershipDisplayName}</p>
-                            <div className="mt-1 flex w-full items-start gap-2 text-sm text-muted-foreground">
+                            <div className="mt-1 flex w-full flex-col items-start gap-0.5 text-sm text-muted-foreground sm:flex-row sm:items-start sm:gap-2">
                               <span>{itemDetail.role}</span>
-                              {itemDetail.period && <span className="ml-auto whitespace-nowrap text-right">{itemDetail.period}</span>}
+                              {itemDetail.period && (
+                                <span className="whitespace-nowrap text-left sm:ml-auto sm:text-right">{itemDetail.period}</span>
+                              )}
                             </div>
                           </div>
                         </div>
