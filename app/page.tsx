@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Atom, CircuitBoard, Microscope, Sparkles } from "lucide-react"
 import { HighlightsSlider } from "@/components/highlights-slider"
@@ -11,7 +13,22 @@ export const metadata = {
     "Current research work of Islam I. Abdulaal across integrated photonics, nonlinear photonics, and physics-informed design.",
 }
 
-export default function Home() {
+async function countJsonItems(fileName: string): Promise<number> {
+  try {
+    const raw = await readFile(join(process.cwd(), fileName), "utf8")
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed.length : 0
+  } catch {
+    return 0
+  }
+}
+
+export default async function Home() {
+  const [publicationCount, talkCount] = await Promise.all([
+    countJsonItems("publications.json"),
+    countJsonItems("talks.json"),
+  ])
+
   const focusAreas = [
     {
       title: "Integrated Photonics",
@@ -30,6 +47,27 @@ export default function Home() {
     },
   ]
 
+  const collaborationPaths = [
+    {
+      title: "Technical Services",
+      description: "Support for photonic device design, simulation strategy, and optimization-led engineering execution.",
+      href: "/services",
+      cta: "Review Service Tracks",
+    },
+    {
+      title: "Project Collaboration",
+      description: "For labs, teams, and founders who need focused technical contribution on active workstreams.",
+      href: "/contact",
+      cta: "Start a Collaboration Discussion",
+    },
+    {
+      title: "Mentorship and Guidance",
+      description: "Structured 1-on-1 support for students and early builders who want faster, clearer progress.",
+      href: "/mentorship",
+      cta: "Open Mentorship Path",
+    },
+  ]
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -41,6 +79,12 @@ export default function Home() {
       name: "Islam I. Abdulaal",
     },
   }
+
+  const achievementStats = [
+    { label: "Publications", value: String(publicationCount) },
+    { label: "Public Talks", value: String(talkCount) },
+    { label: "Founded Initiatives", value: "4" },
+  ]
 
   return (
     <main className="text-foreground">
@@ -55,7 +99,7 @@ export default function Home() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs md:text-sm text-muted-foreground animate-fade-up">
               <Microscope className="w-4 h-4 text-accent" />
-              ECE Undergraduate | Research Intern | Alexandria University | NanoPhoto Lab (A*STAR)
+              ECE Undergraduate | Integrated Photonics | Alexandria University
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mt-6 animate-fade-up-delay">
@@ -63,31 +107,33 @@ export default function Home() {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
-              I am currently building my research profile through coursework, internships, and technical projects in
-              integrated photonics and nonlinear photonics. This website documents my current work and public records.
+              I am building my profile at the intersection of integrated photonics, practical engineering, and venture
+              execution. This website is organized to help you quickly find my current work, public output, and
+              collaboration paths.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link href="/about">View Current Profile</Link>
+                <Link href="/services">Explore Services</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
                 <Link href="/contact">
-                  Contact <ArrowRight className="w-4 h-4" />
+                  Start Collaboration <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="w-full sm:w-auto">
+                <Link href="/about">
+                  View Current Profile
                 </Link>
               </Button>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 animate-fade-up-delay-2">
-            {[
-              { label: "Current Focus", value: "Integrated and Quantum Photonics" },
-              { label: "Current Affiliation", value: "ECE, Alexandria University" },
-              { label: "Current Stage", value: "Undergraduate Engineer and Research Intern" },
-            ].map((stat) => (
+            {achievementStats.map((stat) => (
               <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5">
-                <p className="text-sm font-semibold text-accent">{stat.label}</p>
-                <p className="text-sm md:text-base text-foreground mt-2">{stat.value}</p>
+                <p className="text-2xl md:text-3xl font-bold leading-none">{stat.value}</p>
+                <p className="text-xs text-muted-foreground mt-2">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -116,6 +162,43 @@ export default function Home() {
                 </article>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 border-y border-border/70 bg-card/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h2 className="font-display text-3xl md:text-4xl">Choose Your Path</h2>
+            <p className="text-sm md:text-base text-muted-foreground mt-3 max-w-3xl">
+              If you are visiting for services, collaboration, or mentorship, start with the path that matches your
+              goal.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {collaborationPaths.map((path) => (
+              <article key={path.title} className="rounded-xl border border-border bg-card/75 p-6 hover:border-accent transition-colors">
+                <h3 className="text-lg font-semibold mb-2">{path.title}</h3>
+                <p className="text-sm text-muted-foreground mb-5">{path.description}</p>
+                <Link href={path.href} className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors">
+                  {path.cta}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild className="w-full sm:w-auto">
+              <Link href="/services">Get Started with Services</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full sm:w-auto">
+              <Link href="/contact">
+                Discuss Your Project
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

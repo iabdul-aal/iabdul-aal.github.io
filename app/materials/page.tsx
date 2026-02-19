@@ -1,4 +1,5 @@
 import { JourneySection } from "@/components/journey-section"
+import { PageHero } from "@/components/page-hero"
 import { BookOpenText } from "lucide-react"
 import { MaterialsStack } from "@/components/materials-stack"
 import { getMaterialsOverview } from "@/lib/materials-library"
@@ -21,28 +22,15 @@ export default async function MaterialsPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="min-h-[50vh] flex items-center pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Materials</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
-              I publish practical learning assets here, including slides, summaries, roadmaps, and reusable templates.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-4xl font-bold text-foreground">Resource Stack</h2>
-            <p className="text-sm text-muted-foreground mt-2">
-              Filter by collection type, file state, or keywords.
-            </p>
-          </div>
-          <MaterialsStack items={collectionCards} />
-        </div>
-      </section>
+      <PageHero
+        kicker="Materials"
+        title="Materials Library"
+        description="A practical library of slides, summaries, roadmaps, and templates for faster learning and cleaner project execution."
+        actions={[
+          { label: "Open Mentorship", href: "/mentorship" },
+          { label: "Request Material", href: "/contact", variant: "outline" },
+        ]}
+      />
 
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -51,6 +39,18 @@ export default async function MaterialsPage() {
           <p className="text-lg text-muted-foreground mb-0">
             These resources are organized for fast review, deeper study, and smoother project execution.
           </p>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <h2 className="text-4xl font-bold text-foreground">Resource Stack</h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Browse material collections in horizontal slots. Use categorize controls at the end of this section.
+            </p>
+          </div>
+          <MaterialsStack items={collectionCards} />
         </div>
       </section>
 

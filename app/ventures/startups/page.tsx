@@ -1,7 +1,8 @@
-import Image from "next/image"
-import Link from "next/link"
 import { JourneySection } from "@/components/journey-section"
-import { ArrowLeft, Rocket } from "lucide-react"
+import { PageHero } from "@/components/page-hero"
+import { ArrowUpRight, Rocket } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Startup Track",
@@ -11,11 +12,15 @@ export const metadata = {
 export default function StartupsPage() {
   const startupConcepts = [
     {
-      title: "Octides | Photonic Sensor Intelligence Stack",
+      title: "Octides | AI Design Engine for Synthetic Biology",
       status: "Discovery",
       summary:
-        "A software and sensing workflow for translating FBG measurement streams into actionable biomedical indicators.",
-      milestones: ["Sensor architecture mapping", "Signal processing baseline", "Pilot partner scouting"],
+        "Octides is developing an AI-powered design engine for optimizing cell-free crude extract systems, dramatically accelerating synthetic biology workflows from weeks to hours.",
+      milestones: [
+        "Part of Seedstars",
+        "Part of CTCN",
+        "Supported by the Irish and Netherlands embassies",
+      ],
     },
     {
       title: "Inverse Design Service Layer for PIC Teams",
@@ -35,24 +40,34 @@ export default function StartupsPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <Link href="/ventures" className="text-accent hover:text-accent/80 mb-4 inline-flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Ventures
-          </Link>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance mb-6">Startup Track</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            These are exploratory concepts I am currently developing to test feasibility and practical relevance.
-          </p>
-          <div className="mt-6 inline-flex items-center gap-3 rounded-xl border border-border bg-card/70 px-4 py-3">
-            <div className="relative h-7 w-24">
-              <Image src="/logos/platforms/Octides.webp" alt="Octides logo" fill sizes="96px" className="object-contain object-left" />
-            </div>
-            <span className="text-sm text-muted-foreground">Current startup identity</span>
-          </div>
-        </div>
+      <PageHero
+        kicker="Ventures"
+        title="Startup Track"
+        description="Startups I founded or worked with, plus concepts I am currently validating for practical relevance."
+        actions={[
+          { label: "Back to Ventures", href: "/ventures", variant: "outline" },
+          { label: "Discuss Opportunities", href: "/contact", variant: "ghost" },
+        ]}
+      />
 
+      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="inline-flex items-center gap-3 rounded-xl border border-border bg-card/70 px-4 py-3">
+          <div className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/70 bg-background/60">
+            <Rocket className="w-4 h-4 text-accent" />
+          </div>
+          <span className="text-sm text-muted-foreground">One startup in this portfolio: Octides</span>
+        </div>
+        <div className="mt-4">
+          <Button asChild variant="outline" size="sm">
+            <a href={socialLinks.octidesLinkedIn} target="_blank" rel="noopener noreferrer">
+              Octides on LinkedIn
+              <ArrowUpRight className="w-4 h-4 ml-2" />
+            </a>
+          </Button>
+        </div>
+      </section>
+
+      <section className="pb-16 md:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {startupConcepts.map((concept) => (
             <article
@@ -75,7 +90,6 @@ export default function StartupsPage() {
             </article>
           ))}
         </div>
-
       </section>
 
       <JourneySection

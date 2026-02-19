@@ -1,8 +1,7 @@
-﻿import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
+import { PageHero } from "@/components/page-hero"
 import { TalksStack } from "@/components/talks-stack"
-import { ArrowRight, MessageSquareText, Presentation, Users } from "lucide-react"
+import { MessageSquareText, Presentation, Users } from "lucide-react"
 import { loadTalks } from "@/lib/talks"
 
 export const metadata = {
@@ -53,26 +52,22 @@ export default async function TalksPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="min-h-[55vh] flex items-center pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks and Workshops</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
-              This page lists sessions where I speak about technical topics, entrepreneurship, and practical growth for
-              student and early-career audiences.
-            </p>
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link href="/contact">
-                Invite Me to Speak <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        kicker="Talks"
+        title="Talks and Workshops"
+        description="Sessions across technical topics, entrepreneurship, and practical career growth for students and early-career audiences."
+        actions={[
+          { label: "Invite Me to Speak", href: "/contact" },
+          { label: "Browse Services", href: "/services", variant: "outline" },
+        ]}
+      />
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-12">What I Cover</h2>
+          <h2 className="text-4xl font-bold mb-3">What I Cover</h2>
+          <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
+            Session topics are adapted to audience level, from fundamentals and methods to execution mindset and practical career strategy.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {themes.map((theme) => (
               <article key={theme.title} className="p-7 rounded-xl border border-border bg-card">
@@ -86,7 +81,10 @@ export default async function TalksPage() {
 
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-10">Session Formats</h2>
+          <h2 className="text-4xl font-bold mb-3">Session Formats</h2>
+          <p className="text-sm text-muted-foreground mb-10 max-w-[72ch]">
+            Choose the format that matches your objective, audience size, and available session time.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {formats.map((item) => {
               const Icon = item.icon
@@ -107,7 +105,7 @@ export default async function TalksPage() {
           <div className="mb-6">
             <h2 className="text-3xl font-bold">Talk Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Filter by format, source, and year, or search by event and session title.
+              Browse talks in horizontal slots. Use categorize controls at the end of this section.
             </p>
           </div>
 
@@ -117,7 +115,7 @@ export default async function TalksPage() {
 
       <JourneySection
         title="Plan the Right Session"
-        description="If you share your audience level and objective, I can shape a session across technical, entrepreneurial, or personal-development themes."
+        description="Share your audience level and objective, and I can shape a session across technical, entrepreneurial, or personal-development themes."
         actions={[
           { href: "/contact", label: "Invite for a Talk" },
           { href: "/services", label: "Review Service Scope", variant: "outline" },

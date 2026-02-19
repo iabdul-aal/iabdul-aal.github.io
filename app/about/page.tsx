@@ -83,6 +83,20 @@ function parseMembershipDetail(detail: string): { role: string; period: string }
   }
 }
 
+function normalizeMembershipName(name: string): string {
+  const trimmed = name.trim()
+  const ieeeWrappedName = trimmed.match(/^IEEE\s*\(([^)]+)\)$/i)?.[1]
+  if (ieeeWrappedName) {
+    return ieeeWrappedName.trim()
+  }
+
+  return trimmed
+    .replace(/^IEEE\s+/i, "")
+    .replace(/\s+\(IEEE\)\s*$/i, "")
+    .replace(/\s+\(SSCS\)\s*$/i, "")
+    .trim()
+}
+
 async function loadPublications(): Promise<Publication[]> {
   try {
     const filePath = join(process.cwd(), "publications.json")
@@ -179,8 +193,7 @@ function LogoMark({
       : "h-12 min-w-24 px-3"
   const imageWidth = size === "sm" ? 88 : 112
   const imageHeight = size === "sm" ? 28 : 36
-
-  return (
+  const mark = (
     <span className={`inline-flex items-center justify-center ${containerClass}`}>
       {slot?.available ? (
         <Image
@@ -196,6 +209,22 @@ function LogoMark({
       )}
     </span>
   )
+
+  if (slot?.available && slot.website) {
+    return (
+      <a
+        href={slot.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visit ${slot.name}`}
+        className="inline-flex rounded-md transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+      >
+        {mark}
+      </a>
+    )
+  }
+
+  return mark
 }
 
 export default async function AboutPage() {
@@ -286,11 +315,11 @@ export default async function AboutPage() {
 
   const awards = [
     {
-      title: "Alexandria University Technology Park (AUTP) Research Grant - Candidate (Withdrew due to time commitment)",
+      title: "Alexandria University Technology Park Research Grant (Applied and shortlisted; later declined due to schedule constraints)",
       period: "2025",
     },
     {
-      title: "SSCS Student Travel Award (Withdrew due to visa issues)",
+      title: "SSCS Student Travel Award (Selected; travel not completed due to visa timing)",
       period: "Nov 2025",
     },
     {
@@ -305,12 +334,12 @@ export default async function AboutPage() {
 
   const memberships = {
     main: {
-      name: "IEEE (Institute of Electrical and Electronics Engineers)",
+      name: "Institute of Electrical and Electronics Engineers",
       detail: "Student Member | 2025 - Present",
     },
     subs: [
       {
-        name: "Solid-State Circuits Society (SSCS)",
+        name: "Solid-State Circuits Society",
         detail: "Student Member | 2025 - Present",
       },
       {
@@ -346,13 +375,23 @@ export default async function AboutPage() {
   ]
 
   const fallbackProfileParagraphs = [
-    "I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University, currently building my research experience in integrated photonics and device-level engineering.",
-    "My recent work focuses on physics-informed and optimization-guided workflows for photonic device modeling and design.",
-    "At NanoPhoto Lab (A*STAR), I contribute to integrated quantum photonics modeling tasks while strengthening reproducible simulation and analysis practices.",
+    "I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University, currently focused on integrated photonics and device-level engineering work.",
+    "My recent projects combine physics-informed modeling, optimization-guided design, and reproducible simulation workflows.",
+    "At NanoPhoto Lab (A*STAR), I contribute to integrated quantum photonics tasks while improving model reliability and reporting quality.",
   ]
 
   const profileParagraphs = fallbackProfileParagraphs
   const orcidKeywords = (orcidProfile?.profile?.keywords ?? []).slice(0, 6)
+  const quickLinks = [
+    { href: "#profile", label: "Profile" },
+    { href: "#research-focus", label: "Research Focus" },
+    { href: "#education", label: "Education" },
+    { href: "#experience", label: "Experience" },
+    { href: "#publications", label: "Publications" },
+    { href: "#awards", label: "Awards" },
+    { href: "#memberships", label: "Memberships" },
+    { href: "#ventures", label: "Ventures" },
+  ]
 
   const educationEntries = (orcidProfile?.educations && orcidProfile.educations.length > 0)
     ? orcidProfile.educations.map((item) => ({
@@ -378,8 +417,11 @@ export default async function AboutPage() {
           detail: shouldUseOrcidMembershipDetail ? orcidPrimaryMembershipDetail : memberships.main.detail,
         }
       : memberships.main
+  const mainMembershipDisplayName = normalizeMembershipName(mainMembership.name)
   const mainMembershipDetail = parseMembershipDetail(mainMembership.detail)
-  const showMainMembershipCommunityLink = mainMembership.name.toLowerCase().includes("ieee")
+  const showMainMembershipCommunityLink =
+    mainMembership.name.toLowerCase().includes("ieee") ||
+    mainMembership.name.toLowerCase().includes("electrical and electronics engineers")
 
   const resolveMembershipLogo = (name: string): LogoSlotWithStatus | undefined => {
     const lowerName = name.toLowerCase()
@@ -389,7 +431,7 @@ export default async function AboutPage() {
     if (lowerName.includes("photonics")) {
       return ieeePhotonicsLogo
     }
-    if (lowerName.includes("ieee")) {
+    if (lowerName.includes("ieee") || lowerName.includes("electrical and electronics engineers")) {
       return ieeeLogo
     }
     return undefined
@@ -427,9 +469,9 @@ export default async function AboutPage() {
                 />
               </div>
               <h1 className="text-3xl font-bold mb-2">{personConfig.name}</h1>
-              <p className="text-accent font-semibold mb-2">{personConfig.role}</p>
+              <p className="text-accent font-semibold mb-2">ECE Undergraduate</p>
               <p className="text-sm text-muted-foreground mb-2">
-                {personConfig.location} | {personConfig.affiliation}
+                Alexandria University
               </p>
               <div className="space-y-3">
                 {orcidKeywords.length > 0 && (
@@ -445,7 +487,7 @@ export default async function AboutPage() {
                   </div>
                 )}
                 <p className="text-sm font-semibold text-foreground">Academic Profiles</p>
-                <ul className="text-sm border border-border rounded-lg divide-y divide-border">
+                <ul className="list-none pl-0 text-sm border border-border rounded-lg divide-y divide-border">
                   {academicProfiles.map((profile) => (
                     <li key={profile.label} className="py-2.5 px-3 hover:bg-card/60 transition-colors">
                       <a
@@ -460,6 +502,20 @@ export default async function AboutPage() {
                     </li>
                   ))}
                 </ul>
+                <div className="pt-2">
+                  <p className="text-sm font-semibold text-foreground mb-2">Quick Navigation</p>
+                  <div className="flex flex-wrap gap-2">
+                    {quickLinks.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className="px-2.5 py-1 rounded-md border border-border text-xs text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild className="w-full sm:w-auto">
@@ -482,7 +538,7 @@ export default async function AboutPage() {
           </aside>
 
           <div className="lg:col-span-2 space-y-6">
-            <section id="profile" className={sectionCardClass}>
+            <section id="profile" className={`${sectionCardClass} scroll-mt-24`}>
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 {profileParagraphs.map((paragraph) => (
@@ -501,7 +557,7 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section id="research-focus" className={sectionCardClass}>
+            <section id="research-focus" className={`${sectionCardClass} scroll-mt-24`}>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
               <p className="text-sm text-muted-foreground mb-4">
                 My research interests connect photonic device physics, inverse design, and robust computational
@@ -517,21 +573,19 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section id="education" className={sectionCardClass}>
+            <section id="education" className={`${sectionCardClass} scroll-mt-24`}>
               <h2 className="text-2xl font-bold mb-4">Education</h2>
               <div className="space-y-6">
                 {educationEntries.map((item) => (
                   <article key={`${item.degree}-${item.org}`} className="pb-6 border-b border-border last:border-b-0 last:pb-0">
+                    {item.org && (
+                      <p className="mb-2 inline-flex flex-col items-start gap-1 text-sm text-accent">
+                        <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
+                        <span>{item.org}</span>
+                      </p>
+                    )}
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
-                      <div>
-                        <h3 className="font-semibold">{item.degree}</h3>
-                        {item.org && (
-                          <p className="mt-1 inline-flex flex-col items-start gap-1 text-sm text-accent">
-                            <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
-                            <span>{item.org}</span>
-                          </p>
-                        )}
-                      </div>
+                      <h3 className="font-semibold">{item.degree}</h3>
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     {item.summary && <p className="text-sm text-muted-foreground">{item.summary}</p>}
@@ -540,19 +594,17 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section id="experience" className={sectionCardClass}>
+            <section id="experience" className={`${sectionCardClass} scroll-mt-24`}>
               <h2 className="text-2xl font-bold mb-4">Experience</h2>
               <div className="space-y-6">
                 {experience.map((item) => (
                   <article key={`${item.role}-${item.org}`} className="pb-6 border-b border-border last:border-b-0 last:pb-0">
+                    <p className="mb-2 inline-flex flex-col items-start gap-1 text-sm text-accent">
+                      <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
+                      <span>{item.org}</span>
+                    </p>
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
-                      <div>
-                        <h3 className="font-semibold">{item.role}</h3>
-                        <p className="mt-1 inline-flex flex-col items-start gap-1 text-sm text-accent">
-                          <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
-                          <span>{item.org}</span>
-                        </p>
-                      </div>
+                      <h3 className="font-semibold">{item.role}</h3>
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
@@ -561,11 +613,11 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section id="ventures" className={sectionCardClass}>
+            <section id="ventures" className={`${sectionCardClass} scroll-mt-24`}>
               <h2 className="text-2xl font-bold mb-4">Ventures</h2>
               <p className="text-sm text-muted-foreground">
-                Alongside research, I founded several venture and community projects to test practical applications of
-                technical ideas. I am currently not active in day-to-day initiative operations.
+                Alongside research, I founded venture and community projects to test practical applications of
+                technical ideas.
               </p>
               <div className="mt-4">
                 <Button asChild variant="outline">
@@ -581,7 +633,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <Publications publications={publications} />
+      <div id="publications" className="scroll-mt-24">
+        <Publications publications={publications} />
+      </div>
 
       <section className="py-16 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -593,7 +647,7 @@ export default async function AboutPage() {
             {technicalStack.map((item) => (
               <article key={item.label} className="p-5 rounded-xl border border-border bg-background">
                 <p className="text-sm font-semibold text-accent mb-3">{item.label}</p>
-                <ul className="space-y-3 text-sm text-muted-foreground">
+                <ul className="list-none space-y-3 pl-0 text-sm text-muted-foreground">
                   {item.items.map((tool) => (
                     <li key={tool.name} className="flex items-center justify-between gap-3">
                       <span>{tool.name}</span>
@@ -613,10 +667,10 @@ export default async function AboutPage() {
           </div>
 
           <div className="mt-12 space-y-10">
-            <section>
+            <section id="awards" className="scroll-mt-24">
               <h3 className="text-2xl font-bold mb-4">Awards</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Selected recognitions and candidacies relevant to my academic and research track.
+                Selected recognitions and applications relevant to my academic and research track.
               </p>
               <div className="space-y-4">
                 {awards.map((item) => (
@@ -628,19 +682,19 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section>
+            <section id="memberships" className="scroll-mt-24">
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                    <div className="flex items-start gap-3 min-w-0">
+                    <div className="flex items-start gap-3 min-w-0 sm:flex-1">
                       <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
                       <div className="w-full min-w-0">
-                        <p className="text-sm font-semibold">{mainMembership.name}</p>
-                        <div className="mt-1 grid grid-cols-[1fr_auto] items-start gap-2 text-sm text-muted-foreground">
+                        <p className="text-sm font-semibold">{mainMembershipDisplayName}</p>
+                        <div className="mt-1 flex w-full items-start gap-2 text-sm text-muted-foreground">
                           <span>{mainMembershipDetail.role}</span>
                           {mainMembershipDetail.period && (
-                            <span className="whitespace-nowrap text-right">{mainMembershipDetail.period}</span>
+                            <span className="ml-auto whitespace-nowrap text-right">{mainMembershipDetail.period}</span>
                           )}
                         </div>
                       </div>
@@ -652,7 +706,7 @@ export default async function AboutPage() {
                         rel="noopener noreferrer"
                         className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
                       >
-                        Collabratec
+                        Collabratec @iabdul-aal
                         <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                       </a>
                     )}
@@ -662,15 +716,16 @@ export default async function AboutPage() {
                   <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
                   {memberships.subs.map((item) => {
                     const itemDetail = parseMembershipDetail(item.detail)
+                    const membershipDisplayName = normalizeMembershipName(item.name)
                     return (
                       <article key={item.name} className="relative p-5 rounded-xl border border-border/80 bg-background/90 sm:ml-4">
-                        <div className="flex items-start gap-3">
+                        <div className="flex w-full items-start gap-3">
                           <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
                           <div className="w-full min-w-0">
-                            <p className="text-sm font-semibold">{item.name}</p>
-                            <div className="mt-1 grid grid-cols-[1fr_auto] items-start gap-2 text-sm text-muted-foreground">
+                            <p className="text-sm font-semibold">{membershipDisplayName}</p>
+                            <div className="mt-1 flex w-full items-start gap-2 text-sm text-muted-foreground">
                               <span>{itemDetail.role}</span>
-                              {itemDetail.period && <span className="whitespace-nowrap text-right">{itemDetail.period}</span>}
+                              {itemDetail.period && <span className="ml-auto whitespace-nowrap text-right">{itemDetail.period}</span>}
                             </div>
                           </div>
                         </div>

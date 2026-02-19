@@ -20,10 +20,11 @@ function slideIndex(index: number, total: number): number {
 
 export function HighlightsSlider({ items, intervalMs = 7000 }: HighlightsSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const total = items.length
 
   useEffect(() => {
-    if (total < 2) {
+    if (total < 2 || isPaused) {
       return
     }
 
@@ -32,7 +33,7 @@ export function HighlightsSlider({ items, intervalMs = 7000 }: HighlightsSliderP
     }, intervalMs)
 
     return () => clearInterval(timer)
-  }, [intervalMs, total])
+  }, [intervalMs, total, isPaused])
 
   if (total === 0) {
     return null
@@ -42,7 +43,17 @@ export function HighlightsSlider({ items, intervalMs = 7000 }: HighlightsSliderP
   const canNavigate = total > 1
 
   return (
-    <div className="rounded-xl border border-border bg-card/70 p-6 sm:p-8">
+    <div
+      className="rounded-xl border border-border bg-card/70 p-6 sm:p-8"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsPaused(false)
+        }
+      }}
+    >
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <span className="inline-block px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold">
           {current.category}

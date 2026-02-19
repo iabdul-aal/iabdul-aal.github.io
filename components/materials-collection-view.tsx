@@ -1,7 +1,7 @@
-﻿import Link from "next/link"
-import { ArrowLeft, ArrowRight, FileText } from "lucide-react"
+import { ArrowRight, FileText } from "lucide-react"
 import { JourneySection } from "@/components/journey-section"
-import { getCollectionAssets, getMaterialCollection, type MaterialCollectionSlug } from "@/lib/materials-library"
+import { PageHero } from "@/components/page-hero"
+import { getCollectionAssets, type MaterialCollectionSlug } from "@/lib/materials-library"
 
 type JourneyAction = {
   href: string
@@ -26,31 +26,27 @@ export async function MaterialsCollectionView({
   journeyDescription,
   journeyActions,
 }: MaterialsCollectionViewProps) {
-  const collection = getMaterialCollection(slug)
   const assets = await getCollectionAssets(slug)
-
-  const summaryStats = [
-    { label: "Published Files", value: String(assets.length) },
-    { label: "Collection", value: collection?.title ?? "Materials" },
-  ]
+  const publishedFiles = String(assets.length)
 
   return (
     <main className="bg-background text-foreground">
-      <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/materials" className="text-accent hover:text-accent/80 mb-4 inline-flex items-center gap-2">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Materials
-        </Link>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{pageTitle}</h1>
-        <p className="text-muted-foreground max-w-2xl mb-10">{pageDescription}</p>
+      <PageHero
+        kicker="Materials Collection"
+        title={pageTitle}
+        description={pageDescription}
+        actions={[
+          { label: "Back to Materials", href: "/materials", variant: "outline" },
+          { label: "Request a Resource", href: "/contact", variant: "ghost" },
+        ]}
+      />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-          {summaryStats.map((item) => (
-            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
-              <p className="text-lg font-bold leading-none">{item.value}</p>
-              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
-            </article>
-          ))}
+      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 max-w-xs">
+          <article className="p-4 rounded-xl border border-border bg-card/40">
+            <p className="text-lg font-bold leading-none">{publishedFiles}</p>
+            <p className="text-xs text-muted-foreground mt-2">Published Files</p>
+          </article>
         </div>
 
         {assets.length > 0 ? (

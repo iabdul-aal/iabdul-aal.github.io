@@ -16,6 +16,31 @@ const sourceSerif = Source_Serif_4({
   variable: "--font-source-serif",
 })
 
+const isDevelopment = process.env.NODE_ENV !== "production"
+
+const securityPolicy = {
+  referrerPolicy: "strict-origin-when-cross-origin",
+  permissionsPolicy:
+    "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+  contentSecurityPolicy: [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+    "object-src 'none'",
+    `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""} https://assets.calendly.com`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob: https:",
+    "font-src 'self' data:",
+    "connect-src 'self' https://calendly.com https://assets.calendly.com",
+    "frame-src 'self' https://calendly.com",
+    "manifest-src 'self'",
+    isDevelopment ? "" : "upgrade-insecure-requests",
+  ]
+    .filter(Boolean)
+    .join("; "),
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   manifest: "/manifest.webmanifest",
@@ -30,6 +55,7 @@ export const metadata: Metadata = {
   creator: personConfig.name,
   publisher: personConfig.name,
   category: "technology",
+  referrer: "strict-origin-when-cross-origin",
   alternates: {
     canonical: "/",
   },
@@ -129,6 +155,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content={securityPolicy.contentSecurityPolicy} />
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta name="referrer" content={securityPolicy.referrerPolicy} />
+        <meta httpEquiv="Permissions-Policy" content={securityPolicy.permissionsPolicy} />
+      </head>
       <body className={`${spaceGrotesk.variable} ${sourceSerif.variable} font-sans antialiased`}>
         <a
           href="#main-content"
@@ -141,7 +174,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <Navigation />
-        <div id="main-content">{children}</div>
+        <div id="main-content" role="main">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

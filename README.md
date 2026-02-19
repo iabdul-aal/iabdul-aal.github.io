@@ -153,3 +153,8 @@ Current dependency list is intentionally minimal:
 - Keep narrative concise, formal, and human.
 - Avoid duplicated messaging across sections.
 - Preserve accessibility, readability, and clear next-step navigation.
+
+## License
+
+This repository is licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
+See `LICENSE` for the full text.

@@ -57,7 +57,43 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
 
   return (
     <div className="space-y-8">
+      {filteredArticles.length > 0 ? (
+        <div className="space-y-3">
+          <p className="text-xs text-muted-foreground" aria-live="polite">
+            {filteredArticles.length} of {articles.length} articles shown
+          </p>
+          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory">
+            {filteredArticles.map((article) => (
+              <a
+                key={article.url}
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-w-[300px] md:min-w-[360px] max-w-[420px] shrink-0 snap-start flex-col p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors"
+              >
+                <span className="inline-block px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold mb-4 w-fit">
+                  {article.tag}
+                </span>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{article.title}</h3>
+                <p className="text-muted-foreground text-sm mb-6 flex-grow">{article.excerpt}</p>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-accent inline-flex items-center gap-2">
+                    Read article <ArrowRight className="w-4 h-4" />
+                  </span>
+                  <span className="text-xs text-muted-foreground">{article.publishedAt}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <article className="p-6 rounded-xl border border-border bg-card">
+          <p className="text-sm text-muted-foreground">No articles match the selected filters yet.</p>
+        </article>
+      )}
+
       <div className="p-5 rounded-xl border border-border bg-card/60">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Categorize</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <label className="space-y-1.5">
             <span className="text-xs text-muted-foreground">Search</span>
@@ -65,7 +101,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Title, topic, or keyword"
-              className="w-full h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
             />
           </label>
 
@@ -74,7 +110,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
             <select
               value={topic}
               onChange={(event) => setTopic(event.target.value)}
-              className="w-full h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
             >
               {topicOptions.map((option) => (
                 <option key={option} value={option}>
@@ -89,7 +125,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
             <select
               value={year}
               onChange={(event) => setYear(event.target.value)}
-              className="w-full h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
             >
               {yearOptions.map((option) => (
                 <option key={option} value={option}>
@@ -101,7 +137,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
         </div>
 
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground" aria-live="polite">
             {filteredArticles.length} of {articles.length} articles shown
           </p>
           {hasFilters && (
@@ -112,43 +148,13 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
                 setTopic(ALL_TOPICS)
                 setYear(ALL_YEARS)
               }}
-              className="text-xs text-accent hover:text-accent/80 transition-colors"
+              className="inline-flex h-9 items-center rounded-md border border-border px-3 text-xs text-accent hover:text-accent/80 hover:border-accent/50 transition-colors"
             >
               Clear filters
             </button>
           )}
         </div>
       </div>
-
-      {filteredArticles.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredArticles.map((article) => (
-            <a
-              key={article.url}
-              href={article.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors group"
-            >
-              <span className="inline-block px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold mb-4 w-fit">
-                {article.tag}
-              </span>
-              <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{article.title}</h3>
-              <p className="text-muted-foreground text-sm mb-6 flex-grow">{article.excerpt}</p>
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-sm text-accent inline-flex items-center gap-2">
-                  Read article <ArrowRight className="w-4 h-4" />
-                </span>
-                <span className="text-xs text-muted-foreground">{article.publishedAt}</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <article className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">No articles match the selected filters yet.</p>
-        </article>
-      )}
     </div>
   )
 }

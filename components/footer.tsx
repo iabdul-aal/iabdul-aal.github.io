@@ -31,8 +31,8 @@ export function Footer() {
           <section>
             <h2 className="font-semibold text-foreground mb-4">Website Overview</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              I use this website to document my current academic work, research learning progress, and technical
-              activities. If you would like to connect, the contact page is the fastest path.
+              This website documents my current research, venture, and technical work. If you want to collaborate,
+              contact is the fastest path.
             </p>
             <div className="mt-5">
               <Button asChild className="w-full sm:w-auto">
@@ -57,7 +57,7 @@ export function Footer() {
 
           <section>
             <h2 className="font-semibold text-foreground mb-4">Connect</h2>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="grid grid-cols-2 gap-2">
               {connectLinks.map((item) => {
                 const Icon = item.icon
                 return (
@@ -66,11 +66,12 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-accent transition-colors"
+                    className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-3 text-xs text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
                     aria-label={item.name}
                     title={item.name}
                   >
                     <Icon className="w-5 h-5" />
+                    <span>{item.name}</span>
                   </a>
                 )
               })}
@@ -88,7 +89,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border pt-6 text-xs text-muted-foreground">
-          <p>&copy; {currentYear} Islam I. Abdulaal. All rights reserved.</p>
+          <p>&copy; {currentYear} Islam I. Abdulaal. Content available under CC BY 4.0 unless noted otherwise.</p>
         </div>
       </div>
     </footer>

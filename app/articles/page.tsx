@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
+import { PageHero } from "@/components/page-hero"
 import { ArticlesStack } from "@/components/articles-stack"
-import { ExternalLink } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 import { getMediumArticles, type MediumArticle } from "@/lib/medium-feed"
 
@@ -51,35 +51,15 @@ export default async function ArticlesPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="min-h-[55vh] flex items-center pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Articles and Writing</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
-              I write across research, engineering, entrepreneurship, and practical life lessons from projects and
-              real-world experience.
-            </p>
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
-                Visit Medium Profile <ExternalLink className="w-4 h-4 ml-2" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-4xl font-bold">Article Stack</h2>
-            <p className="text-sm text-muted-foreground mt-2">
-              Filter by topic and year, or search by title and keywords.
-            </p>
-          </div>
-
-          <ArticlesStack articles={articles} />
-        </div>
-      </section>
+      <PageHero
+        kicker="Articles"
+        title="Articles and Writing"
+        description="I write about research, engineering execution, entrepreneurship, and practical life lessons from real projects."
+        actions={[
+          { label: "Visit Medium", href: socialLinks.medium, external: true },
+          { label: "Open Materials", href: "/materials", variant: "outline" },
+        ]}
+      />
 
       <section className="py-20 bg-card border-t border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -92,6 +72,19 @@ export default async function ArticlesPage() {
               Follow on Medium
             </a>
           </Button>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <h2 className="text-4xl font-bold">Article Stack</h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Browse articles in horizontal slots. Use categorize controls at the end of this section.
+            </p>
+          </div>
+
+          <ArticlesStack articles={articles} />
         </div>
       </section>
 

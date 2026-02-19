@@ -1,8 +1,8 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
-import { ArrowRight, FlaskConical, Rocket, Users2 } from "lucide-react"
+import { PageHero } from "@/components/page-hero"
+import { ArrowRight, ArrowUpRight, FlaskConical, Rocket, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
@@ -12,18 +12,20 @@ export const metadata = {
 }
 
 export default function VenturesPage() {
-  const ventureTracks = [
+  const startupPortfolio = [
     {
-      title: "Startup Exploration",
+      name: "Octides",
+      relation: "Founded / Worked On",
       description:
-        "Exploring how photonics and sensing ideas can be shaped into realistic early-stage product hypotheses, including Octides.",
-      icon: Rocket,
-      logo: "/logos/platforms/Octides.webp",
-      logoAlt: "Octides logo",
+        "Octides is developing an AI-powered design engine for optimizing cell-free crude extract systems, dramatically accelerating synthetic biology workflows from weeks to hours.",
+      supportNote:
+        "Part of Seedstars and CTCN, with support from the Irish and Netherlands embassies.",
       href: "/ventures/startups",
-      cta: "View Startup Track",
-      stage: "Concept to Prototype",
+      linkedin: socialLinks.octidesLinkedIn,
     },
+  ]
+
+  const ventureTracks = [
     {
       title: "Research-to-Industry Pilots",
       description:
@@ -40,7 +42,7 @@ export default function VenturesPage() {
       icon: Users2,
       href: "/ventures/non-profit",
       cta: "See Initiative Background",
-      stage: "Founded | Not currently active",
+      stage: "Founded programs and chapter work",
     },
   ]
 
@@ -49,54 +51,87 @@ export default function VenturesPage() {
       name: "HW Carnival",
       summary:
         "Founded initiative with a technical day hosted at Bibliotheca Alexandrina on December 25, 2025, covering AlexDuino, Si-Clash, and Si-Cast tracks.",
-      status: "Founded | Inactive",
+      status: "Founded",
       href: socialLinks.hwCarnivalEvent,
     },
     {
       name: "Si-Cast",
       summary:
         "Founded technical content track focused on practical engineering communication and peer learning.",
-      status: "Founded | Inactive",
+      status: "Founded",
       href: socialLinks.siCastYoutube,
     },
     {
       name: "Si-Clash",
       summary:
         "Founded challenge-oriented track for improving practical design thinking and implementation skills.",
-      status: "Founded | Inactive",
+      status: "Founded",
     },
     {
       name: "AlexDuino",
       summary:
         "Founded hands-on prototyping track centered on embedded systems and real hardware execution.",
-      status: "Founded | Inactive",
+      status: "Founded",
     },
   ]
 
   return (
     <main className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="min-h-[50vh] flex items-center pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance">Ventures</h1>
-            <p className="text-lg md:text-2xl text-muted-foreground">
-              I founded these initiatives to build practical student-focused technical programs. I am currently not
-              active in daily initiative operations.
-            </p>
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link href="/contact">
-                Contact <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
+      <PageHero
+        kicker="Ventures"
+        title="Venture Tracks and Initiatives"
+        description="I work across startup exploration, research-to-industry pilots, and student-facing technical initiatives."
+        actions={[
+          { label: "Discuss Collaboration", href: "/contact" },
+          { label: "Explore Services", href: "/services", variant: "outline" },
+        ]}
+      />
+
+      <section className="py-16 md:py-20 bg-card border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Startups I Founded or Worked With</h2>
+          <p className="text-sm text-muted-foreground mb-8 max-w-[72ch]">
+            Startup ventures where I contribute through founding, technical development, or active project work.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {startupPortfolio.map((startup) => (
+              <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border/70 bg-background/60 mb-4">
+                  <Rocket className="w-5 h-5 text-accent" />
+                </div>
+                <span className="inline-flex text-xs text-accent bg-accent/10 rounded-md px-2 py-1 mb-3">
+                  {startup.relation}
+                </span>
+                <h3 className="text-2xl font-bold mb-3">{startup.name}</h3>
+                <p className="text-sm md:text-base text-muted-foreground mb-4">{startup.description}</p>
+                <p className="text-sm text-accent mb-6">{startup.supportNote}</p>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild size="sm">
+                    <Link href={startup.href}>
+                      Open Startup Track
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="sm" variant="outline">
+                    <a href={startup.linkedin} target="_blank" rel="noopener noreferrer">
+                      LinkedIn
+                      <ArrowUpRight className="w-4 h-4 ml-2" />
+                    </a>
+                  </Button>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Current Venture Directions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Other Venture Directions</h2>
+          <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
+            Additional tracks where I test ideas through pilots, programs, and practical execution models.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {ventureTracks.map((track) => {
               const Icon = track.icon
               return (
@@ -104,19 +139,7 @@ export default function VenturesPage() {
                   key={track.title}
                   className="p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors flex flex-col"
                 >
-                  {track.logo ? (
-                    <div className="relative h-8 w-28 mb-5">
-                      <Image
-                        src={track.logo}
-                        alt={track.logoAlt ?? `${track.title} logo`}
-                        fill
-                        sizes="112px"
-                        className="object-contain object-left"
-                      />
-                    </div>
-                  ) : (
-                    <Icon className="w-7 h-7 text-accent mb-5" />
-                  )}
+                  <Icon className="w-7 h-7 text-accent mb-5" />
                   <h3 className="text-xl font-bold text-foreground mb-3">{track.title}</h3>
                   <p className="text-muted-foreground text-sm mb-6 flex-grow">{track.description}</p>
                   <p className="text-xs text-accent mb-5">{track.stage}</p>
@@ -133,7 +156,10 @@ export default function VenturesPage() {
 
       <section className="py-16 md:py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10">Founded Initiatives</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Founded Initiatives</h2>
+          <p className="text-sm text-muted-foreground mb-10 max-w-[72ch]">
+            Programs I started to support technical learning communities and student-led execution.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {foundedInitiatives.map((item) => (
               <article key={item.name} className="p-6 rounded-xl border border-border bg-background">

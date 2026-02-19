@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
+import { PageHero } from "@/components/page-hero"
 import { Mail, MapPin, MessageSquareText, Phone } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
@@ -35,16 +36,15 @@ export default function ContactPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="min-h-[50vh] flex items-center pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Contact</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
-              For research collaboration, speaking invitations, mentorship requests, or technical service discussions.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        kicker="Contact"
+        title="Start a Conversation"
+        description="Use this page for collaboration, talks, mentorship requests, or technical service discussions."
+        actions={[
+          { label: "Send Email", href: `mailto:${socialLinks.email}`, external: true },
+          { label: "Message on LinkedIn", href: socialLinks.linkedin, external: true, variant: "outline" },
+        ]}
+      />
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,9 +94,8 @@ export default function ContactPage() {
                   "Student mentorship and guidance",
                   "Speaking and workshop invitations",
                 ].map((item) => (
-                  <p key={item} className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                    <span>{item}</span>
+                  <p key={item} className="rounded-md border border-border/70 bg-background/40 px-3 py-2">
+                    {item}
                   </p>
                 ))}
               </div>
@@ -145,9 +144,8 @@ export default function ContactPage() {
                 "Include your timeline and expected deliverable.",
                 "Add relevant links or context files to avoid extra back-and-forth.",
               ].map((item) => (
-                <p key={item} className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
-                  <span>{item}</span>
+                <p key={item} className="rounded-md border border-border/70 bg-background/40 px-3 py-2">
+                  {item}
                 </p>
               ))}
             </div>

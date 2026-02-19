@@ -1,6 +1,6 @@
-import Link from "next/link"
 import { JourneySection } from "@/components/journey-section"
-import { ArrowLeft, Users } from "lucide-react"
+import { PageHero } from "@/components/page-hero"
+import { Users } from "lucide-react"
 
 export const metadata = {
   title: "Community Initiatives",
@@ -37,19 +37,15 @@ export default function NonProfitPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <Link href="/ventures" className="text-accent hover:text-accent/80 mb-4 inline-flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Ventures
-          </Link>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance mb-6">Non-Profit Initiatives</h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            These are community initiatives where I contributed through founding and chapter leadership roles.
-            I am currently not active in operating them.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        kicker="Ventures"
+        title="Community and Non-Profit Initiatives"
+        description="Founding and chapter roles focused on student development, technical education access, and community capacity building."
+        actions={[
+          { label: "Back to Ventures", href: "/ventures", variant: "outline" },
+          { label: "Discuss Collaboration", href: "/contact", variant: "ghost" },
+        ]}
+      />
 
       <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

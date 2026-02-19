@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ export function Navigation() {
   const pathname = usePathname()
 
   const links = [
+    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/ventures", label: "Ventures" },
     { href: "/articles", label: "Articles" },
@@ -22,6 +23,10 @@ export function Navigation() {
   ]
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
 
   return (
     <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
@@ -48,8 +53,9 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
                 className={cn(
-                  "text-sm transition-colors",
+                  "inline-flex h-9 items-center text-sm transition-colors",
                   isActive(link.href) ? "text-accent font-semibold" : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -67,7 +73,7 @@ export function Navigation() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden text-foreground hover:text-accent transition-colors"
+            className="lg:hidden inline-flex h-10 w-10 items-center justify-center text-foreground hover:text-accent transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >

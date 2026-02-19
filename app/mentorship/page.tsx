@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
+import { PageHero } from "@/components/page-hero"
 import { MessageCircle } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
@@ -32,16 +33,15 @@ export default function MentorshipPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <section className="min-h-[55vh] flex items-center pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Mentorship</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
-              Mentorship support for students and early researchers working in integrated photonics and adjacent fields.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        kicker="Mentorship"
+        title="Mentorship and Guidance"
+        description="Structured support for students and early researchers who need clarity on direction, methods, and execution quality."
+        actions={[
+          { label: "Use Contact Page", href: "/contact" },
+          { label: "Ask via Telegram Bot", href: socialLinks.telegramBot, external: true, variant: "outline" },
+        ]}
+      />
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
