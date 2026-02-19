@@ -1,14 +1,18 @@
-﻿# Logo Slots
+# Logo Slots
 
 Place logo files in these paths to activate branded visuals:
 
-- `/public/logos/affiliations/ieee.svg`
-- `/public/logos/affiliations/ieee-sscs.svg`
-- `/public/logos/affiliations/ieee-photonics.svg`
-- `/public/logos/affiliations/alexandria-university.svg`
-- `/public/logos/affiliations/astar-imre.svg`
+- `/public/logos/affiliations/IEEE.png`
+- `/public/logos/affiliations/SSCS.png`
+- `/public/logos/affiliations/Photonics.webp`
+- `/public/logos/affiliations/Alexandria Univeristy.webp`
+- `/public/logos/affiliations/A Star.png`
+- `/public/logos/affiliations/Egypt Scholars.png`
 - `/public/logos/platforms/orcid.svg`
 - `/public/logos/platforms/google-scholar.svg`
 - `/public/logos/platforms/web-of-science.svg`
 
-You can also keep these local files empty and use external logo URLs later in `lib/logo-slots.ts`.
+Notes:
+- Filenames are matched exactly against `lib/logo-slots.ts`.
+- If a file is missing, the UI falls back to a compact text mark.
+- You can switch any slot to external image hosting later in `lib/logo-slots.ts`.

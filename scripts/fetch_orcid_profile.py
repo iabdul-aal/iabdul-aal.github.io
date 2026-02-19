@@ -42,15 +42,27 @@ def fetch_json(endpoint: str) -> dict[str, Any]:
 
 
 def compact_whitespace(text: str) -> str:
-    # Some records may contain mojibake (UTF-8 bytes decoded as Latin-1).
-    # Attempt a reversible repair pass before normalizing whitespace.
-    try:
-        repaired = text.encode("latin-1").decode("utf-8")
-        if repaired.count("�") <= text.count("�"):
-            text = repaired
-    except UnicodeError:
-        pass
+    # Some records may contain mojibake (UTF-8 decoded as cp1252/latin-1).
+    # Try both common repair paths and keep the cleaner result.
+    def mojibake_score(value: str) -> int:
+        markers = ("Ã", "â€", "â€“", "â€”", "â€™", "â€œ", "â€˜", "ï¿½")
+        return sum(value.count(marker) for marker in markers)
 
+    best = text
+    best_score = mojibake_score(text)
+
+    for source_encoding in ("cp1252", "latin-1"):
+        try:
+            repaired = text.encode(source_encoding).decode("utf-8")
+        except UnicodeError:
+            continue
+
+        repaired_score = mojibake_score(repaired)
+        if repaired_score < best_score:
+            best = repaired
+            best_score = repaired_score
+
+    text = best
     normalized_lines = [" ".join(line.split()) for line in text.splitlines()]
     return "\n".join(line for line in normalized_lines if line).strip()
 

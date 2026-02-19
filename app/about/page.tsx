@@ -162,6 +162,17 @@ async function loadLogoSlots(): Promise<LogoSlotWithStatus[]> {
   return resolved
 }
 
+async function resolveCvLink(): Promise<{ href: string; download: boolean }> {
+  const localCvPath = join(process.cwd(), "public", "cv.pdf")
+
+  try {
+    await access(localCvPath)
+    return { href: "/cv.pdf", download: true }
+  } catch {
+    return { href: socialLinks.cvRepository, download: false }
+  }
+}
+
 function buildLogoAcronym(label: string): string {
   const tokens = label
     .replace(/[()]/g, " ")
@@ -231,6 +242,7 @@ export default async function AboutPage() {
   const publications = await loadPublications()
   const orcidProfile = await loadOrcidProfile()
   const loadedLogos = await loadLogoSlots()
+  const cvLink = await resolveCvLink()
   const logoByName = new Map(loadedLogos.map((slot) => [slot.name, slot]))
 
   const ieeeLogo = logoByName.get("IEEE")
@@ -490,7 +502,12 @@ export default async function AboutPage() {
                   <Link href="/contact">Contact</Link>
                 </Button>
                 <Button asChild variant="outline" className="w-full sm:w-auto">
-                  <a href="/cv.pdf" download>
+                  <a
+                    href={cvLink.href}
+                    download={cvLink.download ? true : undefined}
+                    target={cvLink.download ? undefined : "_blank"}
+                    rel={cvLink.download ? undefined : "noopener noreferrer"}
+                  >
                     <Download className="w-4 h-4 mr-2" />
                     CV
                   </a>
