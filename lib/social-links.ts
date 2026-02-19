@@ -13,6 +13,7 @@ export const socialLinks = {
   medium: "https://iabdul-aal.medium.com/",
   mediumRss: "https://medium.com/feed/@iabdul-aal",
   arxiv: "https://arxiv.org/abs/2510.00357",
+  collabratec: "https://ieee-collabratec.ieee.org/app/p/iabdul-aal",
   cvRepository: "https://github.com/iabdul-aal/CV",
   nanophoto: "https://www.nanophoto.org/team",
   hwCarnivalEvent: "https://events.vtools.ieee.org/m/526669",

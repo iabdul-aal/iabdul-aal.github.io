@@ -660,63 +660,64 @@ export default async function AboutPage() {
             <section id="memberships" className="scroll-mt-24">
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
-                <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
-                  {showMainMembershipCommunityLink ? (
-                    <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2">
-                      <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
-                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                        <p className="text-sm font-semibold">{mainMembershipDisplayName}</p>
-                        <a
-                          href="https://ieee-collabratec.ieee.org/app/p/iabdul-aal"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="self-center sm:self-auto inline-flex items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
-                        >
-                          Collabratec
-                          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                        </a>
+                <article className="relative overflow-hidden rounded-xl border border-accent/45 bg-background/95 p-5 sm:p-6">
+                  <span className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-accent/60" aria-hidden="true" />
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="flex items-start gap-3 min-w-0">
+                        <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
+                        <div className="min-w-0">
+                          <p className="text-base font-semibold leading-snug">{mainMembershipDisplayName}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{mainMembershipDetail.role}</p>
+                        </div>
                       </div>
-                      <span aria-hidden="true" />
-                      <div className="flex w-full flex-col items-start gap-0.5 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-                        <span>{mainMembershipDetail.role}</span>
+                      <div className="flex flex-col items-center gap-2 sm:items-end">
+                        {showMainMembershipCommunityLink && (
+                          <a
+                            href={socialLinks.collabratec}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
+                          >
+                            Collabratec
+                            <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                          </a>
+                        )}
                         {mainMembershipDetail.period && (
-                          <span className="whitespace-nowrap text-left sm:text-right">{mainMembershipDetail.period}</span>
+                          <p className="text-sm text-muted-foreground whitespace-nowrap">{mainMembershipDetail.period}</p>
                         )}
                       </div>
                     </div>
-                  ) : (
-                    <div className="flex items-start gap-3 min-w-0 sm:flex-1">
-                      <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
-                      <div className="w-full min-w-0">
-                        <p className="text-sm font-semibold">{mainMembershipDisplayName}</p>
-                        <div className="mt-1 flex w-full flex-col items-start gap-0.5 text-sm text-muted-foreground sm:flex-row sm:items-start sm:gap-2">
-                          <span>{mainMembershipDetail.role}</span>
-                          {mainMembershipDetail.period && (
-                            <span className="whitespace-nowrap text-left sm:ml-auto sm:text-right">{mainMembershipDetail.period}</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                  </div>
                 </article>
-                <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4 sm:pl-8">
-                  <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
+
+                <div className="relative space-y-3 pl-4 sm:pl-7">
+                  <span className="absolute left-1.5 sm:left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
                   {memberships.subs.map((item) => {
                     const itemDetail = parseMembershipDetail(item.detail)
                     const membershipDisplayName = normalizeMembershipName(item.name)
                     return (
-                      <article key={item.name} className="relative p-5 rounded-xl border border-border/80 bg-background/90 sm:ml-4">
-                        <div className="flex w-full items-start gap-3">
-                          <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
-                          <div className="w-full min-w-0">
-                            <p className="text-sm font-semibold">{membershipDisplayName}</p>
-                            <div className="mt-1 flex w-full flex-col items-start gap-0.5 text-sm text-muted-foreground sm:flex-row sm:items-start sm:gap-2">
-                              <span>{itemDetail.role}</span>
-                              {itemDetail.period && (
-                                <span className="whitespace-nowrap text-left sm:ml-auto sm:text-right">{itemDetail.period}</span>
-                              )}
+                      <article
+                        key={item.name}
+                        className="group relative rounded-xl border border-border/80 bg-background/90 p-5 hover:border-accent/60 transition-colors"
+                      >
+                        <span
+                          className="pointer-events-none absolute -left-[0.9rem] sm:-left-[1.4rem] top-6 h-2.5 w-2.5 rounded-full border border-accent/60 bg-background"
+                          aria-hidden="true"
+                        />
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                          <div className="flex items-start gap-3 min-w-0">
+                            <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
+                            <div className="min-w-0">
+                              <p className="text-sm font-semibold leading-snug group-hover:text-accent transition-colors">
+                                {membershipDisplayName}
+                              </p>
+                              <p className="text-sm text-muted-foreground mt-1">{itemDetail.role}</p>
                             </div>
                           </div>
+                          {itemDetail.period && (
+                            <p className="text-sm text-muted-foreground whitespace-nowrap text-left sm:text-right">{itemDetail.period}</p>
+                          )}
                         </div>
                       </article>
                     )
