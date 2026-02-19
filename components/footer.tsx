@@ -1,107 +1,74 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { Mail } from "lucide-react"
 import { SocialProfileIconRow } from "@/components/social-profile-links"
-import { socialLinks } from "@/lib/social-links"
+import { contactInfo, socialLinks } from "@/lib/social-links"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
+  const primaryLinks = [
+    { href: "/about", label: "About" },
+    { href: "/ventures", label: "Ventures" },
+    { href: "/services", label: "Services" },
+    { href: "/materials", label: "Materials" },
+    { href: "/talks", label: "Talks" },
+    { href: "/contact", label: "Contact" },
+  ]
+
   return (
     <footer className="bg-card border-t border-border mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* About */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">About</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-8">
+          <section>
+            <h2 className="font-semibold text-foreground mb-4">Research Portfolio</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Research portfolio and collaboration hub for integrated and nonlinear quantum photonics.
+              I use this website to share my work in integrated photonics, research execution, and technical programs.
+              If you would like to collaborate, the contact page is the fastest path.
             </p>
-          </div>
-
-          {/* Start Here */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Start Here</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about" className="text-muted-foreground hover:text-accent transition-colors">
-                  Research Profile
-                </Link>
-              </li>
-              <li>
-                <Link href="/news" className="text-muted-foreground hover:text-accent transition-colors">
-                  Key Highlights
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-muted-foreground hover:text-accent transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-accent transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Explore */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Explore</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/ventures" className="text-muted-foreground hover:text-accent transition-colors">
-                  Ventures
-                </Link>
-              </li>
-              <li>
-                <Link href="/materials" className="text-muted-foreground hover:text-accent transition-colors">
-                  Materials
-                </Link>
-              </li>
-              <li>
-                <Link href="/mentorship" className="text-muted-foreground hover:text-accent transition-colors">
-                  Mentorship
-                </Link>
-              </li>
-              <li>
-                <Link href="/talks" className="text-muted-foreground hover:text-accent transition-colors">
-                  Talks
-                </Link>
-              </li>
-              <li>
-                <Link href="/articles" className="text-muted-foreground hover:text-accent transition-colors">
-                  Articles
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Connect */}
-          <div>
-            <h3 className="font-semibold text-foreground mb-4">Connect</h3>
-            <SocialProfileIconRow limit={4} />
-            <div className="mt-3 flex gap-4">
-              <a
-                href={`mailto:${socialLinks.email}`}
-                className="text-muted-foreground hover:text-accent transition-colors"
-                aria-label="Email"
-                title="Email"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
+            <div className="mt-4">
+              <Link href="/contact" className="text-sm text-accent hover:text-accent/80">
+                Start a conversation
+              </Link>
             </div>
-            <p className="text-xs text-muted-foreground mt-4">
-              Email:{" "}
-              <a href={`mailto:${socialLinks.email}`} className="text-accent hover:text-accent/80">
-                {socialLinks.email}
-              </a>
-            </p>
-          </div>
+          </section>
+
+          <section>
+            <h2 className="font-semibold text-foreground mb-4">Navigate</h2>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              {primaryLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-accent transition-colors py-1">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="font-semibold text-foreground mb-4">Connect</h2>
+            <SocialProfileIconRow limit={6} />
+            <div className="mt-4 space-y-2 text-xs text-muted-foreground">
+              <p>
+                Email: <a href={`mailto:${socialLinks.email}`} className="text-accent hover:text-accent/80">{socialLinks.email}</a>
+              </p>
+              <p>
+                Academic: <a href={`mailto:${socialLinks.academicEmail}`} className="text-accent hover:text-accent/80">{socialLinks.academicEmail}</a>
+              </p>
+              <p>{contactInfo.location}</p>
+            </div>
+            <a
+              href={`mailto:${socialLinks.email}`}
+              className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+              aria-label="Email"
+            >
+              <Mail className="w-4 h-4" />
+              Email Me
+            </a>
+          </section>
         </div>
 
-        <div className="border-t border-border pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
+        <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-muted-foreground">
           <p>&copy; {currentYear} Islam I. Abdulaal. All rights reserved.</p>
+          <p>Updated continuously through ORCID, Medium RSS, and talks sync workflows.</p>
         </div>
       </div>
     </footer>

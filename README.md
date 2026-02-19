@@ -1,52 +1,114 @@
-# Islam I. Abdulaal | Personal Research Website
+﻿# Islam I. Abdulaal | Research Website
 
-Professional website and research portfolio for **Islam I. Abdulaal**, focused on:
-- Integrated photonics
-- Quantum and nonlinear optics
-- Physics-informed photonic design
-- Mentorship and technical outreach
-- Flagship initiatives: HW Carnival, Si-Cast, Si-Clash, AlexDuino
+This repository powers my personal website: **https://iabdul-aal.github.io**.
 
-Live website: **https://iabdul-aal.github.io**
+I use it to present my research profile, publications, talks, materials, services, and venture activity in a clean, professional format.
 
-## Core Goals
+## Core Scope
 
-- Present a credible, professional research profile
-- Showcase initiative leadership across research, hardware, and engineering communities
-- Provide clear access to verified academic and professional profiles
-- Publish highlights, writing, services, and mentorship pathways
-- Maintain SEO-friendly structure for discoverability
+- Integrated photonics and nonlinear optics research profile
+- Auto-synced publications and ORCID profile data
+- Auto-synced talks list from public video sources
+- Materials library backed by real files in the repository
+- Direct pathways for mentorship, services, and collaboration
 
-## Tech Stack
+## Stack
 
 - **Framework:** Next.js (App Router, static export)
 - **Language:** TypeScript + React
 - **Styling:** Tailwind CSS
-- **Hosting:** GitHub Pages via GitHub Actions
+- **Automation:** Python scripts + GitHub Actions
+- **Hosting:** GitHub Pages
+
+## Key Automation
+
+### ORCID sync
+
+- Script: `scripts/fetch_publications.py`
+- Script: `scripts/fetch_orcid_profile.py`
+- Outputs:
+  - `publications.json`
+  - `orcid_profile.json`
+
+### Talks sync
+
+- Script: `scripts/fetch_talks.py`
+- Source config: `talk_sources.json`
+- Output: `talks.json`
+
+### Scheduled workflow
+
+- Workflow: `.github/workflows/update_publications.yml`
+- Runs daily and updates:
+  - `publications.json`
+  - `orcid_profile.json`
+  - `talks.json`
+- Commits and pushes only when data changed.
+
+## Materials Library (File-Driven)
+
+The materials pages are generated from real files inside `public/materials/`.
+
+Upload folders:
+
+- `public/materials/slides/`
+- `public/materials/summaries/`
+- `public/materials/roadmaps/`
+- `public/materials/templates/`
+
+Once files are added and pushed, the Materials pages auto-list them on the next build.
+
+## Logo Slots
+
+Logo placeholders are prepared in:
+
+- `public/logos/affiliations/`
+- `public/logos/platforms/`
+
+Expected filenames are documented in:
+
+- `public/logos/README.md`
+
+Slot definitions used by the About page are in:
+
+- `lib/logo-slots.ts`
 
 ## Project Structure
 
 ```text
 app/
-  page.tsx                 # Homepage
-  about/page.tsx           # Bio, profiles, publications, awards
-  news/page.tsx            # Highlights
-  articles/page.tsx        # Writing and article links
-  services/page.tsx        # Research/technical service tracks
-  mentorship/page.tsx      # Mentorship page
-  contact/page.tsx         # Contact and quick actions
-  sitemap.ts               # Dynamic sitemap.xml
-  robots.ts                # Dynamic robots.txt
-  layout.tsx               # Global metadata + structured data
+  about/page.tsx
+  articles/page.tsx
+  contact/page.tsx
+  materials/page.tsx
+  materials/slides/page.tsx
+  materials/summaries/page.tsx
+  materials/roadmaps/page.tsx
+  materials/templates/page.tsx
+  talks/page.tsx
+  ventures/page.tsx
+  services/page.tsx
+  mentorship/page.tsx
+  news/page.tsx
 components/
-  navigation.tsx
   footer.tsx
+  journey-section.tsx
+  materials-collection-view.tsx
   publications.tsx
 lib/
-  site-config.ts           # Global site and SEO config
-  social-links.ts          # Professional profile and contact links
+  materials-library.ts
+  logo-slots.ts
+  medium-feed.ts
+  social-links.ts
+  site-config.ts
+  talks.ts
+scripts/
+  fetch_publications.py
+  fetch_orcid_profile.py
+  fetch_talks.py
 .github/workflows/
-  deploy.yml               # GitHub Pages deployment workflow
+  deploy.yml
+  update_publications.yml
 ```
 
 ## Local Development
@@ -61,71 +123,34 @@ npm install
 npm run dev
 ```
 
-3. Open:
-```text
-http://localhost:3000
+3. Build for production
+```bash
+npm run build
 ```
 
-## Scripts
+## Python Dependencies
 
-- `npm run dev` - run local dev server
-- `npm run build` - production build + static export
-- `npm run start` - start production server (non-static hosting use)
-- `npm run lint` - lint source files
-- `npm run typecheck` - TypeScript type checking only
-- `npm run check` - lint + typecheck
+Install script dependencies:
 
-## SEO Implementation
+```bash
+pip install -r requirements.txt
+```
 
-SEO is implemented through:
-- Central metadata in `app/layout.tsx`
-- Open Graph + Twitter metadata
-- JSON-LD structured data (`Person` + `WebSite`)
-- `app/sitemap.ts` for search indexing
-- `app/robots.ts` for crawler directives
-- Canonical URL strategy via `site-config.ts`
+Current dependency list is intentionally minimal:
 
-## Professional Profile Sources
+- `requests`
 
-Profile links are centralized in:
-- `lib/social-links.ts`
+## Content Workflow
 
-This includes research identity links (ORCID, Scholar, Semantic Scholar, ResearchGate, etc.), professional channels, and contact endpoints.
+1. Update links and identity data in `lib/social-links.ts`.
+2. Update page copy inside `app/*/page.tsx` in first-person professional voice.
+3. Add new materials to `public/materials/*`.
+4. Add logos to `public/logos/*` when available.
+5. Run checks and push.
 
-## Deployment (GitHub Pages)
+## Standards
 
-Deployment is automated via:
-- `.github/workflows/deploy.yml`
-
-Flow:
-1. Push to `main`
-2. Workflow installs dependencies and builds static export
-3. `out/` artifact is deployed to GitHub Pages
-
-Scheduled refresh:
-- The deploy workflow also runs every 6 hours (`cron`) to refresh Medium RSS-driven article content without requiring a new code push.
-
-## Medium RSS Integration
-
-Articles page can ingest Medium posts from:
-- `https://medium.com/feed/@iabdul-aal`
-
-Implementation details:
-- Feed URL is centralized in `lib/social-links.ts` as `socialLinks.mediumRss`
-- RSS parsing and normalization live in `lib/medium-feed.ts`
-- `app/articles/page.tsx` renders live feed results first and falls back to curated static entries if feed retrieval fails
-
-## Content Maintenance Workflow
-
-When updating the website:
-1. Update links/data in `lib/social-links.ts` first
-2. Update page-level messaging (`app/*/page.tsx`)
-3. Keep claims aligned with publicly verifiable sources
-4. Run checks locally (`npm run check`) before push
-
-## Repository Standards
-
-- Keep content professional and evidence-driven
-- Avoid placeholder text and unverifiable claims
-- Prefer centralized config over scattered hardcoded values
-- Preserve SEO metadata consistency when adding pages
+- Keep claims verifiable and source-based.
+- Keep narrative concise, formal, and human.
+- Avoid duplicated messaging across sections.
+- Preserve accessibility, readability, and clear next-step navigation.

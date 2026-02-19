@@ -1,12 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
-import { readFile } from "node:fs/promises"
+import { access, readFile } from "node:fs/promises"
 import { join } from "node:path"
 import { ArrowUpRight, Download, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Publications, type Publication } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
+import { logoSlots } from "@/lib/logo-slots"
 
 export const metadata = {
   title: "About",
@@ -38,6 +39,14 @@ type OrcidProfile = {
     organization?: string
     detail?: string
   }>
+}
+
+type LogoSlotWithStatus = {
+  name: string
+  filePath: string
+  website: string
+  group: "Affiliations" | "Profiles"
+  available: boolean
 }
 
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
@@ -105,6 +114,28 @@ async function loadOrcidProfile(): Promise<OrcidProfile | null> {
   }
 }
 
+async function loadLogoSlots(): Promise<LogoSlotWithStatus[]> {
+  const resolved = await Promise.all(
+    logoSlots.map(async (slot) => {
+      const absolutePath = join(process.cwd(), "public", slot.filePath.replace(/^\/+/, ""))
+      try {
+        await access(absolutePath)
+        return {
+          ...slot,
+          available: true,
+        } satisfies LogoSlotWithStatus
+      } catch {
+        return {
+          ...slot,
+          available: false,
+        } satisfies LogoSlotWithStatus
+      }
+    }),
+  )
+
+  return resolved
+}
+
 function biographyPreview(biography: string | undefined, fallback: string[]): string[] {
   if (!biography) {
     return fallback
@@ -125,6 +156,7 @@ function biographyPreview(biography: string | undefined, fallback: string[]): st
 export default async function AboutPage() {
   const publications = await loadPublications()
   const orcidProfile = await loadOrcidProfile()
+  const loadedLogos = await loadLogoSlots()
 
   const focusAreas = [
     {
@@ -407,22 +439,6 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section id="ventures" className={sectionCardClass}>
-              <h2 className="text-2xl font-bold mb-4">Ventures</h2>
-              <p className="text-sm text-muted-foreground">
-                I build and support venture tracks that translate research, hardware, and community initiatives into
-                practical products, programs, and measurable impact.
-              </p>
-              <div className="mt-4">
-                <Button asChild variant="outline">
-                  <Link href="/ventures">
-                    Explore Ventures
-                    <ArrowUpRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </section>
-
             <section id="research-focus" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
               <p className="text-sm text-muted-foreground mb-4">
@@ -488,6 +504,22 @@ export default async function AboutPage() {
                     </div>
                   </article>
                 ))}
+              </div>
+            </section>
+
+            <section id="ventures" className={sectionCardClass}>
+              <h2 className="text-2xl font-bold mb-4">Ventures</h2>
+              <p className="text-sm text-muted-foreground">
+                Beyond core research, I build and support venture tracks that translate technical ideas into real programs
+                and measurable community impact.
+              </p>
+              <div className="mt-4">
+                <Button asChild variant="outline">
+                  <Link href="/ventures">
+                    Explore Ventures
+                    <ArrowUpRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
               </div>
             </section>
 
@@ -558,6 +590,40 @@ export default async function AboutPage() {
                     </article>
                   ))}
                 </div>
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-bold mb-4">Affiliations and Profile Presence</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                These are my current affiliation and profile slots. Once a logo file is added, it will appear automatically.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {loadedLogos.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 rounded-xl border border-border bg-background hover:border-accent transition-colors"
+                  >
+                    <div className="h-12 rounded-md border border-border/70 bg-card/70 flex items-center justify-center mb-3">
+                      {item.available ? (
+                        <Image
+                          src={item.filePath}
+                          alt={`${item.name} logo`}
+                          width={140}
+                          height={36}
+                          className="max-h-8 w-auto object-contain"
+                        />
+                      ) : (
+                        <span className="text-xs text-muted-foreground uppercase tracking-wide">Logo Slot Ready</span>
+                      )}
+                    </div>
+                    <p className="text-sm font-semibold">{item.name}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{item.group}</p>
+                  </a>
+                ))}
               </div>
             </section>
 

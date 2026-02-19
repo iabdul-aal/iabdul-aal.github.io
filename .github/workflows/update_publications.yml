@@ -1,4 +1,4 @@
-name: Update ORCID Academic Data
+name: Update Academic and Talks Data
 
 on:
   schedule:
@@ -25,25 +25,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Fetch latest publications and profile data from ORCID
+      - name: Fetch latest publications, profile data, and talks
         run: |
           python scripts/fetch_publications.py
           python scripts/fetch_orcid_profile.py
+          python scripts/fetch_talks.py
 
       - name: Detect changes
         id: diff
         run: |
-          if git diff --quiet -- publications.json orcid_profile.json; then
+          if git diff --quiet -- publications.json orcid_profile.json talks.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit and push academic data files
+      - name: Commit and push data files
         if: steps.diff.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add publications.json orcid_profile.json
-          git commit -m "chore: update ORCID academic data"
+          git add publications.json orcid_profile.json talks.json
+          git commit -m "chore: update ORCID and talks data"
           git push

@@ -1,45 +1,28 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { JourneySection } from "@/components/journey-section"
-import { ArrowRight, BookOpenText, FileText, LayoutTemplate, Route } from "lucide-react"
+import { ArrowRight, BookOpenText, FileSpreadsheet, FileText, LayoutTemplate, Route } from "lucide-react"
+import { getMaterialsOverview, type MaterialCollectionSlug } from "@/lib/materials-library"
 
 export const metadata = {
   title: "Materials | Islam Abdulaal",
-  description: "Slides, summaries, and learning roadmaps for integrated photonics and related research skills.",
+  description: "Slides, summaries, roadmaps, and reusable templates for integrated photonics and research workflows.",
 }
 
-export default function MaterialsPage() {
-  const collections = [
-    {
-      title: "Presentation Slides",
-      description:
-        "Concise visual decks covering integrated photonics fundamentals, device-level intuition, and system-level framing.",
-      icon: LayoutTemplate,
-      href: "/materials/slides",
-      tags: ["Concept visuals", "Teaching-friendly", "Updated periodically"],
-    },
-    {
-      title: "Technical Summaries",
-      description:
-        "Short technical briefs extracting key ideas from papers, methods, and simulation workflows in photonics research.",
-      icon: FileText,
-      href: "/materials/summaries",
-      tags: ["Paper digestion", "Method notes", "Research acceleration"],
-    },
-    {
-      title: "Learning Roadmaps",
-      description:
-        "Step-by-step progression paths for students moving from theory to practical photonic design and experimentation.",
-      icon: Route,
-      href: "/materials/roadmaps",
-      tags: ["Beginner to advanced", "Tool progression", "Project checkpoints"],
-    },
-  ]
+const iconMap: Record<MaterialCollectionSlug, typeof LayoutTemplate> = {
+  slides: LayoutTemplate,
+  summaries: FileText,
+  roadmaps: Route,
+  templates: FileSpreadsheet,
+}
+
+export default async function MaterialsPage() {
+  const overview = await getMaterialsOverview()
 
   const summaryStats = [
-    { label: "Collections", value: String(collections.length) },
-    { label: "Audience", value: "Students & Researchers" },
-    { label: "Coverage", value: "Theory to Practice" },
-    { label: "Updates", value: "Periodic" },
+    { label: "Collections", value: String(overview.collections.length) },
+    { label: "Published Files", value: String(overview.totalAssets) },
+    { label: "Audience", value: "Students and Researchers" },
+    { label: "Updates", value: "File-driven" },
   ]
 
   return (
@@ -49,8 +32,7 @@ export default function MaterialsPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Materials</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Practical educational resources designed to make integrated photonics and research execution easier to
-              learn.
+              I publish practical learning assets here, including slides, summaries, roadmaps, and reusable templates.
             </p>
           </div>
         </div>
@@ -68,24 +50,28 @@ export default function MaterialsPage() {
           </div>
 
           <h2 className="text-4xl font-bold text-foreground mb-12">Resource Collections</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {collections.map((collection) => {
-              const Icon = collection.icon
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {overview.collections.map(({ collection, assets }) => {
+              const Icon = iconMap[collection.slug]
               return (
                 <article
-                  key={collection.title}
+                  key={collection.slug}
                   className="p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors flex flex-col"
                 >
                   <Icon className="w-8 h-8 text-accent mb-5" />
-                  <h3 className="text-xl font-bold text-foreground mb-3">{collection.title}</h3>
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <h3 className="text-xl font-bold text-foreground">{collection.title}</h3>
+                    <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{assets.length} files</span>
+                  </div>
                   <p className="text-muted-foreground text-sm mb-5 flex-grow">{collection.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {collection.tags.map((tag) => (
                       <span key={tag} className="px-2 py-1 rounded text-xs bg-background text-muted-foreground">
                         {tag}
                       </span>
                     ))}
                   </div>
+                  <p className="text-xs text-muted-foreground mb-4">Upload path: <code>{collection.uploadPath}</code></p>
                   <Link href={collection.href} className="text-sm text-accent inline-flex items-center gap-2">
                     Open Collection
                     <ArrowRight className="w-3 h-3" />
@@ -100,10 +86,9 @@ export default function MaterialsPage() {
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <BookOpenText className="w-10 h-10 text-accent mx-auto mb-4" />
-          <h2 className="text-4xl font-bold text-foreground mb-6">Designed for Students and Early Researchers</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-6">Built for Continuous Updates</h2>
           <p className="text-lg text-muted-foreground mb-0">
-            Materials focus on clarity, progressive depth, and direct usefulness for coursework, projects, and research
-            onboarding.
+            Once you add files under `public/materials/`, the materials pages update automatically on the next build.
           </p>
         </div>
       </section>

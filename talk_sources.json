@@ -1,0 +1,16 @@
+﻿{
+  "featured": [
+    {
+      "url": "https://www.youtube.com/watch?v=mEboydO5pEk&t=4s",
+      "event": "Featured Public Talk",
+      "format": "Technical Talk"
+    }
+  ],
+  "youtubeChannels": [
+    {
+      "name": "Si-Cast",
+      "url": "https://www.youtube.com/@si-cast",
+      "format": "Talk and Workshop"
+    }
+  ]
+}
