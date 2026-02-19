@@ -37,7 +37,7 @@ export const logoSlots: LogoSlot[] = [
     group: "Affiliations",
   },
   {
-    name: "Egypt Scholars Advanced Labs Program",
+    name: "Labs Program, Egypt Scholars",
     filePath: "/logos/affiliations/Egypt Scholars.png",
     website: "https://www.egyptscholars.org/",
     group: "Affiliations",

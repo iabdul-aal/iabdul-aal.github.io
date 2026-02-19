@@ -278,7 +278,7 @@ export default async function AboutPage() {
   const ieeePhotonicsLogo = logoByName.get("IEEE Photonics Society")
   const alexandriaLogo = logoByName.get("Alexandria University")
   const astarImreLogo = logoByName.get("A*STAR IMRE")
-  const egyptScholarsLogo = logoByName.get("Egypt Scholars Advanced Labs Program")
+  const egyptScholarsLogo = logoByName.get("Labs Program, Egypt Scholars")
   const siemensLogo = logoByName.get("Siemens EDA, Egypt")
   const itiLogo = logoByName.get("Information Technology Institute")
   const orcidLogo = logoByName.get("ORCID")
@@ -338,7 +338,7 @@ export default async function AboutPage() {
     },
     {
       role: "Research Intern",
-      org: "Egypt Scholars Advanced Labs Program",
+      org: "Labs Program, Egypt Scholars",
       period: "Jul 2025 - Sep 2025",
       summary:
         "Completed intensive research training in quantum photonics, including independent problem framing, simulation, and technical reporting.",
