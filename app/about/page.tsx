@@ -300,6 +300,13 @@ export default async function AboutPage() {
         "Contributing to optimization-driven integrated quantum photonics workflows with emphasis on model reliability and practical design iteration.",
     },
     {
+      role: "Analog and Mixed-Signal Simulation & Modeling Trainee",
+      org: "Siemens EDA",
+      period: "Jul 2025 - Sep 2025",
+      summary:
+        "Completed 90+ hours in AMS behavioral modeling and verification, including Verilog-A PLL modeling and SPICE-based analysis workflows.",
+    },
+    {
       role: "Research Intern",
       org: "Egypt Scholars Advanced Labs Program",
       period: "Jul 2025 - Sep 2025",
@@ -312,6 +319,20 @@ export default async function AboutPage() {
       period: "Jul 2023 - Aug 2025",
       summary:
         "Worked on FBG-based sensing and photonic modeling for biomedical and communications contexts across both analysis and implementation tracks.",
+    },
+    {
+      role: "Analog-to-Digital Converter Design & Verification Trainee",
+      org: "Siemens EDA",
+      period: "Feb 2025",
+      summary:
+        "Designed and verified an 8-bit SAR ADC in single-ended and fully differential configurations with FFT-based performance evaluation.",
+    },
+    {
+      role: "CMOS Analog Integrated Circuit Design Trainee",
+      org: "Information Technology Institute (ITI)",
+      period: "Jun 2024 - Sep 2024",
+      summary:
+        "Completed 180+ hours in CMOS analog IC design, including OTA design and verification flows using GF180-based toolchains.",
     },
   ]
 
