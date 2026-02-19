@@ -303,11 +303,11 @@ export default async function AboutPage() {
     subs: [
       {
         name: "Solid-State Circuits Society (SSCS)",
-        detail: "IEEE Society Membership | 2025 - Present",
+        detail: "Student Member | 2025 - Present",
       },
       {
         name: "Photonics Society",
-        detail: "IEEE Society Membership | 2025 - Present",
+        detail: "Student Member | 2025 - Present",
       },
     ],
   }
