@@ -96,17 +96,17 @@ export default function VenturesPage() {
               <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
                 <div className="mb-4 flex items-center gap-3">
                   {startup.logo ? (
-                    <div className="inline-flex h-16 w-16 items-center justify-center">
+                    <div className="inline-flex h-16 min-w-36 items-center justify-center rounded-lg border border-accent/35 bg-accent/10 px-4 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.65)]">
                       <Image
                         src={startup.logo}
                         alt={`${startup.name} logo`}
-                        width={56}
-                        height={56}
-                        className="h-full w-full object-contain"
+                        width={156}
+                        height={44}
+                        className="h-10 w-auto object-contain"
                       />
                     </div>
                   ) : (
-                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60">
+                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg border border-accent/35 bg-accent/10 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.65)]">
                       <Rocket className="w-6 h-6 text-accent" />
                     </div>
                   )}

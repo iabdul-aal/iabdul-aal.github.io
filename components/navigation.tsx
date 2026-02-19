@@ -34,14 +34,16 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-foreground hover:text-accent transition-colors">
-            <Image
-              src="/logo.png"
-              alt="Islam Abdulaal logo"
-              width={42}
-              height={42}
-              className="inline-block h-8 w-auto align-middle"
-            />
+          <Link href="/" className="flex items-center gap-2.5 text-foreground hover:text-accent transition-colors">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/75 bg-card/70 shadow-[0_8px_20px_-18px_rgba(0,0,0,0.75)]">
+              <Image
+                src="/logo.png"
+                alt="Islam Abdulaal logo"
+                width={42}
+                height={42}
+                className="inline-block h-8 w-auto align-middle"
+              />
+            </span>
             <div className="hidden md:block">
               <p className="text-sm font-semibold leading-none">Islam I. Abdulaal</p>
               <p className="text-[11px] text-muted-foreground leading-none mt-1">ECE Undergraduate</p>
