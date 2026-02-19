@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
 import { MessageCircle } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
@@ -36,7 +35,7 @@ export default function MentorshipPage() {
       <PageHero
         kicker="Mentorship"
         title="Mentorship and Guidance"
-        description="Structured support for students and early researchers who need clarity on direction, methods, and execution quality."
+        description="Structured support for students and early researchers who need clarity on direction and execution."
         actions={[
           { label: "Use Contact Page", href: "/contact" },
           { label: "Ask via Telegram Bot", href: socialLinks.telegramBot, external: true, variant: "outline" },
@@ -60,24 +59,15 @@ export default function MentorshipPage() {
 
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold mb-4">Quick Questions</h2>
-            <p className="text-lg text-muted-foreground">
-              For short questions, you can use the contact page, LinkedIn, or the Telegram bot pathway.
-            </p>
-          </div>
-
           <div className="p-8 rounded-xl border border-border bg-background">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <MessageCircle className="w-8 h-8 text-accent" />
-              <h3 className="text-2xl font-bold">Direct Message Options</h3>
+            <div className="flex items-center gap-3 mb-5">
+              <MessageCircle className="w-6 h-6 text-accent" />
+              <h3 className="text-xl font-bold">Direct Questions</h3>
             </div>
-            <p className="text-center text-muted-foreground mb-6">
-              For concise technical questions, send a short context summary with your current objective and challenge.
-              You can submit privately via Telegram bot, and I reply on the Telegram channel without exposing your
-              identity.
+            <p className="text-muted-foreground mb-6">
+              For concise technical questions, send a short context summary and your current objective.
             </p>
-            <div className="flex justify-center gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap">
               <Button asChild className="w-full sm:w-auto">
                 <Link href="/contact">Use Contact Page</Link>
               </Button>
@@ -100,16 +90,6 @@ export default function MentorshipPage() {
           </div>
         </div>
       </section>
-
-      <JourneySection
-        title="Build Your Next Learning Step"
-        description="Continue with structured materials, direct contact, or talks and workshops based on your current stage."
-        actions={[
-          { href: "/materials", label: "Open Learning Materials" },
-          { href: "/contact", label: "Send a Mentorship Request", variant: "outline" },
-          { href: "/talks", label: "Browse Talks", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

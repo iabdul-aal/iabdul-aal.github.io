@@ -1,4 +1,3 @@
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
 import { Users } from "lucide-react"
 
@@ -81,16 +80,6 @@ export default function NonProfitPage() {
           </div>
         </div>
       </section>
-
-      <JourneySection
-        title="Continue From Community Impact"
-        description="You can review the full ventures map, startup track, or open a direct collaboration discussion."
-        actions={[
-          { href: "/ventures", label: "Back to Ventures" },
-          { href: "/ventures/startups", label: "See Startup Track", variant: "outline" },
-          { href: "/contact", label: "Discuss Collaboration", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

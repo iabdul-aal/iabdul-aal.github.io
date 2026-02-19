@@ -1,8 +1,5 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
-import { ArrowRight, Check } from "lucide-react"
+import { Check } from "lucide-react"
 
 export const metadata = {
   title: "Services",
@@ -29,19 +26,6 @@ export default function ServicesPage() {
     },
   ]
 
-  const mentorship = {
-    title: "Mentorship",
-    badge: "Free Service",
-    description:
-      "1-on-1 guidance for students and early researchers in integrated photonics and research workflows.",
-    scope: [
-      "Research direction and milestone planning",
-      "Technical review of simulation approach",
-      "Feedback on project communication and structure",
-      "Session scheduling through mentorship page",
-    ],
-  }
-
   const process = [
     {
       step: "1",
@@ -65,7 +49,7 @@ export default function ServicesPage() {
       <PageHero
         kicker="Services"
         title="Collaboration Support"
-        description="If you need focused support in photonics modeling, research workflow design, or optimization planning, start with one of these service tracks."
+        description="Focused support for photonics modeling, research workflow design, and physics-informed optimization."
         actions={[
           { label: "Start a Discussion", href: "/contact" },
           { label: "Review Mentorship", href: "/mentorship", variant: "outline" },
@@ -76,7 +60,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-3">Service Tracks</h2>
           <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
-            Each track is scoped around deliverables and constraints, so it is easy to decide whether the collaboration is a fit.
+            Each track is scoped around practical deliverables and clear constraints.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {serviceTracks.map((track) => (
@@ -94,32 +78,6 @@ export default function ServicesPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-background border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4 mb-6">
-            <h2 className="text-3xl font-bold">{mentorship.title}</h2>
-            <span className="text-xs text-accent bg-accent/10 rounded-full px-3 py-1.5">{mentorship.badge}</span>
-          </div>
-          <p className="text-sm text-muted-foreground mb-6 max-w-[72ch]">
-            If you are early in your research journey, mentorship is the fastest low-friction path to get direction and feedback.
-          </p>
-          <article className="p-8 rounded-xl border border-border bg-background">
-            <p className="text-sm text-muted-foreground mb-6 max-w-3xl">{mentorship.description}</p>
-            <div className="space-y-3 mb-6">
-              {mentorship.scope.map((item) => (
-                <p key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </p>
-              ))}
-            </div>
-            <Link href="/mentorship" className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80">
-              Book mentorship <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </article>
         </div>
       </section>
 
@@ -151,16 +109,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      <JourneySection
-        title="Check Fit Before Starting"
-        description="Use contact to share your context and timeline, then we can confirm whether the scope is a good fit."
-        actions={[
-          { href: "/contact", label: "Start a Project Discussion" },
-          { href: "/about", label: "Review Full Profile", variant: "outline" },
-          { href: "/ventures", label: "See Venture Tracks", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

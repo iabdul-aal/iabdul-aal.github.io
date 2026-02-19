@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
 import { ArrowRight, ArrowUpRight, FlaskConical, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
@@ -35,7 +34,6 @@ export default function VenturesPage() {
       icon: FlaskConical,
       href: "/services",
       cta: "Explore Collaboration Formats",
-      stage: "Open for pilot scoping",
     },
     {
       title: "Community and Non-Profit Initiatives",
@@ -44,7 +42,6 @@ export default function VenturesPage() {
       icon: Users2,
       href: "/ventures/non-profit",
       cta: "See Initiative Background",
-      stage: "Founded programs and chapter work",
     },
   ]
 
@@ -81,8 +78,8 @@ export default function VenturesPage() {
     <main className="bg-background text-foreground">
       <PageHero
         kicker="Ventures"
-        title="Venture Tracks and Initiatives"
-        description="I work across startup exploration, research-to-industry pilots, and student-facing technical initiatives."
+        title="Ventures and Initiatives"
+        description="A concise view of startup work, pilot directions, and founded student initiatives."
         actions={[
           { label: "Discuss Collaboration", href: "/contact" },
           { label: "Explore Services", href: "/services", variant: "outline" },
@@ -91,11 +88,9 @@ export default function VenturesPage() {
 
       <section className="py-16 md:py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Startups I Founded or Worked With</h2>
-          <p className="text-sm text-muted-foreground mb-8 max-w-[72ch]">
-            Startup ventures where I contribute through founding, technical development, or active project work.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Startup Work</h2>
+          <p className="text-sm text-muted-foreground mb-8 max-w-[72ch]">Current startup activity in one place.</p>
+          <div className="grid grid-cols-1 gap-6">
             {startupPortfolio.map((startup) => (
               <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
                 <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 mb-4 p-1">
@@ -137,7 +132,7 @@ export default function VenturesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">Other Venture Directions</h2>
           <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
-            Additional tracks where I test ideas through pilots, programs, and practical execution models.
+            Additional tracks I use to test ideas in practical settings.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {ventureTracks.map((track) => {
@@ -150,7 +145,6 @@ export default function VenturesPage() {
                   <Icon className="w-7 h-7 text-accent mb-5" />
                   <h3 className="text-xl font-bold text-foreground mb-3">{track.title}</h3>
                   <p className="text-muted-foreground text-sm mb-6 flex-grow">{track.description}</p>
-                  <p className="text-xs text-accent mb-5">{track.stage}</p>
                   <Link href={track.href} className="text-sm text-accent hover:text-accent/80 inline-flex items-center gap-2">
                     {track.cta}
                     <ArrowRight className="w-3 h-3" />
@@ -191,16 +185,6 @@ export default function VenturesPage() {
           </div>
         </div>
       </section>
-
-      <JourneySection
-        title="Continue the Venture Track"
-        description="Move into startup concepts, community initiatives, or service-based collaboration formats."
-        actions={[
-          { href: "/ventures/startups", label: "Open Startup Track" },
-          { href: "/ventures/non-profit", label: "View Community Initiatives", variant: "outline" },
-          { href: "/services", label: "Map to Services", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

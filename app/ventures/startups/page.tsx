@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
 import { ArrowUpRight, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -7,7 +6,7 @@ import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
   title: "Startup Track",
-  description: "Exploratory startup concepts and early venture hypotheses related to my current technical work.",
+  description: "Current startup work and early venture concepts related to my technical background.",
 }
 
 export default function StartupsPage() {
@@ -30,13 +29,6 @@ export default function StartupsPage() {
         "A focused service model applying PINN-driven optimization to shorten photonic design iteration loops.",
       milestones: ["Workflow prototyping", "Benchmark case studies", "Documentation pipeline"],
     },
-    {
-      title: "Education-to-Research Transition Platform",
-      status: "Scoping",
-      summary:
-        "A resource platform to help students move from coursework to publication-ready photonics research projects.",
-      milestones: ["Curriculum framework", "Mentorship track design", "Community onboarding"],
-    },
   ]
 
   return (
@@ -44,7 +36,7 @@ export default function StartupsPage() {
       <PageHero
         kicker="Ventures"
         title="Startup Track"
-        description="Startups I founded or worked with, plus concepts I am currently validating for practical relevance."
+        description="Startups I founded or worked with, plus early concepts I am validating."
         actions={[
           { label: "Back to Ventures", href: "/ventures", variant: "outline" },
           { label: "Discuss Opportunities", href: "/contact", variant: "ghost" },
@@ -98,16 +90,6 @@ export default function StartupsPage() {
           ))}
         </div>
       </section>
-
-      <JourneySection
-        title="Discuss a Startup Direction"
-        description="Continue with collaboration scoping, service alignment, or review of the broader venture pages."
-        actions={[
-          { href: "/contact", label: "Discuss Opportunities" },
-          { href: "/services", label: "Match to Service Tracks", variant: "outline" },
-          { href: "/ventures", label: "Back to Ventures", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

@@ -349,13 +349,6 @@ export default async function AboutPage() {
     ],
   }
 
-  const currentPriorities = [
-    "Physics-informed inverse design for compact integrated photonic components.",
-    "Multiphysics workflows that connect device behavior to system-level constraints.",
-    "Optimization strategies for quantum photonics building blocks and design robustness.",
-    "Reproducible research pipelines for simulation, data generation, and validation.",
-  ]
-
   const technicalStack = [
     {
       label: "Photonics & Simulation",
@@ -382,17 +375,6 @@ export default async function AboutPage() {
 
   const profileParagraphs = fallbackProfileParagraphs
   const orcidKeywords = (orcidProfile?.profile?.keywords ?? []).slice(0, 6)
-  const quickLinks = [
-    { href: "#profile", label: "Profile" },
-    { href: "#research-focus", label: "Research Focus" },
-    { href: "#education", label: "Education" },
-    { href: "#experience", label: "Experience" },
-    { href: "#publications", label: "Publications" },
-    { href: "#awards", label: "Awards" },
-    { href: "#memberships", label: "Memberships" },
-    { href: "#ventures", label: "Ventures" },
-  ]
-
   const educationEntries = (orcidProfile?.educations && orcidProfile.educations.length > 0)
     ? orcidProfile.educations.map((item) => ({
         degree: item.degree ?? "Education",
@@ -502,20 +484,6 @@ export default async function AboutPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="pt-2">
-                  <p className="text-sm font-semibold text-foreground mb-2">Quick Navigation</p>
-                  <div className="flex flex-wrap gap-2">
-                    {quickLinks.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        className="px-2.5 py-1 rounded-md border border-border text-xs text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild className="w-full sm:w-auto">
@@ -544,16 +512,6 @@ export default async function AboutPage() {
                 {profileParagraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
-              </div>
-              <div className="mt-5 p-5 rounded-xl border border-border bg-card/60">
-                <p className="text-sm font-semibold mb-3">Current Priorities</p>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  {currentPriorities.map((item) => (
-                    <p key={item} className="px-3 py-2 rounded-md border border-border/60 bg-background/40">
-                      {item}
-                    </p>
-                  ))}
-                </div>
               </div>
             </section>
 
@@ -670,7 +628,7 @@ export default async function AboutPage() {
             <section id="awards" className="scroll-mt-24">
               <h3 className="text-2xl font-bold mb-4">Awards</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Selected recognitions and applications relevant to my academic and research track.
+                Selected recognitions and applications.
               </p>
               <div className="space-y-4">
                 {awards.map((item) => (

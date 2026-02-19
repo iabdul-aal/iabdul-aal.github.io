@@ -16,13 +16,12 @@ type JourneySectionProps = {
 
 export function JourneySection({ title, description, actions }: JourneySectionProps) {
   return (
-    <section className="py-14 border-t border-border/80 bg-background">
+    <section className="py-10 border-t border-border/80 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-5 sm:p-7 rounded-xl border border-border bg-card/80 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <div className="p-5 rounded-xl border border-border bg-card/80 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Next Step</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-balance">{title}</h2>
-            <p className="text-sm sm:text-base text-muted-foreground mt-2 leading-relaxed max-w-[70ch]">{description}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-balance">{title}</h2>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed max-w-[68ch]">{description}</p>
           </div>
 
           <div className="flex flex-wrap gap-3">

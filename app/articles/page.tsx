@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button"
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
 import { ArticlesStack } from "@/components/articles-stack"
 import { socialLinks } from "@/lib/social-links"
@@ -54,26 +52,12 @@ export default async function ArticlesPage() {
       <PageHero
         kicker="Articles"
         title="Articles and Writing"
-        description="I write about research, engineering execution, entrepreneurship, and practical life lessons from real projects."
+        description="I write about research, engineering execution, entrepreneurship, and practical lessons from real projects."
         actions={[
           { label: "Visit Medium", href: socialLinks.medium, external: true },
           { label: "Open Materials", href: "/materials", variant: "outline" },
         ]}
       />
-
-      <section className="py-20 bg-card border-t border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Follow New Writing</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            I share new posts on technical ideas, venture-building lessons, and personal growth reflections.
-          </p>
-          <Button asChild size="lg">
-            <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
-              Follow on Medium
-            </a>
-          </Button>
-        </div>
-      </section>
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,16 +71,6 @@ export default async function ArticlesPage() {
           <ArticlesStack articles={articles} />
         </div>
       </section>
-
-      <JourneySection
-        title="Continue Through the Knowledge Track"
-        description="After reading articles, move to structured materials, workshops, or direct discussion."
-        actions={[
-          { href: "/materials", label: "Open Materials" },
-          { href: "/talks", label: "Browse Talks", variant: "outline" },
-          { href: "/contact", label: "Discuss a Topic", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

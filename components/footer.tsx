@@ -31,8 +31,7 @@ export function Footer() {
           <section>
             <h2 className="font-semibold text-foreground mb-4">Website Overview</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              This website documents my current research, venture, and technical work. If you want to collaborate,
-              contact is the fastest path.
+              I use this website to share my current research, ventures, and public work.
             </p>
             <div className="mt-5">
               <Button asChild className="w-full sm:w-auto">

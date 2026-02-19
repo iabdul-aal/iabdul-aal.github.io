@@ -1,6 +1,4 @@
-import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
-import { BookOpenText } from "lucide-react"
 import { MaterialsStack } from "@/components/materials-stack"
 import { getMaterialsOverview } from "@/lib/materials-library"
 
@@ -32,16 +30,6 @@ export default async function MaterialsPage() {
         ]}
       />
 
-      <section className="py-20 bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <BookOpenText className="w-10 h-10 text-accent mx-auto mb-4" />
-          <h2 className="text-4xl font-bold text-foreground mb-6">Built for Practical Learning</h2>
-          <p className="text-lg text-muted-foreground mb-0">
-            These resources are organized for fast review, deeper study, and smoother project execution.
-          </p>
-        </div>
-      </section>
-
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
@@ -53,16 +41,6 @@ export default async function MaterialsPage() {
           <MaterialsStack items={collectionCards} />
         </div>
       </section>
-
-      <JourneySection
-        title="Turn Learning Into Action"
-        description="After reviewing materials, continue with mentorship support, topic requests, or article deep-dives."
-        actions={[
-          { href: "/mentorship", label: "Ask for Mentorship" },
-          { href: "/contact", label: "Request Specific Material", variant: "outline" },
-          { href: "/articles", label: "Read Related Articles", variant: "ghost" },
-        ]}
-      />
     </main>
   )
 }

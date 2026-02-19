@@ -47,27 +47,6 @@ export default async function Home() {
     },
   ]
 
-  const collaborationPaths = [
-    {
-      title: "Technical Services",
-      description: "Support for photonic device design, simulation strategy, and optimization-led engineering execution.",
-      href: "/services",
-      cta: "Review Service Tracks",
-    },
-    {
-      title: "Project Collaboration",
-      description: "For labs, teams, and founders who need focused technical contribution on active workstreams.",
-      href: "/contact",
-      cta: "Start a Collaboration Discussion",
-    },
-    {
-      title: "Mentorship and Guidance",
-      description: "Structured 1-on-1 support for students and early builders who want faster, clearer progress.",
-      href: "/mentorship",
-      cta: "Open Mentorship Path",
-    },
-  ]
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -99,7 +78,7 @@ export default async function Home() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs md:text-sm text-muted-foreground animate-fade-up">
               <Microscope className="w-4 h-4 text-accent" />
-              ECE Undergraduate | Integrated Photonics | Alexandria University
+              ECE Undergraduate | Research Intern | Alexandria University
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mt-6 animate-fade-up-delay">
@@ -107,23 +86,17 @@ export default async function Home() {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
-              I am building my profile at the intersection of integrated photonics, practical engineering, and venture
-              execution. This website is organized to help you quickly find my current work, public output, and
-              collaboration paths.
+              I work on integrated photonics and research-focused engineering workflows. This website summarizes my
+              current work, public outputs, and collaboration options.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link href="/services">Explore Services</Link>
+                <Link href="/about">View Profile</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
                 <Link href="/contact">
-                  Start Collaboration <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="ghost" className="w-full sm:w-auto">
-                <Link href="/about">
-                  View Current Profile
+                  Contact <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
             </div>
@@ -143,9 +116,9 @@ export default async function Home() {
       <section className="py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 mb-8">
-            <h2 className="font-display text-3xl md:text-4xl">Research Focus Areas</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Current Focus</h2>
             <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
-              Explore full background
+              See details
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -166,49 +139,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="py-16 border-y border-border/70 bg-card/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h2 className="font-display text-3xl md:text-4xl">Choose Your Path</h2>
-            <p className="text-sm md:text-base text-muted-foreground mt-3 max-w-3xl">
-              If you are visiting for services, collaboration, or mentorship, start with the path that matches your
-              goal.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {collaborationPaths.map((path) => (
-              <article key={path.title} className="rounded-xl border border-border bg-card/75 p-6 hover:border-accent transition-colors">
-                <h3 className="text-lg font-semibold mb-2">{path.title}</h3>
-                <p className="text-sm text-muted-foreground mb-5">{path.description}</p>
-                <Link href={path.href} className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors">
-                  {path.cta}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild className="w-full sm:w-auto">
-              <Link href="/services">Get Started with Services</Link>
-            </Button>
-            <Button asChild variant="outline" className="w-full sm:w-auto">
-              <Link href="/contact">
-                Discuss Your Project
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       <section id="highlights" className="py-16 border-y border-border/70 bg-card/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 mb-8">
-            <h2 className="font-display text-3xl md:text-4xl">Highlights</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Recent Highlights</h2>
             <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
-              View full profile
+              View profile
             </Link>
           </div>
           <HighlightsSlider items={highlights} />
