@@ -418,10 +418,10 @@ export default async function AboutPage() {
               </div>
               <h1 className="text-3xl font-bold mb-2">{personConfig.name}</h1>
               <p className="text-accent font-semibold mb-2">{personConfig.role}</p>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-muted-foreground mb-2">
                 {personConfig.location} | {personConfig.affiliation}
               </p>
-              <div className="mt-5 space-y-3">
+              <div className="space-y-3">
                 {orcidKeywords.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {orcidKeywords.map((keyword) => (
