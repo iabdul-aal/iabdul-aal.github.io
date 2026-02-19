@@ -245,10 +245,6 @@ export default async function AboutPage() {
       period: "Sep 2025 - Present",
       summary:
         "Contributing to optimization-driven integrated quantum photonics workflows with emphasis on model reliability and practical design iteration.",
-      highlights: [
-        "Build simulation-to-learning pipelines for parameter exploration and fast design screening.",
-        "Study trade-offs among optical performance, robustness, and computational cost.",
-      ],
     },
     {
       role: "Research Intern",
@@ -256,10 +252,6 @@ export default async function AboutPage() {
       period: "Jul 2025 - Sep 2025",
       summary:
         "Completed intensive research training in quantum photonics, including independent problem framing, simulation, and technical reporting.",
-      highlights: [
-        "Executed mentor-guided and self-directed technical tasks under research timelines.",
-        "Strengthened communication of assumptions, methods, and model limitations.",
-      ],
     },
     {
       role: "Research Intern",
@@ -267,10 +259,6 @@ export default async function AboutPage() {
       period: "Jul 2023 - Aug 2025",
       summary:
         "Worked on FBG-based sensing and photonic modeling for biomedical and communications contexts across both analysis and implementation tracks.",
-      highlights: [
-        "Modeled and analyzed FBG response under changing sensing conditions.",
-        "Developed reproducible workflows for simulation setup and result interpretation.",
-      ],
     },
   ]
 
@@ -281,10 +269,6 @@ export default async function AboutPage() {
       period: "Aug 2021 - Aug 2026",
       summary:
         "CGPA: 3.39/4.0 (Distinct with Honors). Thesis focus: integrated Si transceiver and waveguide-based Ge/Si PIN photodetector modeling and design.",
-      highlights: [
-        "Training emphasis in electromagnetics, communications, semiconductor devices, and signal processing.",
-        "Current thesis work combines device modeling with system-level photonic integration goals.",
-      ],
     },
   ]
 
@@ -364,15 +348,22 @@ export default async function AboutPage() {
         org: item.org ?? "",
         period: item.period ?? "",
         summary: item.summary ?? "",
-        highlights: [] as string[],
       }))
     : education
 
+  const orcidPrimaryMembership = orcidProfile?.memberships?.[0]
+  const orcidPrimaryMembershipName = (orcidPrimaryMembership?.organization ?? "").trim()
+  const orcidPrimaryMembershipDetail = (orcidPrimaryMembership?.detail ?? "").trim()
+  const shouldUseOrcidMembershipName =
+    orcidPrimaryMembershipName.length > 0 && orcidPrimaryMembershipName.toLowerCase() !== "ieee"
+  const shouldUseOrcidMembershipDetail =
+    orcidPrimaryMembershipDetail.length > 0 && orcidPrimaryMembershipDetail.toLowerCase() !== "member"
+
   const mainMembership =
-    orcidProfile?.memberships && orcidProfile.memberships.length > 0
+    orcidPrimaryMembership
       ? {
-          name: orcidProfile.memberships[0].organization ?? memberships.main.name,
-          detail: orcidProfile.memberships[0].detail ?? memberships.main.detail,
+          name: shouldUseOrcidMembershipName ? orcidPrimaryMembershipName : memberships.main.name,
+          detail: shouldUseOrcidMembershipDetail ? orcidPrimaryMembershipDetail : memberships.main.detail,
         }
       : memberships.main
 
@@ -453,11 +444,13 @@ export default async function AboutPage() {
                         rel="noopener noreferrer"
                         className="flex items-center justify-between gap-3 text-accent hover:text-accent/80 transition-colors"
                       >
-                        <span className="inline-flex items-center gap-1.5">
+                        <span className="inline-flex flex-1 items-center gap-1.5 pr-2 break-words">
                           {profile.label}
                           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </span>
-                        <LogoMark slot={profile.logo} label={profile.logoLabel} size="sm" />
+                        <span className="shrink-0">
+                          <LogoMark slot={profile.logo} label={profile.logoLabel} size="sm" />
+                        </span>
                       </a>
                     </li>
                   ))}
@@ -546,15 +539,6 @@ export default async function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     {item.summary && <p className="text-sm text-muted-foreground">{item.summary}</p>}
-                    {item.highlights.length > 0 && (
-                      <div className="mt-3 space-y-2 text-sm text-muted-foreground">
-                        {item.highlights.map((point) => (
-                          <p key={point} className="pl-3 border-l-2 border-border/70">
-                            {point}
-                          </p>
-                        ))}
-                      </div>
-                    )}
                   </article>
                 ))}
               </div>
@@ -576,13 +560,6 @@ export default async function AboutPage() {
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.summary}</p>
-                    <div className="mt-3 space-y-2 text-sm text-muted-foreground">
-                      {item.highlights.map((point) => (
-                        <p key={point} className="pl-3 border-l-2 border-border/70">
-                          {point}
-                        </p>
-                      ))}
-                    </div>
                   </article>
                 ))}
               </div>

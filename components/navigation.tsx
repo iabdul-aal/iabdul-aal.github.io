@@ -39,7 +39,7 @@ export function Navigation() {
             />
             <div className="hidden md:block">
               <p className="text-sm font-semibold leading-none">Islam I. Abdulaal</p>
-              <p className="text-[11px] text-muted-foreground leading-none mt-1">ECE Undergraduate Researcher</p>
+              <p className="text-[11px] text-muted-foreground leading-none mt-1">ECE Undergraduate | Research Intern</p>
             </div>
           </Link>
 
