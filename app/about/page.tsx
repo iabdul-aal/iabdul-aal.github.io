@@ -105,23 +105,6 @@ async function loadOrcidProfile(): Promise<OrcidProfile | null> {
   }
 }
 
-function formatSyncedDate(rawValue?: string): string | null {
-  if (!rawValue) {
-    return null
-  }
-
-  const parsed = new Date(rawValue)
-  if (Number.isNaN(parsed.getTime())) {
-    return null
-  }
-
-  return parsed.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  })
-}
-
 function biographyPreview(biography: string | undefined, fallback: string[]): string[] {
   if (!biography) {
     return fallback
@@ -142,7 +125,6 @@ function biographyPreview(biography: string | undefined, fallback: string[]): st
 export default async function AboutPage() {
   const publications = await loadPublications()
   const orcidProfile = await loadOrcidProfile()
-  const syncedDate = formatSyncedDate(orcidProfile?.fetchedAt)
 
   const focusAreas = [
     {
@@ -297,12 +279,21 @@ export default async function AboutPage() {
         }
       : memberships.main
 
+  const summaryStats = [
+    { label: "Publications", value: String(publications.length) },
+    { label: "Focus Areas", value: String(focusAreas.length) },
+    { label: "Awards", value: String(awards.length) },
+    { label: "Memberships", value: String(1 + memberships.subs.length) },
+  ]
+
+  const sectionCardClass = "p-6 sm:p-7 rounded-2xl border border-border bg-card/40"
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-20 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 w-full max-w-[300px]">
+            <div className="w-full max-w-[340px] mx-auto lg:max-w-[300px] lg:mx-0 lg:sticky lg:top-24">
               <div className="relative w-full aspect-square bg-card rounded-xl border border-border overflow-hidden mb-6">
                 <Image
                   src="/personal-pic.png"
@@ -332,7 +323,7 @@ export default async function AboutPage() {
                 )}
                 <p className="text-sm font-semibold text-foreground">Academic Profiles</p>
                 <ul className="text-sm border border-border rounded-lg divide-y divide-border">
-                  <li className="py-2.5 px-3">
+                  <li className="py-2.5 px-3 hover:bg-card/60 transition-colors">
                     <a
                       href={socialLinks.orcid}
                       target="_blank"
@@ -343,7 +334,7 @@ export default async function AboutPage() {
                       <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </a>
                   </li>
-                  <li className="py-2.5 px-3">
+                  <li className="py-2.5 px-3 hover:bg-card/60 transition-colors">
                     <a
                       href={socialLinks.scholar}
                       target="_blank"
@@ -354,7 +345,7 @@ export default async function AboutPage() {
                       <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </a>
                   </li>
-                  <li className="py-2.5 px-3">
+                  <li className="py-2.5 px-3 hover:bg-card/60 transition-colors">
                     <a
                       href="https://www.webofscience.com/wos/author/record/OLP-9224-2025"
                       target="_blank"
@@ -368,16 +359,16 @@ export default async function AboutPage() {
                 </ul>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild>
+                <Button asChild className="w-full sm:w-auto">
                   <Link href="/contact">Contact</Link>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                   <a href="/cv.pdf" download>
                     <Download className="w-4 h-4 mr-2" />
                     CV
                   </a>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                   <a href={socialLinks.linktree} target="_blank" rel="noopener noreferrer">
                     More Profiles
                     <ArrowUpRight className="w-4 h-4 ml-2" />
@@ -387,11 +378,19 @@ export default async function AboutPage() {
             </div>
           </aside>
 
-          <div className="lg:col-span-2 space-y-10">
-            <section>
+          <div className="lg:col-span-2 space-y-6">
+            <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {summaryStats.map((item) => (
+                <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+                  <p className="text-xl font-bold leading-none">{item.value}</p>
+                  <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+                </article>
+              ))}
+            </section>
+
+            <section id="profile" className={sectionCardClass}>
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
-              {syncedDate && <p className="text-xs text-muted-foreground mb-4">Auto-synced from ORCID on {syncedDate}</p>}
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
                 {profileParagraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -408,7 +407,7 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section>
+            <section id="ventures" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Ventures</h2>
               <p className="text-sm text-muted-foreground">
                 I build and support venture tracks that translate research, hardware, and community initiatives into
@@ -424,7 +423,7 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section>
+            <section id="research-focus" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
               <p className="text-sm text-muted-foreground mb-4">
                 My research interests connect photonic device physics, inverse design, and robust computational
@@ -432,7 +431,7 @@ export default async function AboutPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {focusAreas.map((item) => (
-                  <article key={item.title} className="p-5 rounded-xl border border-border bg-card/70">
+                  <article key={item.title} className="p-5 rounded-xl border border-border bg-background/70">
                     <h3 className="font-semibold mb-2">{item.title}</h3>
                     <p className="text-sm text-muted-foreground">{item.desc}</p>
                   </article>
@@ -440,7 +439,7 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section>
+            <section id="education" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Education</h2>
               <div className="space-y-6">
                 {educationEntries.map((item) => (
@@ -467,7 +466,7 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section>
+            <section id="experience" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Experience</h2>
               <div className="space-y-6">
                 {experience.map((item) => (
