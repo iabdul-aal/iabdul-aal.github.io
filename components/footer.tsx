@@ -57,7 +57,7 @@ export function Footer() {
 
           <section>
             <h2 className="font-semibold text-foreground mb-4">Connect</h2>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-wrap items-center gap-3">
               {connectLinks.map((item) => {
                 const Icon = item.icon
                 return (
@@ -66,12 +66,11 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-3 text-xs text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
                     aria-label={item.name}
                     title={item.name}
                   >
                     <Icon className="w-5 h-5" />
-                    <span>{item.name}</span>
                   </a>
                 )
               })}
