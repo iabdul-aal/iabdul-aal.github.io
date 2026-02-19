@@ -766,10 +766,15 @@ export default async function AboutPage() {
                                 {membershipDisplayName}
                               </p>
                               <p className="text-sm text-muted-foreground mt-1">{itemDetail.role}</p>
+                              {itemDetail.period && (
+                                <p className="mt-1 text-sm text-muted-foreground sm:hidden">{itemDetail.period}</p>
+                              )}
                             </div>
                           </div>
                           {itemDetail.period && (
-                            <p className="text-sm text-muted-foreground whitespace-nowrap text-left sm:text-right">{itemDetail.period}</p>
+                            <p className="hidden text-sm text-muted-foreground whitespace-nowrap sm:block sm:text-right">
+                              {itemDetail.period}
+                            </p>
                           )}
                         </div>
                       </article>
