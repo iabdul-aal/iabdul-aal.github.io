@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button"
 import { PageHero } from "@/components/page-hero"
-import { CalendarDays, FileText, Mail, MapPin, Phone } from "lucide-react"
+import { Mail, MapPin, Phone } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 import { ContactEmailForm } from "@/components/contact-email-form"
 
@@ -80,35 +79,7 @@ export default function ContactPage() {
             })}
           </div>
 
-          <div className="p-8 rounded-xl border border-border bg-card">
-            <h2 className="text-3xl font-bold mb-4">Quick Actions</h2>
-            <p className="text-muted-foreground mb-6">
-              Use direct actions for faster scheduling and clearer email intake.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg">
-                <a href="#meeting-booking">
-                  <CalendarDays className="w-5 h-5 mr-2" />
-                  Book Meeting Calendar
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#email-form-section">
-                  <FileText className="w-5 h-5 mr-2" />
-                  Open Email Form
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href={socialLinks.whatsapp} target="_blank" rel="noopener noreferrer">
-                  <Phone className="w-5 h-5 mr-2" />
-                  WhatsApp
-                </a>
-              </Button>
-            </div>
-            <p className="text-xs text-muted-foreground mt-6">Typical response window: 24-72 hours.</p>
-          </div>
-
-          <div className="mt-[30mm] grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <div className="mt-10 grid grid-cols-1 xl:grid-cols-2 gap-8">
             <article id="meeting-booking" className="p-8 rounded-xl border border-border bg-card">
               <h2 className="text-3xl font-bold mb-3">Meeting Booking Calendar</h2>
               <p className="text-muted-foreground">
