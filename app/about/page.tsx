@@ -449,15 +449,10 @@ export default async function AboutPage() {
                         href={profile.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between gap-3 text-accent hover:text-accent/80 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
                       >
-                        <span className="inline-flex flex-1 items-center gap-1.5 pr-2 break-words">
-                          {profile.label}
-                          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                        </span>
-                        <span className="shrink-0">
-                          <LogoMark slot={profile.logo} label={profile.logoLabel} size="sm" />
-                        </span>
+                        {profile.label}
+                        <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                       </a>
                     </li>
                   ))}
