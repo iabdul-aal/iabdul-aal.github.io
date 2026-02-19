@@ -1,7 +1,7 @@
 ﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
 export const metadata = {
-  title: "Templates | Materials | Islam Abdulaal",
+  title: "Templates",
 }
 
 export default function TemplatesPage() {

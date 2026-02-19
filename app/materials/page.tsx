@@ -4,7 +4,7 @@ import { ArrowRight, BookOpenText, FileSpreadsheet, FileText, LayoutTemplate, Ro
 import { getMaterialsOverview, type MaterialCollectionSlug } from "@/lib/materials-library"
 
 export const metadata = {
-  title: "Materials | Islam Abdulaal",
+  title: "Materials",
   description: "Slides, summaries, roadmaps, and reusable templates for integrated photonics and research workflows.",
 }
 

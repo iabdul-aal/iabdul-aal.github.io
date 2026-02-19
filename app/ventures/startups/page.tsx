@@ -3,8 +3,8 @@ import { JourneySection } from "@/components/journey-section"
 import { ArrowLeft, Rocket } from "lucide-react"
 
 export const metadata = {
-  title: "Startups | Ventures | Islam Abdulaal",
-  description: "Startup initiatives and entrepreneurial ventures.",
+  title: "Startup Track",
+  description: "Startup concepts and early venture hypotheses connected to my research translation goals.",
 }
 
 export default function StartupsPage() {
@@ -46,9 +46,9 @@ export default function StartupsPage() {
             <ArrowLeft className="w-4 h-4" />
             Back to Ventures
           </Link>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance mb-6">Startups</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance mb-6">Startup Track</h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
-            Early-stage startup concepts derived from integrated photonics research and engineering workflows.
+            I develop these early-stage venture concepts to connect research insights with practical product direction.
           </p>
         </div>
 

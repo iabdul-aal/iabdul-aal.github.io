@@ -1,7 +1,7 @@
 ﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
 export const metadata = {
-  title: "Roadmaps | Materials | Islam Abdulaal",
+  title: "Roadmaps",
 }
 
 export default function RoadmapsPage() {

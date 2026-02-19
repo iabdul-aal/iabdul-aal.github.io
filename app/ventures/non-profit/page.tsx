@@ -1,9 +1,10 @@
 import Link from "next/link"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowLeft, Users } from "lucide-react"
 
 export const metadata = {
-  title: "Non-Profit Initiatives | Ventures | Islam Abdulaal",
-  description: "Non-profit initiatives and social impact projects.",
+  title: "Community Initiatives",
+  description: "Community and non-profit initiatives focused on technical education, access, and leadership.",
 }
 
 export default function NonProfitPage() {
@@ -50,7 +51,7 @@ export default function NonProfitPage() {
           </Link>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance mb-6">Non-Profit Initiatives</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            Education and community initiatives aimed at widening access to technical learning and research exposure.
+            I lead these initiatives to widen access to technical learning, research exposure, and structured engineering mentorship.
           </p>
         </div>
 
@@ -98,6 +99,16 @@ export default function NonProfitPage() {
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Continue From Community Impact"
+        description="You can review the full ventures map, startup track, or open a direct collaboration discussion."
+        actions={[
+          { href: "/ventures", label: "Back to Ventures" },
+          { href: "/ventures/startups", label: "See Startup Track", variant: "outline" },
+          { href: "/contact", label: "Discuss Collaboration", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }

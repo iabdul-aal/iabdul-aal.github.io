@@ -1,12 +1,13 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { JourneySection } from "@/components/journey-section"
 import { ArrowRight, FlaskConical, Rocket, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
-  title: "Ventures | Islam Abdulaal",
+  title: "Ventures",
   description:
-    "Startup and initiative tracks including HW Carnival, Si-Cast, Si-Clash, and AlexDuino across technical innovation and community impact.",
+    "Venture tracks across startup exploration, technical pilots, and community programs connected to my research direction.",
 }
 
 export default function VenturesPage() {
@@ -84,8 +85,8 @@ export default function VenturesPage() {
           <div className="space-y-6 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance">Ventures</h1>
             <p className="text-lg md:text-2xl text-muted-foreground">
-              Venture pathways that translate integrated photonics research into technical pilots, products, and social
-              impact.
+              I use ventures to translate research and engineering work into pilot-ready solutions, practical programs,
+              and measurable impact.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -157,6 +158,16 @@ export default function VenturesPage() {
           </div>
         </div>
       </section>
+
+      <JourneySection
+        title="Continue the Venture Track"
+        description="Move into startup concepts, community initiatives, or service-based collaboration formats."
+        actions={[
+          { href: "/ventures/startups", label: "Open Startup Track" },
+          { href: "/ventures/non-profit", label: "View Community Initiatives", variant: "outline" },
+          { href: "/services", label: "Map to Services", variant: "ghost" },
+        ]}
+      />
     </main>
   )
 }
