@@ -12,7 +12,7 @@ const ACCENT_LOGO_FILTER =
 export default function NonProfitPage() {
   const initiatives = [
     {
-      name: "IEEE SSCS Student Chapter",
+      name: "IEEE SSCS AUSC",
       role: "Chapter Chair",
       period: "Feb 2025 - Oct 2025",
       description:

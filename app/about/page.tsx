@@ -198,31 +198,36 @@ function LogoMark({
   label: string
   size?: LogoMarkSize
 }) {
-  const isWideLogo = Boolean(slot?.name && /siemens/i.test(slot.name))
+  const isSiemensLogo = Boolean(slot?.name && /siemens/i.test(slot.name))
   const containerClass =
     size === "sm"
-      ? isWideLogo
-        ? "h-11 min-w-28 px-1.5"
+      ? isSiemensLogo
+        ? "h-10 min-w-36 px-0"
         : "h-10 min-w-20 px-2.5"
-      : isWideLogo
-        ? "h-14 min-w-36 px-1.5"
+      : isSiemensLogo
+        ? "h-12 min-w-44 px-0"
         : "h-12 min-w-24 px-3"
   const imageWidth =
     size === "sm"
-      ? isWideLogo
-        ? 132
+      ? isSiemensLogo
+        ? 176
         : 88
-      : isWideLogo
-        ? 170
+      : isSiemensLogo
+        ? 208
         : 112
   const imageHeight =
     size === "sm"
-      ? isWideLogo
-        ? 34
+      ? isSiemensLogo
+        ? 28
         : 28
-      : isWideLogo
-        ? 44
+      : isSiemensLogo
+        ? 33
         : 36
+  const imageClassName = isSiemensLogo
+    ? size === "sm"
+      ? "h-[22px] w-auto object-contain"
+      : "h-[26px] w-auto object-contain"
+    : "max-h-full w-auto object-contain"
   const mark = (
     <span className={`inline-flex items-center justify-center ${containerClass}`}>
       {slot?.available ? (
@@ -231,7 +236,7 @@ function LogoMark({
           alt={`${slot.name} logo`}
           width={imageWidth}
           height={imageHeight}
-          className="max-h-full w-auto object-contain"
+          className={imageClassName}
           style={{ filter: ACCENT_LOGO_FILTER }}
         />
       ) : (
