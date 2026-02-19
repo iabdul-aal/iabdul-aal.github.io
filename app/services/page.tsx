@@ -120,7 +120,7 @@ export default function ServicesPage() {
                 <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
                   Free Service
                 </span>
-                <h2 className="text-3xl font-bold mt-3">Mentorship for Students and Early Researchers</h2>
+                <h2 className="text-3xl font-bold mt-3">Mentorship for Students</h2>
                 <p className="text-sm text-muted-foreground mt-3 max-w-[72ch]">
                   I offer free mentorship sessions for direction clarity, technical planning, and practical academic growth.
                 </p>

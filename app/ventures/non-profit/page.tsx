@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { PageHero } from "@/components/page-hero"
-import { Users } from "lucide-react"
 
 export const metadata = {
   title: "Community Initiatives",
@@ -52,10 +51,10 @@ export default function NonProfitPage() {
                 key={initiative.name}
                 className="p-6 md:p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors"
               >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                  <div>
+                <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+                  <div className="space-y-3">
                     {initiative.logoPath && (
-                      <span className="mb-3 inline-flex h-11 min-w-24 items-center justify-center rounded-md border border-border/70 bg-background/60 px-3">
+                      <span className="inline-flex h-11 min-w-24 items-center justify-center rounded-md border border-border/70 bg-background/60 px-3">
                         <Image
                           src={initiative.logoPath}
                           alt={`${initiative.name} logo`}
@@ -66,14 +65,16 @@ export default function NonProfitPage() {
                         />
                       </span>
                     )}
-                    <div className="inline-flex items-center gap-2 text-accent text-sm mb-2">
-                      <Users className="w-4 h-4" />
-                      Community Work
-                    </div>
-                    <h2 className="text-2xl font-bold text-foreground mb-1">{initiative.name}</h2>
-                    <p className="text-accent font-semibold mb-2">{initiative.role}</p>
-                    <p className="text-muted-foreground text-sm">{initiative.period}</p>
+                    <h2 className="text-2xl font-bold text-foreground leading-snug">{initiative.name}</h2>
                   </div>
+                  <span className="inline-flex items-center rounded-full bg-accent/12 px-3 py-1 text-xs font-semibold text-accent">
+                    Community Work
+                  </span>
+                </div>
+
+                <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-accent font-semibold">{initiative.role}</p>
+                  <p className="text-muted-foreground text-sm">{initiative.period}</p>
                 </div>
 
                 <p className="text-muted-foreground mb-6">{initiative.description}</p>

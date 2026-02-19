@@ -15,6 +15,8 @@ type GitHubApiRepo = {
   fork?: boolean
 }
 
+const EXCLUDED_REPOSITORY_NAMES = new Set(["iabdul-aal", "iabdul-aal.github.io"])
+
 export type GitHubRepository = {
   name: string
   url: string
@@ -55,8 +57,9 @@ function formatDate(value: string): string {
 function normalizeRepo(repo: GitHubApiRepo): GitHubRepository | null {
   const name = (repo.name ?? "").trim()
   const url = (repo.html_url ?? "").trim()
+  const normalizedName = name.toLowerCase()
 
-  if (!name || !url || repo.private) {
+  if (!name || !url || repo.private || EXCLUDED_REPOSITORY_NAMES.has(normalizedName)) {
     return null
   }
 

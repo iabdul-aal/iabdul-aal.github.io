@@ -198,12 +198,31 @@ function LogoMark({
   label: string
   size?: LogoMarkSize
 }) {
+  const isWideLogo = Boolean(slot?.name && /siemens/i.test(slot.name))
   const containerClass =
     size === "sm"
-      ? "h-10 min-w-20 px-2.5"
-      : "h-12 min-w-24 px-3"
-  const imageWidth = size === "sm" ? 88 : 112
-  const imageHeight = size === "sm" ? 28 : 36
+      ? isWideLogo
+        ? "h-11 min-w-28 px-1.5"
+        : "h-10 min-w-20 px-2.5"
+      : isWideLogo
+        ? "h-14 min-w-36 px-1.5"
+        : "h-12 min-w-24 px-3"
+  const imageWidth =
+    size === "sm"
+      ? isWideLogo
+        ? 132
+        : 88
+      : isWideLogo
+        ? 170
+        : 112
+  const imageHeight =
+    size === "sm"
+      ? isWideLogo
+        ? 34
+        : 28
+      : isWideLogo
+        ? 44
+        : 36
   const mark = (
     <span className={`inline-flex items-center justify-center ${containerClass}`}>
       {slot?.available ? (

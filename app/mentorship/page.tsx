@@ -7,7 +7,7 @@ import { socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "Mentorship",
   description:
-    "Mentorship support by Islam I. Abdulaal for students and early researchers in integrated photonics and research skills.",
+    "Mentorship support by Islam I. Abdulaal for students in integrated photonics and research skills.",
 }
 
 export default function MentorshipPage() {
@@ -35,7 +35,7 @@ export default function MentorshipPage() {
       <PageHero
         kicker="Mentorship"
         title="Mentorship and Guidance"
-        description="Structured support for students and early researchers who need clarity on direction and execution."
+        description="Structured support for students who need clarity on direction and execution."
         actions={[
           { label: "Use Contact Page", href: "/contact" },
           { label: "Ask via Telegram Bot", href: socialLinks.telegramBot, external: true, variant: "outline" },

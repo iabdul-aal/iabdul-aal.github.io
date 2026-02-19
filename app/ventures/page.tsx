@@ -48,6 +48,13 @@ export default function VenturesPage() {
 
   const foundedInitiatives = [
     {
+      name: "HW Carnival",
+      summary:
+        "Founded and chaired a student-led technical day at Bibliotheca Alexandrina in December 2025, covering the AlexDuino, Si-Clash, and Si-Cast tracks.",
+      status: "Founded",
+      href: socialLinks.hwCarnivalEvent,
+    },
+    {
       name: "Si-Cast",
       summary:
         "Founded technical content track focused on practical engineering communication and peer learning.",
