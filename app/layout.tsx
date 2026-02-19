@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Source_Serif_4, Space_Grotesk } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -17,6 +18,7 @@ const sourceSerif = Source_Serif_4({
 })
 
 const isDevelopment = process.env.NODE_ENV !== "production"
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_ID?.trim()
 
 const securityPolicy = {
   referrerPolicy: "strict-origin-when-cross-origin",
@@ -28,11 +30,11 @@ const securityPolicy = {
     "form-action 'self'",
     "frame-ancestors 'none'",
     "object-src 'none'",
-    `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""} https://assets.calendly.com`,
+    `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""} https://assets.calendly.com${googleAnalyticsId ? " https://www.googletagmanager.com" : ""}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "font-src 'self' data:",
-    "connect-src 'self' https://calendly.com https://assets.calendly.com",
+    `connect-src 'self' https://calendly.com https://assets.calendly.com${googleAnalyticsId ? " https://www.google-analytics.com https://region1.google-analytics.com" : ""}`,
     "frame-src 'self' https://calendly.com",
     "manifest-src 'self'",
     isDevelopment ? "" : "upgrade-insecure-requests",
@@ -169,6 +171,20 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        {googleAnalyticsId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${googleAnalyticsId}', { anonymize_ip: true });`}
+            </Script>
+          </>
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

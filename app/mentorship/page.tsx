@@ -67,7 +67,7 @@ export default function MentorshipPage() {
             <p className="text-muted-foreground mb-6">
               For concise technical questions, send a short context summary and your current objective.
             </p>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex flex-wrap justify-center gap-4">
               <Button asChild className="w-full sm:w-auto">
                 <Link href="/contact">Use Contact Page</Link>
               </Button>

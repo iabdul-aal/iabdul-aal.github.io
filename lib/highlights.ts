@@ -31,7 +31,7 @@ export const highlights: HighlightItem[] = [
     category: "Award",
     description:
       "Recognized through the SSCS Student Travel Grant Award (STGA) program for chapter and technical engagement.",
-    link: socialLinks.linkedin,
+    link: socialLinks.sscsStga,
   },
   {
     title: "arXiv Preprint Published",

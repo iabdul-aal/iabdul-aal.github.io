@@ -127,6 +127,12 @@ npm run dev
 npm run build
 ```
 
+## Environment Variables
+
+Create a local environment file from `.env.example` and set:
+
+- `NEXT_PUBLIC_GA_ID` (optional): Google Analytics 4 Measurement ID (for example `G-XXXXXXXXXX`).
+
 ## Python Dependencies
 
 Install script dependencies:

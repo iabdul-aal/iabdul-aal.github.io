@@ -78,7 +78,7 @@ export default async function Home() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs md:text-sm text-muted-foreground animate-fade-up">
               <Microscope className="w-4 h-4 text-accent" />
-              ECE Undergraduate | Research Intern | Alexandria University
+              Postgradute student
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mt-6 animate-fade-up-delay">
