@@ -198,6 +198,7 @@ export default async function AboutPage() {
   const ieeePhotonicsLogo = logoByName.get("IEEE Photonics Society")
   const alexandriaLogo = logoByName.get("Alexandria University")
   const astarImreLogo = logoByName.get("A*STAR IMRE")
+  const egyptScholarsLogo = logoByName.get("Egypt Scholars Advanced Labs Program")
   const orcidLogo = logoByName.get("ORCID")
   const scholarLogo = logoByName.get("Google Scholar")
   const webOfScienceLogo = logoByName.get("Web of Science")
@@ -392,6 +393,9 @@ export default async function AboutPage() {
     const lowerOrg = org.toLowerCase()
     if (lowerOrg.includes("alexandria")) {
       return alexandriaLogo
+    }
+    if (lowerOrg.includes("egypt scholars")) {
+      return egyptScholarsLogo
     }
     if (lowerOrg.includes("a*star") || lowerOrg.includes("imre")) {
       return astarImreLogo

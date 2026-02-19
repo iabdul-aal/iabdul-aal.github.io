@@ -37,6 +37,12 @@ export const logoSlots: LogoSlot[] = [
     group: "Affiliations",
   },
   {
+    name: "Egypt Scholars Advanced Labs Program",
+    filePath: "/logos/affiliations/Egypt Scholars.png",
+    website: "https://www.egyptscholars.org/",
+    group: "Affiliations",
+  },
+  {
     name: "ORCID",
     filePath: "/logos/platforms/orcid.svg",
     website: "https://orcid.org/",
