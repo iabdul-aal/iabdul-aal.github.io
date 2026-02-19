@@ -52,6 +52,8 @@ type LogoSlotWithStatus = {
 type LogoMarkSize = "sm" | "md"
 
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
+const ACCENT_LOGO_FILTER =
+  "brightness(0) saturate(100%) invert(68%) sepia(18%) saturate(744%) hue-rotate(352deg) brightness(94%) contrast(89%)"
 
 function extractArxivId(doi: string, url: string): string | undefined {
   const normalizedDoi = doi.trim().toLowerCase()
@@ -179,6 +181,7 @@ function LogoMark({
           width={imageWidth}
           height={imageHeight}
           className="max-h-full w-auto object-contain"
+          style={{ filter: ACCENT_LOGO_FILTER }}
         />
       ) : (
         <span className="text-[10px] font-medium tracking-wide text-muted-foreground">{buildLogoAcronym(label)}</span>

@@ -8,31 +8,31 @@
 export const logoSlots: LogoSlot[] = [
   {
     name: "IEEE",
-    filePath: "/logos/affiliations/ieee.svg",
+    filePath: "/logos/affiliations/IEEE.png",
     website: "https://www.ieee.org/",
     group: "Affiliations",
   },
   {
     name: "IEEE Solid-State Circuits Society",
-    filePath: "/logos/affiliations/ieee-sscs.svg",
+    filePath: "/logos/affiliations/SSCS.png",
     website: "https://sscs.ieee.org/",
     group: "Affiliations",
   },
   {
     name: "IEEE Photonics Society",
-    filePath: "/logos/affiliations/ieee-photonics.svg",
+    filePath: "/logos/affiliations/Photonics.webp",
     website: "https://www.photonicssociety.org/",
     group: "Affiliations",
   },
   {
     name: "Alexandria University",
-    filePath: "/logos/affiliations/alexandria-university.svg",
+    filePath: "/logos/affiliations/Alexandria Univeristy.png",
     website: "https://alexu.edu.eg/",
     group: "Affiliations",
   },
   {
     name: "A*STAR IMRE",
-    filePath: "/logos/affiliations/astar-imre.svg",
+    filePath: "/logos/affiliations/A Star.png",
     website: "https://www.a-star.edu.sg/imre",
     group: "Affiliations",
   },
