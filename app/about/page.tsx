@@ -49,6 +49,8 @@ type LogoSlotWithStatus = {
   available: boolean
 }
 
+type LogoMarkSize = "sm" | "md"
+
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
 
 function extractArxivId(doi: string, url: string): string | undefined {
@@ -136,10 +138,90 @@ async function loadLogoSlots(): Promise<LogoSlotWithStatus[]> {
   return resolved
 }
 
+function buildLogoAcronym(label: string): string {
+  const tokens = label
+    .replace(/[()]/g, " ")
+    .split(/[^A-Za-z0-9]+/)
+    .filter(Boolean)
+    .slice(0, 3)
+
+  if (tokens.length === 0) {
+    return "LOGO"
+  }
+
+  return tokens
+    .map((token) => token.charAt(0).toUpperCase())
+    .join("")
+}
+
+function LogoMark({
+  slot,
+  label,
+  size = "md",
+}: {
+  slot?: LogoSlotWithStatus
+  label: string
+  size?: LogoMarkSize
+}) {
+  const containerClass =
+    size === "sm"
+      ? "h-8 min-w-16 px-2"
+      : "h-10 min-w-20 px-2.5"
+  const imageWidth = size === "sm" ? 70 : 90
+  const imageHeight = size === "sm" ? 20 : 26
+
+  return (
+    <span className={`inline-flex items-center justify-center rounded-md border border-border/70 bg-card/80 ${containerClass}`}>
+      {slot?.available ? (
+        <Image
+          src={slot.filePath}
+          alt={`${slot.name} logo`}
+          width={imageWidth}
+          height={imageHeight}
+          className="max-h-full w-auto object-contain"
+        />
+      ) : (
+        <span className="text-[10px] font-medium tracking-wide text-muted-foreground">{buildLogoAcronym(label)}</span>
+      )}
+    </span>
+  )
+}
+
 export default async function AboutPage() {
   const publications = await loadPublications()
   const orcidProfile = await loadOrcidProfile()
   const loadedLogos = await loadLogoSlots()
+  const logoByName = new Map(loadedLogos.map((slot) => [slot.name, slot]))
+
+  const ieeeLogo = logoByName.get("IEEE")
+  const ieeeSscsLogo = logoByName.get("IEEE Solid-State Circuits Society")
+  const ieeePhotonicsLogo = logoByName.get("IEEE Photonics Society")
+  const alexandriaLogo = logoByName.get("Alexandria University")
+  const astarImreLogo = logoByName.get("A*STAR IMRE")
+  const orcidLogo = logoByName.get("ORCID")
+  const scholarLogo = logoByName.get("Google Scholar")
+  const webOfScienceLogo = logoByName.get("Web of Science")
+
+  const academicProfiles = [
+    {
+      label: `ORCID: ${personConfig.orcid}`,
+      href: socialLinks.orcid,
+      logo: orcidLogo,
+      logoLabel: "ORCID",
+    },
+    {
+      label: "Google Scholar Profile",
+      href: socialLinks.scholar,
+      logo: scholarLogo,
+      logoLabel: "Google Scholar",
+    },
+    {
+      label: `Researcher ID: ${contactInfo.webOfScienceResearcherID}`,
+      href: "https://www.webofscience.com/wos/author/record/OLP-9224-2025",
+      logo: webOfScienceLogo,
+      logoLabel: "Web of Science",
+    },
+  ]
 
   const focusAreas = [
     {
@@ -301,6 +383,31 @@ export default async function AboutPage() {
     { label: "Memberships", value: String(1 + memberships.subs.length) },
   ]
 
+  const resolveMembershipLogo = (name: string): LogoSlotWithStatus | undefined => {
+    const lowerName = name.toLowerCase()
+    if (lowerName.includes("solid-state") || lowerName.includes("sscs")) {
+      return ieeeSscsLogo
+    }
+    if (lowerName.includes("photonics")) {
+      return ieeePhotonicsLogo
+    }
+    if (lowerName.includes("ieee")) {
+      return ieeeLogo
+    }
+    return undefined
+  }
+
+  const resolveOrgLogo = (org: string): LogoSlotWithStatus | undefined => {
+    const lowerOrg = org.toLowerCase()
+    if (lowerOrg.includes("alexandria")) {
+      return alexandriaLogo
+    }
+    if (lowerOrg.includes("a*star") || lowerOrg.includes("imre")) {
+      return astarImreLogo
+    }
+    return undefined
+  }
+
   const sectionCardClass = "p-6 sm:p-7 rounded-2xl border border-border bg-card/40"
 
   return (
@@ -338,39 +445,22 @@ export default async function AboutPage() {
                 )}
                 <p className="text-sm font-semibold text-foreground">Academic Profiles</p>
                 <ul className="text-sm border border-border rounded-lg divide-y divide-border">
-                  <li className="py-2.5 px-3 hover:bg-card/60 transition-colors">
-                    <a
-                      href={socialLinks.orcid}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
-                    >
-                      ORCID: {personConfig.orcid}
-                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                    </a>
-                  </li>
-                  <li className="py-2.5 px-3 hover:bg-card/60 transition-colors">
-                    <a
-                      href={socialLinks.scholar}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
-                    >
-                      Google Scholar Profile
-                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                    </a>
-                  </li>
-                  <li className="py-2.5 px-3 hover:bg-card/60 transition-colors">
-                    <a
-                      href="https://www.webofscience.com/wos/author/record/OLP-9224-2025"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
-                    >
-                      Researcher ID: {contactInfo.webOfScienceResearcherID}
-                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                    </a>
-                  </li>
+                  {academicProfiles.map((profile) => (
+                    <li key={profile.label} className="py-2.5 px-3 hover:bg-card/60 transition-colors">
+                      <a
+                        href={profile.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between gap-3 text-accent hover:text-accent/80 transition-colors"
+                      >
+                        <span className="inline-flex items-center gap-1.5">
+                          {profile.label}
+                          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                        </span>
+                        <LogoMark slot={profile.logo} label={profile.logoLabel} size="sm" />
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -446,7 +536,12 @@ export default async function AboutPage() {
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                       <div>
                         <h3 className="font-semibold">{item.degree}</h3>
-                        <p className="text-sm text-accent">{item.org}</p>
+                        {item.org && (
+                          <p className="mt-1 inline-flex items-center gap-2 text-sm text-accent">
+                            <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
+                            <span>{item.org}</span>
+                          </p>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
@@ -473,7 +568,10 @@ export default async function AboutPage() {
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                       <div>
                         <h3 className="font-semibold">{item.role}</h3>
-                        <p className="text-sm text-accent">{item.org}</p>
+                        <p className="mt-1 inline-flex items-center gap-2 text-sm text-accent">
+                          <LogoMark slot={resolveOrgLogo(item.org)} label={item.org} size="sm" />
+                          <span>{item.org}</span>
+                        </p>
                       </div>
                       <p className="text-sm text-muted-foreground">{item.period}</p>
                     </div>
@@ -561,52 +659,28 @@ export default async function AboutPage() {
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
-                  <p className="text-sm font-semibold">{mainMembership.name}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{mainMembership.detail}</p>
+                  <div className="flex items-start gap-3">
+                    <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
+                    <div>
+                      <p className="text-sm font-semibold">{mainMembership.name}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{mainMembership.detail}</p>
+                    </div>
+                  </div>
                 </article>
-                <div className="relative space-y-4 sm:pl-8">
+                <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4 sm:pl-8">
                   <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
                   {memberships.subs.map((item) => (
                     <article key={item.name} className="relative p-5 rounded-xl border border-border/80 bg-background/90 sm:ml-4">
-                      <p className="text-sm font-semibold">IEEE {item.name}</p>
-                      <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                      <div className="flex items-start gap-3">
+                        <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
+                        <div>
+                          <p className="text-sm font-semibold">IEEE {item.name}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                        </div>
+                      </div>
                     </article>
                   ))}
                 </div>
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-2xl font-bold mb-4">Affiliations and Profile Presence</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                These are my current affiliation and profile slots. Once a logo file is added, it will appear automatically.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {loadedLogos.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-4 rounded-xl border border-border bg-background hover:border-accent transition-colors"
-                  >
-                    <div className="h-12 rounded-md border border-border/70 bg-card/70 flex items-center justify-center mb-3">
-                      {item.available ? (
-                        <Image
-                          src={item.filePath}
-                          alt={`${item.name} logo`}
-                          width={140}
-                          height={36}
-                          className="max-h-8 w-auto object-contain"
-                        />
-                      ) : (
-                        <span className="text-xs text-muted-foreground uppercase tracking-wide">Logo Slot Ready</span>
-                      )}
-                    </div>
-                    <p className="text-sm font-semibold">{item.name}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{item.group}</p>
-                  </a>
-                ))}
               </div>
             </section>
 
