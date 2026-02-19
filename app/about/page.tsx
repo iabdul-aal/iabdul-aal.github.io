@@ -644,21 +644,11 @@ export default async function AboutPage() {
               <h3 className="text-2xl font-bold mb-4">Memberships</h3>
               <div className="space-y-4">
                 <article className="p-5 rounded-xl border-2 border-accent/40 bg-background">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                    <div className="flex items-start gap-3 min-w-0 sm:flex-1">
+                  {showMainMembershipCommunityLink ? (
+                    <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2">
                       <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
-                      <div className="w-full min-w-0">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                         <p className="text-sm font-semibold">{mainMembershipDisplayName}</p>
-                        <div className="mt-1 flex w-full items-start gap-2 text-sm text-muted-foreground">
-                          <span>{mainMembershipDetail.role}</span>
-                          {!showMainMembershipCommunityLink && mainMembershipDetail.period && (
-                            <span className="ml-auto whitespace-nowrap text-right">{mainMembershipDetail.period}</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    {showMainMembershipCommunityLink && (
-                      <div className="flex shrink-0 flex-col items-start gap-1.5 sm:items-end">
                         <a
                           href="https://ieee-collabratec.ieee.org/app/p/iabdul-aal"
                           target="_blank"
@@ -668,12 +658,27 @@ export default async function AboutPage() {
                           Collabratec
                           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </a>
-                        {mainMembershipDetail.period && (
-                          <span className="text-sm text-muted-foreground">{mainMembershipDetail.period}</span>
-                        )}
                       </div>
-                    )}
-                  </div>
+                      <span aria-hidden="true" />
+                      <div className="flex w-full items-center justify-between gap-3 text-sm text-muted-foreground">
+                        <span>{mainMembershipDetail.role}</span>
+                        {mainMembershipDetail.period && <span className="whitespace-nowrap text-right">{mainMembershipDetail.period}</span>}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-start gap-3 min-w-0 sm:flex-1">
+                      <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
+                      <div className="w-full min-w-0">
+                        <p className="text-sm font-semibold">{mainMembershipDisplayName}</p>
+                        <div className="mt-1 flex w-full items-start gap-2 text-sm text-muted-foreground">
+                          <span>{mainMembershipDetail.role}</span>
+                          {mainMembershipDetail.period && (
+                            <span className="ml-auto whitespace-nowrap text-right">{mainMembershipDetail.period}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </article>
                 <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4 sm:pl-8">
                   <div className="hidden sm:block absolute left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
