@@ -1,6 +1,5 @@
 ﻿import Link from "next/link"
 import { Mail } from "lucide-react"
-import { SocialProfileIconRow } from "@/components/social-profile-links"
 import { contactInfo, socialLinks } from "@/lib/social-links"
 
 export function Footer() {
@@ -47,7 +46,6 @@ export function Footer() {
 
           <section>
             <h2 className="font-semibold text-foreground mb-4">Connect</h2>
-            <SocialProfileIconRow limit={6} />
             <div className="mt-4 space-y-2 text-xs text-muted-foreground">
               <p>
                 Email: <a href={`mailto:${socialLinks.email}`} className="text-accent hover:text-accent/80">{socialLinks.email}</a>
