@@ -167,13 +167,13 @@ function LogoMark({
 }) {
   const containerClass =
     size === "sm"
-      ? "h-8 min-w-16 px-2"
-      : "h-10 min-w-20 px-2.5"
-  const imageWidth = size === "sm" ? 70 : 90
-  const imageHeight = size === "sm" ? 20 : 26
+      ? "h-10 min-w-20 px-2.5"
+      : "h-12 min-w-24 px-3"
+  const imageWidth = size === "sm" ? 88 : 112
+  const imageHeight = size === "sm" ? 28 : 36
 
   return (
-    <span className={`inline-flex items-center justify-center rounded-md border border-border/70 bg-card/80 ${containerClass}`}>
+    <span className={`inline-flex items-center justify-center ${containerClass}`}>
       {slot?.available ? (
         <Image
           src={slot.filePath}
