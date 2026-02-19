@@ -105,7 +105,7 @@ export default async function TalksPage() {
           <div className="mb-6">
             <h2 className="text-3xl font-bold">Talk Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Browse talks in horizontal slots. Use categorize controls at the end of this section.
+              Use search and filters at the top, then browse full-width talk blocks below.
             </p>
           </div>
 

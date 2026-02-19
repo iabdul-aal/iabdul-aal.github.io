@@ -68,50 +68,9 @@ export function MaterialsStack({ items }: MaterialsStackProps) {
     query.trim().length > 0 || collectionType !== ALL_TYPES || fileState !== ALL_STATES
 
   return (
-    <div className="space-y-8">
-      {filteredItems.length > 0 ? (
-        <div className="space-y-3">
-          <p className="text-xs text-muted-foreground" aria-live="polite">
-            {filteredItems.length} of {items.length} collections shown
-          </p>
-          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory">
-            {filteredItems.map((item) => {
-              const Icon = iconMap[item.slug]
-              return (
-                <article
-                  key={item.slug}
-                  className="flex min-w-[300px] md:min-w-[360px] max-w-[420px] shrink-0 snap-start flex-col p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors"
-                >
-                  <Icon className="w-8 h-8 text-accent mb-5" />
-                  <div className="flex items-center justify-between gap-3 mb-3">
-                    <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
-                    <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{item.fileCount} files</span>
-                  </div>
-                  <p className="text-muted-foreground text-sm mb-5 flex-grow">{item.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {item.tags.map((tag) => (
-                      <span key={`${item.slug}-${tag}`} className="px-2 py-1 rounded text-xs bg-background text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href={item.href} className="text-sm text-accent inline-flex items-center gap-2">
-                    Open Collection
-                    <ArrowRight className="w-3 h-3" />
-                  </Link>
-                </article>
-              )
-            })}
-          </div>
-        </div>
-      ) : (
-        <article className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">No material collections match the selected filters yet.</p>
-        </article>
-      )}
-
+    <div className="space-y-6">
       <div className="p-5 rounded-xl border border-border bg-card/60">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Categorize</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Search and Filters</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <label className="space-y-1.5">
             <span className="text-xs text-muted-foreground">Search</span>
@@ -173,6 +132,47 @@ export function MaterialsStack({ items }: MaterialsStackProps) {
           )}
         </div>
       </div>
+
+      {filteredItems.length > 0 ? (
+        <div className="space-y-4">
+          {filteredItems.map((item) => {
+            const Icon = iconMap[item.slug]
+            return (
+              <article key={item.slug} className="w-full rounded-xl border border-border bg-card p-6">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                  <div className="flex items-start gap-4 min-w-0">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/70 bg-background/60 shrink-0">
+                      <Icon className="w-5 h-5 text-accent" />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {item.tags.map((tag) => (
+                          <span key={`${item.slug}-${tag}`} className="px-2 py-1 rounded text-xs bg-background text-muted-foreground">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link href={item.href} className="text-sm text-accent inline-flex items-center gap-2">
+                        Open Collection
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                  <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded h-fit md:whitespace-nowrap">
+                    {item.fileCount} files
+                  </span>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      ) : (
+        <article className="p-6 rounded-xl border border-border bg-card">
+          <p className="text-sm text-muted-foreground">No material collections match the selected filters yet.</p>
+        </article>
+      )}
     </div>
   )
 }

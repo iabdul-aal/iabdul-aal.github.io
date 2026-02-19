@@ -80,7 +80,7 @@ export default async function ArticlesPage() {
           <div className="mb-12">
             <h2 className="text-4xl font-bold">Article Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Browse articles in horizontal slots. Use categorize controls at the end of this section.
+              Use search and filters at the top, then browse full-width article blocks below.
             </p>
           </div>
 

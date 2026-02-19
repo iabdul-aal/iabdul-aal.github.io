@@ -79,71 +79,13 @@ export function TalksStack({ talks }: TalksStackProps) {
     })
   }, [talks, query, format, source, year])
 
-  const selectedTalk = filteredTalks.find((item) => item.featured) ?? filteredTalks[0]
   const hasFilters =
     query.trim().length > 0 || format !== ALL_FORMATS || source !== ALL_SOURCES || year !== ALL_YEARS
 
   return (
     <div className="space-y-6">
-      {filteredTalks.length > 0 ? (
-        <div className="space-y-3">
-          <p className="text-xs text-muted-foreground" aria-live="polite">
-            {filteredTalks.length} of {talks.length} sessions shown
-          </p>
-          <div className="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory">
-            {filteredTalks.map((talk) => (
-              <article key={talk.url} className="min-w-[300px] md:min-w-[380px] max-w-[460px] shrink-0 snap-start p-6 rounded-xl border border-border bg-card">
-                <div className="flex flex-col gap-3">
-                  <div>
-                    <h3 className="text-lg font-semibold leading-snug">{talk.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2">{talk.event}</p>
-                    <p className="text-xs text-accent mt-2">
-                      {talk.source} | {talk.format}
-                    </p>
-                  </div>
-                  <div className="text-sm text-muted-foreground inline-flex items-center gap-2">
-                    <CalendarDays className="w-4 h-4 text-accent" />
-                    {formatTalkDate(talk.date, talk.year)}
-                  </div>
-                </div>
-                <a
-                  href={talk.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-                >
-                  Watch Session <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <article className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">No talk sessions match the selected filters yet.</p>
-        </article>
-      )}
-
-      {selectedTalk && (
-        <article className="p-6 rounded-xl border border-accent/40 bg-background">
-          <p className="text-xs text-accent font-semibold">Selected Session</p>
-          <h3 className="text-xl font-semibold mt-2">{selectedTalk.title}</h3>
-          <p className="text-sm text-muted-foreground mt-2">
-            One recent public session that reflects my current talk style and technical scope.
-          </p>
-          <a
-            href={selectedTalk.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-          >
-            Open Session <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </article>
-      )}
-
       <div className="p-5 rounded-xl border border-border bg-card/60">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Categorize</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-3">Search and Filters</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <label className="space-y-1.5">
             <span className="text-xs text-muted-foreground">Search</span>
@@ -221,6 +163,40 @@ export function TalksStack({ talks }: TalksStackProps) {
           )}
         </div>
       </div>
+
+      {filteredTalks.length > 0 ? (
+        <div className="space-y-4">
+          {filteredTalks.map((talk) => (
+            <article key={talk.url} className="w-full rounded-xl border border-border bg-card p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold leading-snug">{talk.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-2">{talk.event}</p>
+                  <p className="text-xs text-accent mt-2">
+                    {talk.source} | {talk.format}
+                  </p>
+                  <a
+                    href={talk.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+                  >
+                    Watch Session <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+                <div className="text-sm text-muted-foreground inline-flex items-center gap-2 md:whitespace-nowrap">
+                  <CalendarDays className="w-4 h-4 text-accent" />
+                  {formatTalkDate(talk.date, talk.year)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <article className="p-6 rounded-xl border border-border bg-card">
+          <p className="text-sm text-muted-foreground">No talk sessions match the selected filters yet.</p>
+        </article>
+      )}
     </div>
   )
 }
