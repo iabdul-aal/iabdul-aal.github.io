@@ -1,8 +1,9 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
-import { ArrowRight, ArrowUpRight, FlaskConical, Rocket, Users2 } from "lucide-react"
+import { ArrowRight, ArrowUpRight, FlaskConical, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
@@ -22,6 +23,7 @@ export default function VenturesPage() {
         "Part of Seedstars and CTCN, with support from the Irish and Netherlands embassies.",
       href: "/ventures/startups",
       linkedin: socialLinks.octidesLinkedIn,
+      logo: "/logos/platforms/Octides.webp",
     },
   ]
 
@@ -96,8 +98,14 @@ export default function VenturesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {startupPortfolio.map((startup) => (
               <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border/70 bg-background/60 mb-4">
-                  <Rocket className="w-5 h-5 text-accent" />
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 mb-4 p-1">
+                  <Image
+                    src={startup.logo}
+                    alt={`${startup.name} logo`}
+                    width={48}
+                    height={48}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
                 <span className="inline-flex text-xs text-accent bg-accent/10 rounded-md px-2 py-1 mb-3">
                   {startup.relation}

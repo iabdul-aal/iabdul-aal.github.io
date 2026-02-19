@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { JourneySection } from "@/components/journey-section"
 import { PageHero } from "@/components/page-hero"
 import { ArrowUpRight, Rocket } from "lucide-react"
@@ -52,8 +53,14 @@ export default function StartupsPage() {
 
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="inline-flex items-center gap-3 rounded-xl border border-border bg-card/70 px-4 py-3">
-          <div className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/70 bg-background/60">
-            <Rocket className="w-4 h-4 text-accent" />
+          <div className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/70 bg-background/60 p-1">
+            <Image
+              src="/logos/platforms/Octides.webp"
+              alt="Octides logo"
+              width={32}
+              height={32}
+              className="h-full w-full object-contain"
+            />
           </div>
           <span className="text-sm text-muted-foreground">One startup in this portfolio: Octides</span>
         </div>
