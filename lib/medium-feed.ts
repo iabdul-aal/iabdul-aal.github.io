@@ -6,6 +6,7 @@ export type MediumArticle = {
   url: string
   tag: string
   publishedAt: string
+  imageUrl?: string
 }
 
 function stripCdata(value: string) {
@@ -52,6 +53,15 @@ function toExcerpt(rawDescription: string, maxLength = 180) {
   return `${plain.slice(0, maxLength).trimEnd()}...`
 }
 
+function extractFirstImageSrc(rawHtml: string) {
+  const match = rawHtml.match(/<img[^>]+src=["']([^"']+)["']/i)
+  const imageUrl = decodeEntities(match?.[1] ?? "").trim()
+  if (!imageUrl || !/^https?:\/\//i.test(imageUrl)) {
+    return ""
+  }
+  return imageUrl
+}
+
 export async function getMediumArticles(limit = 6): Promise<MediumArticle[]> {
   try {
     const response = await fetch(socialLinks.mediumRss)
@@ -65,7 +75,9 @@ export async function getMediumArticles(limit = 6): Promise<MediumArticle[]> {
       const url = extractTag(item, "link")
       const publishedAt = formatDate(extractTag(item, "pubDate"))
       const description = extractTag(item, "description")
+      const encodedContent = extractTag(item, "content:encoded")
       const categories = extractCategories(item)
+      const imageUrl = extractFirstImageSrc(encodedContent || description)
 
       return {
         title,
@@ -73,6 +85,7 @@ export async function getMediumArticles(limit = 6): Promise<MediumArticle[]> {
         publishedAt,
         excerpt: toExcerpt(description),
         tag: categories[0] || "Medium Article",
+        imageUrl: imageUrl || undefined,
       }
     })
   } catch {

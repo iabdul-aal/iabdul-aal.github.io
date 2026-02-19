@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, CalendarDays } from "lucide-react"
 import type { MediumArticle } from "@/lib/medium-feed"
 
 type ArticlesStackProps = {
@@ -129,20 +129,42 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
               href={article.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block w-full rounded-xl border border-border bg-card p-6 hover:border-accent transition-colors"
+              className="group block w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/80 hover:bg-card/95 transition-all"
             >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="min-w-0">
-                  <span className="inline-block px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold mb-3">
-                    {article.tag}
-                  </span>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{article.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{article.excerpt}</p>
+              <div className="flex flex-col lg:flex-row gap-5">
+                {article.imageUrl ? (
+                  <div className="lg:w-[260px] xl:w-[300px] shrink-0">
+                    <div className="h-44 sm:h-52 lg:h-full min-h-[164px] rounded-lg border border-border/70 bg-background/40 overflow-hidden">
+                      <div
+                        className="h-full w-full bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.03]"
+                        style={{
+                          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url("${article.imageUrl}")`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                      {article.tag}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground md:whitespace-nowrap">
+                      <CalendarDays className="w-3.5 h-3.5 text-accent" />
+                      {article.publishedAt}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold leading-snug mb-3 group-hover:text-accent transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-5">{article.excerpt}</p>
+
                   <span className="text-sm text-accent inline-flex items-center gap-2">
                     Read article <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
-                <span className="text-xs text-muted-foreground md:whitespace-nowrap">{article.publishedAt}</span>
               </div>
             </a>
           ))}
