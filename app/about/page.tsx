@@ -726,22 +726,27 @@ export default async function AboutPage() {
                         <div className="min-w-0">
                           <p className="text-base font-semibold leading-snug">{mainMembershipDisplayName}</p>
                           <p className="text-sm text-muted-foreground mt-1">{mainMembershipDetail.role}</p>
+                          {mainMembershipDetail.period && (
+                            <p className="mt-1 text-sm text-muted-foreground sm:hidden">{mainMembershipDetail.period}</p>
+                          )}
                         </div>
                       </div>
-                      <div className="flex flex-col items-center gap-2 sm:items-end">
+                      <div className="flex flex-col items-start gap-2 sm:items-end">
                         {showMainMembershipCommunityLink && (
                           <a
                             href={socialLinks.collabratec}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors"
+                            className="inline-flex items-center gap-1.5 self-start rounded-md border border-accent/40 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/10 transition-colors sm:self-auto"
                           >
                             Collabratec
                             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                           </a>
                         )}
                         {mainMembershipDetail.period && (
-                          <p className="text-sm text-muted-foreground whitespace-nowrap">{mainMembershipDetail.period}</p>
+                          <p className="hidden text-sm text-muted-foreground whitespace-nowrap sm:block sm:text-right">
+                            {mainMembershipDetail.period}
+                          </p>
                         )}
                       </div>
                     </div>
