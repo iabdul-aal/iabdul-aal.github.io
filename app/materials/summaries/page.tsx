@@ -25,6 +25,12 @@ export default function SummariesPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Summaries", value: String(summaries.length) },
+    { label: "Depth", value: "Compact" },
+    { label: "Use Case", value: "Research Workflow" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,6 +42,15 @@ export default function SummariesPage() {
         <p className="text-muted-foreground max-w-2xl mb-10">
           Compact write-ups that convert dense technical material into clear, reusable insight.
         </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+          {summaryStats.map((item) => (
+            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+              <p className="text-lg font-bold leading-none">{item.value}</p>
+              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+            </article>
+          ))}
+        </div>
 
         <div className="space-y-5">
           {summaries.map((item) => (

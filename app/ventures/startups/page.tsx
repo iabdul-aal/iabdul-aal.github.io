@@ -32,6 +32,12 @@ export default function StartupsPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Concepts", value: String(startupConcepts.length) },
+    { label: "Current Stage", value: "Discovery to Validation" },
+    { label: "Orientation", value: "Research Translation" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,6 +52,15 @@ export default function StartupsPage() {
           </p>
         </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+          {summaryStats.map((item) => (
+            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+              <p className="text-lg font-bold leading-none">{item.value}</p>
+              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+            </article>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {startupConcepts.map((concept) => (
             <article
@@ -58,13 +73,13 @@ export default function StartupsPage() {
               </div>
               <h2 className="text-xl font-semibold mb-3">{concept.title}</h2>
               <p className="text-sm text-muted-foreground mb-5">{concept.summary}</p>
-              <ul className="space-y-2">
+              <div className="space-y-2">
                 {concept.milestones.map((milestone) => (
-                  <li key={milestone} className="text-xs text-muted-foreground border-l-2 border-accent/50 pl-3">
+                  <p key={milestone} className="text-xs text-muted-foreground border-l-2 border-accent/50 pl-3">
                     {milestone}
-                  </li>
+                  </p>
                 ))}
-              </ul>
+              </div>
             </article>
           ))}
         </div>

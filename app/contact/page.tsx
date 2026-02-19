@@ -33,6 +33,13 @@ export default function ContactPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Channels", value: String(contactMethods.length) },
+    { label: "Response Window", value: "24-72h" },
+    { label: "Location", value: "Alexandria" },
+    { label: "Mode", value: "Remote-first" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[50vh] flex items-center pt-20 pb-12">
@@ -42,6 +49,19 @@ export default function ContactPage() {
             <p className="text-xl md:text-2xl text-muted-foreground">
               For research collaboration, speaking invitations, mentorship requests, or technical service discussions.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {summaryStats.map((item) => (
+              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+                <p className="text-lg font-bold leading-none">{item.value}</p>
+                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -87,19 +107,19 @@ export default function ContactPage() {
                 Best fit inquiries usually include a clear technical objective, timeline expectation, and current
                 project context.
               </p>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <div className="space-y-3 text-sm text-muted-foreground">
                 {[
                   "Integrated photonics research projects",
                   "Simulation and method design discussions",
                   "Student mentorship and guidance",
                   "Speaking and workshop invitations",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
+                  <p key={item} className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
                     <span>{item}</span>
-                  </li>
+                  </p>
                 ))}
-              </ul>
+              </div>
             </div>
 
             <div className="p-8 rounded-xl border border-border bg-card">
@@ -139,18 +159,18 @@ export default function ContactPage() {
 
           <div className="mt-8 p-8 rounded-xl border border-border bg-card">
             <h2 className="text-2xl font-bold mb-4">How to Get a Faster, Better Response</h2>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+            <div className="space-y-3 text-sm text-muted-foreground">
               {[
                 "State your objective in one sentence (collaboration, mentorship, speaking, or consultation).",
                 "Include your timeline and expected deliverable.",
                 "Add relevant links or context files to avoid extra back-and-forth.",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2">
+                <p key={item} className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2" />
                   <span>{item}</span>
-                </li>
+                </p>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>

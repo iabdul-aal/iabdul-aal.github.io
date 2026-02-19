@@ -25,6 +25,12 @@ export default function RoadmapsPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Roadmaps", value: String(roadmaps.length) },
+    { label: "Typical Span", value: "8-16 weeks" },
+    { label: "Focus", value: "Execution Readiness" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,6 +43,15 @@ export default function RoadmapsPage() {
           Curated progression paths for students and early researchers who want structured momentum.
         </p>
 
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+          {summaryStats.map((item) => (
+            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+              <p className="text-lg font-bold leading-none">{item.value}</p>
+              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+            </article>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {roadmaps.map((roadmap) => (
             <article key={roadmap.title} className="p-6 rounded-xl border border-border bg-card">
@@ -45,13 +60,13 @@ export default function RoadmapsPage() {
                 <span className="text-xs text-accent">{roadmap.duration}</span>
               </div>
               <h2 className="text-lg font-semibold mb-4">{roadmap.title}</h2>
-              <ul className="space-y-2">
+              <div className="space-y-2">
                 {roadmap.checkpoints.map((checkpoint) => (
-                  <li key={checkpoint} className="text-sm text-muted-foreground border-l-2 border-accent/50 pl-3">
+                  <p key={checkpoint} className="text-sm text-muted-foreground border-l-2 border-accent/50 pl-3">
                     {checkpoint}
-                  </li>
+                  </p>
                 ))}
-              </ul>
+              </div>
             </article>
           ))}
         </div>

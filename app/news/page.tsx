@@ -79,6 +79,13 @@ export default function HighlightsPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Highlights", value: String(highlights.length) },
+    { label: "Latest Year", value: "2025" },
+    { label: "Coverage", value: "Research + Initiatives" },
+    { label: "Format", value: "Milestone Feed" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[50vh] flex items-center pt-20 pb-12">
@@ -88,6 +95,19 @@ export default function HighlightsPage() {
             <p className="text-xl md:text-2xl text-muted-foreground">
               Major updates across research progress, publication activity, and technical community work.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {summaryStats.map((item) => (
+              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+                <p className="text-lg font-bold leading-none">{item.value}</p>
+                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

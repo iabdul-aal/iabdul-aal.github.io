@@ -25,6 +25,12 @@ export default function SlidesPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Decks", value: String(slideDecks.length) },
+    { label: "Format", value: "Visual-first" },
+    { label: "Audience", value: "Beginner to Advanced" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,6 +42,15 @@ export default function SlidesPage() {
         <p className="text-muted-foreground max-w-2xl mb-10">
           Short, structured decks designed for quick learning and workshop delivery.
         </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+          {summaryStats.map((item) => (
+            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+              <p className="text-lg font-bold leading-none">{item.value}</p>
+              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+            </article>
+          ))}
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {slideDecks.map((deck) => (

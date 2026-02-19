@@ -48,6 +48,12 @@ export default async function ArticlesPage() {
   const rssArticles = await getMediumArticles(8)
   const articles = rssArticles.length > 0 ? rssArticles : fallbackArticles
   const usingLiveFeed = rssArticles.length > 0
+  const summaryStats = [
+    { label: "Articles", value: String(articles.length) },
+    { label: "Source", value: usingLiveFeed ? "Live RSS" : "Fallback" },
+    { label: "Primary Topic", value: "Integrated Photonics" },
+    { label: "Format", value: "Technical Explainers" },
+  ]
 
   return (
     <main className="bg-background text-foreground">
@@ -59,11 +65,24 @@ export default async function ArticlesPage() {
               Auto-updating publications from Medium, focused on integrated photonics, nonlinear quantum photonics, and
               practical research communication.
             </p>
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <a href={socialLinks.medium} target="_blank" rel="noopener noreferrer">
                 Visit Medium Profile <ExternalLink className="w-4 h-4 ml-2" />
               </a>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {summaryStats.map((item) => (
+              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+                <p className="text-lg font-bold leading-none">{item.value}</p>
+                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

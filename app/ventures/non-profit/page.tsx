@@ -34,6 +34,12 @@ export default function NonProfitPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Initiatives", value: String(initiatives.length) },
+    { label: "Focus", value: "Community Impact" },
+    { label: "Mode", value: "Education + Leadership" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,6 +52,15 @@ export default function NonProfitPage() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
             Education and community initiatives aimed at widening access to technical learning and research exposure.
           </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {summaryStats.map((item) => (
+            <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+              <p className="text-lg font-bold leading-none">{item.value}</p>
+              <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+            </article>
+          ))}
         </div>
       </section>
 

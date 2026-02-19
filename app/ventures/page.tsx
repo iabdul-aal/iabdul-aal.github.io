@@ -69,6 +69,13 @@ export default function VenturesPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Venture Tracks", value: String(ventureTracks.length) },
+    { label: "Flagship Initiatives", value: String(flagshipInitiatives.length) },
+    { label: "Orientation", value: "Research to Impact" },
+    { label: "Status", value: "Active" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
@@ -80,11 +87,24 @@ export default function VenturesPage() {
               Venture pathways that translate integrated photonics research into technical pilots, products, and social
               impact.
             </p>
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
                 Contact <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {summaryStats.map((item) => (
+              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+                <p className="text-lg font-bold leading-none">{item.value}</p>
+                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

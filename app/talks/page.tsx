@@ -48,6 +48,13 @@ export default function TalksPage() {
     },
   ]
 
+  const summaryStats = [
+    { label: "Topics", value: String(topics.length) },
+    { label: "Formats", value: String(formats.length) },
+    { label: "Delivery", value: "Talks & Workshops" },
+    { label: "Mode", value: "Onsite / Remote" },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <section className="min-h-[55vh] flex items-center pt-20 pb-12">
@@ -57,11 +64,24 @@ export default function TalksPage() {
             <p className="text-xl md:text-2xl text-muted-foreground">
               Speaking sessions focused on integrated photonics, nonlinear quantum photonics, and research skill development.
             </p>
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
                 Invite Me to Speak <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {summaryStats.map((item) => (
+              <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
+                <p className="text-lg font-bold leading-none">{item.value}</p>
+                <p className="text-xs text-muted-foreground mt-2">{item.label}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
