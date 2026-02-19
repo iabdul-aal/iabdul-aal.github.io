@@ -53,9 +53,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-8 bg-background">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
             {summaryStats.map((item) => (
               <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
                 <p className="text-lg font-bold leading-none">{item.value}</p>
@@ -63,11 +63,7 @@ export default function ContactPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {contactMethods.map((method) => {
               const Icon = method.icon
