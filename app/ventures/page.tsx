@@ -93,18 +93,20 @@ export default function VenturesPage() {
           <div className="grid grid-cols-1 gap-6">
             {startupPortfolio.map((startup) => (
               <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 mb-4 p-1">
-                  <Image
-                    src={startup.logo}
-                    alt={`${startup.name} logo`}
-                    width={48}
-                    height={48}
-                    className="h-full w-full object-contain"
-                  />
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 p-1">
+                    <Image
+                      src={startup.logo}
+                      alt={`${startup.name} logo`}
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <span className="inline-flex h-8 items-center text-xs text-accent bg-accent/10 rounded-md px-2.5">
+                    {startup.relation}
+                  </span>
                 </div>
-                <span className="inline-flex text-xs text-accent bg-accent/10 rounded-md px-2 py-1 mb-3">
-                  {startup.relation}
-                </span>
                 <h3 className="text-2xl font-bold mb-3">{startup.name}</h3>
                 <p className="text-sm md:text-base text-muted-foreground mb-4">{startup.description}</p>
                 <p className="text-sm text-accent mb-6">{startup.supportNote}</p>
