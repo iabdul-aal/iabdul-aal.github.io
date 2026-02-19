@@ -4,7 +4,7 @@ import { ArrowLeft, Users } from "lucide-react"
 
 export const metadata = {
   title: "Community Initiatives",
-  description: "Community and non-profit initiatives focused on technical education, access, and leadership.",
+  description: "Community and non-profit work focused on technical education access and student support.",
 }
 
 export default function NonProfitPage() {
@@ -14,7 +14,7 @@ export default function NonProfitPage() {
       role: "Chapter Chair",
       period: "Feb 2025 - Oct 2025",
       description:
-        "Led a full chapter restructuring, coordinated volunteers, and organized technical events with industry and academic experts.",
+        "Supported chapter restructuring, coordinated volunteers, and helped organize technical events with industry and academic experts.",
       impact: ["500+ students served", "30 universities reached", "80+ events organized"],
     },
     {
@@ -22,7 +22,7 @@ export default function NonProfitPage() {
       role: "Program Lead (SSCS Chapter)",
       period: "Dec 25, 2025",
       description:
-        "Delivered competition finals and technical activities at Bibliotheca Alexandrina under the HW Carnival initiative.",
+        "Helped deliver competition finals and technical activities at Bibliotheca Alexandrina under the HW Carnival initiative.",
       impact: ["AlexDuino track", "Si-Clash track", "Si-Cast track"],
     },
     {
@@ -30,15 +30,15 @@ export default function NonProfitPage() {
       role: "General Coordinator",
       period: "Aug 2021 - Sep 2023",
       description:
-        "Coordinated a volunteer organization focused on broad educational access and upskilling programs across MENA.",
-      impact: ["250k+ students reached", "80+ team members", "3 flagship programs"],
+        "Contributed to coordinating a volunteer organization focused on educational access and upskilling programs across MENA.",
+      impact: ["250k+ students reached", "80+ team members", "3 core programs"],
     },
   ]
 
   const summaryStats = [
     { label: "Initiatives", value: String(initiatives.length) },
     { label: "Focus", value: "Community Impact" },
-    { label: "Mode", value: "Education + Leadership" },
+    { label: "Mode", value: "Education + Volunteer Work" },
   ]
 
   return (
@@ -51,7 +51,7 @@ export default function NonProfitPage() {
           </Link>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance mb-6">Non-Profit Initiatives</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            I lead these initiatives to widen access to technical learning, research exposure, and structured engineering mentorship.
+            I contribute to these initiatives to widen access to technical learning, research exposure, and engineering mentorship.
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export default function NonProfitPage() {
                   <div>
                     <div className="inline-flex items-center gap-2 text-accent text-sm mb-2">
                       <Users className="w-4 h-4" />
-                      Community Leadership
+                      Community Work
                     </div>
                     <h2 className="text-2xl font-bold text-foreground mb-1">{initiative.name}</h2>
                     <p className="text-accent font-semibold mb-2">{initiative.role}</p>

@@ -4,7 +4,7 @@ import { ArrowLeft, Rocket } from "lucide-react"
 
 export const metadata = {
   title: "Startup Track",
-  description: "Startup concepts and early venture hypotheses connected to my research translation goals.",
+  description: "Exploratory startup concepts and early venture hypotheses related to my current technical work.",
 }
 
 export default function StartupsPage() {
@@ -35,7 +35,7 @@ export default function StartupsPage() {
   const summaryStats = [
     { label: "Concepts", value: String(startupConcepts.length) },
     { label: "Current Stage", value: "Discovery to Validation" },
-    { label: "Orientation", value: "Research Translation" },
+    { label: "Orientation", value: "Learning and Validation" },
   ]
 
   return (
@@ -48,7 +48,7 @@ export default function StartupsPage() {
           </Link>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance mb-6">Startup Track</h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
-            I develop these early-stage venture concepts to connect research insights with practical product direction.
+            These are exploratory concepts I am currently developing to test feasibility and practical relevance.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function StartupsPage() {
 
       <JourneySection
         title="Discuss a Startup Direction"
-        description="Continue with collaboration scoping, service alignment, or review of the broader venture portfolio."
+        description="Continue with collaboration scoping, service alignment, or review of the broader venture pages."
         actions={[
           { href: "/contact", label: "Discuss Opportunities" },
           { href: "/services", label: "Match to Service Tracks", variant: "outline" },

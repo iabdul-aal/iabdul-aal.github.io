@@ -21,7 +21,7 @@ export default function MentorshipPage() {
     },
     {
       title: "Academic Growth",
-      description: "Support for portfolio building, writing habits, and transitioning from learning to research output.",
+      description: "Support for profile building, writing habits, and transitioning from learning to research output.",
     },
     {
       title: "Project Review",

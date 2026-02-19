@@ -5,9 +5,9 @@ import { siteConfig } from "@/lib/site-config"
 import { socialLinks } from "@/lib/social-links"
 
 export const metadata = {
-  title: "Integrated Photonics Research Portfolio",
+  title: "Integrated Photonics and Research Work",
   description:
-    "Islam I. Abdulaal's portfolio in integrated photonics, nonlinear quantum photonics, physics-informed photonic design, venture initiatives, and research mentorship.",
+    "Current research work of Islam I. Abdulaal across integrated photonics, nonlinear photonics, and physics-informed design.",
 }
 
 export default function Home() {
@@ -45,9 +45,9 @@ export default function Home() {
       cta: "View listing",
     },
     {
-      title: "Initiatives Portfolio",
+      title: "Initiatives Overview",
       description:
-        "HW Carnival technical day was held at Bibliotheca Alexandrina on December 25, 2025 with AlexDuino, Si-Clash, and Si-Cast tracks.",
+        "HW Carnival student initiative held a technical day at Bibliotheca Alexandrina on December 25, 2025 with AlexDuino, Si-Clash, and Si-Cast tracks.",
       href: "/ventures",
       cta: "Explore ventures",
     },
@@ -78,7 +78,7 @@ export default function Home() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs md:text-sm text-muted-foreground animate-fade-up">
               <Microscope className="w-4 h-4 text-accent" />
-              Integrated Photonics Researcher | ECE, Alexandria University | NanoPhoto Lab (A*STAR)
+              ECE Undergraduate Researcher | Alexandria University | NanoPhoto Lab (A*STAR)
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mt-6 animate-fade-up-delay">
@@ -86,13 +86,13 @@ export default function Home() {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
-              I work on integrated photonics, nonlinear quantum photonics, and physics-informed design for photonic
-              devices. This website is a concise portfolio for research profile, verified activity, and direct contact.
+              I am currently building my research profile through coursework, internships, and technical projects in
+              integrated photonics and nonlinear photonics. This website documents my current work and public records.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link href="/about">View Research Profile</Link>
+                <Link href="/about">View Current Profile</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
                 <Link href="/contact">
@@ -104,9 +104,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 animate-fade-up-delay-2">
             {[
-              { label: "Current Focus", value: "Integrated Quantum Photonics" },
+              { label: "Current Focus", value: "Integrated and Quantum Photonics" },
               { label: "Current Affiliation", value: "ECE, Alexandria University" },
-              { label: "Initiative Highlights", value: "HW Carnival @ Bibliotheca Alexandrina (Dec 25, 2025)" },
+              { label: "Current Stage", value: "Undergraduate Researcher and Intern" },
             ].map((stat) => (
               <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5">
                 <p className="text-sm font-semibold text-accent">{stat.label}</p>
@@ -145,7 +145,7 @@ export default function Home() {
 
       <section className="py-16 border-y border-border/70 bg-card/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-3xl md:text-4xl mb-8">Verified Public Footprint</h2>
+          <h2 className="font-display text-3xl md:text-4xl mb-8">Public Records and Profiles</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {highlights.map((item) => {
               const isExternal = item.href.startsWith("http")

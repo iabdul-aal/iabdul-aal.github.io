@@ -12,7 +12,7 @@ import { logoSlots } from "@/lib/logo-slots"
 export const metadata = {
   title: "About",
   description:
-    "Background, research direction, affiliations, publications, initiatives, and technical competencies of Islam I. Abdulaal.",
+    "Current background, research direction, affiliations, publications, and technical work of Islam I. Abdulaal.",
 }
 
 type OrcidPublication = {
@@ -134,23 +134,6 @@ async function loadLogoSlots(): Promise<LogoSlotWithStatus[]> {
   )
 
   return resolved
-}
-
-function biographyPreview(biography: string | undefined, fallback: string[]): string[] {
-  if (!biography) {
-    return fallback
-  }
-
-  const sentences = biography
-    .split(/(?<=[.!?])\s+/)
-    .map((item) => item.trim())
-    .filter(Boolean)
-
-  const first = sentences.slice(0, 2).join(" ")
-  const second = sentences.slice(2, 4).join(" ")
-  const combined = [first, second].filter(Boolean)
-
-  return combined.length > 0 ? combined : fallback
 }
 
 export default async function AboutPage() {
@@ -285,12 +268,12 @@ export default async function AboutPage() {
   ]
 
   const fallbackProfileParagraphs = [
-    "I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University with a research focus on integrated photonics and device-level engineering.",
-    "My recent work centers on physics-informed and optimization-guided workflows that support faster, more reliable design decisions for photonic devices.",
-    "I currently contribute at NanoPhoto Lab (A*STAR), where I work on integrated quantum photonics modeling flows that balance performance, robustness, and practical computation constraints.",
+    "I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University, currently building my research experience in integrated photonics and device-level engineering.",
+    "My recent work focuses on physics-informed and optimization-guided workflows for photonic device modeling and design.",
+    "At NanoPhoto Lab (A*STAR), I contribute to integrated quantum photonics modeling tasks while strengthening reproducible simulation and analysis practices.",
   ]
 
-  const profileParagraphs = biographyPreview(orcidProfile?.profile?.biography, fallbackProfileParagraphs)
+  const profileParagraphs = fallbackProfileParagraphs
   const orcidKeywords = (orcidProfile?.profile?.keywords ?? []).slice(0, 6)
 
   const educationEntries = (orcidProfile?.educations && orcidProfile.educations.length > 0)
@@ -510,8 +493,8 @@ export default async function AboutPage() {
             <section id="ventures" className={sectionCardClass}>
               <h2 className="text-2xl font-bold mb-4">Ventures</h2>
               <p className="text-sm text-muted-foreground">
-                Beyond core research, I build and support venture tracks that translate technical ideas into real programs
-                and measurable community impact.
+                Alongside research, I am exploring venture and community projects to test practical applications of what I
+                am learning.
               </p>
               <div className="mt-4">
                 <Button asChild variant="outline">
@@ -637,7 +620,7 @@ export default async function AboutPage() {
             <div>
               <h3 className="text-xl font-bold">Services</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                Continue to consulting, mentorship, and collaboration service tracks.
+                If useful, you can continue to services, mentorship, and collaboration options.
               </p>
             </div>
             <Button asChild>

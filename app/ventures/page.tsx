@@ -7,7 +7,7 @@ import { socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "Ventures",
   description:
-    "Venture tracks across startup exploration, technical pilots, and community programs connected to my research direction.",
+    "Early-stage venture directions across startup exploration, technical pilots, and student community programs.",
 }
 
 export default function VenturesPage() {
@@ -15,7 +15,7 @@ export default function VenturesPage() {
     {
       title: "Startup Exploration",
       description:
-        "Translating photonics and sensing research into early-stage product hypotheses with scoped validation milestones.",
+        "Exploring how photonics and sensing ideas can be shaped into realistic early-stage product hypotheses.",
       icon: Rocket,
       href: "/ventures/startups",
       cta: "View Startup Track",
@@ -24,7 +24,7 @@ export default function VenturesPage() {
     {
       title: "Research-to-Industry Pilots",
       description:
-        "Structured pilot collaborations for simulation, inverse design, and photonic-electronic integration challenges.",
+        "Testing small pilot formats for simulation, inverse design, and photonic-electronic integration problems.",
       icon: FlaskConical,
       href: "/services",
       cta: "Explore Collaboration Formats",
@@ -33,7 +33,7 @@ export default function VenturesPage() {
     {
       title: "Community and Non-Profit Initiatives",
       description:
-        "Education and technical capacity-building programs for student communities and volunteer engineering networks.",
+        "Student-focused education and technical capacity-building programs in volunteer engineering communities.",
       icon: Users2,
       href: "/ventures/non-profit",
       cta: "See Community Impact",
@@ -41,39 +41,39 @@ export default function VenturesPage() {
     },
   ]
 
-  const flagshipInitiatives = [
+  const ongoingInitiatives = [
     {
       name: "HW Carnival",
       summary:
-        "Competition and technical day hosted at Bibliotheca Alexandrina on December 25, 2025, covering AlexDuino, Si-Clash, and Si-Cast tracks.",
-      status: "Flagship",
+        "Student competition and technical day hosted at Bibliotheca Alexandrina on December 25, 2025, covering AlexDuino, Si-Clash, and Si-Cast tracks.",
+      status: "Ongoing",
       href: socialLinks.hwCarnivalEvent,
     },
     {
       name: "Si-Cast",
       summary:
-        "Track focused on structured technical content and practical engineering communication.",
-      status: "Active",
+        "Technical content track focused on practical engineering communication and peer learning.",
+      status: "Ongoing",
       href: socialLinks.siCastYoutube,
     },
     {
       name: "Si-Clash",
       summary:
-        "Challenge-oriented track designed to strengthen practical design thinking and implementation skills.",
-      status: "Active",
+        "Challenge-oriented track for improving practical design thinking and implementation skills.",
+      status: "Ongoing",
     },
     {
       name: "AlexDuino",
       summary:
         "Hands-on prototyping track centered on embedded systems and real hardware execution.",
-      status: "Active",
+      status: "Ongoing",
     },
   ]
 
   const summaryStats = [
     { label: "Venture Tracks", value: String(ventureTracks.length) },
-    { label: "Flagship Initiatives", value: String(flagshipInitiatives.length) },
-    { label: "Orientation", value: "Research to Impact" },
+    { label: "Ongoing Initiatives", value: String(ongoingInitiatives.length) },
+    { label: "Orientation", value: "Learning + Execution" },
     { label: "Status", value: "Active" },
   ]
 
@@ -85,8 +85,8 @@ export default function VenturesPage() {
           <div className="space-y-6 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance">Ventures</h1>
             <p className="text-lg md:text-2xl text-muted-foreground">
-              I use ventures to translate research and engineering work into pilot-ready solutions, practical programs,
-              and measurable impact.
+              I am using ventures as a learning and execution track to test technical ideas through small pilots and
+              student-focused programs.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -108,7 +108,7 @@ export default function VenturesPage() {
             ))}
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Active Venture Tracks</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Current Venture Directions</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {ventureTracks.map((track) => {
               const Icon = track.icon
@@ -134,9 +134,9 @@ export default function VenturesPage() {
 
       <section className="py-16 md:py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10">Flagship Initiatives</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10">Ongoing Initiatives</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {flagshipInitiatives.map((item) => (
+            {ongoingInitiatives.map((item) => (
               <article key={item.name} className="p-6 rounded-xl border border-border bg-background">
                 <div className="flex items-center justify-between gap-3 mb-3">
                   <h3 className="text-xl font-semibold text-foreground">{item.name}</h3>

@@ -7,7 +7,7 @@ import { loadTalks } from "@/lib/talks"
 export const metadata = {
   title: "Talks",
   description:
-    "Talks and workshop sessions by Islam I. Abdulaal across integrated photonics, nonlinear photonics, and practical research execution.",
+    "Talk and workshop sessions by Islam I. Abdulaal for student and early-career audiences in photonics and research methods.",
 }
 
 function formatTalkDate(date: string, year: string) {
@@ -23,7 +23,7 @@ function formatTalkDate(date: string, year: string) {
 
 export default async function TalksPage() {
   const talks = await loadTalks()
-  const featuredTalk = talks.find((item) => item.featured) ?? talks[0]
+  const selectedTalk = talks.find((item) => item.featured) ?? talks[0]
 
   const themes = [
     {
@@ -72,8 +72,8 @@ export default async function TalksPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Talks and Workshops</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              I share sessions on integrated photonics, research execution, and technical communication with student and
-              professional audiences.
+              I share sessions on integrated photonics, research execution, and technical communication, mainly for
+              students and early-career engineers.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -163,20 +163,20 @@ export default async function TalksPage() {
             ))}
           </div>
 
-          {featuredTalk && (
+          {selectedTalk && (
             <article className="mt-8 p-6 rounded-xl border border-accent/40 bg-background">
-              <p className="text-xs text-accent font-semibold">Featured Session</p>
-              <h3 className="text-xl font-semibold mt-2">{featuredTalk.title}</h3>
+              <p className="text-xs text-accent font-semibold">Selected Session</p>
+              <h3 className="text-xl font-semibold mt-2">{selectedTalk.title}</h3>
               <p className="text-sm text-muted-foreground mt-2">
-                A highlighted public talk that reflects how I communicate technical ideas to broader audiences.
+                One recent public session that reflects my current talk style and technical scope.
               </p>
               <a
-                href={featuredTalk.url}
+                href={selectedTalk.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
               >
-                Open Featured Talk <ArrowRight className="w-3.5 h-3.5" />
+                Open Session <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </article>
           )}

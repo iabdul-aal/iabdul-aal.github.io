@@ -6,25 +6,25 @@ import { socialLinks } from "@/lib/social-links"
 export const metadata = {
   title: "Highlights",
   description:
-    "Selected highlights from Islam I. Abdulaal's research journey, publications, programs, and community leadership.",
+    "Selected updates from Islam I. Abdulaal's academic work, publications, initiatives, and community activities.",
 }
 
 export default function HighlightsPage() {
   const highlights = [
     {
-      title: "HW Carnival Initiative (USD 10,000 Funding)",
+      title: "HW Carnival Student Initiative (USD 10,000 Funding Support)",
       date: "2025",
       category: "Initiative",
       description:
-        "Led HW Carnival as a funded hardware initiative with approximately USD 10,000 in support, with public feature coverage.",
+        "Contributed to organizing HW Carnival, a funded student hardware initiative with public feature coverage.",
       link: socialLinks.hwCarnivalFeature,
     },
     {
-      title: "Expansion of Initiative Portfolio (Si-Cast, Si-Clash, AlexDuino)",
+      title: "Expansion of Initiative Tracks (Si-Cast, Si-Clash, AlexDuino)",
       date: "Ongoing",
       category: "Initiatives",
       description:
-        "Expanded initiative portfolio with Si-Cast, Si-Clash, and AlexDuino to broaden technical education, challenge-based learning, and applied prototyping activity.",
+        "Continued development of Si-Cast, Si-Clash, and AlexDuino as student-facing technical learning tracks.",
       link: "/ventures",
     },
     {
@@ -32,7 +32,7 @@ export default function HighlightsPage() {
       date: "2025",
       category: "Award",
       description:
-        "Received recognition under SSCS Student Travel Grant Award (STGA) track for active technical and chapter contributions.",
+        "Recognized through the SSCS Student Travel Grant Award (STGA) program for chapter and technical engagement.",
       link: socialLinks.linkedin,
     },
     {
@@ -65,10 +65,10 @@ export default function HighlightsPage() {
       link: socialLinks.hwCarnivalEvent,
     },
     {
-      title: "IEEE Student Leadership",
+      title: "IEEE Student Chapter Work",
       date: "2025",
-      category: "Leadership",
-      description: "Led student chapter activities and technical community engagement in circuits and systems topics.",
+      category: "Student Activity",
+      description: "Supported student chapter activities and technical community engagement in circuits and systems topics.",
     },
     {
       title: "Public Technical Writing",
@@ -93,7 +93,7 @@ export default function HighlightsPage() {
           <div className="space-y-6 max-w-4xl">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Highlights</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Major updates across research progress, publication activity, and technical community work.
+              Selected updates from my ongoing research, training, and student-led technical activities.
             </p>
           </div>
         </div>

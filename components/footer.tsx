@@ -23,10 +23,10 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-8">
           <section>
-            <h2 className="font-semibold text-foreground mb-4">Research Portfolio</h2>
+            <h2 className="font-semibold text-foreground mb-4">Website Overview</h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              I use this website to share my work in integrated photonics, research execution, and technical programs.
-              If you would like to collaborate, the contact page is the fastest path.
+              I use this website to document my current academic work, research learning progress, and technical
+              activities. If you would like to connect, the contact page is the fastest path.
             </p>
             <div className="mt-4">
               <Link href="/contact" className="text-sm text-accent hover:text-accent/80">
@@ -71,7 +71,7 @@ export function Footer() {
 
         <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-muted-foreground">
           <p>&copy; {currentYear} Islam I. Abdulaal. All rights reserved.</p>
-          <p>Updated continuously through ORCID, Medium RSS, and talks sync workflows.</p>
+          <p>Data updates run through ORCID, Medium RSS, and talks sync workflows.</p>
         </div>
       </div>
     </footer>

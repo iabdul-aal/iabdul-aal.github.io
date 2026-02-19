@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Islam I. Abdulaal",
   title: "Islam I. Abdulaal | Integrated Photonics Research",
   description:
-    "Official website of Islam I. Abdulaal, integrated photonics researcher focused on silicon photonics, nonlinear quantum photonics, physics-informed design, and research mentorship.",
+    "Personal website of Islam I. Abdulaal, an ECE undergraduate researcher focused on integrated photonics, nonlinear optics, and physics-informed design.",
   url: "https://iabdul-aal.github.io",
   locale: "en_US",
   ogImage: "/personal-pic.png",
@@ -45,7 +45,7 @@ export const personConfig = {
   name: "Islam I. Abdulaal",
   givenName: "Islam",
   familyName: "Abdulaal",
-  role: "Integrated Photonics Researcher",
+  role: "ECE Undergraduate Researcher",
   affiliation: "ECE, Alexandria University",
   lab: "NanoPhoto Lab, A*STAR",
   location: "Alexandria, Egypt",

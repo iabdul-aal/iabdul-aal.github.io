@@ -6,7 +6,7 @@ import { ArrowRight, Check } from "lucide-react"
 export const metadata = {
   title: "Services",
   description:
-    "Research and technical service tracks by Islam I. Abdulaal for integrated photonics, simulation, and photonic-electronic co-design.",
+    "Current collaboration and technical support scope by Islam I. Abdulaal in integrated photonics and simulation workflows.",
 }
 
 export default function ServicesPage() {
@@ -63,7 +63,7 @@ export default function ServicesPage() {
     { label: "Service Tracks", value: String(serviceTracks.length) },
     { label: "Mentorship", value: mentorship.badge },
     { label: "Engagement Steps", value: String(process.length) },
-    { label: "Delivery", value: "Structured" },
+    { label: "Working Style", value: "Structured" },
   ]
 
   return (
@@ -71,9 +71,9 @@ export default function ServicesPage() {
       <section className="min-h-[55vh] flex items-center pt-20 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Research and Technical Services</h1>
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-balance">Collaboration Support</h1>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Practical support for integrated photonics research, simulation planning, and technical delivery.
+              Support I can currently provide for integrated photonics research, simulation planning, and technical execution.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/contact">
@@ -156,8 +156,8 @@ export default function ServicesPage() {
       </section>
 
       <JourneySection
-        title="Ready to Scope a Project?"
-        description="Use contact for project context and timeline, or review profile and venture tracks before starting."
+        title="Check Fit Before Starting"
+        description="Use contact to share your context and timeline, then we can confirm whether the scope is a good fit."
         actions={[
           { href: "/contact", label: "Start a Project Discussion" },
           { href: "/about", label: "Review Full Profile", variant: "outline" },
