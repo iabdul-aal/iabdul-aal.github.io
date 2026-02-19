@@ -200,50 +200,39 @@ function LogoMark({
 }) {
   const isSiemensLogo = Boolean(slot?.name && /siemens/i.test(slot.name))
   const isEgyptScholarsLogo = Boolean(slot?.name && /egypt scholars/i.test(slot.name))
-  const containerClass =
-    size === "sm"
-      ? isSiemensLogo
-        ? "h-10 min-w-36 px-0"
-        : isEgyptScholarsLogo
-          ? "h-10 min-w-28 px-2.5"
-        : "h-10 min-w-24 px-2.5"
-      : isSiemensLogo
-        ? "h-14 min-w-[13.5rem] px-0"
-        : isEgyptScholarsLogo
-          ? "h-14 min-w-36 px-4"
-        : "h-14 min-w-32 px-4"
+  const containerClass = size === "sm" ? "h-10 w-28 shrink-0 px-0" : "h-14 w-32 shrink-0 px-0"
   const imageWidth =
     size === "sm"
       ? isSiemensLogo
-        ? 136
+        ? 128
         : isEgyptScholarsLogo
-          ? 112
+          ? 120
         : 96
       : isSiemensLogo
-        ? 168
+        ? 156
         : isEgyptScholarsLogo
-          ? 156
+          ? 164
         : 136
   const imageHeight =
     size === "sm"
       ? isSiemensLogo
-        ? 20
+        ? 18
         : isEgyptScholarsLogo
-          ? 32
+          ? 34
         : 28
       : isSiemensLogo
-        ? 26
+        ? 24
         : isEgyptScholarsLogo
-          ? 40
+          ? 42
         : 40
   const imageClassName = isSiemensLogo
     ? size === "sm"
-      ? "h-[18px] w-auto object-contain"
-      : "h-[22px] w-auto object-contain"
+      ? "h-[16px] w-auto object-contain"
+      : "h-[20px] w-auto object-contain"
     : isEgyptScholarsLogo
       ? size === "sm"
-        ? "h-[30px] w-auto object-contain"
-        : "h-[38px] w-auto object-contain"
+        ? "h-[32px] w-auto object-contain"
+        : "h-[40px] w-auto object-contain"
     : size === "sm"
       ? "h-[26px] w-auto object-contain"
       : "h-[34px] w-auto object-contain"
