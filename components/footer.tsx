@@ -1,5 +1,5 @@
-﻿import Link from "next/link"
-import { Mail } from "lucide-react"
+import Link from "next/link"
+import { Link2, Linkedin, Twitter } from "lucide-react"
 import { contactInfo, socialLinks } from "@/lib/social-links"
 
 export function Footer() {
@@ -14,6 +14,12 @@ export function Footer() {
     { href: "/materials", label: "Materials" },
     { href: "/talks", label: "Talks" },
     { href: "/contact", label: "Contact" },
+  ]
+
+  const connectLinks = [
+    { name: "LinkedIn", href: socialLinks.linkedin, icon: Linkedin },
+    { name: "X", href: socialLinks.twitter, icon: Twitter },
+    { name: "All Profiles", href: socialLinks.linktree, icon: Link2 },
   ]
 
   return (
@@ -46,23 +52,25 @@ export function Footer() {
 
           <section>
             <h2 className="font-semibold text-foreground mb-4">Connect</h2>
-            <div className="mt-4 space-y-2 text-xs text-muted-foreground">
-              <p>
-                Email: <a href={`mailto:${socialLinks.email}`} className="text-accent hover:text-accent/80">{socialLinks.email}</a>
-              </p>
-              <p>
-                Academic: <a href={`mailto:${socialLinks.academicEmail}`} className="text-accent hover:text-accent/80">{socialLinks.academicEmail}</a>
-              </p>
-              <p>{contactInfo.location}</p>
+            <div className="flex flex-wrap items-center gap-4">
+              {connectLinks.map((item) => {
+                const Icon = item.icon
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                    aria-label={item.name}
+                    title={item.name}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                )
+              })}
             </div>
-            <a
-              href={`mailto:${socialLinks.email}`}
-              className="mt-4 inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
-              aria-label="Email"
-            >
-              <Mail className="w-4 h-4" />
-              Email Me
-            </a>
+            <p className="mt-4 text-xs text-muted-foreground">{contactInfo.location}</p>
           </section>
         </div>
 
