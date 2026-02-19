@@ -561,22 +561,25 @@ export default async function AboutPage() {
               </div>
             </section>
 
-            <section>
-              <div className="p-5 rounded-xl border border-border bg-background flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                  <h3 className="text-xl font-bold">Services</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Continue to consulting, mentorship, and collaboration service tracks.
-                  </p>
-                </div>
-                <Button asChild>
-                  <Link href="/services">
-                    Explore Services
-                    <ArrowUpRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </section>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 border-t border-border bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="p-5 rounded-xl border border-border bg-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold">Services</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Continue to consulting, mentorship, and collaboration service tracks.
+              </p>
+            </div>
+            <Button asChild>
+              <Link href="/services">
+                Explore Services
+                <ArrowUpRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
