@@ -96,12 +96,12 @@ export default function VenturesPage() {
               <article key={startup.name} className="p-7 rounded-xl border border-accent/40 bg-background">
                 <div className="mb-4 flex items-center gap-3">
                   {startup.logo ? (
-                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-border/70 bg-background/60 p-1">
+                    <div className="inline-flex h-16 w-16 items-center justify-center">
                       <Image
                         src={startup.logo}
                         alt={`${startup.name} logo`}
-                        width={48}
-                        height={48}
+                        width={56}
+                        height={56}
                         className="h-full w-full object-contain"
                       />
                     </div>

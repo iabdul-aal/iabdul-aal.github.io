@@ -54,12 +54,12 @@ export default function NonProfitPage() {
                 <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
                   <div className="space-y-3">
                     {initiative.logoPath && (
-                      <span className="inline-flex h-11 min-w-24 items-center justify-center rounded-md border border-border/70 bg-background/60 px-3">
+                      <span className="inline-flex h-12 min-w-28 items-center justify-center px-1">
                         <Image
                           src={initiative.logoPath}
                           alt={`${initiative.name} logo`}
-                          width={112}
-                          height={32}
+                          width={128}
+                          height={36}
                           className="max-h-full w-auto object-contain"
                           style={{ filter: ACCENT_LOGO_FILTER }}
                         />
