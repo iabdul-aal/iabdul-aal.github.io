@@ -42,7 +42,7 @@ export const highlights: HighlightItem[] = [
     link: socialLinks.arxiv,
   },
   {
-    title: "Alexandria University Technology Park Research Grant Application",
+    title: "AUTP Research Grant Application",
     date: "2025",
     category: "Funding",
     description: "Applied with a photonics-focused proposal and completed technical preparation during the review stage.",
