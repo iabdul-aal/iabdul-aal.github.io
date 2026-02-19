@@ -69,9 +69,8 @@ export function Footer() {
           </section>
         </div>
 
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-muted-foreground">
+        <div className="border-t border-border pt-6 text-xs text-muted-foreground">
           <p>&copy; {currentYear} Islam I. Abdulaal. All rights reserved.</p>
-          <p>Data updates run through ORCID, Medium RSS, and talks sync workflows.</p>
         </div>
       </div>
     </footer>

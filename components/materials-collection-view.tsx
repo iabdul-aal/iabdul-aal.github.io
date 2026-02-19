@@ -32,7 +32,6 @@ export async function MaterialsCollectionView({
   const summaryStats = [
     { label: "Published Files", value: String(assets.length) },
     { label: "Collection", value: collection?.title ?? "Materials" },
-    { label: "Update Mode", value: "File-driven" },
   ]
 
   return (
@@ -45,7 +44,7 @@ export async function MaterialsCollectionView({
         <h1 className="text-4xl md:text-5xl font-bold mb-4">{pageTitle}</h1>
         <p className="text-muted-foreground max-w-2xl mb-10">{pageDescription}</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
           {summaryStats.map((item) => (
             <article key={item.label} className="p-4 rounded-xl border border-border bg-card/40">
               <p className="text-lg font-bold leading-none">{item.value}</p>
@@ -53,12 +52,6 @@ export async function MaterialsCollectionView({
             </article>
           ))}
         </div>
-
-        {collection && (
-          <div className="mb-6 p-4 rounded-lg border border-border bg-card/60 text-sm text-muted-foreground">
-            Upload path: <code>{collection.uploadPath}</code>
-          </div>
-        )}
 
         {assets.length > 0 ? (
           <div className="space-y-4">

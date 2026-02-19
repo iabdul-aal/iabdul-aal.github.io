@@ -85,18 +85,8 @@ export default async function ArticlesPage() {
             ))}
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-12">
+          <div className="mb-12">
             <h2 className="text-4xl font-bold">Latest Articles</h2>
-            <p className="text-sm text-muted-foreground">
-              {usingLiveFeed ? "Live RSS sync enabled" : "Showing curated fallback list"}
-            </p>
-          </div>
-
-          <div className="mb-6 text-xs text-muted-foreground">
-            Feed source:{" "}
-            <a href={socialLinks.mediumRss} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80">
-              {socialLinks.mediumRss}
-            </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

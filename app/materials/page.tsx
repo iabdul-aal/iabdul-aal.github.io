@@ -22,7 +22,6 @@ export default async function MaterialsPage() {
     { label: "Collections", value: String(overview.collections.length) },
     { label: "Published Files", value: String(overview.totalAssets) },
     { label: "Audience", value: "Students and Researchers" },
-    { label: "Updates", value: "File-driven" },
   ]
 
   return (
@@ -71,7 +70,6 @@ export default async function MaterialsPage() {
                       </span>
                     ))}
                   </div>
-                  <p className="text-xs text-muted-foreground mb-4">Upload path: <code>{collection.uploadPath}</code></p>
                   <Link href={collection.href} className="text-sm text-accent inline-flex items-center gap-2">
                     Open Collection
                     <ArrowRight className="w-3 h-3" />
