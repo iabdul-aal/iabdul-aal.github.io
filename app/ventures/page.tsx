@@ -14,14 +14,16 @@ export const metadata = {
 export default function VenturesPage() {
   const startupPortfolio = [
     {
-      name: "Photonic Sensor Intelligence Stack",
-      relation: "Discovery",
+      name: "Octides",
+      relation: "Founded / Worked On",
       description:
-        "A software and sensing workflow for translating FBG measurement streams into actionable biomedical indicators.",
+        "Octides is developing an AI-powered design engine for optimizing cell-free crude extract systems, dramatically accelerating synthetic biology workflows from weeks to hours.",
       supportNote:
-        "Current direction: sensor architecture mapping, signal-processing baseline, and pilot partner scouting.",
+        "Part of Seedstars and CTCN, with support from the Irish and Netherlands embassies.",
       href: "/ventures/startups",
-      logo: "",
+      logo: "/logos/platforms/Octides.webp",
+      externalHref: socialLinks.octidesLinkedIn,
+      externalLabel: "LinkedIn",
     },
   ]
 
@@ -122,6 +124,14 @@ export default function VenturesPage() {
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>
+                  {startup.externalHref && startup.externalLabel && (
+                    <Button asChild size="sm" variant="outline">
+                      <a href={startup.externalHref} target="_blank" rel="noopener noreferrer">
+                        {startup.externalLabel}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </article>
             ))}

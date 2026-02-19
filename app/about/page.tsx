@@ -251,6 +251,8 @@ export default async function AboutPage() {
   const alexandriaLogo = logoByName.get("Alexandria University")
   const astarImreLogo = logoByName.get("A*STAR IMRE")
   const egyptScholarsLogo = logoByName.get("Egypt Scholars Advanced Labs Program")
+  const siemensLogo = logoByName.get("Siemens EDA, Egypt")
+  const itiLogo = logoByName.get("Information Technology Institute")
   const orcidLogo = logoByName.get("ORCID")
   const scholarLogo = logoByName.get("Google Scholar")
   const webOfScienceLogo = logoByName.get("Web of Science")
@@ -301,7 +303,7 @@ export default async function AboutPage() {
     },
     {
       role: "Analog and Mixed-Signal Simulation & Modeling Trainee",
-      org: "Siemens EDA",
+      org: "Siemens EDA, Egypt",
       period: "Jul 2025 - Sep 2025",
       summary:
         "Completed 90+ hours in AMS behavioral modeling and verification, including Verilog-A PLL modeling and SPICE-based analysis workflows.",
@@ -322,14 +324,14 @@ export default async function AboutPage() {
     },
     {
       role: "Analog-to-Digital Converter Design & Verification Trainee",
-      org: "Siemens EDA",
+      org: "Siemens EDA, Egypt",
       period: "Feb 2025",
       summary:
         "Designed and verified an 8-bit SAR ADC in single-ended and fully differential configurations with FFT-based performance evaluation.",
     },
     {
       role: "CMOS Analog Integrated Circuit Design Trainee",
-      org: "Information Technology Institute (ITI)",
+      org: "Information Technology Institute",
       period: "Jun 2024 - Sep 2024",
       summary:
         "Completed 180+ hours in CMOS analog IC design, including OTA design and verification flows using GF180-based toolchains.",
@@ -456,6 +458,12 @@ export default async function AboutPage() {
     const lowerOrg = org.toLowerCase()
     if (lowerOrg.includes("alexandria")) {
       return alexandriaLogo
+    }
+    if (lowerOrg.includes("siemens")) {
+      return siemensLogo
+    }
+    if (lowerOrg.includes("information technology institute") || lowerOrg.includes("(iti)") || lowerOrg.endsWith(" iti")) {
+      return itiLogo
     }
     if (lowerOrg.includes("egypt scholars")) {
       return egyptScholarsLogo

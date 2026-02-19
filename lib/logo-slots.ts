@@ -43,6 +43,18 @@ export const logoSlots: LogoSlot[] = [
     group: "Affiliations",
   },
   {
+    name: "Siemens EDA, Egypt",
+    filePath: "/logos/affiliations/Siemens.svg",
+    website: "https://eda.sw.siemens.com/",
+    group: "Affiliations",
+  },
+  {
+    name: "Information Technology Institute",
+    filePath: "/logos/affiliations/ITI.png",
+    website: "https://www.iti.gov.eg/",
+    group: "Affiliations",
+  },
+  {
     name: "ORCID",
     filePath: "/logos/platforms/orcid.svg",
     website: "https://orcid.org/",

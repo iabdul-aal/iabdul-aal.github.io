@@ -8,6 +8,8 @@ Place logo files in these paths to activate branded visuals:
 - `/public/logos/affiliations/Alexandria Univeristy.webp`
 - `/public/logos/affiliations/A Star.png`
 - `/public/logos/affiliations/Egypt Scholars.png`
+- `/public/logos/affiliations/Siemens.svg`
+- `/public/logos/affiliations/ITI.png`
 - `/public/logos/platforms/orcid.svg`
 - `/public/logos/platforms/google-scholar.svg`
 - `/public/logos/platforms/web-of-science.svg`

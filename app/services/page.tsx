@@ -1,5 +1,7 @@
 import { PageHero } from "@/components/page-hero"
+import Link from "next/link"
 import { Check } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const metadata = {
   title: "Services",
@@ -105,6 +107,32 @@ export default function ServicesPage() {
                   </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="p-6 sm:p-8 rounded-xl border border-accent/40 bg-card">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+              <div className="max-w-3xl">
+                <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
+                  Free Service
+                </span>
+                <h2 className="text-3xl font-bold mt-3">Mentorship for Students and Early Researchers</h2>
+                <p className="text-sm text-muted-foreground mt-3 max-w-[72ch]">
+                  I offer free mentorship sessions for direction clarity, technical planning, and practical academic growth.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link href="/mentorship">Open Mentorship</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/contact">Request a Session</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
