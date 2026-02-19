@@ -205,29 +205,31 @@ function LogoMark({
         ? "h-10 min-w-36 px-0"
         : "h-10 min-w-20 px-2.5"
       : isSiemensLogo
-        ? "h-12 min-w-44 px-0"
-        : "h-12 min-w-24 px-3"
+        ? "h-14 min-w-[13.5rem] rounded-lg border border-accent/35 bg-accent/10 px-2 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.65)]"
+        : "h-14 min-w-32 rounded-lg border border-accent/35 bg-accent/10 px-4 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.65)]"
   const imageWidth =
     size === "sm"
       ? isSiemensLogo
         ? 176
         : 88
       : isSiemensLogo
-        ? 208
-        : 112
+        ? 224
+        : 136
   const imageHeight =
     size === "sm"
       ? isSiemensLogo
         ? 28
         : 28
       : isSiemensLogo
-        ? 33
-        : 36
+        ? 38
+        : 40
   const imageClassName = isSiemensLogo
     ? size === "sm"
       ? "h-[22px] w-auto object-contain"
-      : "h-[26px] w-auto object-contain"
-    : "max-h-full w-auto object-contain"
+      : "h-[30px] w-auto object-contain"
+    : size === "sm"
+      ? "max-h-full w-auto object-contain"
+      : "h-[34px] w-auto object-contain"
   const mark = (
     <span className={`inline-flex items-center justify-center ${containerClass}`}>
       {slot?.available ? (
@@ -240,7 +242,9 @@ function LogoMark({
           style={{ filter: ACCENT_LOGO_FILTER }}
         />
       ) : (
-        <span className="text-[10px] font-medium tracking-wide text-muted-foreground">{buildLogoAcronym(label)}</span>
+        <span className={size === "sm" ? "text-[10px] font-medium tracking-wide text-muted-foreground" : "text-xs font-semibold tracking-wide text-muted-foreground"}>
+          {buildLogoAcronym(label)}
+        </span>
       )}
     </span>
   )
@@ -252,7 +256,7 @@ function LogoMark({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Visit ${slot.name}`}
-        className="inline-flex rounded-md transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+        className={`inline-flex ${size === "sm" ? "rounded-md transition-opacity hover:opacity-80" : "rounded-lg transition-all duration-200 hover:opacity-90 hover:scale-[1.01]"} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70`}
       >
         {mark}
       </a>
@@ -717,7 +721,7 @@ export default async function AboutPage() {
                   <span className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-accent/60" aria-hidden="true" />
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="flex items-start gap-3 min-w-0">
+                      <div className="flex items-start gap-4 min-w-0">
                         <LogoMark slot={resolveMembershipLogo(mainMembership.name)} label={mainMembership.name} />
                         <div className="min-w-0">
                           <p className="text-base font-semibold leading-snug">{mainMembershipDisplayName}</p>
@@ -759,7 +763,7 @@ export default async function AboutPage() {
                           aria-hidden="true"
                         />
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                          <div className="flex items-start gap-3 min-w-0">
+                          <div className="flex items-start gap-4 min-w-0">
                             <LogoMark slot={resolveMembershipLogo(item.name)} label={item.name} />
                             <div className="min-w-0">
                               <p className="text-sm font-semibold leading-snug group-hover:text-accent transition-colors">
