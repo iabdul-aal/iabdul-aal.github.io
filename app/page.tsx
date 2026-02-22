@@ -6,12 +6,14 @@ import { ArrowRight, Atom, CircuitBoard, Microscope, Sparkles } from "lucide-rea
 import { HighlightsSlider } from "@/components/highlights-slider"
 import { highlights } from "@/lib/highlights"
 import { siteConfig } from "@/lib/site-config"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Integrated Photonics and Research Work",
   description:
     "Current research work of Islam I. Abdulaal across integrated photonics, nonlinear photonics, and physics-informed design.",
-}
+  path: "/",
+})
 
 async function countJsonItems(fileName: string): Promise<number> {
   try {

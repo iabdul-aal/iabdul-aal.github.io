@@ -1,8 +1,12 @@
 ﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
-export const metadata = {
+import { createPageMetadata } from "@/lib/seo"
+
+export const metadata = createPageMetadata({
   title: "Summaries",
-}
+  description: "Concise technical summaries for photonics and research workflows.",
+  path: "/materials/summaries",
+})
 
 export default function SummariesPage() {
   return (

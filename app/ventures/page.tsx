@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button"
 import { PageHero } from "@/components/page-hero"
 import { ArrowRight, FlaskConical, Rocket, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Ventures",
   description:
     "Founded initiatives and venture directions across startup exploration, technical pilots, and student community programs.",
-}
+  path: "/ventures",
+})
 
 export default function VenturesPage() {
   const startupPortfolio = [

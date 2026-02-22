@@ -2,12 +2,14 @@ import { PageHero } from "@/components/page-hero"
 import { ProjectsStack } from "@/components/projects-stack"
 import { getGitHubRepositories } from "@/lib/github-repos"
 import { socialLinks } from "@/lib/social-links"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Projects",
   description:
     "Project portfolio from GitHub repositories across photonics, engineering workflows, and applied technical experiments.",
-}
+  path: "/projects",
+})
 
 export default async function ProjectsPage() {
   const repositories = await getGitHubRepositories(60)

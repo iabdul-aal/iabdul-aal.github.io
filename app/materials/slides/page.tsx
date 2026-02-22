@@ -1,8 +1,12 @@
 ﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
-export const metadata = {
+import { createPageMetadata } from "@/lib/seo"
+
+export const metadata = createPageMetadata({
   title: "Slides",
-}
+  description: "Presentation slides for teaching sessions, workshops, and technical explainers.",
+  path: "/materials/slides",
+})
 
 export default function SlidesPage() {
   return (

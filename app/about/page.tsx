@@ -8,12 +8,14 @@ import { Publications, type Publication } from "@/components/publications"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
 import { logoSlots } from "@/lib/logo-slots"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "About",
   description:
     "Current background, research direction, affiliations, publications, and technical work of Islam I. Abdulaal.",
-}
+  path: "/about",
+})
 
 type OrcidPublication = {
   title?: string

@@ -58,9 +58,6 @@ export const metadata: Metadata = {
   publisher: personConfig.name,
   category: "technology",
   referrer: "strict-origin-when-cross-origin",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,

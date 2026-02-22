@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button"
 import { PageHero } from "@/components/page-hero"
 import { MessageCircle } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Mentorship",
   description:
     "Mentorship support by Islam I. Abdulaal for students in integrated photonics and research skills.",
-}
+  path: "/mentorship",
+})
 
 export default function MentorshipPage() {
   const sessions = [

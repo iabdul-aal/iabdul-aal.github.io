@@ -2,12 +2,14 @@ import { PageHero } from "@/components/page-hero"
 import Link from "next/link"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Services",
   description:
     "Current collaboration and technical support scope by Islam I. Abdulaal in integrated photonics and simulation workflows.",
-}
+  path: "/services",
+})
 
 export default function ServicesPage() {
   const serviceTracks = [

@@ -1,11 +1,13 @@
 import { PageHero } from "@/components/page-hero"
 import { MaterialsStack } from "@/components/materials-stack"
 import { getMaterialsOverview } from "@/lib/materials-library"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Materials",
   description: "Slides, summaries, roadmaps, and reusable templates for integrated photonics and research workflows.",
-}
+  path: "/materials",
+})
 
 export default async function MaterialsPage() {
   const overview = await getMaterialsOverview()

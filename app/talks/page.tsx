@@ -1,12 +1,14 @@
 import { PageHero } from "@/components/page-hero"
 import { TalksStack } from "@/components/talks-stack"
 import { loadTalks } from "@/lib/talks"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Talks",
   description:
     "Speaking sessions by Islam I. Abdulaal across technical topics, entrepreneurship, and practical growth for students and early-career audiences.",
-}
+  path: "/talks",
+})
 
 export default async function TalksPage() {
   const talks = await loadTalks()

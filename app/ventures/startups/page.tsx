@@ -1,10 +1,12 @@
 import { PageHero } from "@/components/page-hero"
 import { Rocket } from "lucide-react"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Startup Track",
   description: "Startup concepts and early venture hypotheses connected to research translation work.",
-}
+  path: "/ventures/startups",
+})
 
 export default function StartupsPage() {
   const startupConcepts = [

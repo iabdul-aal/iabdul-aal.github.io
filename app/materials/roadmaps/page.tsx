@@ -1,8 +1,12 @@
 ﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
-export const metadata = {
+import { createPageMetadata } from "@/lib/seo"
+
+export const metadata = createPageMetadata({
   title: "Roadmaps",
-}
+  description: "Learning roadmaps from fundamentals to applied photonics and design workflows.",
+  path: "/materials/roadmaps",
+})
 
 export default function RoadmapsPage() {
   return (

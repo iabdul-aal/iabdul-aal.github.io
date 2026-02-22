@@ -2,12 +2,14 @@ import { PageHero } from "@/components/page-hero"
 import { ArticlesStack } from "@/components/articles-stack"
 import { socialLinks } from "@/lib/social-links"
 import { getMediumArticles, type MediumArticle } from "@/lib/medium-feed"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Articles",
   description:
     "Writing by Islam I. Abdulaal across photonics, engineering execution, entrepreneurship, and practical life wisdom.",
-}
+  path: "/articles",
+})
 
 export default async function ArticlesPage() {
   const fallbackArticles: MediumArticle[] = [

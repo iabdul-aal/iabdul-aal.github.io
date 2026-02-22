@@ -2,12 +2,14 @@ import { PageHero } from "@/components/page-hero"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 import { ContactEmailForm } from "@/components/contact-email-form"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Contact",
   description:
     "Contact Islam I. Abdulaal for research collaboration, speaking, mentorship, and technical consulting opportunities.",
-}
+  path: "/contact",
+})
 
 export default function ContactPage() {
   const contactMethods = [

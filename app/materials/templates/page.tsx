@@ -1,8 +1,12 @@
 ﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
-export const metadata = {
+import { createPageMetadata } from "@/lib/seo"
+
+export const metadata = createPageMetadata({
   title: "Templates",
-}
+  description: "Reusable templates for reports, project planning, and technical communication.",
+  path: "/materials/templates",
+})
 
 export default function TemplatesPage() {
   return (

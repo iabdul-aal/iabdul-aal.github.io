@@ -1,10 +1,12 @@
 import Image from "next/image"
 import { PageHero } from "@/components/page-hero"
+import { createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Community Initiatives",
   description: "Community and non-profit initiatives focused on technical education access and student support.",
-}
+  path: "/ventures/non-profit",
+})
 
 const ACCENT_LOGO_FILTER =
   "brightness(0) saturate(100%) invert(68%) sepia(18%) saturate(744%) hue-rotate(352deg) brightness(94%) contrast(89%)"
