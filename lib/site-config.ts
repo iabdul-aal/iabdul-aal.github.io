@@ -28,6 +28,9 @@ export const siteConfig = {
     "AlexDuino",
     "engineering initiatives",
     "hardware innovation",
+    "metamaterials",
+    "BICs",
+    "2D-materials",
   ],
   sameAs: [
     socialLinks.linkedin,
@@ -60,5 +63,7 @@ export const personConfig = {
     "Nonlinear quantum photonics",
     "Physics-informed machine learning",
     "Photonic-electronic co-design",
+    "Metamaterials",
+    "Bound states in the continuum (BICs)",
   ],
 } as const

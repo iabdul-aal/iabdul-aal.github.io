@@ -169,7 +169,7 @@
   
   ::-webkit-scrollbar-thumb {
     background: #b68c61; /* --scrollbar-thumb-color */
-    border-radius: 0px; /* Sharp corners to match theme */
+    border-radius: 4px; /* Slight roundness for a more modern premium feel */
   }
   
   ::-webkit-scrollbar-thumb:hover {

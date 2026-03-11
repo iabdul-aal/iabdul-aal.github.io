@@ -73,8 +73,8 @@ export default async function Home() {
 
       <section className="relative overflow-hidden border-b border-border/70">
         <div className="pointer-events-none absolute inset-0 hero-grid opacity-30" />
-        <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-accent/15 blur-3xl animate-slow-float" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl animate-slow-float" />
+        <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-accent/20 blur-[80px] animate-slow-float" />
+        <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-blue-400/15 blur-[80px] animate-slow-float" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative">
           <div className="max-w-4xl">
@@ -106,7 +106,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 animate-fade-up-delay-2">
             {achievementStats.map((stat) => (
-              <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5">
+              <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5 transition-all duration-300 hover:scale-[1.03] hover:border-accent hover:shadow-md hover:shadow-accent/5">
                 <p className="text-2xl md:text-3xl font-bold leading-none">{stat.value}</p>
                 <p className="text-xs text-muted-foreground mt-2">{stat.label}</p>
               </div>
@@ -129,7 +129,7 @@ export default async function Home() {
               return (
                 <article
                   key={area.title}
-                  className="rounded-xl border border-border bg-card/75 p-6 hover:border-accent transition-colors"
+                  className="rounded-xl border border-border bg-card/75 p-6 border-transparent hover:border-accent transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/5"
                 >
                   <Icon className="w-7 h-7 text-accent mb-4" />
                   <h3 className="text-lg font-semibold mb-2">{area.title}</h3>
