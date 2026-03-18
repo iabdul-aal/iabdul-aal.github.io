@@ -13,7 +13,7 @@ export function Footer() {
     { href: "/projects", label: "Projects" },
     { href: "/ventures", label: "Ventures" },
     { href: "/services", label: "Services" },
-    { href: "/mentorship", label: "Mentorship" },
+    { href: "/services#mentorship", label: "Mentorship" },
     { href: "/materials", label: "Materials" },
     { href: "/talks", label: "Talks" },
     { href: "/contact", label: "Contact" },

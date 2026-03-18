@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import { ArrowUpRight, BookOpen, ExternalLink } from "lucide-react"
+import { PageHero } from "@/components/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
 import type { Publication } from "@/components/publications"
@@ -94,26 +95,15 @@ export default async function PublicationsPage() {
     <main className="bg-background text-foreground">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Hero */}
-      <section className="pt-20 pb-12 border-b border-border/70">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs text-muted-foreground mb-6 animate-fade-up">
-            <BookOpen className="w-4 h-4 text-accent" />
-            Research Output
-          </div>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight animate-fade-up-delay">
-            Publications
-          </h1>
-          <p className="text-base md:text-lg text-muted-foreground mt-4 max-w-3xl animate-fade-up-delay-2">
-            Peer-reviewed papers, preprints, and research contributions in integrated photonics,
-            nonlinear optics, and physics-informed design.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        kicker="Research Output"
+        title="Publications"
+        description="Peer-reviewed papers, preprints, and research contributions in integrated photonics, nonlinear optics, and physics-informed design."
+      />
 
       {/* Publications List */}
       <section className="py-16 md:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {publications.length === 0 ? (
             <article className="p-8 rounded-2xl border border-border bg-card/40 text-center">
               <BookOpen className="w-10 h-10 text-muted-foreground/50 mx-auto mb-4" />

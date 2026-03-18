@@ -9,5 +9,5 @@ export const metadata = createPageMetadata({
 })
 
 export default function GuidancePage() {
-  redirect("/mentorship")
+  redirect("/services#mentorship")
 }

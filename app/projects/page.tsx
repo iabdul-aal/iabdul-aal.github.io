@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <h2 className="text-4xl font-bold">Project Stack</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Project Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
               Use search and filters at the top, then browse full-width repository blocks below.
             </p>

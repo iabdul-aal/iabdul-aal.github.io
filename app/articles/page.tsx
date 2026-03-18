@@ -64,7 +64,7 @@ export default async function ArticlesPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <h2 className="text-4xl font-bold">Article Stack</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Article Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
               Use search and filters at the top, then browse full-width article blocks below.
             </p>

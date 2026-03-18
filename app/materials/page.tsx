@@ -35,7 +35,7 @@ export default async function MaterialsPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <h2 className="text-4xl font-bold text-foreground">Resource Stack</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-foreground">Resource Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
               Start with a collection below. Each collection has its own file-level search and filters.
             </p>

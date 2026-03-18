@@ -46,7 +46,7 @@ export default async function TalksPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-3">What I Cover</h2>
+          <h2 className="font-display text-3xl md:text-4xl mb-3">What I Cover</h2>
           <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
             Session topics are adapted to audience level, from fundamentals and methods to execution mindset and practical career strategy.
           </p>
@@ -64,7 +64,7 @@ export default async function TalksPage() {
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
-            <h2 className="text-3xl font-bold">Talk Stack</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Talk Stack</h2>
             <p className="text-sm text-muted-foreground mt-2">
               Use search and filters at the top, then browse full-width talk blocks below.
             </p>

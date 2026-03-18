@@ -4,6 +4,8 @@ import { siteConfig } from "@/lib/site-config"
 export const dynamic = "force-static"
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date().toISOString()
+
   const routes: Array<{
     path: string
     changeFrequency: "daily" | "weekly" | "monthly" | "yearly" | "always" | "hourly" | "never"
@@ -20,16 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/materials/summaries", changeFrequency: "monthly", priority: 0.7 },
     { path: "/materials/roadmaps", changeFrequency: "monthly", priority: 0.7 },
     { path: "/materials/templates", changeFrequency: "monthly", priority: 0.7 },
-    { path: "/mentorship", changeFrequency: "monthly", priority: 0.8 },
-    { path: "/services", changeFrequency: "monthly", priority: 0.7 },
+    { path: "/services", changeFrequency: "monthly", priority: 0.8 },
     { path: "/talks", changeFrequency: "monthly", priority: 0.7 },
     { path: "/ventures", changeFrequency: "monthly", priority: 0.7 },
-    { path: "/ventures/startups", changeFrequency: "monthly", priority: 0.6 },
-    { path: "/ventures/non-profit", changeFrequency: "monthly", priority: 0.6 },
   ]
 
   return routes.map((route) => ({
     url: `${siteConfig.url}${route.path}`,
+    lastModified: now,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }))

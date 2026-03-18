@@ -83,7 +83,7 @@ export default function ContactPage() {
 
           <div className="mt-10 grid grid-cols-1 xl:grid-cols-2 gap-8">
             <article id="meeting-booking" className="p-8 rounded-xl border border-border bg-card">
-              <h2 className="text-3xl font-bold mb-3">Meeting Booking Calendar</h2>
+              <h2 className="font-display text-3xl md:text-4xl mb-3">Meeting Booking Calendar</h2>
               <p className="text-muted-foreground">
                 Pick a time slot directly. Please include your objective in the booking notes.
               </p>
@@ -109,7 +109,7 @@ export default function ContactPage() {
             </article>
 
             <article id="email-form-section" className="p-8 rounded-xl border border-border bg-card">
-              <h2 className="text-3xl font-bold mb-3">Email Form</h2>
+              <h2 className="font-display text-3xl md:text-4xl mb-3">Email Form</h2>
               <p className="text-muted-foreground mb-6">
                 Share details in a structured format, then open a pre-filled draft in your email app.
               </p>

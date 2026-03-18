@@ -1,13 +1,14 @@
 import { PageHero } from "@/components/page-hero"
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { Check, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { socialLinks } from "@/lib/social-links"
 import { createPageMetadata } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
   title: "Services",
   description:
-    "Current collaboration and technical support scope by Islam I. Abdulaal in integrated photonics and simulation workflows.",
+    "Current collaboration and technical support scope by Islam I. Abdulaal in integrated photonics, simulation workflows, and student mentorship.",
   path: "/services",
 })
 
@@ -48,28 +49,47 @@ export default function ServicesPage() {
     },
   ]
 
+  const mentorshipSessions = [
+    {
+      title: "Research Direction",
+      description: "Clarify topic scope, reading priorities, and milestone planning for photonics-related projects.",
+    },
+    {
+      title: "Technical Guidance",
+      description: "Discuss simulation strategy, modeling assumptions, and practical implementation trade-offs.",
+    },
+    {
+      title: "Academic Growth",
+      description: "Support for profile building, writing habits, and transitioning from learning to research output.",
+    },
+    {
+      title: "Project Review",
+      description: "Feedback on current work, bottlenecks, and how to improve technical communication.",
+    },
+  ]
+
   return (
     <main className="bg-background text-foreground">
       <PageHero
         kicker="Services"
         title="Collaboration Support"
-        description="Focused support for photonics modeling, research workflow design, and physics-informed optimization."
+        description="Focused support for photonics modeling, research workflow design, physics-informed optimization, and student mentorship."
         actions={[
           { label: "Start a Discussion", href: "/contact" },
-          { label: "Review Mentorship", href: "/mentorship", variant: "outline" },
+          { label: "Jump to Mentorship", href: "#mentorship", variant: "outline" },
         ]}
       />
 
-      <section className="py-20 bg-background">
+      <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">What I Offer</p>
-          <h2 className="text-4xl font-bold mb-3">Service Tracks</h2>
+          <h2 className="font-display text-3xl md:text-4xl mb-3">Service Tracks</h2>
           <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
             Each track is scoped around practical deliverables and clear constraints.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {serviceTracks.map((track) => (
-              <article key={track.title} className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+              <article key={track.title} className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
                 <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{track.title}</h3>
                 <p className="text-sm text-muted-foreground mb-6">{track.description}</p>
                 <div className="space-y-3">
@@ -86,10 +106,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-card border-y border-border">
+      <section className="py-16 md:py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">How It Works</p>
-          <h2 className="text-4xl font-bold mb-3">Typical Engagement Flow</h2>
+          <h2 className="font-display text-3xl md:text-4xl mb-3">Typical Engagement Flow</h2>
           <p className="text-sm text-muted-foreground mb-10 max-w-[72ch]">
             A lightweight sequence to keep scope, execution, and delivery aligned from the first conversation.
           </p>
@@ -116,27 +136,45 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-background">
+      <section id="mentorship" className="py-16 md:py-20 bg-background scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-6 sm:p-8 rounded-xl border border-accent/40 bg-card">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-              <div className="max-w-3xl">
-                <span className="inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
-                  Free Service
-                </span>
-                <h2 className="text-3xl font-bold mt-3">Mentorship for Students</h2>
-                <p className="text-sm text-muted-foreground mt-3 max-w-[72ch]">
-                  I offer free mentorship sessions for direction clarity, technical planning, and practical academic growth.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Button asChild>
-                  <Link href="/mentorship">Open Mentorship</Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <Link href="/contact">Request a Session</Link>
-                </Button>
-              </div>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Free Service</p>
+          <h2 className="font-display text-3xl md:text-4xl mb-3">Mentorship for Students</h2>
+          <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
+            Structured support for students who need clarity on direction and execution. Mentorship sessions are offered free of charge.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {mentorshipSessions.map((session) => (
+              <article key={session.title} className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{session.title}</h3>
+                <p className="text-muted-foreground">{session.description}</p>
+                <p className="text-accent text-sm font-semibold mt-5 group-hover:translate-x-0.5 transition-transform">By appointment</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 p-6 sm:p-7 rounded-xl border border-border bg-card">
+            <div className="flex items-center gap-3 mb-5">
+              <MessageCircle className="w-6 h-6 text-accent" />
+              <h3 className="text-xl font-bold">Direct Questions</h3>
+            </div>
+            <p className="text-muted-foreground mb-6">
+              For concise technical questions, send a short context summary and your current objective.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/contact">Use Contact Page</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <a href={socialLinks.telegramBot} target="_blank" rel="noopener noreferrer">
+                  Ask via Telegram Bot
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                  Message on LinkedIn
+                </a>
+              </Button>
             </div>
           </div>
         </div>
@@ -144,3 +182,4 @@ export default function ServicesPage() {
     </main>
   )
 }
+
