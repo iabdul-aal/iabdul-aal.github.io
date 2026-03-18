@@ -2,7 +2,7 @@ import Link from "next/link"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Atom, Brain, CircuitBoard, Microscope, Sparkles, Zap } from "lucide-react"
+import { ArrowRight, Atom, Brain, CircuitBoard, Microscope, Sparkles, Waves, Zap } from "lucide-react"
 import { HighlightsSlider } from "@/components/highlights-slider"
 import { highlights } from "@/lib/highlights"
 import { siteConfig } from "@/lib/site-config"
@@ -11,7 +11,7 @@ import { createPageMetadata } from "@/lib/seo"
 export const metadata = createPageMetadata({
   title: "Photonics Research",
   description:
-    "Research work of Islam I. Abdulaal across integrated photonics, neuromorphic photonics, quantum and nonlinear photonics, nanophotonics, and computational photonics.",
+    "Research work of Islam I. Abdulaal across integrated photonics, neuromorphic photonics, quantum photonics, nonlinear photonics, nanophotonics, and computational photonics.",
   path: "/",
 })
 
@@ -43,9 +43,14 @@ export default async function Home() {
       icon: Brain,
     },
     {
-      title: "Quantum & Nonlinear Photonics",
-      description: "SPDC architectures, quasi-BIC concepts, and quantum-compatible device design.",
+      title: "Quantum Photonics",
+      description: "SPDC architectures, entangled photon-pair sources, and quantum-compatible integrated device design.",
       icon: Atom,
+    },
+    {
+      title: "Nonlinear Photonics",
+      description: "Quasi-BIC concepts, nonlinear light-matter interactions, and frequency conversion in integrated platforms.",
+      icon: Waves,
     },
     {
       title: "Nanophotonics",
@@ -98,8 +103,8 @@ export default async function Home() {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
-              Photonics researcher working at the intersection of integrated, neuromorphic, quantum, nonlinear,
-              and computational photonics. This website summarizes my current work, publications, and collaboration options.
+              Photonics researcher working at the intersection of integrated, neuromorphic, quantum, nonlinear, nano-,
+              and computational photonics — summarizing current work, publications, and collaboration options.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">

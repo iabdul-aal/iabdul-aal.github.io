@@ -15,7 +15,7 @@ export default function ContactPage() {
   const contactMethods = [
     {
       icon: Mail,
-      title: "IEEE Email",
+      title: "Email",
       value: socialLinks.email,
       description: "Primary channel for collaboration and professional inquiries",
       href: `mailto:${socialLinks.email}`,
@@ -66,7 +66,7 @@ export default function ContactPage() {
                   <a
                     key={method.title}
                     href={method.href}
-                    className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors"
+                    className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
                   >
                     {content}
                   </a>
@@ -74,7 +74,7 @@ export default function ContactPage() {
               }
 
               return (
-                <article key={method.title} className="p-8 rounded-xl border border-border bg-card">
+                <article key={method.title} className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
                   {content}
                 </article>
               )

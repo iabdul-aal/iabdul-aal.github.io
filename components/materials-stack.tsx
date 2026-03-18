@@ -38,12 +38,12 @@ export function MaterialsStack({ items }: MaterialsStackProps) {
         return (
           <article
             key={item.slug}
-            className="group w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/80 hover:bg-card/95 transition-all"
+            className="group w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
           >
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
               <div className="flex items-start gap-4 min-w-0">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/70 bg-background/60 shrink-0">
-                  <Icon className="w-5 h-5 text-accent" />
+                  <Icon className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
                 </span>
                 <div className="min-w-0">
                   <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">{item.title}</h3>

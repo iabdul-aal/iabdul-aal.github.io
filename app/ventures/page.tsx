@@ -153,10 +153,10 @@ export default function VenturesPage() {
               return (
                 <article
                   key={track.title}
-                  className="p-7 rounded-xl border border-border bg-card hover:border-accent transition-colors flex flex-col"
+                  className="group p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 flex flex-col"
                 >
-                  <Icon className="w-7 h-7 text-accent mb-5" />
-                  <h3 className="text-xl font-bold text-foreground mb-3">{track.title}</h3>
+                  <Icon className="w-7 h-7 text-accent mb-5 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">{track.title}</h3>
                   <p className="text-muted-foreground text-sm mb-6 flex-grow">{track.description}</p>
                   <Link href={track.href} className="text-sm text-accent hover:text-accent/80 inline-flex items-center gap-2">
                     {track.cta}
@@ -177,9 +177,9 @@ export default function VenturesPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {foundedInitiatives.map((item) => (
-              <article key={item.name} className="p-6 rounded-xl border border-border bg-background">
+              <article key={item.name} className="group p-6 rounded-xl border border-border bg-background hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
                 <div className="flex items-center justify-between gap-3 mb-3">
-                  <h3 className="text-xl font-semibold text-foreground">{item.name}</h3>
+                  <h3 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{item.name}</h3>
                   <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{item.status}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{item.summary}</p>

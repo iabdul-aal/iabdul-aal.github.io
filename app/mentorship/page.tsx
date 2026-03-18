@@ -46,13 +46,14 @@ export default function MentorshipPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">Session Options</p>
           <h2 className="text-4xl font-bold mb-12">1-on-1 Session Themes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {sessions.map((session) => (
-              <article key={session.title} className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors">
-                <h3 className="text-xl font-bold mb-3">{session.title}</h3>
+              <article key={session.title} className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{session.title}</h3>
                 <p className="text-muted-foreground">{session.description}</p>
-                <p className="text-accent text-sm font-semibold mt-5">By appointment</p>
+                <p className="text-accent text-sm font-semibold mt-5 group-hover:translate-x-0.5 transition-transform">By appointment</p>
               </article>
             ))}
           </div>

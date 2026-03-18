@@ -324,8 +324,12 @@ export default async function AboutPage() {
       desc: "Photonic neural network architectures, optical computing primitives, and brain-inspired processing on integrated platforms.",
     },
     {
-      title: "Quantum & Nonlinear Photonics",
-      desc: "SPDC-oriented architectures, quasi-BIC concepts, nonlinear light-matter interactions, and quantum-compatible device design.",
+      title: "Quantum Photonics",
+      desc: "SPDC-oriented architectures, entangled photon-pair generation, and quantum-compatible integrated device design.",
+    },
+    {
+      title: "Nonlinear Photonics",
+      desc: "Quasi-BIC concepts, nonlinear light-matter interactions, frequency conversion, and four-wave mixing in integrated platforms.",
     },
     {
       title: "Nanophotonics",

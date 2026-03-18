@@ -62,14 +62,15 @@ export default function ServicesPage() {
 
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">What I Offer</p>
           <h2 className="text-4xl font-bold mb-3">Service Tracks</h2>
           <p className="text-sm text-muted-foreground mb-12 max-w-[72ch]">
             Each track is scoped around practical deliverables and clear constraints.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {serviceTracks.map((track) => (
-              <article key={track.title} className="p-8 rounded-xl border border-border bg-card hover:border-accent transition-colors">
-                <h3 className="text-xl font-bold mb-3">{track.title}</h3>
+              <article key={track.title} className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{track.title}</h3>
                 <p className="text-sm text-muted-foreground mb-6">{track.description}</p>
                 <div className="space-y-3">
                   {track.scope.map((item) => (
@@ -87,6 +88,7 @@ export default function ServicesPage() {
 
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-2">How It Works</p>
           <h2 className="text-4xl font-bold mb-3">Typical Engagement Flow</h2>
           <p className="text-sm text-muted-foreground mb-10 max-w-[72ch]">
             A lightweight sequence to keep scope, execution, and delivery aligned from the first conversation.
@@ -103,7 +105,7 @@ export default function ServicesPage() {
                   <div className="timeline-node-pulse absolute left-[2px] top-1 w-7 h-7 rounded-full border border-accent/60 bg-background text-accent flex items-center justify-center text-sm font-semibold md:left-1/2 md:-translate-x-1/2 md:top-0">
                     {item.step}
                   </div>
-                  <div className="p-6 rounded-xl border border-border bg-background hover:border-accent transition-colors h-full">
+                  <div className="p-6 rounded-xl border border-border bg-background hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 h-full">
                     <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                     <p className="text-sm text-muted-foreground">{item.detail}</p>
                   </div>
