@@ -54,7 +54,7 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
             required
             value={formState.name}
             onChange={(event) => updateField("name", event.target.value)}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-all input-focus-glow"
+            className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
             placeholder="Your name"
           />
         </label>
@@ -65,7 +65,7 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
             required
             value={formState.email}
             onChange={(event) => updateField("email", event.target.value)}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-all input-focus-glow"
+            className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
             placeholder="you@example.com"
           />
         </label>
@@ -77,7 +77,7 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
           required
           value={formState.subject}
           onChange={(event) => updateField("subject", event.target.value)}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-accent"
+          className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
           placeholder="How can I help?"
         />
       </label>
@@ -87,7 +87,7 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
           required
           value={formState.message}
           onChange={(event) => updateField("message", event.target.value)}
-          className="w-full min-h-40 rounded-md border border-border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-accent"
+          className="w-full min-h-40 rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
           placeholder="Share your context and objective."
         />
       </label>
