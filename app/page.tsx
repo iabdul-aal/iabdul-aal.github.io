@@ -2,16 +2,16 @@ import Link from "next/link"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Atom, CircuitBoard, Microscope, Sparkles } from "lucide-react"
+import { ArrowRight, Atom, Brain, CircuitBoard, Microscope, Sparkles, Zap } from "lucide-react"
 import { HighlightsSlider } from "@/components/highlights-slider"
 import { highlights } from "@/lib/highlights"
 import { siteConfig } from "@/lib/site-config"
 import { createPageMetadata } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
-  title: "Integrated Photonics and Research Work",
+  title: "Photonics Research",
   description:
-    "Current research work of Islam I. Abdulaal across integrated photonics, nonlinear photonics, and physics-informed design.",
+    "Research work of Islam I. Abdulaal across integrated photonics, neuromorphic photonics, quantum and nonlinear photonics, nanophotonics, and computational photonics.",
   path: "/",
 })
 
@@ -34,17 +34,27 @@ export default async function Home() {
   const focusAreas = [
     {
       title: "Integrated Photonics",
-      description: "Silicon photonics, waveguide engineering, and mode-division multiplexing systems.",
+      description: "Silicon photonics, waveguide engineering, and scalable on-chip optical systems.",
       icon: CircuitBoard,
     },
     {
-      title: "Nonlinear Quantum Photonics",
-      description: "SPDC-oriented architectures, quasi-BIC concepts, and quantum-compatible device design.",
+      title: "Neuromorphic Photonics",
+      description: "Photonic neural networks, optical computing primitives, and brain-inspired processing.",
+      icon: Brain,
+    },
+    {
+      title: "Quantum & Nonlinear Photonics",
+      description: "SPDC architectures, quasi-BIC concepts, and quantum-compatible device design.",
       icon: Atom,
     },
     {
-      title: "Physics-Informed Design",
-      description: "PINN-assisted inverse design and multiphysics optimization for photonic components.",
+      title: "Nanophotonics",
+      description: "Sub-wavelength structures, metasurfaces, and nanostructured resonators.",
+      icon: Zap,
+    },
+    {
+      title: "Computational Photonics",
+      description: "PINN-assisted inverse design and data-driven photonic device modeling.",
       icon: Sparkles,
     },
   ]
@@ -80,7 +90,7 @@ export default async function Home() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 text-xs md:text-sm text-muted-foreground animate-fade-up">
               <Microscope className="w-4 h-4 text-accent" />
-              Postgradute student
+              Postgraduate Student
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mt-6 animate-fade-up-delay">
@@ -88,8 +98,8 @@ export default async function Home() {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground mt-6 max-w-3xl animate-fade-up-delay-2">
-              I work on integrated photonics and research-focused engineering workflows. This website summarizes my
-              current work, public outputs, and collaboration options.
+              Photonics researcher working at the intersection of integrated, neuromorphic, quantum, nonlinear,
+              and computational photonics. This website summarizes my current work, publications, and collaboration options.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
@@ -123,16 +133,16 @@ export default async function Home() {
               See details
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {focusAreas.map((area) => {
               const Icon = area.icon
               return (
                 <article
                   key={area.title}
-                  className="rounded-xl border border-border bg-card/75 p-6 border-transparent hover:border-accent transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/5"
+                  className="group rounded-xl border border-border bg-card/75 p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
                 >
-                  <Icon className="w-7 h-7 text-accent mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">{area.title}</h3>
+                  <Icon className="w-7 h-7 text-accent mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{area.title}</h3>
                   <p className="text-sm text-muted-foreground">{area.description}</p>
                 </article>
               )

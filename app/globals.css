@@ -22,7 +22,7 @@
   /* Muted: medium navy */
   --muted: oklch(0.22 0.033 250);
   /* Muted foreground: lighter gray for subtitle text */
-  --muted-foreground: oklch(0.65 0.01 250);
+  --muted-foreground: oklch(0.70 0.01 250);
   /* Accent: #b68c61 - bronze/gold for all interactive elements */
   --accent: oklch(0.655 0.088 68);
   --accent-foreground: oklch(0.132 0.033 250);
@@ -42,7 +42,7 @@
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   /* Border radius: 0 for sharp corners */
-  --radius: 0rem;
+  --radius: 0.625rem;
   /* Sidebar: exact #0a1723 navy background */
   --sidebar: oklch(0.132 0.033 250);
   --sidebar-foreground: oklch(0.835 0 0);
@@ -71,7 +71,7 @@
   --secondary: oklch(0.22 0.033 250);
   --secondary-foreground: oklch(0.835 0 0);
   --muted: oklch(0.22 0.033 250);
-  --muted-foreground: oklch(0.65 0.01 250);
+  --muted-foreground: oklch(0.70 0.01 250);
   --accent: oklch(0.655 0.088 68);
   --accent-foreground: oklch(0.132 0.033 250);
   --destructive: oklch(0.55 0.22 25);

@@ -317,15 +317,23 @@ export default async function AboutPage() {
   const focusAreas = [
     {
       title: "Integrated Photonics",
-      desc: "Silicon photonics, waveguide engineering, and PIC-level component development for compact and scalable optical systems.",
+      desc: "Silicon photonics, waveguide engineering, and PIC-level component development for compact and scalable on-chip optical systems.",
     },
     {
-      title: "Nonlinear Photonics",
-      desc: "SPDC-oriented architectures, nonlinear light-matter interactions, and design choices aligned with quantum photonics use cases.",
+      title: "Neuromorphic Photonics",
+      desc: "Photonic neural network architectures, optical computing primitives, and brain-inspired processing on integrated platforms.",
     },
     {
-      title: "Physics-Informed Design",
-      desc: "PINN-assisted inverse design and multiphysics-aware optimization to improve both model quality and design efficiency.",
+      title: "Quantum & Nonlinear Photonics",
+      desc: "SPDC-oriented architectures, quasi-BIC concepts, nonlinear light-matter interactions, and quantum-compatible device design.",
+    },
+    {
+      title: "Nanophotonics",
+      desc: "Sub-wavelength structures, metasurfaces, and nanostructured resonators for advanced light manipulation and sensing.",
+    },
+    {
+      title: "Computational Photonics",
+      desc: "PINN-assisted inverse design, multiphysics optimization, and data-driven modeling for photonic device engineering.",
     },
   ]
 
@@ -406,18 +414,23 @@ export default async function AboutPage() {
   const memberships = {
     main: {
       name: "Institute of Electrical and Electronics Engineers",
-      detail: "Student Member | 2025 - Present",
+      detail: "Student Member | 2025 - 2026",
     },
     subs: [
       {
         name: "Solid-State Circuits Society",
-        detail: "Student Member | 2025 - Present",
+        detail: "Student Member | 2025 - 2026",
       },
       {
         name: "Photonics Society",
-        detail: "Student Member | 2025 - Present",
+        detail: "Student Member | 2025 - 2026",
       },
     ],
+  }
+
+  const opticaMembership = {
+    name: "Optica (formerly OSA)",
+    detail: "Student Member | 2026 - Present",
   }
 
   const technicalStack = [
@@ -439,9 +452,9 @@ export default async function AboutPage() {
   ]
 
   const fallbackProfileParagraphs = [
-    "I am an Electronics and Communications Engineering (ECE) undergraduate at Alexandria University, currently focused on integrated photonics and device-level engineering work.",
-    "My recent projects combine physics-informed modeling, optimization-guided design, and reproducible simulation workflows.",
-    "At NanoPhoto Lab (A*STAR), I contribute to integrated quantum photonics tasks while improving model reliability and reporting quality.",
+    "I am a postgraduate student in Photonics, working at the intersection of integrated photonics, neuromorphic photonics, quantum and nonlinear photonics, nanophotonics, and computational photonics.",
+    "My research combines physics-informed modeling, optimization-driven inverse design, and reproducible simulation workflows to advance photonic device engineering across classical and quantum platforms.",
+    "At NanoPhoto Lab (A*STAR), I contribute to integrated quantum photonics research with emphasis on model reliability, practical design iteration, and scalable computational approaches.",
   ]
 
   const profileParagraphs = fallbackProfileParagraphs
@@ -476,10 +489,18 @@ export default async function AboutPage() {
     mainMembership.name.toLowerCase().includes("ieee") ||
     mainMembership.name.toLowerCase().includes("electrical and electronics engineers")
 
+  const opticaLogo = logoByName.get("Optica")
+
   const resolveMembershipLogo = (name: string): LogoSlotWithStatus | undefined => {
     const lowerName = name.toLowerCase()
     if (lowerName.includes("solid-state") || lowerName.includes("sscs")) {
       return ieeeSscsLogo
+    }
+    if (lowerName.includes("optica") || lowerName.includes("osa")) {
+      return opticaLogo
+    }
+    if (lowerName.includes("photonics") && lowerName.includes("ieee")) {
+      return ieeePhotonicsLogo
     }
     if (lowerName.includes("photonics")) {
       return ieeePhotonicsLogo
@@ -528,7 +549,7 @@ export default async function AboutPage() {
                 />
               </div>
               <h1 className="text-3xl font-bold mb-2">{personConfig.name}</h1>
-              <p className="text-accent font-semibold mb-2">ECE Undergraduate</p>
+              <p className="text-accent font-semibold mb-2">Postgraduate Student in Photonics</p>
               <p className="text-sm text-muted-foreground mb-2">
                 Alexandria University
               </p>
@@ -600,8 +621,8 @@ export default async function AboutPage() {
             <section id="research-focus" className={`${sectionCardClass} scroll-mt-24`}>
               <h2 className="text-2xl font-bold mb-4">Research Focus</h2>
               <p className="text-sm text-muted-foreground mb-4">
-                My research interests connect photonic device physics, inverse design, and robust computational
-                workflows for both classical and quantum-oriented platforms.
+                My work spans the intersection of integrated photonics with neuromorphic computing, quantum information,
+                nonlinear optics, nanophotonics, and computational design methodologies.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {focusAreas.map((item) => (
@@ -674,7 +695,7 @@ export default async function AboutPage() {
       </section>
 
       <div id="publications" className="scroll-mt-24">
-        <Publications publications={publications} />
+        <Publications publications={publications} featured />
       </div>
 
       <section className="py-16 bg-card border-t border-border">

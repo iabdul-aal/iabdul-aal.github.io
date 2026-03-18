@@ -8,6 +8,7 @@ export function Footer() {
 
   const primaryLinks = [
     { href: "/about", label: "About" },
+    { href: "/publications", label: "Publications" },
     { href: "/articles", label: "Articles" },
     { href: "/projects", label: "Projects" },
     { href: "/ventures", label: "Ventures" },

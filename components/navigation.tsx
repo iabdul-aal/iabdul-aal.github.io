@@ -15,6 +15,7 @@ export function Navigation() {
   const links = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
+    { href: "/publications", label: "Publications" },
     { href: "/ventures", label: "Ventures" },
     { href: "/projects", label: "Projects" },
     { href: "/articles", label: "Articles" },
@@ -44,7 +45,7 @@ export function Navigation() {
             />
             <div className="hidden md:block">
               <p className="text-sm font-semibold leading-none">Islam I. Abdulaal</p>
-              <p className="text-[11px] text-muted-foreground leading-none mt-1">ECE Undergraduate</p>
+              <p className="text-[11px] text-muted-foreground leading-none mt-1">Postgraduate Student in Photonics</p>
             </div>
           </Link>
 

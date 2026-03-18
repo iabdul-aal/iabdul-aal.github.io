@@ -1,4 +1,4 @@
-﻿export type LogoSlot = {
+export type LogoSlot = {
   name: string
   filePath: string
   website: string
@@ -22,6 +22,12 @@ export const logoSlots: LogoSlot[] = [
     name: "IEEE Photonics Society",
     filePath: "/logos/affiliations/Photonics.webp",
     website: "https://www.photonicssociety.org/",
+    group: "Affiliations",
+  },
+  {
+    name: "Optica",
+    filePath: "/logos/affiliations/Optica.png",
+    website: "https://www.optica.org/",
     group: "Affiliations",
   },
   {

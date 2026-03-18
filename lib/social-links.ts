@@ -27,6 +27,7 @@ export const socialLinks = {
   academicEmail: "eslam.ibrahim2026@alexu.edu.eg",
   phone: "+20120460921",
   whatsapp: "https://wa.me/20120460921",
+  optica: "https://www.optica.org/",
 }
 
 export const professionalSocialProfiles = [
