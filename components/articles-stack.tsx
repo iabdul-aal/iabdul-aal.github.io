@@ -129,7 +129,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
               href={article.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative p-4 sm:p-6 rounded-xl border border-border bg-card hover:border-accent/80 hover:bg-card/95 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border"
+              className="group block w-full relative p-4 sm:p-6 rounded-xl border border-border bg-card hover:border-accent/80 hover:bg-card/95 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border"
             >
               <div className="flex flex-col lg:flex-row gap-5">
                 {article.imageUrl ? (
