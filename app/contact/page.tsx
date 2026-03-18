@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/page-hero"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 import { ContactEmailForm } from "@/components/contact-email-form"
@@ -50,7 +51,7 @@ export default function ContactPage() {
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-            {contactMethods.map((method) => {
+            {contactMethods.map((method, index) => {
               const Icon = method.icon
               const content = (
                 <>
@@ -63,20 +64,23 @@ export default function ContactPage() {
 
               if (method.href) {
                 return (
-                  <a
-                    key={method.title}
-                    href={method.href}
-                    className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
-                  >
-                    {content}
-                  </a>
+                  <ScrollReveal key={method.title} delay={index * 100} direction="up">
+                    <a
+                      href={method.href}
+                      className="group block p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
+                    >
+                      {content}
+                    </a>
+                  </ScrollReveal>
                 )
               }
 
               return (
-                <article key={method.title} className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
-                  {content}
-                </article>
+                <ScrollReveal key={method.title} delay={index * 100} direction="up">
+                  <article className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full">
+                    {content}
+                  </article>
+                </ScrollReveal>
               )
             })}
           </div>

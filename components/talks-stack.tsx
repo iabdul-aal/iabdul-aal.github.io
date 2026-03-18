@@ -169,7 +169,7 @@ export function TalksStack({ talks }: TalksStackProps) {
           {filteredTalks.map((talk) => (
             <article
               key={talk.url}
-              className="group w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/80 hover:bg-card/95 transition-all"
+              className="group relative p-4 sm:p-6 rounded-xl border border-border bg-card hover:border-accent/80 hover:bg-card/95 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border"
             >
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">

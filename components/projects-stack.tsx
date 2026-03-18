@@ -146,7 +146,7 @@ export function ProjectsStack({ repositories }: ProjectsStackProps) {
           {filteredRepositories.map((repo) => (
             <article
               key={repo.url}
-              className="group w-full rounded-xl border border-border bg-card p-4 sm:p-6 hover:border-accent/80 hover:bg-card/95 transition-all"
+              className="group relative p-4 sm:p-6 rounded-xl border border-border bg-card hover:border-accent/80 hover:bg-card/95 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border"
             >
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
@@ -194,9 +194,9 @@ export function ProjectsStack({ repositories }: ProjectsStackProps) {
                     href={repo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80"
+                    className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 group/link"
                   >
-                    Open Repository <ArrowUpRight className="w-3.5 h-3.5" />
+                    Open Repository <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
                   {repo.homepage && (
                     <a

@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/page-hero"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import Link from "next/link"
 import { Check, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -88,19 +89,21 @@ export default function ServicesPage() {
             Each track is scoped around practical deliverables and clear constraints.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {serviceTracks.map((track) => (
-              <article key={track.title} className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{track.title}</h3>
-                <p className="text-sm text-muted-foreground mb-6">{track.description}</p>
-                <div className="space-y-3">
-                  {track.scope.map((item) => (
-                    <p key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </p>
-                  ))}
-                </div>
-              </article>
+            {serviceTracks.map((track, index) => (
+              <ScrollReveal key={track.title} delay={index * 100} direction="up">
+                <article className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{track.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-6">{track.description}</p>
+                  <div className="space-y-3">
+                    {track.scope.map((item) => (
+                      <p key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </p>
+                    ))}
+                  </div>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -144,12 +147,14 @@ export default function ServicesPage() {
             Structured support for students who need clarity on direction and execution. Mentorship sessions are offered free of charge.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {mentorshipSessions.map((session) => (
-              <article key={session.title} className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{session.title}</h3>
-                <p className="text-muted-foreground">{session.description}</p>
-                <p className="text-accent text-sm font-semibold mt-5 group-hover:translate-x-0.5 transition-transform">By appointment</p>
-              </article>
+            {mentorshipSessions.map((session, index) => (
+              <ScrollReveal key={session.title} delay={index * 80} direction="up">
+                <article className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">{session.title}</h3>
+                  <p className="text-muted-foreground">{session.description}</p>
+                  <p className="text-accent text-sm font-semibold mt-5 group-hover:translate-x-0.5 transition-transform">By appointment</p>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
 

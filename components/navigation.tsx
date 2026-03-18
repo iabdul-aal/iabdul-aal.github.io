@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,6 +10,8 @@ import { cn } from "@/lib/utils"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
   const links = [
@@ -26,12 +28,34 @@ export function Navigation() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
+  const closeMenu = useCallback(() => {
+    if (!isOpen) return
+    setIsClosing(true)
+    setTimeout(() => {
+      setIsOpen(false)
+      setIsClosing(false)
+    }, 200)
+  }, [isOpen])
+
   useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
+    closeMenu()
+  }, [pathname, closeMenu])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+    <nav
+      className={cn(
+        "sticky top-0 z-50 border-b border-border transition-all duration-300",
+        scrolled
+          ? "bg-background/95 backdrop-blur-xl shadow-lg shadow-black/5"
+          : "bg-background/90 backdrop-blur-md",
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -57,11 +81,18 @@ export function Navigation() {
                 href={link.href}
                 aria-current={isActive(link.href) ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-9 items-center text-sm transition-colors",
+                  "relative inline-flex h-9 items-center text-sm transition-colors",
                   isActive(link.href) ? "text-accent font-semibold" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {link.label}
+                {/* Animated underline indicator */}
+                <span
+                  className={cn(
+                    "absolute -bottom-[1px] left-0 h-[2px] bg-accent transition-all duration-300 ease-out",
+                    isActive(link.href) ? "w-full" : "w-0 group-hover:w-full",
+                  )}
+                />
               </Link>
             ))}
           </div>
@@ -76,34 +107,46 @@ export function Navigation() {
           {/* Mobile Menu Toggle */}
           <button
             className="lg:hidden inline-flex h-10 w-10 items-center justify-center text-foreground hover:text-accent transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              if (isOpen) {
+                closeMenu()
+              } else {
+                setIsOpen(true)
+              }
+            }}
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation — Animated */}
         {isOpen && (
-          <div className="lg:hidden pb-4 space-y-2 border-t border-border">
-            {links.map((link) => (
+          <div
+            className={cn(
+              "lg:hidden pb-4 space-y-2 border-t border-border",
+              isClosing ? "animate-slide-up-out" : "animate-slide-down",
+            )}
+          >
+            {links.map((link, index) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "block px-4 py-2 rounded transition-colors",
+                  "block px-4 py-2 rounded transition-all duration-200",
                   isActive(link.href)
                     ? "text-accent bg-accent/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-card",
                 )}
-                onClick={() => setIsOpen(false)}
+                style={{ animationDelay: isClosing ? "0ms" : `${index * 30}ms` }}
+                onClick={closeMenu}
               >
                 {link.label}
               </Link>
             ))}
 
             <div className="px-4 pt-2">
-              <Button asChild className="w-full" onClick={() => setIsOpen(false)}>
+              <Button asChild className="w-full" onClick={closeMenu}>
                 <Link href="/contact">Contact</Link>
               </Button>
             </div>

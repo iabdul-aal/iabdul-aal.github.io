@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PageHero } from "@/components/page-hero"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import { ArrowRight, FlaskConical, Rocket, Users2 } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 import { createPageMetadata } from "@/lib/seo"
@@ -184,25 +185,26 @@ export default function VenturesPage() {
             Concepts I am validating to connect sensing research with practical product direction.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {startupConcepts.map((concept) => (
-              <article
-                key={concept.title}
-                className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
-              >
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <Rocket className="w-5 h-5 text-accent" />
-                  <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{concept.status}</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">{concept.title}</h3>
-                <p className="text-sm text-muted-foreground mb-5">{concept.summary}</p>
-                <div className="space-y-2">
-                  {concept.milestones.map((milestone) => (
-                    <p key={milestone} className="text-xs text-muted-foreground border-l-2 border-accent/50 pl-3">
-                      {milestone}
-                    </p>
-                  ))}
-                </div>
-              </article>
+            {startupConcepts.map((concept, index) => (
+              <ScrollReveal key={concept.title} delay={index * 100} direction="up">
+                <article
+                  className="group p-6 sm:p-7 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
+                >
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <Rocket className="w-5 h-5 text-accent" />
+                    <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{concept.status}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">{concept.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-5">{concept.summary}</p>
+                  <div className="space-y-2">
+                    {concept.milestones.map((milestone) => (
+                      <p key={milestone} className="text-xs text-muted-foreground border-l-2 border-accent/50 pl-3">
+                        {milestone}
+                      </p>
+                    ))}
+                  </div>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -300,24 +302,26 @@ export default function VenturesPage() {
             Programs I started to support technical learning communities and student-led execution.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {foundedInitiatives.map((item) => (
-              <article key={item.name} className="group p-6 sm:p-7 rounded-xl border border-border bg-background hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
-                <div className="flex items-center justify-between gap-3 mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{item.name}</h3>
-                  <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{item.status}</span>
-                </div>
-                <p className="text-sm text-muted-foreground">{item.summary}</p>
-                {"href" in item && item.href && (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-2 text-xs text-accent hover:text-accent/80"
-                  >
-                    {item.name === "Si-Cast" ? "View YouTube channel" : "View event details"} <ArrowRight className="w-3 h-3" />
-                  </a>
-                )}
-              </article>
+            {foundedInitiatives.map((item, index) => (
+              <ScrollReveal key={item.name} delay={index * 80} direction="up">
+                <article className="group p-6 sm:p-7 rounded-xl border border-border bg-background hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <h3 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{item.name}</h3>
+                    <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">{item.status}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{item.summary}</p>
+                  {"href" in item && item.href && (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center gap-2 text-xs text-accent hover:text-accent/80 group/link"
+                    >
+                      {item.name === "Si-Cast" ? "View YouTube channel" : "View event details"} <ArrowRight className="w-3 h-3 arrow-slide" />
+                    </a>
+                  )}
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>

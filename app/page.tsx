@@ -4,6 +4,7 @@ import { join } from "node:path"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Atom, Brain, CircuitBoard, Microscope, Sparkles, Waves, Zap } from "lucide-react"
 import { HighlightsSlider } from "@/components/highlights-slider"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import { highlights } from "@/lib/highlights"
 import { siteConfig } from "@/lib/site-config"
 import { createPageMetadata } from "@/lib/seo"
@@ -107,21 +108,21 @@ export default async function Home() {
               and computational photonics — summarizing current work, publications, and collaboration options.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-2">
+            <div className="mt-8 flex flex-wrap gap-3 animate-fade-up-delay-3">
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link href="/about">View Profile</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto group/link">
                 <Link href="/contact">
-                  Contact <ArrowRight className="w-4 h-4" />
+                  Contact <ArrowRight className="w-4 h-4 arrow-slide" />
                 </Link>
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 animate-fade-up-delay-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 animate-fade-up-delay-3">
             {achievementStats.map((stat) => (
-              <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5 transition-all duration-300 hover:scale-[1.03] hover:border-accent hover:shadow-md hover:shadow-accent/5">
+              <div key={stat.label} className="rounded-xl border border-border bg-card/70 p-5 transition-all duration-300 hover:scale-[1.03] hover:border-accent hover:shadow-md hover:shadow-accent/5 glow-border">
                 <p className="text-2xl md:text-3xl font-bold leading-none">{stat.value}</p>
                 <p className="text-xs text-muted-foreground mt-2">{stat.label}</p>
               </div>
@@ -132,24 +133,27 @@ export default async function Home() {
 
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4 mb-8">
-            <h2 className="font-display text-3xl md:text-4xl">Current Focus</h2>
-            <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
-              See details
-            </Link>
-          </div>
+          <ScrollReveal>
+            <div className="flex items-center justify-between gap-4 mb-8">
+              <h2 className="font-display text-3xl md:text-4xl">Current Focus</h2>
+              <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
+                See details
+              </Link>
+            </div>
+          </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {focusAreas.map((area) => {
+            {focusAreas.map((area, index) => {
               const Icon = area.icon
               return (
-                <article
-                  key={area.title}
-                  className="group rounded-xl border border-border bg-card/75 p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
-                >
-                  <Icon className="w-7 h-7 text-accent mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{area.title}</h3>
-                  <p className="text-sm text-muted-foreground">{area.description}</p>
-                </article>
+                <ScrollReveal key={area.title} delay={index * 80} direction="up">
+                  <article
+                    className="group rounded-xl border border-border bg-card/75 p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
+                  >
+                    <Icon className="w-7 h-7 text-accent mb-4 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{area.title}</h3>
+                    <p className="text-sm text-muted-foreground">{area.description}</p>
+                  </article>
+                </ScrollReveal>
               )
             })}
           </div>
@@ -158,13 +162,17 @@ export default async function Home() {
 
       <section id="highlights" className="py-16 border-y border-border/70 bg-card/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4 mb-8">
-            <h2 className="font-display text-3xl md:text-4xl">Recent Highlights</h2>
-            <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
-              View profile
-            </Link>
-          </div>
-          <HighlightsSlider items={highlights} />
+          <ScrollReveal>
+            <div className="flex items-center justify-between gap-4 mb-8">
+              <h2 className="font-display text-3xl md:text-4xl">Recent Highlights</h2>
+              <Link href="/about" className="text-sm text-accent hover:text-accent/80 transition-colors">
+                View profile
+              </Link>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <HighlightsSlider items={highlights} />
+          </ScrollReveal>
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, Link2, Linkedin, Mail, Send, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { contactInfo, socialLinks } from "@/lib/social-links"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -28,70 +29,72 @@ export function Footer() {
 
   return (
     <footer className="bg-card border-t border-border mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-8">
-          <section>
-            <h2 className="font-semibold text-foreground mb-4">Website Overview</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              I use this website to share my current research, ventures, and public work.
-            </p>
-            <div className="mt-5">
-              <Button asChild className="w-full sm:w-auto">
-                <Link href="/contact">
-                  Start a conversation
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </Button>
-            </div>
-          </section>
+      <ScrollReveal>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-8">
+            <section>
+              <h2 className="font-semibold text-foreground mb-4">Website Overview</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                I use this website to share my current research, ventures, and public work.
+              </p>
+              <div className="mt-5">
+                <Button asChild className="w-full sm:w-auto">
+                  <Link href="/contact">
+                    Start a conversation
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </section>
 
-          <section>
-            <h2 className="font-semibold text-foreground mb-4">Navigate</h2>
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              {primaryLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-accent transition-colors py-1">
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </section>
+            <section>
+              <h2 className="font-semibold text-foreground mb-4">Navigate</h2>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                {primaryLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-accent transition-colors py-1">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
 
-          <section>
-            <h2 className="font-semibold text-foreground mb-4">Connect</h2>
-            <div className="flex flex-wrap items-center gap-3">
-              {connectLinks.map((item) => {
-                const Icon = item.icon
-                return (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
-                    aria-label={item.name}
-                    title={item.name}
-                  >
-                    <Icon className="w-5 h-5" />
+            <section>
+              <h2 className="font-semibold text-foreground mb-4">Connect</h2>
+              <div className="flex flex-wrap items-center gap-3">
+                {connectLinks.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
+                      aria-label={item.name}
+                      title={item.name}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </a>
+                  )
+                })}
+              </div>
+              <p className="mt-4 text-xs text-muted-foreground">{contactInfo.location}</p>
+              <div className="mt-4">
+                <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
+                  <a href={`mailto:${contactInfo.email}`}>
+                    <Mail className="w-4 h-4 mr-2" />
+                    Email Me
                   </a>
-                )
-              })}
-            </div>
-            <p className="mt-4 text-xs text-muted-foreground">{contactInfo.location}</p>
-            <div className="mt-4">
-              <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
-                <a href={`mailto:${contactInfo.email}`}>
-                  <Mail className="w-4 h-4 mr-2" />
-                  Email Me
-                </a>
-              </Button>
-            </div>
-          </section>
-        </div>
+                </Button>
+              </div>
+            </section>
+          </div>
 
-        <div className="border-t border-border pt-6 text-xs text-muted-foreground">
-          <p>&copy; {currentYear} Islam I. Abdulaal. Content available under CC BY 4.0 unless noted otherwise.</p>
+          <div className="border-t border-border pt-6 text-xs text-muted-foreground">
+            <p>&copy; {currentYear} Islam I. Abdulaal. Content available under CC BY 4.0 unless noted otherwise.</p>
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
     </footer>
   )
 }
