@@ -35,7 +35,7 @@ export function createPageMetadata({
   const socialTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.name}`
 
   return {
-    title,
+    title: socialTitle,
     description,
     keywords,
     alternates: {
