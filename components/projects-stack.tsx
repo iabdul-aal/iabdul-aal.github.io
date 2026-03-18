@@ -70,7 +70,7 @@ export function ProjectsStack({ repositories }: ProjectsStackProps) {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Repository, topic, or keyword"
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             />
           </label>
 
@@ -79,7 +79,7 @@ export function ProjectsStack({ repositories }: ProjectsStackProps) {
             <select
               value={language}
               onChange={(event) => setLanguage(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {languageOptions.map((option) => (
                 <option key={option} value={option}>
@@ -94,7 +94,7 @@ export function ProjectsStack({ repositories }: ProjectsStackProps) {
             <select
               value={repoType}
               onChange={(event) => setRepoType(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {[ALL_TYPES, "Original repositories", "Forked repositories"].map((option) => (
                 <option key={option} value={option}>
@@ -109,7 +109,7 @@ export function ProjectsStack({ repositories }: ProjectsStackProps) {
             <select
               value={status}
               onChange={(event) => setStatus(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {[ALL_STATUS, "Active only", "Archived only"].map((option) => (
                 <option key={option} value={option}>

@@ -66,7 +66,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Title, topic, or keyword"
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             />
           </label>
 
@@ -75,7 +75,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
             <select
               value={topic}
               onChange={(event) => setTopic(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {topicOptions.map((option) => (
                 <option key={option} value={option}>
@@ -90,7 +90,7 @@ export function ArticlesStack({ articles }: ArticlesStackProps) {
             <select
               value={year}
               onChange={(event) => setYear(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-accent"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {yearOptions.map((option) => (
                 <option key={option} value={option}>

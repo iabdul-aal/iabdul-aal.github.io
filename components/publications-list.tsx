@@ -77,7 +77,7 @@ export function PublicationsList({ publications, featured = false }: Publication
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Title, venue, or keyword"
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none transition-colors focus:border-accent focus:shadow-[0_0_0_3px_rgba(182,140,97,0.1)]"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             />
           </label>
 
@@ -86,7 +86,7 @@ export function PublicationsList({ publications, featured = false }: Publication
             <select
               value={venue}
               onChange={(event) => setVenue(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none transition-colors focus:border-accent focus:shadow-[0_0_0_3px_rgba(182,140,97,0.1)]"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {venueOptions.map((option) => (
                 <option key={option} value={option}>
@@ -101,7 +101,7 @@ export function PublicationsList({ publications, featured = false }: Publication
             <select
               value={year}
               onChange={(event) => setYear(event.target.value)}
-              className="w-full h-11 rounded-md border border-border bg-background px-3 text-sm outline-none transition-colors focus:border-accent focus:shadow-[0_0_0_3px_rgba(182,140,97,0.1)]"
+              className="w-full h-11 rounded-md border border-border bg-card px-3 text-sm outline-none transition-all input-focus-glow"
             >
               {yearOptions.map((option) => (
                 <option key={option} value={option}>
