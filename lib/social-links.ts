@@ -23,7 +23,7 @@ export const socialLinks = {
   hwCarnivalFeatureBA: "https://www.bibalex.org/en/event/details?documentid=44040&keywords=HW-Carnival",
   siCastYoutube: "https://www.youtube.com/@si-cast",
   featuredTalkYoutube: "https://www.youtube.com/watch?v=mEboydO5pEk&t=4s",
-  email: "iabdul-aal@ieee.org",
+  email: "es-eslam.ibrahim2026@alexu.edu.eg",
   academicEmail: "eslam.ibrahim2026@alexu.edu.eg",
   phone: "+20120460921",
   whatsapp: "https://wa.me/20120460921",
