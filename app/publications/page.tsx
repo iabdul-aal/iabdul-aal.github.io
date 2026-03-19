@@ -1,10 +1,10 @@
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
-import { PageHero } from "@/components/page-hero"
+import type { Publication } from "@/components/publications"
 import { PublicationsList } from "@/components/publications-list"
+import { PageHero } from "@/components/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
-import type { Publication } from "@/components/publications"
 
 export const metadata = createPageMetadata({
   title: "Publications",
@@ -91,13 +91,13 @@ export default async function PublicationsPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Publications — Islam I. Abdulaal",
+    name: "Publications - Islam I. Abdulaal",
     url: `${siteConfig.url}/publications`,
     description: "Research publications by Islam I. Abdulaal.",
-    mainEntity: publications.map((pub) => ({
+    mainEntity: publications.map((publication) => ({
       "@type": "ScholarlyArticle",
-      name: pub.title,
-      url: pub.url,
+      name: publication.title,
+      url: publication.url,
     })),
   }
 

@@ -151,6 +151,7 @@
       linear-gradient(180deg, #0a1723 0%, #0b1826 55%, #09131e 100%);
     background-attachment: fixed;
     min-height: 100vh;
+    text-rendering: optimizeLegibility;
   }
 
   a:focus-visible {
@@ -180,6 +181,12 @@
   * {
     scrollbar-width: thin;
     scrollbar-color: #b68c61 #0a1723;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
   }
 }
 

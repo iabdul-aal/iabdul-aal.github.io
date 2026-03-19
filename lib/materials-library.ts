@@ -165,7 +165,14 @@ export async function getCollectionAssets(slug: MaterialCollectionSlug): Promise
       }
       return b.updatedAtEpoch - a.updatedAtEpoch
     })
-    .map(({ updatedAtEpoch: _updatedAtEpoch, ...asset }) => asset)
+    .map((asset) => ({
+      fileName: asset.fileName,
+      displayName: asset.displayName,
+      href: asset.href,
+      extension: asset.extension,
+      sizeLabel: asset.sizeLabel,
+      updatedAt: asset.updatedAt,
+    }))
 }
 
 export async function getMaterialsOverview() {

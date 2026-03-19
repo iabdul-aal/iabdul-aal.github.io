@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 import type { HighlightItem } from "@/lib/highlights"
 import { Button } from "@/components/ui/button"
@@ -22,7 +22,6 @@ export function HighlightsSlider({ items, intervalMs = 7000 }: HighlightsSliderP
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [animKey, setAnimKey] = useState(0)
-  const progressRef = useRef<HTMLDivElement>(null)
   const total = items.length
 
   useEffect(() => {
@@ -138,7 +137,6 @@ export function HighlightsSlider({ items, intervalMs = 7000 }: HighlightsSliderP
           <div className="flex-1 h-0.5 bg-border/50 rounded-full overflow-hidden">
             <div
               key={`progress-${animKey}`}
-              ref={progressRef}
               className="h-full bg-accent/40 rounded-full progress-bar"
               style={{ animationDuration: `${intervalMs}ms` }}
             />

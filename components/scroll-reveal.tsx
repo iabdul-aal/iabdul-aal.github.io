@@ -51,18 +51,26 @@ export function ScrollReveal({
   className,
   as: Tag = "div",
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const node = ref.current
     if (!node) return
 
+    let frameId: number | null = null
+
     // Respect prefers-reduced-motion
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReduced) {
-      setIsVisible(true)
-      return
+      frameId = window.requestAnimationFrame(() => {
+        setIsVisible(true)
+      })
+      return () => {
+        if (frameId !== null) {
+          window.cancelAnimationFrame(frameId)
+        }
+      }
     }
 
     const observer = new IntersectionObserver(
@@ -76,14 +84,21 @@ export function ScrollReveal({
     )
 
     observer.observe(node)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId)
+      }
+    }
   }, [threshold])
 
   const classes = directionClasses[direction]
 
   return (
     <Tag
-      ref={ref as any}
+      ref={(node: HTMLElement | null) => {
+        ref.current = node
+      }}
       className={cn(
         "transition-all will-change-[transform,opacity]",
         isVisible ? classes.visible : classes.hidden,

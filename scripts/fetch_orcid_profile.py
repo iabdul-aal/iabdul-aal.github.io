@@ -42,10 +42,26 @@ def fetch_json(endpoint: str) -> dict[str, Any]:
 
 
 def compact_whitespace(text: str) -> str:
-    # Some records may contain mojibake (UTF-8 decoded as cp1252/latin-1).
+    # Some records may contain mojibake caused by UTF-8 being decoded as cp1252 or latin-1.
     # Try both common repair paths and keep the cleaner result.
     def mojibake_score(value: str) -> int:
-        markers = ("Ã", "â€", "â€“", "â€”", "â€™", "â€œ", "â€˜", "ï¿½")
+        markers = (
+            "Ãƒ",
+            "Ã¢â‚¬",
+            "Ã¢â‚¬â€œ",
+            "Ã¢â‚¬â€",
+            "Ã¢â‚¬â„¢",
+            "Ã¢â‚¬Å“",
+            "Ã¢â‚¬Ëœ",
+            "Ã¯Â¿Â½",
+            "â€“",
+            "â€”",
+            "â€˜",
+            "â€™",
+            "â€œ",
+            "â€",
+            "Â",
+        )
         return sum(value.count(marker) for marker in markers)
 
     best = text
@@ -62,8 +78,7 @@ def compact_whitespace(text: str) -> str:
             best = repaired
             best_score = repaired_score
 
-    text = best
-    normalized_lines = [" ".join(line.split()) for line in text.splitlines()]
+    normalized_lines = [" ".join(line.split()) for line in best.splitlines()]
     return "\n".join(line for line in normalized_lines if line).strip()
 
 

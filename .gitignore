@@ -1,6 +1,7 @@
 node_modules/
 out/
 .next/
+.tools/
 .env
 .env.local
 .env.*.local
@@ -12,3 +13,4 @@ yarn-error.log*
 .DS_Store
 coverage/
 __pycache__/
+*.tsbuildinfo

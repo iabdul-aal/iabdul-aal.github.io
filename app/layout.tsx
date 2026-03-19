@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: "Islam Abdulaal Research Website",
-  keywords: siteConfig.keywords,
+  keywords: [...siteConfig.keywords],
   authors: [{ name: personConfig.name, url: siteConfig.url }],
   creator: personConfig.name,
   publisher: personConfig.name,

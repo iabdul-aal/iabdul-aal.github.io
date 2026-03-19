@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PageHero } from "@/components/page-hero"
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { ArrowRight, FlaskConical, Rocket, Users2 } from "lucide-react"
+import { ArrowRight, FlaskConical, Rocket } from "lucide-react"
 import { socialLinks } from "@/lib/social-links"
 import { createPageMetadata } from "@/lib/seo"
 

@@ -24,7 +24,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimeoutRef = useRef<number | null>(null)
   const pathname = usePathname()
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
@@ -33,11 +33,11 @@ export function Navigation() {
     if (!isOpen) return
 
     if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current)
+      window.clearTimeout(closeTimeoutRef.current)
     }
 
     setIsClosing(true)
-    closeTimeoutRef.current = setTimeout(() => {
+    closeTimeoutRef.current = window.setTimeout(() => {
       setIsOpen(false)
       setIsClosing(false)
       closeTimeoutRef.current = null
@@ -45,8 +45,25 @@ export function Navigation() {
   }
 
   useEffect(() => {
-    closeMenu()
-  }, [pathname])
+    if (!isOpen) {
+      return
+    }
+
+    const timeout = window.setTimeout(() => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current)
+      }
+
+      setIsClosing(true)
+      closeTimeoutRef.current = window.setTimeout(() => {
+        setIsOpen(false)
+        setIsClosing(false)
+        closeTimeoutRef.current = null
+      }, 200)
+    }, 0)
+
+    return () => clearTimeout(timeout)
+  }, [isOpen, pathname])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32)
@@ -56,8 +73,8 @@ export function Navigation() {
 
   useEffect(() => {
     return () => {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current)
+      if (closeTimeoutRef.current !== null) {
+        window.clearTimeout(closeTimeoutRef.current)
       }
     }
   }, [])

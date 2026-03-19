@@ -32,9 +32,27 @@ export const metadata = createPageMetadata({
   path: "/",
 })
 
-async function countJsonItems(fileName: string): Promise<number> {
+type FocusArea = {
+  title: string
+  description: string
+  icon: typeof CircuitBoard
+}
+
+type DesktopFocusArea = FocusArea & {
+  tag: string
+  col: string
+  mt: string
+  isCenter?: boolean
+}
+
+type MobileFocusArea = FocusArea & {
+  tag: string
+  highlight?: boolean
+}
+
+async function countJsonItems(filePath: string): Promise<number> {
   try {
-    const raw = await readFile(join(process.cwd(), fileName), "utf8")
+    const raw = await readFile(filePath, "utf8")
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? parsed.length : 0
   } catch {
@@ -44,12 +62,12 @@ async function countJsonItems(fileName: string): Promise<number> {
 
 export default async function Home() {
   const [publicationCount, talkCount, materialsOverview] = await Promise.all([
-    countJsonItems("publications.json"),
-    countJsonItems("talks.json"),
+    countJsonItems(join(process.cwd(), "publications.json")),
+    countJsonItems(join(process.cwd(), "talks.json")),
     getMaterialsOverview(),
   ])
 
-  const focusAreas = [
+  const focusAreas: FocusArea[] = [
     {
       title: "Integrated Photonics",
       description: "Silicon photonics, waveguide engineering, and scalable on-chip optical systems.",
@@ -139,6 +157,22 @@ export default async function Home() {
     { label: "Publications", value: String(publicationCount) },
     { label: "Public Talks", value: String(talkCount) },
     { label: "Learning Resources", value: String(materialsOverview.totalAssets) },
+  ]
+
+  const desktopFocusAreas: DesktopFocusArea[] = [
+    { ...focusAreas[4], tag: "Modeling & Software", col: "col-start-2", mt: "" },
+    { ...focusAreas[1], tag: "Architecture", col: "col-start-1", mt: "-mt-4" },
+    { ...focusAreas[0], tag: "Core Platform", col: "col-start-2", mt: "-mt-4", isCenter: true },
+    { ...focusAreas[2], tag: "Architecture", col: "col-start-3", mt: "-mt-4" },
+    { ...focusAreas[3], tag: "Materials & Physics", col: "col-start-2", mt: "mt-4" },
+  ]
+
+  const mobileFocusAreas: MobileFocusArea[] = [
+    { ...focusAreas[4], tag: "Modeling & Software" },
+    { ...focusAreas[0], tag: "Core Platform", highlight: true },
+    { ...focusAreas[1], tag: "Architecture" },
+    { ...focusAreas[2], tag: "Architecture" },
+    { ...focusAreas[3], tag: "Materials & Physics" },
   ]
 
   const jsonLd = {
@@ -267,22 +301,41 @@ export default async function Home() {
 
             {/* Desktop UI: Diamond Layout */}
             <div className="hidden md:grid grid-cols-3 gap-6 relative z-10">
-              {[
-                { ...focusAreas[4], tag: "Modeling & Software", col: "col-start-2", mt: "" },
-                { ...focusAreas[1], tag: "Architecture", col: "col-start-1", mt: "-mt-4" },
-                { ...focusAreas[0], tag: "Core Platform", col: "col-start-2", mt: "-mt-4", isCenter: true },
-                { ...focusAreas[2], tag: "Architecture", col: "col-start-3", mt: "-mt-4" },
-                { ...focusAreas[3], tag: "Materials & Physics", col: "col-start-2", mt: "mt-4" }
-              ].map((item, index) => {
+              {desktopFocusAreas.map((item, index) => {
                 const Icon = item.icon
                 return (
-                  <div key={item.title} className={`${item.col} ${item.mt} relative z-${item.isCenter ? '20' : '10'} ${item.isCenter ? 'transform scale-105' : ''}`}>
+                  <div
+                    key={item.title}
+                    className={`${item.col} ${item.mt} ${item.isCenter ? "relative z-20 scale-105" : "relative z-10"}`}
+                  >
                     <ScrollReveal delay={index * 100} direction="up" className="h-full">
-                      <article className={`group h-full flex flex-col items-center text-center rounded-2xl border ${item.isCenter ? 'border-accent/50 bg-card/60 shadow-lg shadow-accent/10' : 'border-border bg-card/40 glow-border'} p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10`}>
-                        {item.isCenter && <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />}
-                        <span className={`relative z-10 mb-5 text-[10px] font-bold tracking-[0.15em] uppercase ${item.isCenter ? 'text-accent bg-accent/20 px-3' : 'text-accent/80 bg-accent/10 px-2'} py-1.5 rounded-full`}>{item.tag}</span>
-                        <Icon className={`relative z-10 mb-4 ${item.isCenter ? 'h-9 w-9' : 'h-8 w-8'} text-accent transition-transform duration-500 group-hover:scale-110`} />
-                        <h3 className={`relative z-10 mb-3 ${item.isCenter ? 'text-2xl' : 'text-xl'} font-bold transition-colors group-hover:text-accent`}>{item.title}</h3>
+                      <article
+                        className={`group flex h-full flex-col items-center rounded-2xl border p-7 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 ${
+                          item.isCenter
+                            ? "border-accent/50 bg-card/60 shadow-lg shadow-accent/10"
+                            : "border-border bg-card/40 glow-border"
+                        }`}
+                      >
+                        {item.isCenter && <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />}
+                        <span
+                          className={`relative z-10 mb-5 rounded-full py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] ${
+                            item.isCenter ? "bg-accent/20 px-3 text-accent" : "bg-accent/10 px-2 text-accent/80"
+                          }`}
+                        >
+                          {item.tag}
+                        </span>
+                        <Icon
+                          className={`relative z-10 mb-4 text-accent transition-transform duration-500 group-hover:scale-110 ${
+                            item.isCenter ? "h-9 w-9" : "h-8 w-8"
+                          }`}
+                        />
+                        <h3
+                          className={`relative z-10 mb-3 font-bold transition-colors group-hover:text-accent ${
+                            item.isCenter ? "text-2xl" : "text-xl"
+                          }`}
+                        >
+                          {item.title}
+                        </h3>
                         <p className="relative z-10 text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                       </article>
                     </ScrollReveal>
@@ -293,18 +346,24 @@ export default async function Home() {
 
             {/* Mobile UI: Stack */}
             <div className="flex flex-col gap-5 md:hidden">
-              {[
-                { ...focusAreas[4], tag: "Modeling & Software" },
-                { ...focusAreas[0], tag: "Core Platform", highlight: true },
-                { ...focusAreas[1], tag: "Architecture" },
-                { ...focusAreas[2], tag: "Architecture" },
-                { ...focusAreas[3], tag: "Materials & Physics" }
-              ].map((item, index) => {
+              {mobileFocusAreas.map((item, index) => {
                 const Icon = item.icon
                 return (
                   <ScrollReveal key={item.title} delay={index * 50} direction="up">
-                    <article className={`group flex flex-col items-center text-center rounded-xl border ${item.highlight ? 'border-accent/50 bg-card/60 shadow-md shadow-accent/10' : 'border-border bg-card/75 glow-border'} p-6 transition-all duration-300`}>
-                      <span className={`mb-4 text-[10px] font-bold tracking-[0.1em] uppercase ${item.highlight ? 'text-accent bg-accent/20' : 'text-accent/80 bg-accent/10'} px-2 py-1 rounded-full`}>{item.tag}</span>
+                    <article
+                      className={`group flex flex-col items-center rounded-xl border p-6 text-center transition-all duration-300 ${
+                        item.highlight
+                          ? "border-accent/50 bg-card/60 shadow-md shadow-accent/10"
+                          : "border-border bg-card/75 glow-border"
+                      }`}
+                    >
+                      <span
+                        className={`mb-4 rounded-full px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] ${
+                          item.highlight ? "bg-accent/20 text-accent" : "bg-accent/10 text-accent/80"
+                        }`}
+                      >
+                        {item.tag}
+                      </span>
                       <Icon className="mb-4 h-7 w-7 text-accent transition-transform duration-500 group-hover:scale-110" />
                       <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-accent">{item.title}</h3>
                       <p className="text-sm text-muted-foreground">{item.description}</p>
