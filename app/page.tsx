@@ -2,7 +2,7 @@ import Link from "next/link"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Atom, Brain, CircuitBoard, Microscope, Sparkles, Waves, Zap } from "lucide-react"
+import { ArrowRight, Atom, Brain, CircuitBoard, Microscope, Sparkles, Zap } from "lucide-react"
 import { HighlightsSlider } from "@/components/highlights-slider"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { highlights } from "@/lib/highlights"
@@ -48,11 +48,7 @@ export default async function Home() {
       description: "SPDC architectures, entangled photon-pair sources, and quantum-compatible integrated device design.",
       icon: Atom,
     },
-    {
-      title: "Nonlinear Photonics",
-      description: "Quasi-BIC concepts, nonlinear light-matter interactions, and frequency conversion in integrated platforms.",
-      icon: Waves,
-    },
+
     {
       title: "Nanophotonics",
       description: "Sub-wavelength structures, metasurfaces, and nanostructured resonators.",
@@ -141,21 +137,39 @@ export default async function Home() {
               </Link>
             </div>
           </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {focusAreas.map((area, index) => {
-              const Icon = area.icon
-              return (
-                <ScrollReveal key={area.title} delay={index * 80} direction="up">
-                  <article
-                    className="group rounded-xl border border-border bg-card/75 p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
-                  >
-                    <Icon className="w-7 h-7 text-accent mb-4 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{area.title}</h3>
-                    <p className="text-sm text-muted-foreground">{area.description}</p>
-                  </article>
-                </ScrollReveal>
-              )
-            })}
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap justify-center gap-5">
+              {focusAreas.slice(0, 2).map((area, index) => {
+                const Icon = area.icon
+                return (
+                  <ScrollReveal key={area.title} delay={index * 80} direction="up" className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] max-w-sm lg:max-w-none">
+                    <article
+                      className="group rounded-xl border border-border bg-card/75 p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
+                    >
+                      <Icon className="w-7 h-7 text-accent mb-4 group-hover:scale-110 transition-transform" />
+                      <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{area.title}</h3>
+                      <p className="text-sm text-muted-foreground">{area.description}</p>
+                    </article>
+                  </ScrollReveal>
+                )
+              })}
+            </div>
+            <div className="flex flex-wrap justify-center gap-5">
+              {focusAreas.slice(2).map((area, index) => {
+                const Icon = area.icon
+                return (
+                  <ScrollReveal key={area.title} delay={(index + 2) * 80} direction="up" className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] max-w-sm lg:max-w-none">
+                    <article
+                      className="group rounded-xl border border-border bg-card/75 p-6 hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
+                    >
+                      <Icon className="w-7 h-7 text-accent mb-4 group-hover:scale-110 transition-transform" />
+                      <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{area.title}</h3>
+                      <p className="text-sm text-muted-foreground">{area.description}</p>
+                    </article>
+                  </ScrollReveal>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>

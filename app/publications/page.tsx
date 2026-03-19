@@ -26,6 +26,11 @@ type RawPublication = {
   year?: string
   doi?: string
   url?: string
+  authors?: string[]
+  abstract?: string
+  image?: string
+  date?: string
+  publisher?: string
 }
 
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
@@ -68,6 +73,11 @@ async function loadPublications(): Promise<Publication[]> {
         status: parts.join(", ") || "Publication",
         arxiv: extractArxivId(doi, url),
         url: resolvedUrl,
+        authors: item.authors,
+        abstract: item.abstract,
+        image: item.image,
+        date: item.date ?? item.year,
+        publisher: item.publisher ?? item.venue,
       }
     })
   } catch {

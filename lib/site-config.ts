@@ -68,7 +68,6 @@ export const personConfig = {
     "Silicon photonics",
     "Neuromorphic photonics",
     "Quantum photonics",
-    "Nonlinear photonics",
     "Nanophotonics",
     "Computational photonics",
     "Physics-informed machine learning",

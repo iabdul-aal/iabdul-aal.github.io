@@ -23,6 +23,11 @@ type OrcidPublication = {
   year?: string
   doi?: string
   url?: string
+  authors?: string[]
+  abstract?: string
+  image?: string
+  date?: string
+  publisher?: string
 }
 
 type OrcidProfile = {
@@ -119,6 +124,11 @@ async function loadPublications(): Promise<Publication[]> {
         status: toPublicationStatus(item.venue ?? "", item.year ?? ""),
         arxiv: extractArxivId(doi, url),
         url: resolvedUrl,
+        authors: item.authors,
+        abstract: item.abstract,
+        image: item.image,
+        date: item.date ?? item.year,
+        publisher: item.publisher ?? item.venue,
       }
     })
   } catch {
@@ -327,10 +337,7 @@ export default async function AboutPage() {
       title: "Quantum Photonics",
       desc: "SPDC-oriented architectures, entangled photon-pair generation, and quantum-compatible integrated device design.",
     },
-    {
-      title: "Nonlinear Photonics",
-      desc: "Quasi-BIC concepts, nonlinear light-matter interactions, frequency conversion, and four-wave mixing in integrated platforms.",
-    },
+
     {
       title: "Nanophotonics",
       desc: "Sub-wavelength structures, metasurfaces, and nanostructured resonators for advanced light manipulation and sensing.",
@@ -628,13 +635,23 @@ export default async function AboutPage() {
                 My work spans the intersection of integrated photonics with neuromorphic computing, quantum information,
                 nonlinear optics, nanophotonics, and computational design methodologies.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {focusAreas.map((item) => (
-                  <article key={item.title} className="p-5 rounded-xl border border-border bg-background/70">
-                    <h3 className="font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
-                  </article>
-                ))}
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap justify-center gap-4">
+                  {focusAreas.slice(0, 2).map((item) => (
+                    <article key={item.title} className="p-5 rounded-xl border border-border bg-background/70 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.666rem)]">
+                      <h3 className="font-semibold mb-2">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </article>
+                  ))}
+                </div>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {focusAreas.slice(2).map((item) => (
+                    <article key={item.title} className="p-5 rounded-xl border border-border bg-background/70 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.666rem)]">
+                      <h3 className="font-semibold mb-2">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
             </section>
 

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight, ExternalLink, Star } from "lucide-react"
 
 export interface Publication {
@@ -6,6 +7,11 @@ export interface Publication {
   arxiv?: string
   status: string
   url?: string
+  authors?: string[]
+  abstract?: string
+  image?: string
+  date?: string
+  publisher?: string
 }
 
 interface PublicationsProps {
@@ -47,7 +53,7 @@ export function Publications({ publications, featured = false }: PublicationsPro
                 {featured && (
                   <span className="pointer-events-none absolute inset-y-0 left-0 w-1 rounded-l-2xl bg-accent/40 group-hover:bg-accent/70 transition-colors" aria-hidden="true" />
                 )}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 w-full">
                   <div className="flex flex-wrap items-center gap-2">
                     {featured && (
                       <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2.5 py-1 text-xs font-semibold text-accent">
@@ -62,19 +68,61 @@ export function Publications({ publications, featured = false }: PublicationsPro
                     )}
                     {pub.arxiv && (
                       <span className="inline-flex items-center rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground">
-                        arXiv: {pub.arxiv}
+                        Preprint: {pub.arxiv}
                       </span>
                     )}
                   </div>
+                  
                   <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">{pub.title}</h3>
+                  
+                  {pub.authors && pub.authors.length > 0 && (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {pub.authors.map((author, i) => (
+                        <span key={i}>
+                          {author.includes("Islam") || author.includes("Abdulaal") ? (
+                            <strong className="text-foreground font-bold">{author}</strong>
+                          ) : (
+                            author
+                          )}
+                          {i < pub.authors!.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+
+                  {(pub.date || pub.publisher) && (
+                    <p className="text-xs font-medium text-muted-foreground mt-1">
+                      {pub.publisher && <span>{pub.publisher}</span>}
+                      {pub.publisher && pub.date && <span className="mx-1.5">&bull;</span>}
+                      {pub.date && <span>{pub.date}</span>}
+                    </p>
+                  )}
+
+                  {pub.image && (
+                    <div className="mt-4 relative w-full h-48 sm:h-64 rounded-xl overflow-hidden border border-border">
+                      <Image src={pub.image} alt={pub.title} fill className="object-cover" />
+                    </div>
+                  )}
+
+                  {pub.abstract && (
+                    <details className="group mt-3">
+                      <summary className="cursor-pointer text-sm font-semibold text-accent hover:text-accent/80 transition-colors w-fit marker:text-accent">
+                        Abstract
+                      </summary>
+                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-top-2">
+                        {pub.abstract}
+                      </p>
+                    </details>
+                  )}
+
                   {pub.url && (
                     <a
                       href={pub.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-accent hover:text-accent/80 text-sm font-semibold transition-colors flex items-center gap-2 w-fit"
+                      className="text-accent hover:text-accent/80 text-sm font-semibold transition-colors flex items-center gap-2 w-fit mt-2 group/link"
                     >
-                      View Publication <ExternalLink className="w-4 h-4" />
+                      View Publication <ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5" />
                     </a>
                   )}
                 </div>

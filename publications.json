@@ -4,6 +4,11 @@
     "venue": "Preprint",
     "year": "2025",
     "doi": "10.48550/ARXIV.2510.00357",
-    "url": "https://arxiv.org/abs/2510.00357"
+    "url": "https://arxiv.org/abs/2510.00357",
+    "authors": ["Islam I. Abdulaal", "Another Author"],
+    "abstract": "We numerically propose a label-free quasi-bound states in the continuum (quasi-BIC) metasurface sensor using fully etched asymmetric paired elliptical dielectric resonators. This abstract demonstrates the drop-down feature you requested.",
+    "date": "Oct 2025",
+    "publisher": "arXiv",
+    "image": ""
   }
 ]

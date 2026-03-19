@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import Image from "next/image"
 import { ArrowUpRight, ExternalLink, Star } from "lucide-react"
 import type { Publication } from "@/components/publications"
 
@@ -144,7 +145,7 @@ export function PublicationsList({ publications, featured = false }: Publication
                 aria-hidden="true"
               />
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 w-full">
                 <div className="flex flex-wrap items-center gap-2">
                   {featured && (
                     <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2.5 py-1 text-xs font-semibold text-accent">
@@ -159,7 +160,7 @@ export function PublicationsList({ publications, featured = false }: Publication
                   )}
                   {pub.arxiv && (
                     <span className="inline-flex items-center rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground">
-                      arXiv: {pub.arxiv}
+                      Preprint: {pub.arxiv}
                     </span>
                   )}
                 </div>
@@ -168,8 +169,48 @@ export function PublicationsList({ publications, featured = false }: Publication
                   {pub.title}
                 </h2>
 
+                {pub.authors && pub.authors.length > 0 && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {pub.authors.map((author, i) => (
+                      <span key={i}>
+                        {author.includes("Islam") || author.includes("Abdulaal") ? (
+                          <strong className="text-foreground font-bold">{author}</strong>
+                        ) : (
+                          author
+                        )}
+                        {i < pub.authors!.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
+                  </p>
+                )}
+
+                {(pub.date || pub.publisher) && (
+                  <p className="text-xs font-medium text-muted-foreground mt-1">
+                    {pub.publisher && <span>{pub.publisher}</span>}
+                    {pub.publisher && pub.date && <span className="mx-1.5">&bull;</span>}
+                    {pub.date && <span>{pub.date}</span>}
+                  </p>
+                )}
+
+                {pub.image && (
+                  <div className="mt-4 relative w-full h-48 sm:h-64 rounded-xl overflow-hidden border border-border">
+                    <Image src={pub.image} alt={pub.title} fill className="object-cover" />
+                  </div>
+                )}
+
+                {pub.abstract && (
+                  <details className="group mt-3">
+                    <summary className="cursor-pointer text-sm font-semibold text-accent hover:text-accent/80 transition-colors w-fit marker:text-accent">
+                      Abstract
+                    </summary>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-top-2">
+                      {pub.abstract}
+                    </p>
+                  </details>
+                )}
+
                 {pub.url && (
-                  <div className="flex items-center gap-4 mt-1">
+                  <div className="flex items-center gap-4 mt-3">
                     <a
                       href={pub.url}
                       target="_blank"
@@ -186,7 +227,7 @@ export function PublicationsList({ publications, featured = false }: Publication
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors group/link"
                       >
-                        arXiv{" "}
+                        Preprint{" "}
                         <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                       </a>
                     )}
