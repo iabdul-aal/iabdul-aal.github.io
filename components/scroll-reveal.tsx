@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import React, { useEffect, useRef, useState, type ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 type RevealDirection = "up" | "down" | "left" | "right" | "scale" | "blur"
@@ -136,9 +136,9 @@ export function StaggerReveal({
 }: StaggerRevealProps) {
   return (
     <div className={className}>
-      {children.map((child, index) => (
+      {React.Children.map(children, (child, index) => (
         <ScrollReveal
-          key={index}
+          key={React.isValidElement(child) && child.key ? child.key : index}
           direction={direction}
           delay={index * staggerDelay}
           duration={duration}
