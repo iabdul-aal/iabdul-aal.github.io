@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Islam I. Abdulaal",
   title: "Islam I. Abdulaal | Photonics Research",
   description:
-    "Personal website of Islam I. Abdulaal — postgraduate student focused on integrated, neuromorphic, quantum, nonlinear, and computational photonics.",
+    "Personal website of Islam I. Abdulaal, a postgraduate student focused on integrated, neuromorphic, quantum, nonlinear, and computational photonics.",
   url: "https://iabdul-aal.github.io",
   locale: "en_US",
   ogImage: "/personal-pic.png",

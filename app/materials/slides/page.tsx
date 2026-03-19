@@ -1,4 +1,4 @@
-﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
+import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
 import { createPageMetadata } from "@/lib/seo"
 
@@ -19,7 +19,7 @@ export default function SlidesPage() {
       journeyActions={[
         { href: "/materials/summaries", label: "Read Summaries" },
         { href: "/materials/roadmaps", label: "View Roadmaps", variant: "outline" },
-        { href: "/mentorship", label: "Request Mentorship", variant: "ghost" },
+        { href: "/services#mentorship", label: "Request Mentorship", variant: "ghost" },
       ]}
     />
   )

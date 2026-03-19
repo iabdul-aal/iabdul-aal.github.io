@@ -1,50 +1,65 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState, useCallback } from "react"
+import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
+const navigationLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/publications", label: "Publications" },
+  { href: "/projects", label: "Projects" },
+  { href: "/materials", label: "Materials" },
+  { href: "/talks", label: "Talks" },
+  { href: "/services", label: "Services" },
+  { href: "/articles", label: "Articles" },
+  { href: "/ventures", label: "Ventures" },
+] as const
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
-
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/publications", label: "Publications" },
-    { href: "/ventures", label: "Ventures" },
-    { href: "/projects", label: "Projects" },
-    { href: "/articles", label: "Articles" },
-    { href: "/materials", label: "Materials" },
-    { href: "/talks", label: "Talks" },
-    { href: "/services", label: "Services" },
-  ]
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
-  const closeMenu = useCallback(() => {
+  const closeMenu = () => {
     if (!isOpen) return
+
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current)
+    }
+
     setIsClosing(true)
-    setTimeout(() => {
+    closeTimeoutRef.current = setTimeout(() => {
       setIsOpen(false)
       setIsClosing(false)
+      closeTimeoutRef.current = null
     }, 200)
-  }, [isOpen])
+  }
 
   useEffect(() => {
     closeMenu()
-  }, [pathname, closeMenu])
+  }, [pathname])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32)
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current)
+      }
+    }
   }, [])
 
   return (
@@ -57,9 +72,8 @@ export function Navigation() {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-foreground hover:text-accent transition-colors">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-foreground transition-colors hover:text-accent">
             <Image
               src="/logo.png"
               alt="Islam Abdulaal logo"
@@ -69,24 +83,22 @@ export function Navigation() {
             />
             <div className="hidden md:block">
               <p className="text-sm font-semibold leading-none">Islam I. Abdulaal</p>
-              <p className="text-[11px] text-muted-foreground leading-none mt-1">Postgraduate Student</p>
+              <p className="mt-1 text-[11px] leading-none text-muted-foreground">Postgraduate Student</p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
-            {links.map((link) => (
+            {navigationLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 aria-current={isActive(link.href) ? "page" : undefined}
                 className={cn(
-                  "relative inline-flex h-9 items-center text-sm transition-colors",
-                  isActive(link.href) ? "text-accent font-semibold" : "text-muted-foreground hover:text-foreground",
+                  "group relative inline-flex h-9 items-center text-sm transition-colors",
+                  isActive(link.href) ? "font-semibold text-accent" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {link.label}
-                {/* Animated underline indicator */}
                 <span
                   className={cn(
                     "absolute -bottom-[1px] left-0 h-[2px] bg-accent transition-all duration-300 ease-out",
@@ -97,46 +109,48 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-4">
             <Button asChild size="sm">
               <Link href="/contact">Contact</Link>
             </Button>
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden inline-flex h-10 w-10 items-center justify-center text-foreground hover:text-accent transition-colors"
+            className="inline-flex h-10 w-10 items-center justify-center text-foreground transition-colors hover:text-accent lg:hidden"
             onClick={() => {
               if (isOpen) {
                 closeMenu()
-              } else {
-                setIsOpen(true)
+                return
               }
+
+              setIsOpen(true)
+              setIsClosing(false)
             }}
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* Mobile Navigation — Animated */}
         {isOpen && (
           <div
+            id="mobile-navigation"
             className={cn(
-              "lg:hidden pb-4 space-y-2 border-t border-border",
+              "space-y-2 border-t border-border pb-4 lg:hidden",
               isClosing ? "animate-slide-up-out" : "animate-slide-down",
             )}
           >
-            {links.map((link, index) => (
+            {navigationLinks.map((link, index) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "block px-4 py-2 rounded transition-all duration-200",
+                  "block rounded px-4 py-2 transition-all duration-200",
                   isActive(link.href)
-                    ? "text-accent bg-accent/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-card",
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground hover:bg-card hover:text-foreground",
                 )}
                 style={{ animationDelay: isClosing ? "0ms" : `${index * 30}ms` }}
                 onClick={closeMenu}

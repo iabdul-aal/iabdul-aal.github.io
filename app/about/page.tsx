@@ -2,9 +2,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { access, readFile } from "node:fs/promises"
 import { join } from "node:path"
-import { ArrowUpRight, Download, Star } from "lucide-react"
+import { ArrowUpRight, Download, Star, CircuitBoard, Brain, Atom, Zap, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Publications, type Publication } from "@/components/publications"
+import { normalizeCopy, toParagraphs } from "@/lib/copy"
 import { personConfig } from "@/lib/site-config"
 import { contactInfo, socialLinks } from "@/lib/social-links"
 import { logoSlots } from "@/lib/logo-slots"
@@ -102,6 +103,11 @@ function normalizeMembershipName(name: string): string {
     .replace(/\s+\(IEEE\)\s*$/i, "")
     .replace(/\s+\(SSCS\)\s*$/i, "")
     .trim()
+}
+
+function buildProfileParagraphs(biography: string | undefined, fallbackParagraphs: string[]): string[] {
+  const normalizedBiography = biography ? toParagraphs(biography) : []
+  return normalizedBiography.length > 0 ? normalizedBiography : fallbackParagraphs
 }
 
 async function loadPublications(): Promise<Publication[]> {
@@ -328,23 +334,28 @@ export default async function AboutPage() {
     {
       title: "Integrated Photonics",
       desc: "Silicon photonics, waveguide engineering, and PIC-level component development for compact and scalable on-chip optical systems.",
+      icon: CircuitBoard,
     },
     {
       title: "Neuromorphic Photonics",
       desc: "Photonic neural network architectures, optical computing primitives, and brain-inspired processing on integrated platforms.",
+      icon: Brain,
     },
     {
       title: "Quantum Photonics",
       desc: "SPDC-oriented architectures, entangled photon-pair generation, and quantum-compatible integrated device design.",
+      icon: Atom,
     },
 
     {
       title: "Nanophotonics",
       desc: "Sub-wavelength structures, metasurfaces, and nanostructured resonators for advanced light manipulation and sensing.",
+      icon: Zap,
     },
     {
       title: "Computational Photonics",
       desc: "PINN-assisted inverse design, multiphysics optimization, and data-driven modeling for photonic device engineering.",
+      icon: Sparkles,
     },
   ]
 
@@ -468,7 +479,7 @@ export default async function AboutPage() {
     "At NanoPhoto Lab (A*STAR), I contribute to integrated quantum photonics research with emphasis on model reliability, practical design iteration, and scalable computational approaches.",
   ]
 
-  const profileParagraphs = fallbackProfileParagraphs
+  const profileParagraphs = buildProfileParagraphs(orcidProfile?.profile?.biography, fallbackProfileParagraphs)
   const orcidKeywords = (orcidProfile?.profile?.keywords ?? []).slice(0, 6)
   const educationEntries = (orcidProfile?.educations && orcidProfile.educations.length > 0)
     ? orcidProfile.educations.map((item) => ({
@@ -501,6 +512,7 @@ export default async function AboutPage() {
     mainMembership.name.toLowerCase().includes("electrical and electronics engineers")
 
   const opticaLogo = logoByName.get("Optica")
+  const secondaryMemberships = [...memberships.subs, opticaMembership]
 
   const resolveMembershipLogo = (name: string): LogoSlotWithStatus | undefined => {
     const lowerName = name.toLowerCase()
@@ -585,10 +597,13 @@ export default async function AboutPage() {
                         href={profile.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 transition-colors"
+                        className="flex items-center justify-between gap-3 text-accent transition-colors hover:text-accent/80"
                       >
-                        {profile.label}
-                        <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                        <span className="inline-flex min-w-0 items-center gap-3">
+                          <LogoMark slot={profile.logo} label={profile.logoLabel} size="sm" />
+                          <span className="min-w-0 truncate">{profile.label}</span>
+                        </span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                       </a>
                     </li>
                   ))}
@@ -624,7 +639,7 @@ export default async function AboutPage() {
               <h2 className="text-3xl font-bold mb-4">Professional Profile</h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 {profileParagraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>{normalizeCopy(paragraph)}</p>
                 ))}
               </div>
             </section>
@@ -635,22 +650,40 @@ export default async function AboutPage() {
                 My work spans the intersection of integrated photonics with neuromorphic computing, quantum information,
                 nonlinear optics, nanophotonics, and computational design methodologies.
               </p>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap justify-center gap-4">
-                  {focusAreas.slice(0, 2).map((item) => (
-                    <article key={item.title} className="p-5 rounded-xl border border-border bg-background/70 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.666rem)]">
-                      <h3 className="font-semibold mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </article>
-                  ))}
+              <div className="flex flex-col gap-5 mt-6">
+                <div className="flex flex-wrap justify-center gap-5">
+                  {focusAreas.slice(0, 2).map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <article key={item.title} className="group relative rounded-2xl border border-border bg-card/40 p-7 hover:border-accent/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 transition-all duration-300 w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative z-10">
+                          <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
+                            <Icon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                          </div>
+                          <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors duration-300">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                        </div>
+                      </article>
+                    )
+                  })}
                 </div>
-                <div className="flex flex-wrap justify-center gap-4">
-                  {focusAreas.slice(2).map((item) => (
-                    <article key={item.title} className="p-5 rounded-xl border border-border bg-background/70 w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.666rem)]">
-                      <h3 className="font-semibold mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </article>
-                  ))}
+                <div className="flex flex-wrap justify-center gap-5">
+                  {focusAreas.slice(2).map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <article key={item.title} className="group relative rounded-2xl border border-border bg-card/40 p-7 hover:border-accent/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10 transition-all duration-300 w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.833rem)] overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative z-10">
+                          <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
+                            <Icon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                          </div>
+                          <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors duration-300">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                        </div>
+                      </article>
+                    )
+                  })}
                 </div>
               </div>
             </section>
@@ -805,7 +838,7 @@ export default async function AboutPage() {
 
                 <div className="relative space-y-3 pl-4 sm:pl-7">
                   <span className="absolute left-1.5 sm:left-3 top-2 bottom-2 w-px bg-border" aria-hidden="true" />
-                  {memberships.subs.map((item) => {
+                  {secondaryMemberships.map((item) => {
                     const itemDetail = parseMembershipDetail(item.detail)
                     const membershipDisplayName = normalizeMembershipName(item.name)
                     return (

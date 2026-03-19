@@ -27,7 +27,7 @@ export default async function MaterialsPage() {
         title="Materials Library"
         description="A practical library of slides, summaries, roadmaps, and templates for faster learning and cleaner project execution."
         actions={[
-          { label: "Open Mentorship", href: "/mentorship" },
+          { label: "Open Mentorship", href: "/services#mentorship" },
           { label: "Request Material", href: "/contact", variant: "outline" },
         ]}
       />

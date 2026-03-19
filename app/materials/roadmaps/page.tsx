@@ -1,4 +1,4 @@
-﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
+import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
 import { createPageMetadata } from "@/lib/seo"
 
@@ -17,7 +17,7 @@ export default function RoadmapsPage() {
       journeyTitle="Move From Roadmap to Execution"
       journeyDescription="Continue with mentorship support, full materials navigation, or direct outreach for guidance."
       journeyActions={[
-        { href: "/mentorship", label: "Book Mentorship Path" },
+        { href: "/services#mentorship", label: "Book Mentorship Path" },
         { href: "/materials", label: "Back to Materials", variant: "outline" },
         { href: "/contact", label: "Request Guidance", variant: "ghost" },
       ]}

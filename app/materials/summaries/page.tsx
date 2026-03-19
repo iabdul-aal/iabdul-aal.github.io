@@ -1,4 +1,4 @@
-﻿import { MaterialsCollectionView } from "@/components/materials-collection-view"
+import { MaterialsCollectionView } from "@/components/materials-collection-view"
 
 import { createPageMetadata } from "@/lib/seo"
 

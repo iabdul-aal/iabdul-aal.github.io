@@ -11,13 +11,25 @@ type ContactEmailFormProps = {
 type FormState = {
   name: string
   email: string
+  organization: string
+  inquiryType: string
   subject: string
   message: string
 }
 
+const inquiryTypeOptions = [
+  "Research collaboration",
+  "Technical service request",
+  "Mentorship request",
+  "Speaking or workshop invitation",
+  "General inquiry",
+] as const
+
 const initialState: FormState = {
   name: "",
   email: "",
+  organization: "",
+  inquiryType: inquiryTypeOptions[0],
   subject: "",
   message: "",
 }
@@ -32,11 +44,15 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const subject = formState.subject.trim() || "Website Contact Form"
+    const inquiryType = formState.inquiryType.trim() || "General inquiry"
+    const subject = formState.subject.trim() || `${inquiryType} | Website Contact`
     const bodyLines = [
       `Name: ${formState.name.trim() || "N/A"}`,
       `Email: ${formState.email.trim() || "N/A"}`,
+      `Organization: ${formState.organization.trim() || "N/A"}`,
+      `Inquiry Type: ${inquiryType}`,
       "",
+      "Message:",
       formState.message.trim(),
     ]
 
@@ -46,7 +62,7 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" id="email-form">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <label className="space-y-2">
           <span className="text-sm font-medium">Name</span>
           <input
@@ -54,7 +70,7 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
             required
             value={formState.name}
             onChange={(event) => updateField("name", event.target.value)}
-            className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
+            className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
             placeholder="Your name"
           />
         </label>
@@ -65,34 +81,72 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
             required
             value={formState.email}
             onChange={(event) => updateField("email", event.target.value)}
-            className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
+            className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
             placeholder="you@example.com"
           />
         </label>
       </div>
-      <label className="space-y-2 block">
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <label className="space-y-2">
+          <span className="text-sm font-medium">Organization or Lab</span>
+          <input
+            type="text"
+            value={formState.organization}
+            onChange={(event) => updateField("organization", event.target.value)}
+            className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
+            placeholder="Optional"
+          />
+        </label>
+        <label className="space-y-2">
+          <span className="text-sm font-medium">Inquiry Type</span>
+          <select
+            value={formState.inquiryType}
+            onChange={(event) => updateField("inquiryType", event.target.value)}
+            className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
+          >
+            {inquiryTypeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label className="block space-y-2">
         <span className="text-sm font-medium">Subject</span>
         <input
           type="text"
-          required
           value={formState.subject}
           onChange={(event) => updateField("subject", event.target.value)}
-          className="w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
-          placeholder="How can I help?"
+          className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
+          placeholder="Optional override for the email subject"
         />
       </label>
-      <label className="space-y-2 block">
+
+      <label className="block space-y-2">
         <span className="text-sm font-medium">Message</span>
         <textarea
           required
           value={formState.message}
           onChange={(event) => updateField("message", event.target.value)}
-          className="w-full min-h-40 rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all input-focus-glow"
-          placeholder="Share your context and objective."
+          className="input-focus-glow min-h-40 w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
+          placeholder="Include your context, current stage, and the outcome you need."
         />
       </label>
-      <Button type="submit" size="lg" className="hover:scale-[1.02] transition-transform">
-        <Mail className="w-5 h-5 mr-2" />
+
+      <div className="rounded-xl border border-border bg-background/40 p-4 text-xs text-muted-foreground">
+        Best messages include:
+        <div className="mt-2 space-y-1">
+          <p>Project or topic context</p>
+          <p>Where you are currently blocked</p>
+          <p>What decision, deliverable, or next step you need</p>
+        </div>
+      </div>
+
+      <Button type="submit" size="lg" className="transition-transform hover:scale-[1.02]">
+        <Mail className="mr-2 h-5 w-5" />
         Open Draft in Email App
       </Button>
       <p className="text-xs text-muted-foreground">

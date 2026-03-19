@@ -1,9 +1,10 @@
+import { Mail, MapPin, Phone, CalendarClock } from "lucide-react"
+import { ContactEmailForm } from "@/components/contact-email-form"
+import { MeetingBookingPanel } from "@/components/meeting-booking-panel"
 import { PageHero } from "@/components/page-hero"
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { Mail, MapPin, Phone } from "lucide-react"
-import { socialLinks } from "@/lib/social-links"
-import { ContactEmailForm } from "@/components/contact-email-form"
 import { createPageMetadata } from "@/lib/seo"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = createPageMetadata({
   title: "Contact",
@@ -18,46 +19,59 @@ export default function ContactPage() {
       icon: Mail,
       title: "Email",
       value: socialLinks.email,
-      description: "Primary channel for collaboration and professional inquiries",
+      description: "Best for detailed collaboration requests and async technical context.",
       href: `mailto:${socialLinks.email}`,
     },
     {
+      icon: CalendarClock,
+      title: "Schedule",
+      value: "Book a call",
+      description: "Best for scoped discussions, mentorship, and live project review.",
+      href: socialLinks.calendly,
+    },
+    {
       icon: Phone,
-      title: "Phone",
+      title: "Phone / WhatsApp",
       value: socialLinks.phone,
-      description: "WhatsApp-enabled number",
-      href: `tel:${socialLinks.phone}`,
+      description: "Useful when a shorter back-and-forth is enough.",
+      href: socialLinks.whatsapp,
     },
     {
       icon: MapPin,
       title: "Location",
       value: "Alexandria, Egypt",
-      description: "Open to remote collaboration",
+      description: "Open to remote collaboration across labs, teams, and student communities.",
     },
+  ]
+
+  const requestGuidance = [
+    "State the topic, project, or organization clearly.",
+    "Explain the current stage and where you are blocked.",
+    "Ask for a concrete next step, deliverable, or decision.",
   ]
 
   return (
     <main className="bg-background text-foreground">
       <PageHero
         kicker="Contact"
-        title="Start a Conversation"
-        description="Use this page for collaboration, talks, mentorship requests, or technical service discussions."
+        title="Start a Useful Conversation"
+        description="Use this page for research collaboration, speaking invitations, mentorship requests, or technical service discussions. The fastest path depends on whether your request is better handled asynchronously or live."
         actions={[
           { label: "Send Email", href: `mailto:${socialLinks.email}`, external: true },
-          { label: "Message on LinkedIn", href: socialLinks.linkedin, external: true, variant: "outline" },
+          { label: "Book a Call", href: socialLinks.calendly, external: true, variant: "outline" },
         ]}
       />
 
-      <section className="py-20 bg-background">
+      <section className="bg-background py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
             {contactMethods.map((method, index) => {
               const Icon = method.icon
               const content = (
                 <>
-                  <Icon className="w-8 h-8 text-accent mb-4" />
-                  <h2 className="text-xl font-bold mb-2">{method.title}</h2>
-                  <p className="text-accent font-semibold mb-2">{method.value}</p>
+                  <Icon className="mb-4 h-8 w-8 text-accent" />
+                  <h2 className="mb-2 text-xl font-bold">{method.title}</h2>
+                  <p className="mb-2 font-semibold text-accent">{method.value}</p>
                   <p className="text-sm text-muted-foreground">{method.description}</p>
                 </>
               )
@@ -67,7 +81,9 @@ export default function ContactPage() {
                   <ScrollReveal key={method.title} delay={index * 100} direction="up">
                     <a
                       href={method.href}
-                      className="group block p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full"
+                      target={method.href.startsWith("http") ? "_blank" : undefined}
+                      rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="group block h-full rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/5 glow-border"
                     >
                       {content}
                     </a>
@@ -77,7 +93,7 @@ export default function ContactPage() {
 
               return (
                 <ScrollReveal key={method.title} delay={index * 100} direction="up">
-                  <article className="group p-8 rounded-xl border border-border bg-card hover:border-accent/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 glow-border h-full">
+                  <article className="group h-full rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/5 glow-border">
                     {content}
                   </article>
                 </ScrollReveal>
@@ -85,40 +101,28 @@ export default function ContactPage() {
             })}
           </div>
 
-          <div className="mt-10 grid grid-cols-1 xl:grid-cols-2 gap-8">
-            <article id="meeting-booking" className="p-8 rounded-xl border border-border bg-card">
-              <h2 className="font-display text-3xl md:text-4xl mb-3">Meeting Booking Calendar</h2>
-              <p className="text-muted-foreground">
-                Pick a time slot directly. Please include your objective in the booking notes.
-              </p>
-              <div className="mt-6 h-[760px] rounded-xl border border-border overflow-hidden">
-                <iframe
-                  src={`${socialLinks.calendly}?hide_gdpr_banner=1`}
-                  title="Meeting booking calendar"
-                  className="w-full h-full"
-                  loading="lazy"
-                />
-              </div>
-              <p className="text-xs text-muted-foreground mt-4">
-                If the calendar does not load in your browser, use the direct booking page.
-              </p>
-              <a
-                href={socialLinks.calendly}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-3 text-sm font-semibold text-accent hover:underline"
-              >
-                Open booking page directly
-              </a>
-            </article>
+          <div className="mt-10 rounded-xl border border-border bg-card/70 p-6 sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Before You Reach Out</p>
+            <h2 className="mt-2 text-2xl font-semibold">The most useful requests are specific.</h2>
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              {requestGuidance.map((item) => (
+                <div key={item} className="rounded-xl border border-border bg-background/40 p-4 text-sm text-muted-foreground">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
 
-            <article id="email-form-section" className="p-8 rounded-xl border border-border bg-card">
-              <h2 className="font-display text-3xl md:text-4xl mb-3">Email Form</h2>
-              <p className="text-muted-foreground mb-6">
-                Share details in a structured format, then open a pre-filled draft in your email app.
+          <div className="mt-10 grid grid-cols-1 gap-8 xl:grid-cols-2">
+            <article id="email-form-section" className="rounded-xl border border-border bg-card p-8">
+              <h2 className="font-display text-3xl md:text-4xl">Email Draft Builder</h2>
+              <p className="mb-6 mt-3 text-muted-foreground">
+                Use this when you need to send context, links, and a clearly scoped request.
               </p>
               <ContactEmailForm recipientEmail={socialLinks.email} />
             </article>
+
+            <MeetingBookingPanel bookingUrl={socialLinks.calendly} />
           </div>
         </div>
       </section>

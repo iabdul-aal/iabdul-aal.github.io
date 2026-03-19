@@ -187,7 +187,7 @@ gtag('config', '${googleAnalyticsId}', { anonymize_ip: true });`}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <Navigation />
-        <div id="main-content" role="main">
+        <div id="main-content" tabIndex={-1}>
           {children}
         </div>
         <Footer />
