@@ -63,9 +63,12 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" id="email-form">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-sm font-medium">Name</span>
+        <div className="space-y-2">
+          <label htmlFor="contact-name" className="text-sm font-medium">
+            Name <span className="text-destructive" aria-hidden="true">*</span>
+          </label>
           <input
+            id="contact-name"
             type="text"
             required
             value={formState.name}
@@ -73,10 +76,13 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
             className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
             placeholder="Your name"
           />
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium">Email</span>
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="contact-email" className="text-sm font-medium">
+            Email <span className="text-destructive" aria-hidden="true">*</span>
+          </label>
           <input
+            id="contact-email"
             type="email"
             required
             value={formState.email}
@@ -84,23 +90,25 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
             className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
             placeholder="you@example.com"
           />
-        </label>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-sm font-medium">Organization or Lab</span>
+        <div className="space-y-2">
+          <label htmlFor="contact-org" className="text-sm font-medium">Organization or Lab</label>
           <input
+            id="contact-org"
             type="text"
             value={formState.organization}
             onChange={(event) => updateField("organization", event.target.value)}
             className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
             placeholder="Optional"
           />
-        </label>
-        <label className="space-y-2">
-          <span className="text-sm font-medium">Inquiry Type</span>
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="contact-inquiry-type" className="text-sm font-medium">Inquiry Type</label>
           <select
+            id="contact-inquiry-type"
             value={formState.inquiryType}
             onChange={(event) => updateField("inquiryType", event.target.value)}
             className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
@@ -111,30 +119,34 @@ export function ContactEmailForm({ recipientEmail }: ContactEmailFormProps) {
               </option>
             ))}
           </select>
-        </label>
+        </div>
       </div>
 
-      <label className="block space-y-2">
-        <span className="text-sm font-medium">Subject</span>
+      <div className="space-y-2">
+        <label htmlFor="contact-subject" className="text-sm font-medium">Subject</label>
         <input
+          id="contact-subject"
           type="text"
           value={formState.subject}
           onChange={(event) => updateField("subject", event.target.value)}
           className="input-focus-glow w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
           placeholder="Optional override for the email subject"
         />
-      </label>
+      </div>
 
-      <label className="block space-y-2">
-        <span className="text-sm font-medium">Message</span>
+      <div className="space-y-2">
+        <label htmlFor="contact-message" className="text-sm font-medium">
+          Message <span className="text-destructive" aria-hidden="true">*</span>
+        </label>
         <textarea
+          id="contact-message"
           required
           value={formState.message}
           onChange={(event) => updateField("message", event.target.value)}
           className="input-focus-glow min-h-40 w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none transition-all"
           placeholder="Include your context, current stage, and the outcome you need."
         />
-      </label>
+      </div>
 
       <div className="rounded-xl border border-border bg-background/40 p-4 text-xs text-muted-foreground">
         Best messages include:
