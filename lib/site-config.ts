@@ -1,0 +1,62 @@
+import { socialLinks } from "@/lib/social-links"
+
+export const siteConfig = {
+  name: "Islam I. Abdulaal",
+  title: "Islam I. Abdulaal | Computational and Integrated Photonics",
+  description:
+    "Academic website of Islam I. Abdulaal, focused on computational and integrated photonics, nonlinear and quantum photonic systems, inverse design, and physics-informed methods.",
+  url: "https://iabdul-aal.github.io",
+  locale: "en_US",
+  ogImage: "/personal-pic.png",
+  repositoryOwner: "iabdul-aal",
+  repositoryName: "iabdul-aal.github.io",
+  repositoryBranch: "main",
+  orcidId: "0009-0004-9300-3936",
+  keywords: [
+    "Islam I. Abdulaal",
+    "computational photonics",
+    "integrated photonics",
+    "nonlinear photonics",
+    "quantum photonics",
+    "nanophotonics",
+    "inverse design",
+    "physics-informed machine learning",
+    "photonic system modeling",
+    "Alexandria University",
+    "NanoPhoto Lab",
+    "A*STAR",
+    "arXiv",
+    "ORCID",
+    "GitHub",
+  ],
+  sameAs: [
+    socialLinks.orcid,
+    socialLinks.scholar,
+    socialLinks.semanticScholar,
+    socialLinks.researchGate,
+    socialLinks.github,
+    socialLinks.linkedin,
+  ],
+} as const
+
+export const personConfig = {
+  name: "Islam I. Abdulaal",
+  givenName: "Islam",
+  familyName: "Abdulaal",
+  role: "Photonics Researcher and B.Sc. (Hons.) Candidate",
+  affiliation: "Alexandria University",
+  lab: "NanoPhoto Lab, A*STAR",
+  location: "Alexandria, Egypt",
+  email: socialLinks.email,
+  phone: socialLinks.phone,
+  orcid: siteConfig.orcidId,
+  focusAreas: [
+    "Computational photonics",
+    "Integrated photonics",
+    "Nonlinear photonics",
+    "Quantum photonics",
+    "Nanophotonics",
+    "Inverse design",
+    "Physics-informed machine learning",
+  ],
+} as const
