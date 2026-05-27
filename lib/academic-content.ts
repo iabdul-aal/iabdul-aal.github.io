@@ -40,7 +40,7 @@ export const researchThemes = [
     problem:
       "Chip-scale photonic systems require waveguides, couplers, detectors, and multiplexing structures that preserve bandwidth and modal control while remaining compatible with realistic fabrication constraints.",
     methods:
-      "Waveguide and mode analysis, FDTD simulation, Ge-on-Si photodetector modeling, compact-model extraction, and layout-aware validation.",
+      "Waveguide and mode analysis, FDTD simulation, drift-diffusion modeling, compact-model extraction, and layout-aware validation.",
     physicalRelevance:
       "The theme connects modal confinement, dispersion, absorption, carrier transport, and parasitics into one design loop rather than treating device metrics in isolation.",
   },
