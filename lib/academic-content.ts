@@ -54,7 +54,7 @@ export const researchThemes = [
       "The central physical question is how geometry and material response shape photon-pair generation, bandwidth, collection efficiency, and integration density.",
   },
   {
-    title: "Physics-Informed Inverse Design",
+    title: "Physics-Informed Design",
     problem:
       "Target photonic responses can be hard to derive manually from geometry, while purely data-driven models become unreliable without physical constraints.",
     methods:
