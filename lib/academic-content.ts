@@ -45,7 +45,7 @@ export const researchThemes = [
       "The theme connects modal confinement, dispersion, absorption, carrier transport, and parasitics into one design loop rather than treating device metrics in isolation.",
   },
   {
-    title: "Nonlinear and Quantum Photonics",
+    title: "Nonlinear Quantum Photonics",
     problem:
       "Integrated quantum photonic systems need efficient light generation, manipulation, and detection under loss, phase-matching, and coupling constraints.",
     methods:
