@@ -7,7 +7,7 @@ export const socialLinks = {
   researchGate: "https://www.researchgate.net/profile/Islam-Abdulaal",
   arxiv: "https://arxiv.org/abs/2510.00357",
   nanophoto: "https://www.nanophoto.org/team",
-  email: "es-eslam.ibrahim2026@alexu.edu.eg",
-  academicEmail: "eslam.ibrahim2026@alexu.edu.eg",
+  email: "contact@iabdul-aal.me",
+  academicEmail: "contact@iabdul-aal.me",
   phone: "+20120460921",
 } as const

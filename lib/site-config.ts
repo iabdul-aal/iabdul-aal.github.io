@@ -5,7 +5,7 @@ export const siteConfig = {
   title: "Islam I. Abdulaal | Computational and Integrated Photonics",
   description:
     "Academic website of Islam I. Abdulaal, focused on computational and integrated photonics, nonlinear and quantum photonic systems, inverse design, and physics-informed methods.",
-  url: "https://iabdul-aal.github.io",
+  url: "https://iabdul-aal.me",
   locale: "en_US",
   ogImage: "/personal-pic.png",
   repositoryOwner: "iabdul-aal",

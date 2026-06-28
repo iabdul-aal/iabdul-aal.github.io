@@ -1,6 +1,6 @@
 # Islam I. Abdulaal | Academic Website
 
-This repository powers the static academic website at **https://iabdul-aal.github.io**.
+This repository powers the static academic website at **https://iabdul-aal.me**.
 
 The site is intentionally small and research-first. It presents a coherent profile in computational and integrated photonics, with pages for research themes, publications, selected projects, software, talks, and CV.
 
