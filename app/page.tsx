@@ -23,9 +23,10 @@ export default async function Home() {
     "@type": "ProfilePage",
     name: siteConfig.title,
     url: siteConfig.url,
-    about: {
+    mainEntity: {
       "@type": "Person",
       name: identity.name,
+      "@id": `${siteConfig.url}/#person`,
     },
   }
 
