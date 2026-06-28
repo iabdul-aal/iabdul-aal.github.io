@@ -43,6 +43,20 @@ const publicationOverrides: Record<
     bibtexKey: "abdulaal2025terahertz",
     primaryClass: "physics.optics",
   },
+  "2606.21945": {
+    authors: [
+      "Amir H. M. Labeb",
+      "Basmala Sallam",
+      "Abdelrahman W. Elsayed",
+      "Islam I. Abdulaal",
+      "Amany M. Kamal",
+      "Omar A. M. Abdelraouf"
+    ],
+    submitted: "20 Jun 2026",
+    subjects: ["Optics"],
+    bibtexKey: "labeb2026beyond",
+    primaryClass: "physics.optics",
+  },
 }
 
 function slugify(value: string): string {
