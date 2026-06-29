@@ -127,7 +127,7 @@ export default async function Home() {
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
           <div>
-            <h2 className="text-sm font-semibold text-foreground">Selected Publication</h2>
+            <h2 className="text-sm font-semibold text-foreground">Selected Publications</h2>
             <Link
               href="/publications"
               className="mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong"
@@ -136,7 +136,7 @@ export default async function Home() {
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
-          <PublicationsList publications={publications.slice(0, 1)} compact />
+          <PublicationsList publications={publications.slice(0, 2)} />
         </div>
       </section>
 

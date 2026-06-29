@@ -48,16 +48,9 @@ export function PublicationsList({ publications, compact = false }: Publications
                   ))}
                 </p>
               )}
-
-              {!compact && publication.abstract && (
-                <details className="mt-4">
-                  <summary className="cursor-pointer text-sm font-medium text-accent">Abstract</summary>
-                  <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">{publication.abstract}</p>
-                </details>
-              )}
             </div>
 
-            <div className="flex flex-wrap items-start gap-2 md:justify-end">
+            <div className="flex flex-wrap items-start gap-2 md:justify-end md:self-start">
               {publication.url && (
                 <a
                   href={publication.url}
@@ -94,6 +87,13 @@ export function PublicationsList({ publications, compact = false }: Publications
               </button>
             </div>
           </div>
+
+          {!compact && publication.abstract && (
+            <details className="mt-4">
+              <summary className="cursor-pointer text-sm font-medium text-accent">Abstract</summary>
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">{publication.abstract}</p>
+            </details>
+          )}
         </article>
       ))}
     </div>
