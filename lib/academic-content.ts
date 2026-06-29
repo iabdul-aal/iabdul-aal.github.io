@@ -36,6 +36,7 @@ export const aboutParagraphs = [
 
 export const researchThemes = [
   {
+    id: "integrated-nanophotonics",
     title: "Integrated Nanophotonics",
     problem:
       "Chip-scale photonic systems require waveguides, couplers, detectors, and multiplexing structures that preserve bandwidth and modal control while remaining compatible with realistic fabrication constraints.",
@@ -45,6 +46,7 @@ export const researchThemes = [
       "The theme connects modal confinement, dispersion, absorption, carrier transport, and parasitics into one design loop rather than treating device metrics in isolation.",
   },
   {
+    id: "nonlinear-quantum-photonics",
     title: "Nonlinear Quantum Photonics",
     problem:
       "Integrated quantum photonic systems need efficient light generation, manipulation, and detection under loss, phase-matching, and coupling constraints.",
@@ -54,6 +56,7 @@ export const researchThemes = [
       "The central physical question is how geometry and material response shape photon-pair generation, bandwidth, collection efficiency, and integration density.",
   },
   {
+    id: "physics-informed-design",
     title: "Physics-Informed Design",
     problem:
       "Target photonic responses can be hard to derive manually from geometry, while purely data-driven models become unreliable without physical constraints.",
@@ -62,11 +65,11 @@ export const researchThemes = [
     physicalRelevance:
       "This framework ensures optimized device structures satisfy Maxwell equations and boundary conditions, rather than treating optimization as black-box fitting.",
   },
-
 ] as const
 
 export const projects = [
   {
+    id: "pd-design-kit",
     title: "Ge-on-Si PIN Photodetector Design Kit",
     status: "Public software and citable design artifact",
     objective:
@@ -80,6 +83,7 @@ export const projects = [
       { label: "Repository", href: "https://github.com/iabdul-aal/PD-design-kit" },
       { label: "DOI", href: "https://doi.org/10.5281/zenodo.19652934" },
     ],
+    relatedThemes: ["integrated-nanophotonics", "physics-informed-design"],
   },
 ] as const
 

@@ -28,13 +28,15 @@ export type PublicationRecord = {
   submitted?: string
   subjects?: string[]
   bibtex: string
+  relatedThemes?: string[]
+  relatedProjects?: string[]
 }
 
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
 
 const publicationOverrides: Record<
   string,
-  Partial<Pick<PublicationRecord, "authors" | "submitted" | "subjects">> & { bibtexKey?: string; primaryClass?: string }
+  Partial<Pick<PublicationRecord, "authors" | "submitted" | "subjects" | "relatedThemes" | "relatedProjects">> & { bibtexKey?: string; primaryClass?: string }
 > = {
   "2510.00357": {
     authors: ["Islam I. Abdulaal", "Abdelrahman W. A. Elsayed", "Omar A. M. Abdelraouf"],
@@ -42,6 +44,8 @@ const publicationOverrides: Record<
     subjects: ["Optics", "Systems and Control", "Medical Physics"],
     bibtexKey: "abdulaal2025terahertz",
     primaryClass: "physics.optics",
+    relatedThemes: ["integrated-nanophotonics", "physics-informed-design"],
+    relatedProjects: [],
   },
   "2606.21945": {
     authors: [
@@ -56,6 +60,8 @@ const publicationOverrides: Record<
     subjects: ["Optics"],
     bibtexKey: "labeb2026beyond",
     primaryClass: "physics.optics",
+    relatedThemes: ["physics-informed-design", "nonlinear-quantum-photonics"],
+    relatedProjects: [],
   },
 }
 
@@ -166,6 +172,8 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
           abstract: item.abstract,
           submitted: override?.submitted,
           subjects: override?.subjects,
+          relatedThemes: override?.relatedThemes ?? [],
+          relatedProjects: override?.relatedProjects ?? [],
           bibtex: createBibtex({
             title,
             authors,

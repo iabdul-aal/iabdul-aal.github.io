@@ -1,8 +1,10 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 import { ArrowUpRight, Check, Copy, FileText } from "lucide-react"
 import type { PublicationRecord } from "@/lib/publications"
+import { researchThemes, projects } from "@/lib/academic-content"
 
 type PublicationsListProps = {
   publications: PublicationRecord[]
@@ -47,6 +49,44 @@ export function PublicationsList({ publications, compact = false }: Publications
                     </span>
                   ))}
                 </p>
+              )}
+
+              {publication.relatedThemes && publication.relatedThemes.length > 0 && (
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+                  <span className="text-muted-foreground">Topics:</span>
+                  {publication.relatedThemes.map((themeId) => {
+                    const theme = researchThemes.find((t) => t.id === themeId)
+                    if (!theme) return null
+                    return (
+                      <Link
+                        key={themeId}
+                        href={`/research#${themeId}`}
+                        className="rounded-md border border-border bg-surface px-2 py-0.5 text-accent hover:border-accent hover:text-accent-strong transition-colors"
+                      >
+                        {theme.title}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+
+              {publication.relatedProjects && publication.relatedProjects.length > 0 && (
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                  <span className="text-muted-foreground">Projects:</span>
+                  {publication.relatedProjects.map((projectId) => {
+                    const project = projects.find((p) => p.id === projectId)
+                    if (!project) return null
+                    return (
+                      <Link
+                        key={projectId}
+                        href={`/projects#${projectId}`}
+                        className="rounded-md border border-border bg-surface px-2 py-0.5 text-accent hover:border-accent hover:text-accent-strong transition-colors"
+                      >
+                        {project.title}
+                      </Link>
+                    )
+                  })}
+                </div>
               )}
             </div>
 
