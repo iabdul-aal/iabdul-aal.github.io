@@ -11,7 +11,6 @@
     "venue": "Preprint",
     "year": "2025",
     "doi": "10.48550/ARXIV.2510.00357",
-    "url": "https://arxiv.org/abs/2510.00357",
-    "abstract": "Bound states in the continuum (BICs) have emerged as a revolutionary paradigm in terahertz (THz) photonics, enabling metasurfaces with theoretically infinite quality factors (Q-factors) and unprecedented light-matter control. This review synthesizes a decade of progress in THz-BIC research, tracing the evolution from foundational symmetry-protected designs to application-optimized quasi-BICs. We dissect multipolar origins, topological robustness, and symmetry-breaking strategies underpinning high-Q resonances, alongside computational frameworks for predictive design. The timeline highlights key milestones: early dielectric metasurfaces with high Q-factor, flexible biosensors achieving microgram detection limits, and Kerker-conditioned gas spectrometers reducing path lengths by few orders of magnitude. Emerging frontiers in reconfigurable MEMS-BICs and chiral quantum photonics are critically evaluated. Despite breakthroughs, scalability barriers persist for 6G integration, including nano-fabrication tolerances, material loss trade-offs, and dynamic control gaps. This review establishes BIC metasurfaces as pivotal enablers of compact, high-efficiency THz technologies poised to bridge the gap between fundamental discovery and commercialization of THz-based 6G communication and MedTech."
+    "url": "https://arxiv.org/abs/2510.00357"
   }
 ]
