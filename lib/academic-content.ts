@@ -95,10 +95,10 @@ export const recentActivity = [
       "Repository and citable DOI for a Ge-on-Si photodetector simulation and compact-model pipeline.",
   },
   {
-    date: "2025",
-    title: "Submitted arXiv preprint on THz quasi-BIC metasurfaces",
+    date: "2026",
+    title: "Paper on THz quasi-BIC metasurfaces accepted at Journal of Optics",
     detail:
-      "Review work on high-Q terahertz metasurfaces for biosensing and high-speed wireless communication contexts.",
+      "Our review outlining design frameworks and applications of terahertz bound states in the continuum has been accepted for publication.",
   },
   {
     date: "2025",

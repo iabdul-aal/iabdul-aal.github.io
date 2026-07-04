@@ -7,6 +7,7 @@ type RawPublication = {
   year?: string
   doi?: string
   url?: string
+  arxiv?: string
   authors?: string[]
   abstract?: string
   image?: string
@@ -153,7 +154,7 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
 
         const doi = (item.doi ?? "").trim() || undefined
         const url = (item.url ?? "").trim() || (doi ? `https://doi.org/${doi}` : undefined)
-        const arxiv = extractArxivId(doi ?? "", url ?? "")
+        const arxiv = (item.arxiv ?? "").trim() || extractArxivId(doi ?? "", url ?? "")
         const override = arxiv ? publicationOverrides[arxiv] : undefined
         const year = (item.year ?? item.date ?? "").trim()
         const venue = (item.venue ?? item.publisher ?? "").trim() || (arxiv ? "arXiv preprint" : "Publication")
