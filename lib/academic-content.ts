@@ -11,7 +11,7 @@ export const navigationItems = [
 
 export const identity = {
   name: "Islam I. Abdulaal",
-  shortTitle: "Photonics researcher and B.Sc. (Hons.) candidate",
+  shortTitle: "Photonics researcher and B.Sc. candidate",
   affiliation: "Alexandria University",
   location: "Alexandria, Egypt",
   email: socialLinks.email,
@@ -29,7 +29,7 @@ export const profileLinks = [
 ] as const
 
 export const aboutParagraphs = [
-  "I am pursuing a B.Sc. (Hons.) in Electronics and Communications Engineering at Alexandria University. My current work sits in computational and integrated photonics, with an emphasis on device modeling, inverse design, and physics-informed computational methods for nonlinear and quantum-compatible photonic systems.",
+  "I am pursuing a B.Sc. in Electronics and Communications Engineering at Alexandria University. My current work sits in computational and integrated photonics, with an emphasis on device modeling, inverse design, and physics-informed computational methods for nonlinear and quantum-compatible photonic systems.",
   "At NanoPhoto Lab, A*STAR, I have worked on physics-informed neural network methods for optimizing integrated quantum light source and detection structures. I treat machine learning as a modeling and optimization tool, useful when it remains constrained by the underlying physics and by reproducible simulation evidence.",
   "My earlier research work includes fiber Bragg grating sensing for biomedical monitoring and silicon photonic device modeling for intra-data-center optical links. Across these projects, the common thread is the connection between electromagnetic simulation, device physics, and system-level constraints.",
 ] as const
@@ -112,7 +112,7 @@ export const cvSummary = [
   {
     heading: "Education",
     items: [
-      "B.Sc. (Hons.) in Electronics and Communications Engineering, Alexandria University, 2021 to 2026.",
+      "B.Sc. in Electronics and Communications Engineering, Alexandria University, 2021 to 2026.",
       "Bachelor thesis work in silicon photonic devices, waveguide-integrated photodetectors, and intra-data-center optical links.",
     ],
   },

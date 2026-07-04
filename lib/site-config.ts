@@ -43,7 +43,7 @@ export const personConfig = {
   name: "Islam I. Abdulaal",
   givenName: "Islam",
   familyName: "Abdulaal",
-  role: "Photonics Researcher and B.Sc. (Hons.) Candidate",
+  role: "Photonics Researcher and B.Sc. Candidate",
   affiliation: "Alexandria University",
   lab: "NanoPhoto Lab, A*STAR",
   location: "Alexandria, Egypt",
