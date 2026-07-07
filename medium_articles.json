@@ -1,0 +1,32 @@
+{
+  "articles": [
+    {
+      "title": "ECE Roadmap — Part II",
+      "url": "https://iabdul-aal.medium.com/ece-roadmap-part-ii-e416042d13b2",
+      "publishedAt": "2023-03-27T22:30:57+00:00",
+      "year": "2023",
+      "excerpt": "This will be the last part of the career series. Career tracks, job titles, advice on choosing your path, and 10 key actions every engineering student should take.",
+      "tags": ["communication", "computer-science", "tech", "electronics", "careers"],
+      "thumbnail": "https://cdn-images-1.medium.com/max/421/1*vXN3BhJ0OTDX00mo7wY6pA.jpeg"
+    },
+    {
+      "title": "ECE Career — Part 1",
+      "url": "https://iabdul-aal.medium.com/ece-career-part-1-f7579e659d71",
+      "publishedAt": "2023-03-15T12:27:48+00:00",
+      "year": "2023",
+      "excerpt": "Hierarchy of systems in ECE — from analog ICs to communication systems. How to choose your tier using Ikigai and what academia versus industry actually requires.",
+      "tags": ["careers", "electrical", "engineering", "information-technology", "electronics"],
+      "thumbnail": "https://cdn-images-1.medium.com/max/1024/1*52ZdEqlFnPOEo4b1wo35hw.png"
+    },
+    {
+      "title": "ECE Philosophy — Part I",
+      "url": "https://iabdul-aal.medium.com/ece-philosophy-part-i-b50acdf99a52",
+      "publishedAt": "2023-02-27T00:00:00+00:00",
+      "year": "2023",
+      "excerpt": "The revolution of electronics, the history of ECE and why it matters. A philosophical grounding for engineering students entering the field.",
+      "tags": ["engineering", "electronics", "careers", "education"],
+      "thumbnail": ""
+    }
+  ],
+  "fetchedAt": "2026-07-07T00:00:00+00:00"
+}

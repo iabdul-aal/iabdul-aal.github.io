@@ -1,6 +1,8 @@
-import { ArrowUpRight, Download, Presentation, BookOpen, Compass, Layout } from "lucide-react"
+import Link from "next/link"
+import { ArrowUpRight, Download, Presentation, BookOpen, Compass, Layout, FileText } from "lucide-react"
 import { loadTalks, type TalkEntry } from "@/lib/talks"
 import { getMaterialsOverview } from "@/lib/materials-library"
+import { loadMediumArticles, formatArticleDate } from "@/lib/medium-articles"
 import { createPageMetadata } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
@@ -40,8 +42,11 @@ function getCollectionIcon(slug: string) {
 }
 
 export default async function MaterialsPage() {
-  const talks = await loadTalks()
-  const { collections } = await getMaterialsOverview()
+  const [talks, { collections }, { articles: mediumArticles }] = await Promise.all([
+    loadTalks(),
+    getMaterialsOverview(),
+    loadMediumArticles(),
+  ])
 
   return (
     <main>
@@ -116,6 +121,81 @@ export default async function MaterialsPage() {
           </div>
         </div>
       </section>
+
+      {/* Medium Articles */}
+      {mediumArticles.length > 0 && (
+        <section className="border-t border-border">
+          <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between">
+              <div>
+                <h2 className="text-xl font-semibold text-foreground">Medium Articles</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Long-form writing on engineering, careers, and research practice.
+                </p>
+              </div>
+              <Link
+                href="https://iabdul-aal.medium.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong transition-colors shrink-0"
+              >
+                All articles
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {mediumArticles.map((article) => (
+                <Link
+                  key={article.url}
+                  href={article.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col rounded-md border border-border bg-card p-5 transition-colors hover:border-accent/40 hover:bg-surface"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 rounded-md border border-border bg-surface p-1.5 shrink-0 group-hover:border-accent/30">
+                      <FileText className="h-4 w-4 text-accent" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs text-muted-foreground">
+                        {formatArticleDate(article.publishedAt) || article.year}
+                      </p>
+                      <h3 className="mt-1 text-sm font-semibold leading-snug text-foreground group-hover:text-accent transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {article.excerpt && (
+                    <p className="mt-3 text-xs leading-5 text-muted-foreground line-clamp-3">
+                      {article.excerpt}
+                    </p>
+                  )}
+
+                  {article.tags.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {article.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground ring-1 ring-border"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mt-auto pt-4 flex items-center gap-1 text-xs text-accent">
+                    Read on Medium
+                    <ArrowUpRight className="h-3 w-3" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Chronological Talks List */}
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6 lg:px-8">
