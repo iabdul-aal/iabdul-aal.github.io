@@ -1,7 +1,11 @@
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 import { PublicationsList } from "@/components/publications-list"
 import { loadPublications } from "@/lib/publications"
+import { loadScholarMetrics, formatFetchedAt } from "@/lib/scholar-metrics"
 import { createPageMetadata } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
+import { socialLinks } from "@/lib/social-links"
 
 export const metadata = createPageMetadata({
   title: "Publications",
@@ -18,7 +22,10 @@ export const metadata = createPageMetadata({
 })
 
 export default async function PublicationsPage() {
-  const publications = await loadPublications()
+  const [publications, scholar] = await Promise.all([
+    loadPublications(),
+    loadScholarMetrics(),
+  ])
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -48,6 +55,14 @@ export default async function PublicationsPage() {
     })),
   }
 
+  const updatedAt = formatFetchedAt(scholar.fetchedAt)
+
+  const metricsItems = [
+    { label: "Citations", value: scholar.citations.all },
+    { label: "h-index", value: scholar.hIndex.all },
+    { label: "i10-index", value: scholar.i10Index.all },
+  ]
+
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -65,9 +80,44 @@ export default async function PublicationsPage() {
         </div>
       </section>
 
+      {/* Google Scholar metrics strip */}
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-8">
+              {metricsItems.map((item) => (
+                <div key={item.label}>
+                  <p className="text-2xl font-semibold leading-none text-foreground tabular-nums">
+                    {item.value}
+                  </p>
+                  <p className="mt-1.5 text-xs text-muted-foreground">{item.label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
+              {updatedAt && (
+                <p className="text-xs text-muted-foreground">
+                  Updated {updatedAt}
+                </p>
+              )}
+              <Link
+                href={socialLinks.scholar}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent-strong transition-colors"
+              >
+                Google Scholar
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">
         <PublicationsList publications={publications} />
       </section>
     </main>
   )
 }
+
