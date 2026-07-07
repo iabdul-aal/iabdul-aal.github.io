@@ -1,32 +1,65 @@
 {
   "articles": [
     {
-      "title": "ECE Roadmap — Part II",
+      "title": "ECE Roadmap — Part II",
       "url": "https://iabdul-aal.medium.com/ece-roadmap-part-ii-e416042d13b2",
       "publishedAt": "2023-03-27T22:30:57+00:00",
       "year": "2023",
-      "excerpt": "This will be the last part of the career series. Career tracks, job titles, advice on choosing your path, and 10 key actions every engineering student should take.",
-      "tags": ["communication", "computer-science", "tech", "electronics", "careers"],
+      "excerpt": "ECE Roadmap — Part III This will be the last part of the career series. I hope it was beneficial for everyone. Before we continue, I just want to mention the conclusion of a talk with one of the alumni that he divides…",
+      "tags": [
+        "communcation",
+        "computer-science",
+        "tech",
+        "electronics",
+        "careers"
+      ],
       "thumbnail": "https://cdn-images-1.medium.com/max/421/1*vXN3BhJ0OTDX00mo7wY6pA.jpeg"
     },
     {
-      "title": "ECE Career — Part 1",
+      "title": "ECE Career — Part 1",
       "url": "https://iabdul-aal.medium.com/ece-career-part-1-f7579e659d71",
       "publishedAt": "2023-03-15T12:27:48+00:00",
       "year": "2023",
-      "excerpt": "Hierarchy of systems in ECE — from analog ICs to communication systems. How to choose your tier using Ikigai and what academia versus industry actually requires.",
-      "tags": ["careers", "electrical", "engineering", "information-technology", "electronics"],
+      "excerpt": "ECE Career — Part II We discussed a lot of things and concepts in my previous 2 articles; I hope you read them first and then come to continue. First, I want to abstract what we did in the previous article using the…",
+      "tags": [
+        "careers",
+        "electrical",
+        "engineering",
+        "information-technology",
+        "electronics"
+      ],
       "thumbnail": "https://cdn-images-1.medium.com/max/1024/1*52ZdEqlFnPOEo4b1wo35hw.png"
     },
     {
-      "title": "ECE Philosophy — Part I",
-      "url": "https://iabdul-aal.medium.com/ece-philosophy-part-i-b50acdf99a52",
-      "publishedAt": "2023-02-27T00:00:00+00:00",
+      "title": "ECE Philosophy — Part I",
+      "url": "https://iabdul-aal.medium.com/how-to-plan-your-career-in-ece-department-part-i-4a01ee43dc20",
+      "publishedAt": "2023-03-08T12:13:59+00:00",
       "year": "2023",
-      "excerpt": "The revolution of electronics, the history of ECE and why it matters. A philosophical grounding for engineering students entering the field.",
-      "tags": ["engineering", "electronics", "careers", "education"],
-      "thumbnail": ""
+      "excerpt": "The last article was an overview of the electronics and communication department for people who were curious to know about it, but here, it refers to the students of the department. ECE is one of the worst departments…",
+      "tags": [
+        "engineering",
+        "technology",
+        "computer-science",
+        "careers",
+        "programming"
+      ],
+      "thumbnail": "https://cdn-images-1.medium.com/max/770/1*W09NreXPhyrqymDj2AMXJw.png"
+    },
+    {
+      "title": "ECE Department — Part 0",
+      "url": "https://iabdul-aal.medium.com/what-is-electronics-and-communication-engineering-department-cc5120cb65ab",
+      "publishedAt": "2023-02-28T22:21:01+00:00",
+      "year": "2023",
+      "excerpt": "Electronics and Communication Engineering: It is a sub-major of electrical engineering (EE). Electrical engineering consists of three sub-majors: ECE: Electronics and Communication Engineering EPE: Electrical Power…",
+      "tags": [
+        "electrical-engineering",
+        "egypt",
+        "electrical",
+        "electronics",
+        "engineering"
+      ],
+      "thumbnail": "https://cdn-images-1.medium.com/max/1024/1*tPXrHu8mJHes4nIuU8RiFg.jpeg"
     }
   ],
-  "fetchedAt": "2026-07-07T00:00:00+00:00"
+  "fetchedAt": "2026-07-07T06:25:53.362249+00:00"
 }
