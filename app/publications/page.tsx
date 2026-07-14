@@ -18,6 +18,7 @@ export const metadata = createPageMetadata({
     "integrated photonics preprints",
     "terahertz quasi-BIC metasurfaces",
     "physics-informed photonics",
+    "intelligent photonics",
   ],
 })
 

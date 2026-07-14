@@ -21,6 +21,7 @@ export const siteConfig = {
     "nanophotonics",
     "inverse design",
     "physics-informed machine learning",
+    "Intelligent Photonics",
     "photonic system modeling",
     "Alexandria University",
     "NanoPhoto Lab",
@@ -57,5 +58,6 @@ export const personConfig = {
     "Nanophotonics",
     "Inverse design",
     "Physics-informed machine learning",
+    "Intelligent Photonics",
   ],
 } as const
