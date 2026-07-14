@@ -29,6 +29,7 @@ export type PublicationRecord = {
   submitted?: string
   subjects?: string[]
   bibtex: string
+  status: "published" | "preprint"
   relatedThemes?: string[]
   relatedProjects?: string[]
 }
@@ -160,6 +161,8 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
         const venue = (item.venue ?? item.publisher ?? "").trim() || (arxiv ? "arXiv preprint" : "Publication")
         const authors = item.authors && item.authors.length > 0 ? item.authors : override?.authors ?? []
 
+        const isPreprint = Boolean(arxiv && (!doi || doi.toLowerCase().startsWith(ARXIV_DOI_PREFIX)))
+
         return {
           id: slugify(`${year}-${title}`),
           title,
@@ -173,6 +176,7 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
           abstract: item.abstract,
           submitted: override?.submitted,
           subjects: override?.subjects,
+          status: isPreprint ? "preprint" : "published",
           relatedThemes: override?.relatedThemes ?? [],
           relatedProjects: override?.relatedProjects ?? [],
           bibtex: createBibtex({

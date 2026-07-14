@@ -14,9 +14,16 @@ export const metadata = createPageMetadata({
   path: "/",
 })
 
+const activityTypeLabel: Record<string, string> = {
+  paper: "Paper",
+  software: "Software",
+  position: "Position",
+  milestone: "Education",
+}
+
 export default async function Home() {
   const publications = await loadPublications()
-  const selectedProjects = projects.slice(0, 2)
+  const featuredProject = projects[0]
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -34,25 +41,29 @@ export default async function Home() {
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-6 md:grid-cols-[minmax(0,1fr)_11rem] md:items-start md:py-24 lg:px-8">
-        <div className="max-w-3xl">
+      {/* Hero */}
+      <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-6 md:grid-cols-[minmax(0,1fr)_13rem] md:items-start md:py-24 lg:px-8">
+        <div className="max-w-2xl">
           <p className="text-sm font-medium text-muted-foreground">{identity.shortTitle}</p>
           <h1 className="mt-4 text-4xl font-semibold leading-tight text-balance text-foreground md:text-5xl">
             {identity.name}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">{identity.statement}</p>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">{identity.statement}</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {identity.affiliation} · {identity.location}
+          </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             {profileLinks.map((link) =>
               link.external ? (
-                <Button key={link.label} asChild variant="outline">
+                <Button key={link.label} asChild variant="outline" size="sm">
                   <a href={link.href} target="_blank" rel="noreferrer">
                     {link.label}
                     <ArrowUpRight aria-hidden="true" />
                   </a>
                 </Button>
               ) : (
-                <Button key={link.label} asChild variant={link.label === "CV" ? "default" : "outline"}>
+                <Button key={link.label} asChild variant={link.label === "CV" ? "default" : "outline"} size="sm">
                   <Link href={link.href}>
                     {link.label}
                     {link.label === "CV" ? <FileText aria-hidden="true" /> : null}
@@ -63,7 +74,7 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="w-36 overflow-hidden rounded-md border border-border bg-surface md:justify-self-end">
+        <div className="w-44 overflow-hidden rounded-md border border-border bg-surface ring-4 ring-border md:justify-self-end">
           <Image
             src="/personal-pic.png"
             alt="Portrait of Islam I. Abdulaal"
@@ -75,26 +86,33 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Research summary */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
           <div>
-            <p className="text-sm font-semibold text-foreground">Research Summary</p>
+            <p className="text-sm font-semibold text-foreground">Research</p>
+            <Link
+              href="/research"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong"
+            >
+              Full overview
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </Link>
           </div>
           <div className="max-w-3xl">
             <p className="text-base leading-8 text-muted-foreground">
-              My work is organized around integrated nanophotonics, nonlinear and quantum photonics,
-              physics-informed computational methods, inverse design, and photonic system modeling. The emphasis is on
-              connecting device physics to computational workflows that remain interpretable and reproducible.
+              Work organized around integrated nanophotonics, nonlinear and quantum photonics,
+              physics-informed computational methods, and inverse design. The emphasis is connecting
+              device physics to computational workflows that remain interpretable and reproducible.
             </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {researchThemes.slice(0, 4).map((theme) => (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {researchThemes.map((theme) => (
                 <Link
-                  key={theme.title}
-                  href="/research"
-                  className="rounded-md border border-border bg-card p-4 text-sm transition-colors hover:border-accent"
+                  key={theme.id}
+                  href={`/research#${theme.id}`}
+                  className="rounded-md border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
                 >
-                  <span className="font-medium text-foreground">{theme.title}</span>
-                  <span className="mt-2 block leading-6 text-muted-foreground">{theme.problem}</span>
+                  {theme.title}
                 </Link>
               ))}
             </div>
@@ -102,28 +120,51 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Featured project */}
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-[16rem_minmax(0,1fr)]">
           <div>
-            <h2 className="text-sm font-semibold text-foreground">Selected Projects</h2>
+            <h2 className="text-sm font-semibold text-foreground">Featured Project</h2>
             <Link href="/projects" className="mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong">
-              View all projects
+              All projects
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="grid gap-5">
-            {selectedProjects.map((project) => (
-              <article key={project.title} className="rounded-md border border-border bg-card p-5">
-                <p className="text-sm text-muted-foreground">{project.status}</p>
-                <h3 className="mt-2 text-xl font-semibold leading-7 text-foreground">{project.title}</h3>
-                <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">{project.objective}</p>
-              </article>
-            ))}
-          </div>
+          <article className="rounded-md border border-border bg-card p-6">
+            <p className="text-xs font-medium text-accent">{featuredProject.status}</p>
+            <h3 className="mt-2 text-xl font-semibold leading-7 text-foreground">{featuredProject.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">{featuredProject.objective}</p>
+
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {featuredProject.tools.slice(0, 5).map((tool) => (
+                <span key={tool} className="rounded border border-border bg-surface px-2 py-0.5 text-xs text-muted-foreground">
+                  {tool}
+                </span>
+              ))}
+            </div>
+
+            {featuredProject.links.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-3">
+                {featuredProject.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
         </div>
       </section>
 
+      {/* Selected publications */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
           <div>
@@ -132,7 +173,7 @@ export default async function Home() {
               href="/publications"
               className="mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong"
             >
-              Publications
+              All publications
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
@@ -140,15 +181,21 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Recent activity */}
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
         <div>
           <h2 className="text-sm font-semibold text-foreground">Recent Activity</h2>
         </div>
         <div className="divide-y divide-border border-y border-border">
           {recentActivity.map((item) => (
-            <article key={`${item.date}-${item.title}`} className="grid gap-3 py-5 sm:grid-cols-[5rem_minmax(0,1fr)]">
+            <article key={`${item.date}-${item.title}`} className="grid gap-3 py-5 sm:grid-cols-[6rem_minmax(0,1fr)]">
               <p className="text-sm text-muted-foreground">{item.date}</p>
               <div>
+                {"type" in item && item.type && (
+                  <span className="inline-block rounded bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground mb-2">
+                    {activityTypeLabel[item.type as string] ?? item.type}
+                  </span>
+                )}
                 <h3 className="font-medium text-foreground">{item.title}</h3>
                 <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.detail}</p>
               </div>

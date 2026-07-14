@@ -11,7 +11,7 @@ export const navigationItems = [
 
 export const identity = {
   name: "Islam I. Abdulaal",
-  shortTitle: "Photonics researcher and B.Sc. candidate",
+  shortTitle: "Photonics researcher · B.Sc. Electronics and Communications Engineering",
   affiliation: "Alexandria University",
   location: "Alexandria, Egypt",
   email: socialLinks.email,
@@ -29,8 +29,8 @@ export const profileLinks = [
 ] as const
 
 export const aboutParagraphs = [
-  "I am pursuing a B.Sc. in Electronics and Communications Engineering at Alexandria University. My current work sits in computational and integrated photonics, with an emphasis on device modeling, inverse design, and physics-informed computational methods for nonlinear and quantum-compatible photonic systems.",
-  "At NanoPhoto Lab, A*STAR, I have worked on physics-informed neural network methods for optimizing integrated quantum light source and detection structures. I treat machine learning as a modeling and optimization tool, useful when it remains constrained by the underlying physics and by reproducible simulation evidence.",
+  "I hold a B.Sc. in Electronics and Communications Engineering from Alexandria University. My current work sits in computational and integrated photonics, with an emphasis on device modeling, inverse design, and physics-informed computational methods for nonlinear and quantum-compatible photonic systems.",
+  "At NanoPhoto Lab I have worked on physics-informed neural network methods for optimizing integrated quantum light source and detection structures. I treat machine learning as a modeling and optimization tool, useful when it remains constrained by the underlying physics and by reproducible simulation evidence.",
   "My earlier research work includes fiber Bragg grating sensing for biomedical monitoring and silicon photonic device modeling for intra-data-center optical links. Across these projects, the common thread is the connection between electromagnetic simulation, device physics, and system-level constraints.",
 ] as const
 
@@ -89,20 +89,29 @@ export const projects = [
 
 export const recentActivity = [
   {
-    date: "2026",
+    date: "Jun 2026",
+    type: "software",
     title: "Released PD-Design-Kit as a public photonics design workflow",
     detail:
       "Repository and citable DOI for a Ge-on-Si photodetector simulation and compact-model pipeline.",
   },
   {
-    date: "2026",
+    date: "Jun 2026",
+    type: "paper",
     title: "Paper on THz quasi-BIC metasurfaces accepted at Journal of Optics",
     detail:
-      "Our review outlining design frameworks and applications of terahertz bound states in the continuum has been accepted for publication.",
+      "Review outlining design frameworks and applications of terahertz bound states in the continuum accepted for publication.",
   },
   {
-    date: "2025",
-    title: "Joined NanoPhoto Lab, A*STAR, as a research intern",
+    date: "Jun 2026",
+    type: "milestone",
+    title: "Completed B.Sc. in Electronics and Communications Engineering",
+    detail: "Graduated from Alexandria University with a degree in Electronics and Communications Engineering.",
+  },
+  {
+    date: "Sep 2025",
+    type: "position",
+    title: "Joined NanoPhoto Lab as a research intern",
     detail:
       "Work focused on physics-informed optimization for integrated quantum photonic source and detection structures.",
   },
@@ -112,14 +121,14 @@ export const cvSummary = [
   {
     heading: "Education",
     items: [
-      "B.Sc. in Electronics and Communications Engineering, Alexandria University, 2021 to 2026.",
+      "B.Sc. in Electronics and Communications Engineering, Alexandria University, 2021–2026.",
       "Bachelor thesis work in silicon photonic devices, waveguide-integrated photodetectors, and intra-data-center optical links.",
     ],
   },
   {
     heading: "Research Experience",
     items: [
-      "Research Intern, NanoPhoto Lab, IMRE, A*STAR, 2025 to present.",
+      "Research Intern, NanoPhoto Lab, 2025–present.",
       "Research Intern, OPST Group, Alexandria University, 2023 to 2025.",
       "Training in analog and mixed-signal modeling, CMOS analog IC design, and photonic device simulation workflows.",
     ],

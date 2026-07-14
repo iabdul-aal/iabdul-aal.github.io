@@ -1,9 +1,16 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import { Inter } from "next/font/google"
 import "./globals.css"
 import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
 import { personConfig, siteConfig } from "@/lib/site-config"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
 
 const securityPolicy = [
   "default-src 'self'",
@@ -101,7 +108,7 @@ const structuredData = {
         },
         {
           "@type": "Organization",
-          name: "NanoPhoto Lab, A*STAR",
+          name: "NanoPhoto Lab",
         },
       ],
       knowsAbout: personConfig.focusAreas,
@@ -137,7 +144,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         <meta httpEquiv="Content-Security-Policy" content={securityPolicy} />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />

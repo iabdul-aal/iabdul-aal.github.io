@@ -34,10 +34,21 @@ export function PublicationsList({ publications, compact = false }: Publications
         <article key={publication.id} id={publication.id} className="scroll-mt-24 py-6">
           <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_12rem]">
             <div className="min-w-0">
-              <p className="text-sm text-muted-foreground">
-                {[publication.venue, publication.year].filter(Boolean).join(", ")}
-                {publication.submitted ? `, submitted ${publication.submitted}` : ""}
-              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-sm text-muted-foreground">
+                  {[publication.venue, publication.year].filter(Boolean).join(", ")}
+                  {publication.submitted ? `, submitted ${publication.submitted}` : ""}
+                </p>
+                <span
+                  className={
+                    publication.status === "published"
+                      ? "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-secondary text-foreground ring-1 ring-border"
+                      : "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-surface text-muted-foreground ring-1 ring-border"
+                  }
+                >
+                  {publication.status === "published" ? "Published" : "Preprint"}
+                </span>
+              </div>
               <h2 className="mt-2 text-lg font-semibold leading-7 text-foreground">{publication.title}</h2>
 
               {publication.authors.length > 0 && (

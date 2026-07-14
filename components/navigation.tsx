@@ -16,7 +16,7 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6 lg:px-8" aria-label="Main">
+      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 sm:px-6 lg:px-8" aria-label="Main">
         <Link href="/" className="flex min-w-0 items-center gap-3 text-foreground hover:text-accent transition-colors">
           <Image src="/logo.png" alt="Islam Abdulaal logo" width={40} height={40} className="h-10 w-auto" />
           <div className="truncate">
@@ -32,10 +32,10 @@ export function Navigation() {
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
-                "rounded-md px-3 py-2 text-sm transition-colors",
+                "relative rounded-sm px-3 py-2 text-sm transition-colors",
                 isActive(item.href)
-                  ? "bg-secondary text-foreground"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                  ? "text-foreground font-medium after:absolute after:bottom-0 after:left-3 after:right-3 after:h-px after:bg-accent"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {item.label}
