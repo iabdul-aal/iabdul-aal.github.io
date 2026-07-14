@@ -143,7 +143,7 @@ export default async function Home() {
               Connecting device physics to computational workflows that remain interpretable and reproducible across three main focus areas.
             </p>
             
-            <div className="overflow-hidden rounded-md border border-border bg-card max-w-2xl">
+            <div className="overflow-hidden rounded-md border border-border bg-card max-w-xl">
               <Image
                 src="/images/homepage-toc.png"
                 alt="Research profile graphical abstract"
