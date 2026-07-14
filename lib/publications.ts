@@ -48,7 +48,7 @@ const publicationOverrides: Record<
     subjects: ["Optics", "Systems and Control", "Medical Physics"],
     bibtexKey: "abdulaal2025terahertz",
     primaryClass: "physics.optics",
-    relatedThemes: ["integrated-nanophotonics", "physics-informed-design"],
+    relatedThemes: ["integrated-nanophotonics"],
     relatedProjects: [],
   },
   "2606.21945": {
@@ -64,7 +64,7 @@ const publicationOverrides: Record<
     subjects: ["Optics"],
     bibtexKey: "labeb2026beyond",
     primaryClass: "physics.optics",
-    relatedThemes: ["physics-informed-design", "nonlinear-quantum-photonics"],
+    relatedThemes: ["physics-informed-design"],
     relatedProjects: [],
   },
 }

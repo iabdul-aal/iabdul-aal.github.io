@@ -1,4 +1,5 @@
 import Link from "next/link"
+import katex from "katex"
 import { researchThemes } from "@/lib/academic-content"
 import { getProjectsForTheme } from "@/lib/database"
 import { loadPublications } from "@/lib/publications"
@@ -16,19 +17,19 @@ function getThemeFormula(id: string) {
     case "integrated-nanophotonics":
       return {
         label: "Governing Helmholtz Equation",
-        latex: "∇²E + k₀² n²(r)E = 0",
+        latex: "\\nabla^2 \\mathbf{E} + k_0^2 n^2(\\mathbf{r}) \\mathbf{E} = 0",
         desc: "Modal dispersion and wave confinement modeling.",
       }
     case "nonlinear-quantum-photonics":
       return {
         label: "Phase-Matching Constraint",
-        latex: "Δβ = β_s + β_i - β_p = 0",
+        latex: "\\Delta\\beta = \\beta_s + \\beta_i - \\beta_p = 0",
         desc: "Photon-pair energy-momentum conservation.",
       }
     case "physics-informed-design":
       return {
         label: "PINN Maxwell-Residual Loss",
-        latex: "ℒ_total = ℒ_data + λ ℒ_physics  (where ℒ_physics = ||∇ × E + iωμH||²)",
+        latex: "\\mathcal{L}_{\\text{total}} = \\mathcal{L}_{\\text{data}} + \\lambda \\mathcal{L}_{\\text{physics}} \\quad \\text{where} \\quad \\mathcal{L}_{\\text{physics}} = \\|\\nabla \\times \\mathbf{E} + i\\omega\\mu\\mathbf{H}\\|^2",
         desc: "Enforcing wave physics in gradient backpropagation.",
       }
     default:
@@ -101,7 +102,15 @@ export default async function ResearchPage() {
                           <dt className="text-sm font-medium text-foreground pt-0.5">Governing Physics</dt>
                           <dd className="rounded-md border border-border bg-card p-4 border-l-2 border-l-accent/60">
                             <p className="text-xs font-semibold text-foreground">{formula.label}</p>
-                            <p className="mt-2 text-center text-sm font-mono font-medium text-accent tracking-wide">{formula.latex}</p>
+                            <div
+                              className="mt-3 overflow-x-auto py-2 text-accent"
+                              dangerouslySetInnerHTML={{
+                                __html: katex.renderToString(formula.latex, {
+                                  displayMode: true,
+                                  throwOnError: false,
+                                }),
+                              }}
+                            />
                             <p className="mt-2 text-xs text-muted-foreground">{formula.desc}</p>
                           </dd>
                         </div>
