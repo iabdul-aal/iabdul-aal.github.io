@@ -24,7 +24,6 @@ export const identity = {
 export const profileLinks = [
   { label: "CV", href: "/cv", external: false },
   { label: "Google Scholar", href: socialLinks.scholar, external: true },
-  { label: "arXiv", href: socialLinks.arxiv, external: true },
   { label: "GitHub", href: socialLinks.github, external: true },
   { label: "ORCID", href: socialLinks.orcid, external: true },
 ] as const

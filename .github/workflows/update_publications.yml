@@ -28,6 +28,7 @@ jobs:
       - name: Fetch publications, profile, talks, Scholar metrics, Medium articles
         run: |
           python scripts/fetch_publications.py
+          python scripts/sync_arxiv_publications.py
           python scripts/fetch_orcid_profile.py
           python scripts/fetch_talks.py
           python scripts/fetch_scholar_metrics.py
