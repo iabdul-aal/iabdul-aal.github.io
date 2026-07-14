@@ -60,15 +60,15 @@ export default async function ProjectsPage() {
                       {projectThemes.length > 0 && (
                         <div>
                           <dt className="text-sm font-medium text-foreground">Related Topics</dt>
-                          <dd className="mt-2 flex flex-wrap gap-3 text-sm leading-7">
+                          <dd className="mt-2 flex flex-wrap gap-2">
                             {projectThemes.map((theme) => (
                               <Link
                                 key={theme.id}
                                 href={`/research#${theme.id}`}
-                                className="inline-flex items-center gap-1 text-accent hover:text-accent-strong transition-colors"
+                                className="inline-block max-w-[16rem] truncate rounded border border-border bg-surface px-2.5 py-1 text-xs text-accent hover:border-accent hover:bg-card transition-colors"
+                                title={theme.title}
                               >
                                 {theme.title}
-                                <ArrowUpRight className="h-3.5 w-3.5" />
                               </Link>
                             ))}
                           </dd>
@@ -78,15 +78,16 @@ export default async function ProjectsPage() {
                       {projectPublications.length > 0 && (
                         <div>
                           <dt className="text-sm font-medium text-foreground">Related Publications</dt>
-                          <dd className="mt-2 flex flex-col gap-3 text-sm leading-7">
+                          <dd className="mt-2 flex flex-wrap gap-2">
                             {projectPublications.map((pub) => (
                               <Link
                                 key={pub.id}
                                 href={`/publications#${pub.id}`}
-                                className="inline-flex items-start gap-1 text-accent hover:text-accent-strong transition-colors"
+                                className="inline-flex max-w-[22rem] items-baseline gap-1.5 truncate rounded border border-border bg-surface px-2.5 py-1 text-xs text-accent hover:border-accent hover:bg-card transition-colors"
+                                title={pub.title}
                               >
-                                <span className="underline decoration-dotted">{pub.title} ({pub.year})</span>
-                                <ArrowUpRight className="h-3.5 w-3.5 shrink-0 mt-1" />
+                                <span className="truncate">{pub.title}</span>
+                                <span className="shrink-0 text-muted-foreground">· {pub.year}</span>
                               </Link>
                             ))}
                           </dd>

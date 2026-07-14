@@ -41,7 +41,6 @@ export default async function CvPage() {
 
   return (
     <main>
-      {/* Header */}
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6 md:py-20 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
           <div className="max-w-3xl">
@@ -85,7 +84,6 @@ export default async function CvPage() {
         </div>
       </section>
 
-      {/* Education */}
       <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <h2 className="text-sm font-semibold text-foreground">Education</h2>
@@ -106,7 +104,6 @@ export default async function CvPage() {
         </div>
       </section>
 
-      {/* Research experience */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <h2 className="text-sm font-semibold text-foreground">Research Experience</h2>
@@ -127,7 +124,6 @@ export default async function CvPage() {
         </div>
       </section>
 
-      {/* Publications — summary only, full list on /publications */}
       <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -157,7 +153,6 @@ export default async function CvPage() {
         </div>
       </section>
 
-      {/* Methods & tools — canonical location */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <h2 className="text-sm font-semibold text-foreground">Methods and Tools</h2>
@@ -171,7 +166,6 @@ export default async function CvPage() {
         </div>
       </section>
 
-      {/* PDF embed */}
       <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-sm font-semibold text-foreground">PDF Preview</h2>

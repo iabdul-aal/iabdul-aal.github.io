@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
 import { researchThemes } from "@/lib/academic-content"
 import { getProjectsForTheme } from "@/lib/database"
 import { loadPublications } from "@/lib/publications"
@@ -63,16 +62,16 @@ export default async function ResearchPage() {
 
                     {themeProjects.length > 0 && (
                       <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">
-                        <dt className="text-sm font-medium text-foreground pt-0.5">Related projects</dt>
-                        <dd className="flex flex-wrap gap-3 text-sm leading-7">
+                        <dt className="text-sm font-medium text-foreground pt-0.5">Projects</dt>
+                        <dd className="flex flex-wrap gap-2">
                           {themeProjects.map((project) => (
                             <Link
                               key={project.id}
                               href={`/projects#${project.id}`}
-                              className="inline-flex items-center gap-1 text-accent hover:text-accent-strong transition-colors"
+                              className="inline-block max-w-[16rem] truncate rounded border border-border bg-surface px-2.5 py-1 text-xs text-accent hover:border-accent hover:bg-card transition-colors"
+                              title={project.title}
                             >
                               {project.title}
-                              <ArrowUpRight className="h-3.5 w-3.5" />
                             </Link>
                           ))}
                         </dd>
@@ -81,16 +80,17 @@ export default async function ResearchPage() {
 
                     {themePublications.length > 0 && (
                       <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">
-                        <dt className="text-sm font-medium text-foreground pt-0.5">Related publications</dt>
-                        <dd className="flex flex-col gap-2 text-sm leading-7">
+                        <dt className="text-sm font-medium text-foreground pt-0.5">Publications</dt>
+                        <dd className="flex flex-wrap gap-2">
                           {themePublications.map((pub) => (
                             <Link
                               key={pub.id}
                               href={`/publications#${pub.id}`}
-                              className="inline-flex items-start gap-1 text-accent hover:text-accent-strong transition-colors"
+                              className="inline-flex max-w-[22rem] items-baseline gap-1.5 truncate rounded border border-border bg-surface px-2.5 py-1 text-xs text-accent hover:border-accent hover:bg-card transition-colors"
+                              title={pub.title}
                             >
-                              <span className="underline decoration-dotted underline-offset-2">{pub.title} ({pub.year})</span>
-                              <ArrowUpRight className="h-3.5 w-3.5 shrink-0 mt-1" />
+                              <span className="truncate">{pub.title}</span>
+                              <span className="shrink-0 text-muted-foreground">· {pub.year}</span>
                             </Link>
                           ))}
                         </dd>

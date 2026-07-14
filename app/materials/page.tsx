@@ -50,7 +50,6 @@ export default async function MaterialsPage() {
 
   return (
     <main>
-      {/* Hero Section */}
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6 md:py-20 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-medium text-muted-foreground">Materials</p>
@@ -63,7 +62,6 @@ export default async function MaterialsPage() {
         </div>
       </section>
 
-      {/* Dynamic Resource Collections */}
       <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 lg:px-8">
           <h2 className="text-xl font-semibold text-foreground">Technical Resources</h2>
@@ -122,7 +120,6 @@ export default async function MaterialsPage() {
         </div>
       </section>
 
-      {/* Medium Articles */}
       {mediumArticles.length > 0 && (
         <section className="border-t border-border">
           <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 lg:px-8">
@@ -197,7 +194,6 @@ export default async function MaterialsPage() {
         </section>
       )}
 
-      {/* Chronological Talks List */}
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6 lg:px-8">
         <h2 className="text-xl font-semibold text-foreground">Chronological Sessions</h2>
         <p className="mt-2 text-sm text-muted-foreground">

@@ -41,7 +41,6 @@ export default async function Home() {
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Hero */}
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-6 md:grid-cols-[minmax(0,1fr)_13rem] md:items-start md:py-24 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-sm font-medium text-muted-foreground">{identity.shortTitle}</p>
@@ -86,7 +85,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Research summary */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
           <div>
@@ -120,7 +118,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Featured project */}
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-[16rem_minmax(0,1fr)]">
           <div>
@@ -164,7 +161,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Selected publications */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
           <div>
@@ -181,7 +177,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Recent activity */}
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
         <div>
           <h2 className="text-sm font-semibold text-foreground">Recent Activity</h2>

@@ -63,8 +63,7 @@ export function PublicationsList({ publications, compact = false }: Publications
               )}
 
               {publication.relatedThemes && publication.relatedThemes.length > 0 && (
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="text-muted-foreground">Topics:</span>
+                <div className="mt-3 flex flex-wrap gap-2">
                   {publication.relatedThemes.map((themeId) => {
                     const theme = researchThemes.find((t) => t.id === themeId)
                     if (!theme) return null
@@ -72,7 +71,8 @@ export function PublicationsList({ publications, compact = false }: Publications
                       <Link
                         key={themeId}
                         href={`/research#${themeId}`}
-                        className="rounded-md border border-border bg-surface px-2 py-0.5 text-accent hover:border-accent hover:text-accent-strong transition-colors"
+                        className="inline-block max-w-[16rem] truncate rounded border border-border bg-surface px-2.5 py-1 text-xs text-accent hover:border-accent hover:bg-card transition-colors"
+                        title={theme.title}
                       >
                         {theme.title}
                       </Link>
@@ -82,8 +82,7 @@ export function PublicationsList({ publications, compact = false }: Publications
               )}
 
               {publication.relatedProjects && publication.relatedProjects.length > 0 && (
-                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="text-muted-foreground">Projects:</span>
+                <div className="mt-2 flex flex-wrap gap-2">
                   {publication.relatedProjects.map((projectId) => {
                     const project = projects.find((p) => p.id === projectId)
                     if (!project) return null
@@ -91,7 +90,8 @@ export function PublicationsList({ publications, compact = false }: Publications
                       <Link
                         key={projectId}
                         href={`/projects#${projectId}`}
-                        className="rounded-md border border-border bg-surface px-2 py-0.5 text-accent hover:border-accent hover:text-accent-strong transition-colors"
+                        className="inline-block max-w-[16rem] truncate rounded border border-border bg-surface px-2.5 py-1 text-xs text-accent hover:border-accent hover:bg-card transition-colors"
+                        title={project.title}
                       >
                         {project.title}
                       </Link>
