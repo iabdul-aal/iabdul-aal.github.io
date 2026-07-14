@@ -73,7 +73,7 @@ export default async function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-6 md:grid-cols-[minmax(0,1fr)_13rem] md:items-start md:py-24 lg:px-8">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl order-2 md:order-1">
           <p className="text-sm font-medium text-muted-foreground">{identity.shortTitle}</p>
           <h1 className="mt-4 text-4xl font-semibold leading-tight text-balance text-foreground md:text-5xl">
             {identity.name}
@@ -114,7 +114,7 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="w-44 overflow-hidden rounded-md border border-border bg-surface ring-4 ring-border md:justify-self-end">
+        <div className="w-44 overflow-hidden rounded-md border border-border bg-surface ring-4 ring-border md:justify-self-end order-1 md:order-2">
           <Image
             src="/personal-pic.png"
             alt="Portrait of Islam I. Abdulaal"
@@ -143,7 +143,7 @@ export default async function Home() {
               Connecting device physics to computational workflows that remain interpretable and reproducible across three main focus areas.
             </p>
             
-            <div className="overflow-hidden rounded-md border border-border bg-card max-w-xl">
+            <div className="overflow-hidden rounded-md border border-border bg-card w-full max-w-xl">
               <Image
                 src="/images/homepage-toc.png"
                 alt="Research profile graphical abstract"

@@ -80,7 +80,7 @@ export default async function ResearchPage() {
                   <div className="space-y-4">
                     <h2 className="text-xl font-semibold text-foreground">{theme.title}</h2>
                     {theme.image && (
-                      <div className="overflow-hidden rounded-md border border-border bg-card max-w-sm">
+                      <div className="overflow-hidden rounded-md border border-border bg-card w-full max-w-sm">
                         <Image
                           src={theme.image}
                           alt={`TOC figure for ${theme.title}`}

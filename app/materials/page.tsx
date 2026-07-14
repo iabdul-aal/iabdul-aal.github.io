@@ -76,11 +76,11 @@ export default async function MaterialsPage() {
                 {assets.length > 0 ? (
                   <ul className="mt-5 divide-y divide-border border-t border-border">
                     {assets.map((asset) => (
-                      <li key={asset.fileName} className="flex items-center justify-between py-3 text-sm">
-                        <span className="truncate font-medium text-foreground max-w-[70%]" title={asset.displayName}>
+                      <li key={asset.fileName} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
+                        <span className="truncate font-medium text-foreground max-w-full sm:max-w-[70%]" title={asset.displayName}>
                           {asset.displayName}
                         </span>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground ml-auto">
                           <span>{asset.extension} • {asset.sizeLabel}</span>
                           <a
                             href={asset.href}
