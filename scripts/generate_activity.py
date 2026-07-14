@@ -34,13 +34,15 @@ def parse_date(raw: str) -> datetime | None:
     if not raw:
         return None
     raw = raw.strip()
-    try:
-        clean = raw.replace("Z", "+00:00")
-        return datetime.fromisoformat(clean).astimezone(timezone.utc)
-    except ValueError:
-        pass
+    
+    if any(x in raw.lower() for x in ('+', 'z', 't')):
+        try:
+            clean = raw.replace("Z", "+00:00")
+            return datetime.fromisoformat(clean).astimezone(timezone.utc)
+        except ValueError:
+            pass
 
-    for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%Y-%m", "%Y"):
+    for fmt in ("%Y-%m-%d", "%Y-%m", "%Y", "%Y-%m-%dT%H:%M:%S"):
         try:
             return datetime.strptime(raw, fmt).replace(tzinfo=timezone.utc)
         except ValueError:

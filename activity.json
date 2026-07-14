@@ -1,8 +1,8 @@
 {
   "items": [
     {
-      "date_iso": "2026-05-31",
-      "date": "May 2026",
+      "date_iso": "2026-07-01",
+      "date": "Jul 2026",
       "type": "milestone",
       "title": "Completed B.Sc. in Electronics and Communications Engineering",
       "detail": "Graduated from Alexandria University with a degree in Electronics and Communications Engineering."
@@ -22,8 +22,8 @@
       "detail": "Preprint posted on arXiv."
     },
     {
-      "date_iso": "2025-08-31",
-      "date": "Aug 2025",
+      "date_iso": "2025-09-01",
+      "date": "Sep 2025",
       "type": "position",
       "title": "Joined NanoPhoto Lab, IMRE, A*STAR as a research intern",
       "detail": "Work focused on physics-informed optimization for integrated quantum photonic source and detection structures."
@@ -57,5 +57,5 @@
       "detail": "Published on Medium."
     }
   ],
-  "fetchedAt": "2026-07-14T09:04:31.633566+00:00"
+  "fetchedAt": "2026-07-14T09:16:42.110263+00:00"
 }
