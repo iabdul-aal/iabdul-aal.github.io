@@ -11,6 +11,31 @@ export const metadata = createPageMetadata({
   path: "/research",
 })
 
+function getThemeFormula(id: string) {
+  switch (id) {
+    case "integrated-nanophotonics":
+      return {
+        label: "Governing Helmholtz Equation",
+        latex: "∇²E + k₀² n²(r)E = 0",
+        desc: "Modal dispersion and wave confinement modeling.",
+      }
+    case "nonlinear-quantum-photonics":
+      return {
+        label: "Phase-Matching Constraint",
+        latex: "Δβ = β_s + β_i - β_p = 0",
+        desc: "Photon-pair energy-momentum conservation.",
+      }
+    case "physics-informed-design":
+      return {
+        label: "PINN Maxwell-Residual Loss",
+        latex: "ℒ_total = ℒ_data + λ ℒ_physics  (where ℒ_physics = ||∇ × E + iωμH||²)",
+        desc: "Enforcing wave physics in gradient backpropagation.",
+      }
+    default:
+      return null
+  }
+}
+
 export default async function ResearchPage() {
   const publications = await loadPublications()
 
@@ -59,6 +84,22 @@ export default async function ResearchPage() {
                       <dt className="text-sm font-medium text-foreground pt-0.5">Physical relevance</dt>
                       <dd className="text-sm leading-7 text-muted-foreground">{theme.physicalRelevance}</dd>
                     </div>
+
+                    {/* Physics Formulation Card */}
+                    {(() => {
+                      const formula = getThemeFormula(theme.id)
+                      if (!formula) return null
+                      return (
+                        <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">
+                          <dt className="text-sm font-medium text-foreground pt-0.5">Governing Physics</dt>
+                          <dd className="rounded-md border border-border bg-card p-4">
+                            <p className="text-xs font-semibold text-foreground">{formula.label}</p>
+                            <p className="mt-2 text-center text-sm font-mono font-medium text-accent tracking-wide">{formula.latex}</p>
+                            <p className="mt-2 text-xs text-muted-foreground">{formula.desc}</p>
+                          </dd>
+                        </div>
+                      )
+                    })()}
 
                     {themeProjects.length > 0 && (
                       <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">

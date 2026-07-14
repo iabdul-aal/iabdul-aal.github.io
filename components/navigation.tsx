@@ -25,16 +25,16 @@ export function Navigation() {
           </div>
         </Link>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden h-full items-center gap-1 lg:flex">
           {navigationItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
-                "relative rounded-sm px-3 py-2 text-sm transition-colors",
+                "relative flex h-14 items-center px-3 text-sm transition-colors",
                 isActive(item.href)
-                  ? "text-foreground font-medium after:absolute after:bottom-0 after:left-3 after:right-3 after:h-px after:bg-accent"
+                  ? "text-foreground font-semibold after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-accent"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >

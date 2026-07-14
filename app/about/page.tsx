@@ -49,6 +49,10 @@ export default function AboutPage() {
             ))}
           </div>
 
+          <div className="mt-8 border-l-2 border-accent/80 pl-4 py-1.5 italic text-muted-foreground text-[15px] max-w-2xl bg-surface/30 pr-4 rounded-r">
+            &ldquo;Computational models are tools to guide physical intuition, not to replace it.&rdquo;
+          </div>
+
           <div className="mt-10 border-t border-border pt-8">
             <h2 className="text-sm font-semibold text-foreground">Academic Profiles</h2>
             <div className="mt-4 flex flex-wrap gap-2">
