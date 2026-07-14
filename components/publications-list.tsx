@@ -174,11 +174,11 @@ export function PublicationsList({ publications, compact = false }: Publications
                       {publication.submitted ? `, submitted ${publication.submitted}` : ""}
                     </p>
                     <span
-                      className={
+                      className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-border ${
                         publication.status === "published"
-                          ? "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-secondary text-foreground ring-1 ring-border"
-                          : "rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide border border-border text-muted-foreground"
-                      }
+                          ? "bg-secondary text-foreground"
+                          : "bg-surface text-muted-foreground"
+                      }`}
                     >
                       {publication.status === "published" ? "Published" : "Preprint"}
                     </span>

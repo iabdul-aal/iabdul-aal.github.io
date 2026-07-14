@@ -161,11 +161,11 @@ export default async function CvPage() {
             {publications.map((pub) => (
               <div key={pub.id} className="py-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <span
-                  className={
+                  className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-border ${
                     pub.status === "published"
-                      ? "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-secondary text-foreground ring-1 ring-border"
-                      : "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide border border-border text-muted-foreground"
-                  }
+                      ? "bg-secondary text-foreground"
+                      : "bg-surface text-muted-foreground"
+                  }`}
                 >
                   {pub.status === "published" ? "Published" : "Preprint"}
                 </span>

@@ -38,9 +38,10 @@ const ARXIV_DOI_PREFIX = "10.48550/arxiv."
 
 const publicationOverrides: Record<
   string,
-  Partial<Pick<PublicationRecord, "authors" | "submitted" | "subjects" | "relatedThemes" | "relatedProjects">> & { bibtexKey?: string; primaryClass?: string }
+  Partial<Pick<PublicationRecord, "authors" | "submitted" | "subjects" | "relatedThemes" | "relatedProjects">> & { bibtexKey?: string; primaryClass?: string; doi?: string }
 > = {
   "2510.00357": {
+    doi: "10.1088/2040-8986/ae8605",
     authors: ["Islam I. Abdulaal", "Abdelrahman W. A. Elsayed", "Omar A. M. Abdelraouf"],
     submitted: "30 Sep 2025",
     subjects: ["Optics", "Systems and Control", "Medical Physics"],
@@ -156,7 +157,12 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
         const doi = (item.doi ?? "").trim() || undefined
         const url = (item.url ?? "").trim() || (doi ? `https://doi.org/${doi}` : undefined)
         const arxiv = (item.arxiv ?? "").trim() || extractArxivId(doi ?? "", url ?? "")
-        const override = arxiv ? publicationOverrides[arxiv] : undefined
+
+        const overrideEntry = Object.entries(publicationOverrides).find(([key, val]) => {
+          return key === arxiv || (doi && val.doi && val.doi.toLowerCase() === doi.toLowerCase())
+        })
+        const override = overrideEntry ? overrideEntry[1] : undefined
+
         const year = (item.year ?? item.date ?? "").trim()
         const venue = (item.venue ?? item.publisher ?? "").trim() || (arxiv ? "arXiv preprint" : "Publication")
         const authors = item.authors && item.authors.length > 0 ? item.authors : override?.authors ?? []
