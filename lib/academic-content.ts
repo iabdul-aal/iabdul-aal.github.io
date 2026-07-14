@@ -39,11 +39,11 @@ export const researchThemes = [
     id: "integrated-nanophotonics",
     title: "Integrated Nanophotonics",
     problem:
-      "Chip-scale photonic systems require waveguides, couplers, detectors, and multiplexing structures that preserve bandwidth and modal control while remaining compatible with realistic fabrication constraints.",
+      "Integrating emerging materials and physical effects (including BTO, NbOCl2, liquid crystals, and ferroelectrics) on silicon dioxide (SiO2) substrates to enable new capabilities in chip-scale platforms.",
     methods:
-      "Waveguide and mode analysis, FDTD simulation, drift-diffusion modeling, compact-model extraction, and layout-aware validation.",
+      "Full-wave FDTD simulation, electromagnetic mode solving, anisotropic material modeling, waveguide structure analysis, and microring resonator design.",
     physicalRelevance:
-      "The theme connects modal confinement, dispersion, absorption, carrier transport, and parasitics into one design loop rather than treating device metrics in isolation.",
+      "Utilizing mechanisms like Bound States in the Continuum (BIC and quasi-BIC) and electro-optic modulation to control light propagation and confinement in integrated circuits.",
   },
   {
     id: "nonlinear-quantum-photonics",
