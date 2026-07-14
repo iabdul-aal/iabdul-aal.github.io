@@ -66,7 +66,7 @@ def events_from_publications(pubs: list) -> list[dict]:
         title = (pub.get("title") or "").strip()
         if not title:
             continue
-        year = (pub.get("year") or pub.get("date") or "").strip()
+        year = (pub.get("date") or pub.get("year") or "").strip()
         venue = (pub.get("venue") or "").strip()
         doi = (pub.get("doi") or "").strip()
         arxiv_prefix = "10.48550/arxiv."
