@@ -39,7 +39,7 @@ export const researchThemes = [
     id: "integrated-nanophotonics",
     title: "Integrated Nanophotonics",
     problem:
-      "Integrating emerging materials and physical effects (including BTO, NbOCl2, liquid crystals, and quasi-BIC) on silicon dioxide (SiO2) substrates to enable new capabilities in chip-scale platforms.",
+      "Integrating emerging materials and physical effects (including BTO, NbOCl₂, liquid crystals, and quasi-BIC) on silicon dioxide (SiO₂) substrates to enable new capabilities in chip-scale platforms.",
     methods:
       "Full-wave FDTD simulation, electromagnetic mode solving, anisotropic material modeling, waveguide structure analysis, and microring resonator design.",
     physicalRelevance:
