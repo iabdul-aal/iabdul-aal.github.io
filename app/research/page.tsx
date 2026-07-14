@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import katex from "katex"
 import { researchThemes } from "@/lib/academic-content"
 import { getProjectsForTheme } from "@/lib/database"
@@ -76,8 +77,19 @@ export default async function ResearchPage() {
                 }`}
               >
                 <div className="grid gap-6 lg:grid-cols-[20rem_minmax(0,1fr)]">
-                  <div>
+                  <div className="space-y-4">
                     <h2 className="text-xl font-semibold text-foreground">{theme.title}</h2>
+                    {theme.image && (
+                      <div className="overflow-hidden rounded-md border border-border bg-card max-w-sm">
+                        <Image
+                          src={theme.image}
+                          alt={`TOC figure for ${theme.title}`}
+                          width={400}
+                          height={250}
+                          className="aspect-[1.6] h-auto w-full object-contain p-2"
+                        />
+                      </div>
+                    )}
                   </div>
                   <dl className="grid gap-6 max-w-3xl">
                     <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">

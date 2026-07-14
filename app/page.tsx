@@ -138,13 +138,23 @@ export default async function Home() {
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
-          <div className="max-w-3xl">
+          <div className="max-w-3xl space-y-6">
             <p className="text-base leading-8 text-muted-foreground">
-              Work organized around integrated nanophotonics, nonlinear and quantum photonics,
-              physics-informed computational methods, and inverse design. The emphasis is connecting
-              device physics to computational workflows that remain interpretable and reproducible.
+              Connecting device physics to computational workflows that remain interpretable and reproducible across three main focus areas.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            
+            <div className="overflow-hidden rounded-md border border-border bg-card max-w-2xl">
+              <Image
+                src="/images/homepage-toc.png"
+                alt="Research profile graphical abstract"
+                width={800}
+                height={500}
+                priority
+                className="aspect-[1.6] h-auto w-full object-contain p-2"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-2">
               {researchThemes.map((theme) => (
                 <Link
                   key={theme.id}

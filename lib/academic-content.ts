@@ -38,6 +38,7 @@ export const researchThemes = [
   {
     id: "integrated-nanophotonics",
     title: "Integrated Nanophotonics",
+    image: "/images/integrated-nanophotonics.png",
     problem:
       "Integrating emerging materials and physical effects (including BTO, NbOCl₂, liquid crystals, and quasi-BIC) on silicon dioxide (SiO₂) substrates to enable new capabilities in chip-scale platforms.",
     methods:
@@ -48,6 +49,7 @@ export const researchThemes = [
   {
     id: "nonlinear-quantum-photonics",
     title: "Nonlinear Quantum Photonics",
+    image: "/images/nonlinear-quantum-photonics.png",
     problem:
       "Integrated quantum photonic systems need efficient light generation, manipulation, and detection under loss, phase-matching, and coupling constraints.",
     methods:
@@ -58,6 +60,7 @@ export const researchThemes = [
   {
     id: "intelligent-photonics",
     title: "Intelligent Photonics",
+    image: "/images/intelligent-photonics.png",
     problem:
       "Optimizing complex optical responses requires bridging physical modeling with machine learning, both by using AI to design custom photonic devices and by developing photonic hardware (such as neuromorphic networks) to accelerate AI computations.",
     methods:
