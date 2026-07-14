@@ -171,7 +171,7 @@ export default async function Home() {
           </div>
 
           <article className="rounded-md border border-border bg-card p-6">
-            <p className="text-xs font-medium text-accent">{featuredProject.status}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">{featuredProject.status}</p>
             <h3 className="mt-2 text-xl font-semibold leading-7 text-foreground">{featuredProject.title}</h3>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">{featuredProject.objective}</p>
 
