@@ -11,7 +11,7 @@ export const navigationItems = [
 
 export const identity = {
   name: "Islam I. Abdulaal",
-  shortTitle: "Photonics researcher · B.Sc. Electronics and Communications Engineering",
+  shortTitle: "Photonics researcher, B.Sc. in Electronics and Communications Engineering",
   affiliation: "Alexandria University",
   location: "Alexandria, Egypt",
   email: socialLinks.email,

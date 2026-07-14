@@ -80,7 +80,7 @@ export default async function Home() {
           </h1>
           <p className="mt-5 text-base leading-8 text-muted-foreground">{identity.statement}</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            {identity.affiliation} · {identity.location}
+            {identity.affiliation}, {identity.location}
           </p>
 
           <div className="mt-4 flex items-center gap-2">

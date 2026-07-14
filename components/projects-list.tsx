@@ -182,7 +182,7 @@ export function ProjectsList({ initialProjects, publications }: ProjectsListProp
                                 title={pub.title}
                               >
                                 <span className="truncate">{pub.title}</span>
-                                <span className="shrink-0 text-muted-foreground">· {pub.year}</span>
+                                <span className="shrink-0 text-muted-foreground">, {pub.year}</span>
                               </Link>
                             ))}
                           </dd>

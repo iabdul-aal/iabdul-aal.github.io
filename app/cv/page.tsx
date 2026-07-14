@@ -75,7 +75,7 @@ export default async function CvPage() {
           <aside className="rounded-md border border-border bg-surface p-5">
             <p className="text-sm font-semibold text-foreground">{identity.name}</p>
             <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{identity.shortTitle}</p>
-            <p className="text-sm text-muted-foreground">{identity.affiliation} · {identity.location}</p>
+            <p className="text-sm text-muted-foreground">{identity.affiliation}, {identity.location}</p>
             <div className="mt-5 grid gap-2">
               <Button asChild>
                 <a href="/cv.pdf" download>
