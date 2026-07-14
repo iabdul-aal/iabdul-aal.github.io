@@ -44,7 +44,7 @@ export const personConfig = {
   familyName: "Abdulaal",
   role: "Photonics Researcher \u00b7 B.Sc. Electronics and Communications Engineering",
   affiliation: "Alexandria University",
-  lab: "NanoPhoto Lab",
+  lab: "NanoPhoto Lab, IMRE, A*STAR",
   location: "Alexandria, Egypt",
   email: socialLinks.email,
   phone: socialLinks.phone,

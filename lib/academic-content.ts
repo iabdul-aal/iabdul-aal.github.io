@@ -30,7 +30,7 @@ export const profileLinks = [
 
 export const aboutParagraphs = [
   "I hold a B.Sc. in Electronics and Communications Engineering from Alexandria University. My current work sits in computational and integrated photonics, with an emphasis on device modeling, inverse design, and physics-informed computational methods for nonlinear and quantum-compatible photonic systems.",
-  "At NanoPhoto Lab I have worked on physics-informed neural network methods for optimizing integrated quantum light source and detection structures. I treat machine learning as a modeling and optimization tool, useful when it remains constrained by the underlying physics and by reproducible simulation evidence.",
+  "At NanoPhoto Lab, IMRE, A*STAR I have worked on physics-informed neural network methods for optimizing integrated quantum light source and detection structures. I treat machine learning as a modeling and optimization tool, useful when it remains constrained by the underlying physics and by reproducible simulation evidence.",
   "My earlier research work includes fiber Bragg grating sensing for biomedical monitoring and silicon photonic device modeling for intra-data-center optical links. Across these projects, the common thread is the connection between electromagnetic simulation, device physics, and system-level constraints.",
 ] as const
 
@@ -111,7 +111,7 @@ export const recentActivity = [
   {
     date: "Sep 2025",
     type: "position",
-    title: "Joined NanoPhoto Lab as a research intern",
+    title: "Joined NanoPhoto Lab, IMRE, A*STAR, as a research intern",
     detail:
       "Work focused on physics-informed optimization for integrated quantum photonic source and detection structures.",
   },
@@ -128,7 +128,7 @@ export const cvSummary = [
   {
     heading: "Research Experience",
     items: [
-      "Research Intern, NanoPhoto Lab, 2025–present.",
+      "Research Intern, NanoPhoto Lab, IMRE, A*STAR, 2025–present.",
       "Research Intern, OPST Group, Alexandria University, 2023 to 2025.",
       "Training in analog and mixed-signal modeling, CMOS analog IC design, and photonic device simulation workflows.",
     ],

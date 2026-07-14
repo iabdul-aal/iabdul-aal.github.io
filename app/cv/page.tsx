@@ -1,14 +1,14 @@
 import Link from "next/link"
 import { Download, ExternalLink, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { identity, methodStack, projects } from "@/lib/academic-content"
+import { identity, methodStack } from "@/lib/academic-content"
 import { loadPublications } from "@/lib/publications"
 import { createPageMetadata } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
   title: "CV",
   description:
-    "Curriculum vitae of Islam I. Abdulaal, including education, research experience, publications, projects, and technical methods.",
+    "Curriculum vitae of Islam I. Abdulaal, including education, research experience, and technical methods.",
   path: "/cv",
 })
 
@@ -24,7 +24,7 @@ const education = [
 const experience = [
   {
     role: "Research Intern",
-    org: "NanoPhoto Lab",
+    org: "NanoPhoto Lab, IMRE, A*STAR",
     period: "Sep 2025 – present",
     detail: "Physics-informed optimization for integrated quantum photonic source and detection structures.",
   },
@@ -50,8 +50,16 @@ export default async function CvPage() {
               Curriculum vitae
             </h1>
             <p className="mt-6 text-base leading-8 text-muted-foreground">
-              Academic CV covering education, research experience, publications, projects, and technical methods.
-              The PDF version is provided for formal review and download.
+              Academic CV covering education, research experience, and technical methods.
+              The full publications list is on the{" "}
+              <Link href="/publications" className="text-accent hover:text-accent-strong underline underline-offset-2">
+                Publications
+              </Link>{" "}
+              page and projects on the{" "}
+              <Link href="/projects" className="text-accent hover:text-accent-strong underline underline-offset-2">
+                Projects
+              </Link>{" "}
+              page.
             </p>
           </div>
 
@@ -119,83 +127,43 @@ export default async function CvPage() {
         </div>
       </section>
 
-      {/* Publications */}
+      {/* Publications — summary only, full list on /publications */}
       <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between">
-            <h2 className="text-sm font-semibold text-foreground">Publications</h2>
-            <Link href="/publications" className="inline-flex items-center gap-1 text-sm text-accent hover:text-accent-strong">
-              Full list
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-foreground">
+              Publications
+              <span className="ml-2 font-normal text-muted-foreground">({publications.length})</span>
+            </h2>
+            <Link
+              href="/publications"
+              className="inline-flex items-center gap-1 text-sm text-accent hover:text-accent-strong"
+            >
+              View all
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </div>
-          <div className="mt-6 divide-y divide-border border-y border-border">
+          <div className="mt-4 divide-y divide-border border-y border-border">
             {publications.map((pub) => (
-              <div key={pub.id} className="py-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-xs text-muted-foreground">
-                    {[pub.venue, pub.year].filter(Boolean).join(", ")}
-                  </p>
-                  <span className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-border ${pub.status === "published" ? "bg-secondary text-foreground" : "bg-surface text-muted-foreground"}`}>
-                    {pub.status === "published" ? "Published" : "Preprint"}
-                  </span>
-                </div>
-                <p className="mt-1 text-sm font-medium text-foreground">{pub.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {pub.authors.map((a, i) => (
-                    <span key={a}>
-                      {a.includes("Abdulaal") ? <strong className="font-semibold text-foreground">{a}</strong> : a}
-                      {i < pub.authors.length - 1 ? ", " : ""}
-                    </span>
-                  ))}
-                </p>
-                {pub.doi && (
-                  <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noreferrer" className="mt-1 inline-flex items-center gap-1 text-xs text-accent hover:text-accent-strong">
-                    DOI: {pub.doi}
-                    <ArrowUpRight className="h-3 w-3" />
-                  </a>
-                )}
+              <div key={pub.id} className="py-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-border ${pub.status === "published" ? "bg-secondary text-foreground" : "bg-surface text-muted-foreground"}`}>
+                  {pub.status === "published" ? "Published" : "Preprint"}
+                </span>
+                <p className="text-sm font-medium text-foreground">{pub.title}</p>
+                <p className="text-xs text-muted-foreground">{[pub.venue, pub.year].filter(Boolean).join(", ")}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Projects */}
+      {/* Methods & tools — canonical location */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between">
-            <h2 className="text-sm font-semibold text-foreground">Selected Projects</h2>
-            <Link href="/projects" className="inline-flex items-center gap-1 text-sm text-accent hover:text-accent-strong">
-              Full list
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-          <div className="mt-6 divide-y divide-border border-y border-border">
-            {projects.map((project) => (
-              <div key={project.id} className="py-4">
-                <p className="text-xs text-muted-foreground">{project.status}</p>
-                <p className="mt-1 text-sm font-medium text-foreground">{project.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{project.objective}</p>
-                {project.links.map((link) => (
-                  <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="mt-1.5 mr-4 inline-flex items-center gap-1 text-xs text-accent hover:text-accent-strong">
-                    {link.label}
-                    <ArrowUpRight className="h-3 w-3" />
-                  </a>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Methods */}
-      <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <h2 className="text-sm font-semibold text-foreground">Methods and Tools</h2>
           <ul className="mt-4 flex flex-wrap gap-2">
             {methodStack.map((item) => (
-              <li key={item} className="rounded-md border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground">
+              <li key={item} className="rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-muted-foreground">
                 {item}
               </li>
             ))}
@@ -204,7 +172,7 @@ export default async function CvPage() {
       </section>
 
       {/* PDF embed */}
-      <section className="border-t border-border">
+      <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-sm font-semibold text-foreground">PDF Preview</h2>
           <div className="overflow-hidden rounded-md border border-border bg-card">

@@ -108,7 +108,7 @@ const structuredData = {
         },
         {
           "@type": "Organization",
-          name: "NanoPhoto Lab",
+          name: "NanoPhoto Lab, IMRE, A*STAR",
         },
       ],
       knowsAbout: personConfig.focusAreas,
