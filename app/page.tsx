@@ -149,7 +149,7 @@ export default async function Home() {
                 <Link
                   key={theme.id}
                   href={`/research#${theme.id}`}
-                  className="inline-block max-w-[16rem] truncate rounded border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground hover:border-accent hover:text-foreground transition-colors"
+                  className="inline-block max-w-[16rem] truncate rounded border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground hover:border-accent hover:bg-card hover:text-foreground transition-colors"
                   title={theme.title}
                 >
                   {theme.title}
@@ -229,7 +229,7 @@ export default async function Home() {
               <article key={`${item.date_iso}-${item.title}`} className="grid gap-3 py-5 sm:grid-cols-[6rem_minmax(0,1fr)]">
                 <p className="text-sm text-muted-foreground">{item.date}</p>
                 <div>
-                  <span className="inline-block rounded bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground mb-2">
+                  <span className="inline-block shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-border bg-secondary text-muted-foreground">
                     {activityTypeLabel[item.type] ?? item.type}
                   </span>
                   <h3 className="font-medium text-foreground">{item.title}</h3>

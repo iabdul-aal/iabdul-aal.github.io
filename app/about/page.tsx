@@ -63,7 +63,7 @@ export default function AboutPage() {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border px-3 text-sm text-foreground hover:border-accent hover:text-accent transition-colors"
+                    className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border px-3 text-sm text-foreground hover:border-accent hover:text-accent transition-colors"
                   >
                     {link.label}
                     <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />

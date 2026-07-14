@@ -60,7 +60,7 @@ export function Footer() {
 
       <div className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-4 text-xs text-muted-foreground sm:px-6 lg:px-8">
-          (c) {currentYear} {identity.name}. Research profile and selected academic work.
+          © {currentYear} {identity.name}. Research profile and selected academic work.
         </div>
       </div>
     </footer>

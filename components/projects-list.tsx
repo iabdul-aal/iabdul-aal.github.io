@@ -80,40 +80,42 @@ export function ProjectsList({ initialProjects, publications }: ProjectsListProp
         </div>
 
         {availableTopics.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="text-muted-foreground font-medium flex items-center gap-1">
-              <SlidersHorizontal className="h-3 w-3" /> Filter by Topic:
-            </span>
-            <div className="flex flex-wrap gap-1">
-              <button
-                onClick={() => {
-                  setSelectedTopic("all")
-                  setPageSize(6)
-                }}
-                className={`rounded px-2.5 py-1 text-[11px] font-medium border transition-colors ${
-                  selectedTopic === "all"
-                    ? "bg-secondary text-foreground border-accent"
-                    : "bg-card text-muted-foreground border-border hover:text-foreground hover:border-accent"
-                }`}
-              >
-                All Topics
-              </button>
-              {availableTopics.map((topic) => (
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-1 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground font-medium flex items-center gap-1">
+                <SlidersHorizontal className="h-3 w-3" /> Topic:
+              </span>
+              <div className="flex flex-wrap gap-1">
                 <button
-                  key={topic.id}
                   onClick={() => {
-                    setSelectedTopic(topic.id)
+                    setSelectedTopic("all")
                     setPageSize(6)
                   }}
-                  className={`rounded px-2.5 py-1 text-[11px] font-medium border transition-colors ${
-                    selectedTopic === topic.id
-                      ? "bg-secondary text-foreground border-accent"
-                      : "bg-card text-muted-foreground border-border hover:text-foreground hover:border-accent"
+                  className={`rounded px-2.5 py-1 text-[11px] font-medium transition-colors ${
+                    selectedTopic === "all"
+                      ? "bg-secondary text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {topic.title}
+                  All Topics
                 </button>
-              ))}
+                {availableTopics.map((topic) => (
+                  <button
+                    key={topic.id}
+                    onClick={() => {
+                      setSelectedTopic(topic.id)
+                      setPageSize(6)
+                    }}
+                    className={`rounded px-2.5 py-1 text-[11px] font-medium transition-colors ${
+                      selectedTopic === topic.id
+                        ? "bg-secondary text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {topic.title}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -150,7 +152,7 @@ export function ProjectsList({ initialProjects, publications }: ProjectsListProp
             const projectPublications = publications.filter((pub) => pub.relatedProjects?.includes(project.id))
 
             return (
-              <article key={project.id} id={project.id} className="scroll-mt-24 p-8 hover:bg-surface/30 transition-colors">
+              <article key={project.id} id={project.id} className="scroll-mt-24 p-6 hover:bg-surface/30 transition-colors">
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
                   <div className="max-w-3xl">
                     <p className="text-xs font-semibold uppercase tracking-wider text-accent">{project.status}</p>

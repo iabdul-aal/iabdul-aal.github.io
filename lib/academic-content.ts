@@ -89,6 +89,12 @@ export const projects = [
 
 export const recentActivity = [
   {
+    date: "Jul 2026",
+    type: "milestone",
+    title: "Completed B.Sc. in Electronics and Communications Engineering",
+    detail: "Graduated from Alexandria University with a degree in Electronics and Communications Engineering.",
+  },
+  {
     date: "Jun 2026",
     type: "software",
     title: "Released PD-Design-Kit as a public photonics design workflow",
@@ -97,16 +103,16 @@ export const recentActivity = [
   },
   {
     date: "Jun 2026",
+    type: "preprint",
+    title: "Preprint on physics-informed neural networks posted on arXiv",
+    detail: "Research on using PINNs to reshape multi-physics design and discovery submitted as preprint.",
+  },
+  {
+    date: "Jun 2026",
     type: "paper",
     title: "Paper on THz quasi-BIC metasurfaces accepted at Journal of Optics",
     detail:
       "Review outlining design frameworks and applications of terahertz bound states in the continuum accepted for publication.",
-  },
-  {
-    date: "Jun 2026",
-    type: "milestone",
-    title: "Completed B.Sc. in Electronics and Communications Engineering",
-    detail: "Graduated from Alexandria University with a degree in Electronics and Communications Engineering.",
   },
   {
     date: "Sep 2025",

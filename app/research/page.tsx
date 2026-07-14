@@ -61,12 +61,19 @@ export default async function ResearchPage() {
 
       <section className="mx-auto max-w-6xl px-5 pb-20 sm:px-6 lg:px-8">
         <div className="divide-y divide-border border-t border-border">
-          {researchThemes.map((theme) => {
+          {researchThemes.map((theme, idx) => {
             const themeProjects = getProjectsForTheme(theme.id)
             const themePublications = publications.filter((pub) => pub.relatedThemes?.includes(theme.id))
+            const isEven = idx % 2 === 1
 
             return (
-              <article key={theme.title} id={theme.id} className="py-12 scroll-mt-24">
+              <article
+                key={theme.title}
+                id={theme.id}
+                className={`py-12 scroll-mt-24 -mx-5 px-5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ${
+                  isEven ? "bg-surface" : ""
+                }`}
+              >
                 <div className="grid gap-6 lg:grid-cols-[20rem_minmax(0,1fr)]">
                   <div>
                     <h2 className="text-xl font-semibold text-foreground">{theme.title}</h2>
@@ -92,7 +99,7 @@ export default async function ResearchPage() {
                       return (
                         <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">
                           <dt className="text-sm font-medium text-foreground pt-0.5">Governing Physics</dt>
-                          <dd className="rounded-md border border-border bg-card p-4">
+                          <dd className="rounded-md border border-border bg-card p-4 border-l-2 border-l-accent/60">
                             <p className="text-xs font-semibold text-foreground">{formula.label}</p>
                             <p className="mt-2 text-center text-sm font-mono font-medium text-accent tracking-wide">{formula.latex}</p>
                             <p className="mt-2 text-xs text-muted-foreground">{formula.desc}</p>

@@ -8,18 +8,25 @@
       "detail": "Graduated from Alexandria University with a degree in Electronics and Communications Engineering."
     },
     {
-      "date_iso": "2026-01-01",
-      "date": "Jan 2026",
-      "type": "paper",
-      "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
-      "detail": "Paper accepted in Journal of Optics."
+      "date_iso": "2026-06-25",
+      "date": "Jun 2026",
+      "type": "software",
+      "title": "Released PD-Design-Kit as a public photonics design workflow",
+      "detail": "Repository and citable DOI for a Ge-on-Si photodetector simulation and compact-model pipeline."
     },
     {
-      "date_iso": "2026-01-01",
-      "date": "Jan 2026",
+      "date_iso": "2026-06-20",
+      "date": "Jun 2026",
       "type": "preprint",
       "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
       "detail": "Preprint posted on arXiv."
+    },
+    {
+      "date_iso": "2026-06-15",
+      "date": "Jun 2026",
+      "type": "paper",
+      "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
+      "detail": "Paper accepted in Journal of Optics."
     },
     {
       "date_iso": "2025-09-01",

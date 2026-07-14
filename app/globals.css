@@ -122,3 +122,37 @@
     overflow: hidden;
   }
 }
+
+/*
+ * ─── DESIGN TOKEN LAW ────────────────────────────────────────────────────────
+ * Every UI atom MUST use exactly one of these canonical class strings.
+ * Do NOT introduce ad-hoc variants — update this table first if needed.
+ *
+ * Page eyebrow:        text-sm font-medium text-muted-foreground
+ * Page h1:             mt-4 text-3xl font-semibold leading-tight text-foreground md:text-4xl
+ * Section h2 (side):   text-sm font-semibold text-foreground
+ * Section h2 (inline): text-xl font-semibold text-foreground
+ * Body paragraph:      text-base leading-8 text-muted-foreground
+ * Body para (sm):      text-sm leading-7 text-muted-foreground
+ *
+ * Pill/tag chip:       rounded border border-border bg-surface px-2.5 py-1 text-xs
+ *                      text-accent hover:border-accent hover:bg-card transition-colors
+ * Status badge:        rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase
+ *                      tracking-wide ring-1 ring-border  + color variant
+ * Ghost link:          inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-strong
+ * Action button:       inline-flex h-9 items-center gap-1.5 rounded-md border border-border
+ *                      px-3 text-xs font-medium text-foreground hover:border-accent hover:text-accent
+ * Show-more button:    inline-flex h-10 items-center justify-center rounded-md border
+ *                      border-border px-6 text-sm font-medium text-foreground
+ *                      hover:border-accent hover:text-accent transition-colors
+ * Search input:        h-10 w-full rounded-md border border-border bg-card pl-9 pr-4 text-sm
+ *                      text-foreground placeholder-muted-foreground outline-none
+ *                      transition-colors focus:border-accent focus:ring-1 focus:ring-accent
+ * Filter panel:        space-y-4 rounded-lg border border-border bg-surface p-4
+ * Card container:      rounded-md border border-border bg-card p-6
+ * Sidebar aside:       rounded-md border border-border bg-surface p-5
+ * List container:      divide-y divide-border border-y border-border
+ * Row hover:           hover:bg-surface/30 transition-colors
+ * Alternate section:   bg-surface (every other section, starting second)
+ * ─────────────────────────────────────────────────────────────────────────────
+ */

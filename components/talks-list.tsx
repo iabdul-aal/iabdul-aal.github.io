@@ -52,20 +52,22 @@ export function TalksList({ talks }: TalksListProps) {
   }, [filteredTalks, pageSize])
 
   return (
-    <div className="space-y-4">
-      {/* Simple Search bar */}
-      <div className="relative">
-        <Search className="absolute top-3 left-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
-        <input
-          type="text"
-          placeholder="Search talks by title, event, format, or organizer..."
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value)
-            setPageSize(10)
-          }}
-          className="h-10 w-full rounded-md border border-border bg-card pl-9 pr-4 text-sm text-foreground placeholder-muted-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
-        />
+    <div className="space-y-6">
+      {/* Search bar — canonical filter panel */}
+      <div className="space-y-4 rounded-lg border border-border bg-surface p-4">
+        <div className="relative">
+          <Search className="absolute top-3 left-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
+          <input
+            type="text"
+            placeholder="Search talks by title, event, format, or organizer..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value)
+              setPageSize(10)
+            }}
+            className="h-10 w-full rounded-md border border-border bg-card pl-9 pr-4 text-sm text-foreground placeholder-muted-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
+          />
+        </div>
       </div>
 
       {/* Info indicator */}
@@ -94,7 +96,7 @@ export function TalksList({ talks }: TalksListProps) {
           </div>
         ) : (
           visibleTalks.map((talk) => (
-            <article key={talk.url} className="grid gap-4 py-6 md:grid-cols-[10rem_minmax(0,1fr)_8rem] hover:bg-surface/10 transition-colors">
+            <article key={talk.url} className="grid gap-4 py-6 md:grid-cols-[10rem_minmax(0,1fr)_8rem] hover:bg-surface/30 transition-colors">
               <p className="text-sm text-muted-foreground">{formatTalkDate(talk)}</p>
               <div>
                 <p className="text-sm text-muted-foreground">{talk.format}</p>
