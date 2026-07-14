@@ -83,7 +83,7 @@ export const projects = [
       { label: "Repository", href: "https://github.com/iabdul-aal/PD-design-kit" },
       { label: "DOI", href: "https://doi.org/10.5281/zenodo.19652934" },
     ],
-    relatedThemes: ["integrated-nanophotonics", "physics-informed-design"],
+    relatedThemes: ["integrated-nanophotonics"],
   },
 ] as const
 
