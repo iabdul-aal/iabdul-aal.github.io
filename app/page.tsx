@@ -215,7 +215,7 @@ export default async function Home() {
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
-          <PublicationsList publications={featuredPubs} />
+          <PublicationsList publications={featuredPubs} compact />
         </div>
       </section>
 
