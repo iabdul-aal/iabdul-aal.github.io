@@ -64,7 +64,7 @@ const publicationOverrides: Record<
     subjects: ["Optics"],
     bibtexKey: "labeb2026beyond",
     primaryClass: "physics.optics",
-    relatedThemes: ["physics-informed-design"],
+    relatedThemes: ["intelligent-photonics"],
     relatedProjects: [],
   },
 }

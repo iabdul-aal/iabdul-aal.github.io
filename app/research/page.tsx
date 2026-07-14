@@ -26,7 +26,7 @@ function getThemeFormula(id: string) {
         latex: "\\Delta\\beta = \\beta_s + \\beta_i - \\beta_p = 0",
         desc: "Photon-pair energy-momentum conservation.",
       }
-    case "physics-informed-design":
+    case "intelligent-photonics":
       return {
         label: "PINN Maxwell-Residual Loss",
         latex: "\\mathcal{L}_{\\text{total}} = \\mathcal{L}_{\\text{data}} + \\lambda \\mathcal{L}_{\\text{physics}} \\quad \\text{where} \\quad \\mathcal{L}_{\\text{physics}} = \\|\\nabla \\times \\mathbf{E} + i\\omega\\mu\\mathbf{H}\\|^2",

@@ -56,14 +56,14 @@ export const researchThemes = [
       "The central physical question is how geometry and material response shape photon-pair generation, bandwidth, collection efficiency, and integration density.",
   },
   {
-    id: "physics-informed-design",
-    title: "Physics-Informed Design",
+    id: "intelligent-photonics",
+    title: "Intelligent Photonics",
     problem:
-      "Target photonic responses can be hard to derive manually from geometry, while purely data-driven models become unreliable without physical constraints.",
+      "Optimizing complex optical responses requires bridging physical modeling with machine learning, both by using AI to design custom photonic devices and by developing photonic hardware (such as neuromorphic networks) to accelerate AI computations.",
     methods:
-      "Physics-informed neural networks, residual-based loss terms, gradient-based adjoint optimization, parametric sweeps, and electromagnetic validation solvers.",
+      "Physics-informed neural networks, adjoint optimization, neuromorphic optical computing architectures, photonic neural network modeling, and inverse design algorithms.",
     physicalRelevance:
-      "This framework ensures optimized device structures satisfy Maxwell equations and boundary conditions, rather than treating optimization as black-box fitting.",
+      "Creates a bidirectional link where physical wave equations constrain machine learning models, and analog photonic systems perform mathematical operations at the speed of light.",
   },
 ] as const
 
