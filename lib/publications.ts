@@ -29,6 +29,7 @@ export type PublicationRecord = {
   submitted?: string
   subjects?: string[]
   bibtex: string
+  ris: string
   status: "published" | "preprint"
   relatedThemes?: string[]
   relatedProjects?: string[]
@@ -138,6 +139,44 @@ function createBibtex(publication: {
   return `@misc{${key},\n${body}\n}`
 }
 
+function createRis(publication: {
+  title: string
+  authors: string[]
+  venue: string
+  year: string
+  doi?: string
+  url?: string
+  arxiv?: string
+  bibtexKey?: string
+}): string {
+  const key = publication.bibtexKey ?? createBibtexKey(publication.title, publication.year)
+  const lines: string[] = [
+    "TY  - JOUR",
+    `T1  - ${escapeBibtex(publication.title)}`,
+  ]
+
+  publication.authors.forEach((author) => {
+    lines.push(`AU  - ${toBibtexAuthor(author)}`)
+  })
+
+  const joValue = publication.venue || (publication.arxiv ? `arXiv preprint arXiv:${publication.arxiv}` : "Publication")
+  lines.push(`JO  - ${joValue}`)
+
+  if (publication.year) {
+    lines.push(`Y1  - ${publication.year}`)
+  }
+  if (publication.doi) {
+    lines.push(`DO  - ${publication.doi}`)
+  }
+  if (publication.url) {
+    lines.push(`UR  - ${publication.url}`)
+  }
+  lines.push(`ID  - ${key}`)
+  lines.push("ER  - ")
+
+  return lines.join("\n")
+}
+
 export async function loadPublications(): Promise<PublicationRecord[]> {
   try {
     const raw = await readFile(join(process.cwd(), "publications.json"), "utf8")
@@ -194,6 +233,16 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
             arxiv,
             bibtexKey: override?.bibtexKey,
             primaryClass: override?.primaryClass,
+          }),
+          ris: createRis({
+            title,
+            authors,
+            venue,
+            year,
+            doi,
+            url,
+            arxiv,
+            bibtexKey: override?.bibtexKey,
           }),
         }
       })

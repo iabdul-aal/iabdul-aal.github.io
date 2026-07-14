@@ -20,7 +20,13 @@ export function PublicationsList({ publications, compact = false }: Publications
 
   async function copyBibtex(publication: PublicationRecord) {
     await navigator.clipboard.writeText(publication.bibtex)
-    setCopiedId(publication.id)
+    setCopiedId(`bibtex-${publication.id}`)
+    window.setTimeout(() => setCopiedId(null), 1800)
+  }
+
+  async function copyRis(publication: PublicationRecord) {
+    await navigator.clipboard.writeText(publication.ris)
+    setCopiedId(`ris-${publication.id}`)
     window.setTimeout(() => setCopiedId(null), 1800)
   }
 
@@ -263,12 +269,24 @@ export function PublicationsList({ publications, compact = false }: Publications
                     onClick={() => copyBibtex(publication)}
                     className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border px-3 text-xs font-medium text-foreground hover:border-accent hover:text-accent"
                   >
-                    {copiedId === publication.id ? (
+                    {copiedId === `bibtex-${publication.id}` ? (
                       <Check className="h-3.5 w-3.5" aria-hidden="true" />
                     ) : (
                       <Copy className="h-3.5 w-3.5" aria-hidden="true" />
                     )}
                     BibTeX
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => copyRis(publication)}
+                    className="inline-flex h-9 items-center gap-1.5 rounded-md border border-border px-3 text-xs font-medium text-foreground hover:border-accent hover:text-accent"
+                  >
+                    {copiedId === `ris-${publication.id}` ? (
+                      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                    ) : (
+                      <Copy className="h-3.5 w-3.5" aria-hidden="true" />
+                    )}
+                    RIS
                   </button>
                 </div>
               </div>
