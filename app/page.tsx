@@ -3,7 +3,10 @@ import Link from "next/link"
 import { ArrowUpRight, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PublicationsList } from "@/components/publications-list"
-import { identity, profileLinks, projects, recentActivity, researchThemes } from "@/lib/academic-content"
+import { identity, profileLinks, projects, researchThemes } from "@/lib/academic-content"
+import { loadActivity } from "@/lib/activity"
+import { loadPaperMetrics } from "@/lib/paper-metrics"
+import { loadProjectMetrics } from "@/lib/project-metrics"
 import { loadPublications } from "@/lib/publications"
 import { createPageMetadata } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
@@ -16,14 +19,42 @@ export const metadata = createPageMetadata({
 
 const activityTypeLabel: Record<string, string> = {
   paper: "Paper",
+  preprint: "Preprint",
   software: "Software",
   position: "Position",
   milestone: "Education",
+  talk: "Talk",
+  article: "Article",
 }
 
 export default async function Home() {
-  const publications = await loadPublications()
-  const featuredProject = projects[0]
+  const [publications, paperMetrics, projectMetrics, activity] = await Promise.all([
+    loadPublications(),
+    loadPaperMetrics(),
+    loadProjectMetrics(),
+    loadActivity(),
+  ])
+
+  // Rank publications by citation count; fall back to default order (newest first)
+  const rankedPublications = [...publications].sort((a, b) => {
+    const ca = paperMetrics.papers[a.id]?.cited_by_count ?? -1
+    const cb = paperMetrics.papers[b.id]?.cited_by_count ?? -1
+    if (ca !== cb) return cb - ca
+    return 0
+  })
+
+  // Rank projects by composite engagement score (stars × 10 + forks × 5 + zenodo downloads × 2 + views)
+  const rankedProjects = [...projects].sort((a, b) => {
+    const sa = projectMetrics.projects[a.id]?.score ?? 0
+    const sb = projectMetrics.projects[b.id]?.score ?? 0
+    return sb - sa
+  })
+
+  const featuredProject = rankedProjects[0]
+  const featuredPubs = rankedPublications.slice(0, 2)
+
+  // Use auto-generated activity if available, otherwise show nothing
+  const activityItems = activity.items.slice(0, 4)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -108,7 +139,8 @@ export default async function Home() {
                 <Link
                   key={theme.id}
                   href={`/research#${theme.id}`}
-                  className="rounded-md border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
+                  className="inline-block max-w-[16rem] truncate rounded border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground hover:border-accent hover:text-foreground transition-colors"
+                  title={theme.title}
                 >
                   {theme.title}
                 </Link>
@@ -126,6 +158,16 @@ export default async function Home() {
               All projects
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
+            {projectMetrics.projects[featuredProject.id] && (
+              <div className="mt-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                {projectMetrics.projects[featuredProject.id].stars > 0 && (
+                  <span>★ {projectMetrics.projects[featuredProject.id].stars} stars</span>
+                )}
+                {projectMetrics.projects[featuredProject.id].zenodo && projectMetrics.projects[featuredProject.id].zenodo!.downloads > 0 && (
+                  <span>↓ {projectMetrics.projects[featuredProject.id].zenodo!.downloads} downloads</span>
+                )}
+              </div>
+            )}
           </div>
 
           <article className="rounded-md border border-border bg-card p-6">
@@ -173,31 +215,31 @@ export default async function Home() {
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
-          <PublicationsList publications={publications.slice(0, 2)} />
+          <PublicationsList publications={featuredPubs} />
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
-        <div>
-          <h2 className="text-sm font-semibold text-foreground">Recent Activity</h2>
-        </div>
-        <div className="divide-y divide-border border-y border-border">
-          {recentActivity.map((item) => (
-            <article key={`${item.date}-${item.title}`} className="grid gap-3 py-5 sm:grid-cols-[6rem_minmax(0,1fr)]">
-              <p className="text-sm text-muted-foreground">{item.date}</p>
-              <div>
-                {"type" in item && item.type && (
+      {activityItems.length > 0 && (
+        <section className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:px-8">
+          <div>
+            <h2 className="text-sm font-semibold text-foreground">Recent Activity</h2>
+          </div>
+          <div className="divide-y divide-border border-y border-border">
+            {activityItems.map((item) => (
+              <article key={`${item.date_iso}-${item.title}`} className="grid gap-3 py-5 sm:grid-cols-[6rem_minmax(0,1fr)]">
+                <p className="text-sm text-muted-foreground">{item.date}</p>
+                <div>
                   <span className="inline-block rounded bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground mb-2">
-                    {activityTypeLabel[item.type as string] ?? item.type}
+                    {activityTypeLabel[item.type] ?? item.type}
                   </span>
-                )}
-                <h3 className="font-medium text-foreground">{item.title}</h3>
-                <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+                  <h3 className="font-medium text-foreground">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   )
 }

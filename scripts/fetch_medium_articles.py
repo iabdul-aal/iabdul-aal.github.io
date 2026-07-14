@@ -9,12 +9,18 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 import requests
+
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
 
 MEDIUM_RSS = "https://medium.com/feed/@iabdul-aal"
 OUTPUT_PATH = Path(__file__).resolve().parents[1] / "medium_articles.json"

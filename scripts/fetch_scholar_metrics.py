@@ -66,18 +66,19 @@ def parse_metrics(html: str, existing: dict) -> dict:
     if table:
         rows = table.find_all("tr")
         row_keys = ["citations", "hIndex", "i10Index"]
-        for i, row in enumerate(rows):
-            if i >= len(row_keys):
-                break
+        data_row_idx = 0
+        for row in rows:
             cells = row.find_all("td", class_="gsc_rsb_std")
             if len(cells) >= 2:
-                try:
-                    metrics[row_keys[i]] = {
-                        "all": int(cells[0].get_text(strip=True)),
-                        "since2021": int(cells[1].get_text(strip=True)),
-                    }
-                except (ValueError, IndexError):
-                    pass
+                if data_row_idx < len(row_keys):
+                    try:
+                        metrics[row_keys[data_row_idx]] = {
+                            "all": int(cells[0].get_text(strip=True)),
+                            "since2021": int(cells[1].get_text(strip=True)),
+                        }
+                    except (ValueError, IndexError):
+                        pass
+                    data_row_idx += 1
 
     # ── Citations per year histogram ─────────────────────────────────────────
     year_spans = soup.find_all("span", class_="gsc_g_t")
