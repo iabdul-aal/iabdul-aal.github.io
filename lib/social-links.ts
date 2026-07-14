@@ -5,7 +5,7 @@ export const socialLinks = {
   scholar: "https://scholar.google.com/citations?user=CPmqNv4AAAAJ&hl=en",
   semanticScholar: "https://www.semanticscholar.org/author/Islam-I.-Abdulaal",
   researchGate: "https://www.researchgate.net/profile/Islam-Abdulaal",
-  arxiv: "https://arxiv.org/abs/2510.00357",
+  arxiv: "https://arxiv.org/a/abdulaal_i_1.html",
   nanophoto: "https://www.nanophoto.org/team",
   email: "contact@iabdul-aal.me",
   academicEmail: "contact@iabdul-aal.me",
