@@ -1,9 +1,10 @@
 import Link from "next/link"
 import { ArrowUpRight, Download, Presentation, BookOpen, Compass, Layout, FileText } from "lucide-react"
-import { loadTalks, type TalkEntry } from "@/lib/talks"
+import { loadTalks } from "@/lib/talks"
 import { getMaterialsOverview } from "@/lib/materials-library"
 import { loadMediumArticles, formatArticleDate } from "@/lib/medium-articles"
 import { createPageMetadata } from "@/lib/seo"
+import { TalksList } from "@/components/talks-list"
 
 export const metadata = createPageMetadata({
   title: "Materials",
@@ -11,20 +12,6 @@ export const metadata = createPageMetadata({
     "Presentation slides, lecture decks, technical summaries, learning roadmaps, and public sessions by Islam I. Abdulaal.",
   path: "/materials",
 })
-
-function formatTalkDate(talk: TalkEntry): string {
-  if (talk.date) {
-    const parsed = new Date(talk.date)
-    if (!Number.isNaN(parsed.getTime())) {
-      return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      }).format(parsed)
-    }
-  }
-  return talk.year || "Date not listed"
-}
 
 // Icon mapper for the resource categories
 function getCollectionIcon(slug: string) {
@@ -200,29 +187,8 @@ export default async function MaterialsPage() {
           Record of technical talks, workshops, and posters. Items are kept concise and source-linked.
         </p>
 
-        <div className="mt-8 divide-y divide-border border-y border-border">
-          {talks.map((talk) => (
-            <article key={talk.url} className="grid gap-4 py-6 md:grid-cols-[10rem_minmax(0,1fr)_8rem]">
-              <p className="text-sm text-muted-foreground">{formatTalkDate(talk)}</p>
-              <div>
-                <p className="text-sm text-muted-foreground">{talk.format}</p>
-                <h3 className="mt-1 text-lg font-semibold leading-7 text-foreground">{talk.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {talk.event}
-                  {talk.source ? `, ${talk.source}` : ""}
-                </p>
-              </div>
-              <a
-                href={talk.url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-fit items-center gap-1.5 text-sm text-accent hover:text-accent-strong md:justify-self-end"
-              >
-                Source
-                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </a>
-            </article>
-          ))}
+        <div className="mt-8">
+          <TalksList talks={talks} />
         </div>
       </section>
     </main>
