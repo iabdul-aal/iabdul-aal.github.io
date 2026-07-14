@@ -158,16 +158,6 @@ export default async function Home() {
               All projects
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
-            {projectMetrics.projects[featuredProject.id] && (
-              <div className="mt-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                {projectMetrics.projects[featuredProject.id].stars > 0 && (
-                  <span>★ {projectMetrics.projects[featuredProject.id].stars} stars</span>
-                )}
-                {projectMetrics.projects[featuredProject.id].zenodo && projectMetrics.projects[featuredProject.id].zenodo!.downloads > 0 && (
-                  <span>↓ {projectMetrics.projects[featuredProject.id].zenodo!.downloads} downloads</span>
-                )}
-              </div>
-            )}
           </div>
 
           <article className="rounded-md border border-border bg-card p-6">

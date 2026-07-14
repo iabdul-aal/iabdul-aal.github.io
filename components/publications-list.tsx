@@ -177,7 +177,7 @@ export function PublicationsList({ publications, compact = false }: Publications
                       className={
                         publication.status === "published"
                           ? "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-secondary text-foreground ring-1 ring-border"
-                          : "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-surface text-muted-foreground ring-1 ring-border"
+                          : "rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide border border-border text-muted-foreground"
                       }
                     >
                       {publication.status === "published" ? "Published" : "Preprint"}

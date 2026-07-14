@@ -21,20 +21,30 @@ const education = [
   },
 ] as const
 
-const experience = [
+type ExperienceItem = {
+  role: string
+  org: string
+  orgUrl?: string
+  period: string
+  detail: string
+}
+
+const experience: readonly ExperienceItem[] = [
   {
     role: "Research Intern",
     org: "NanoPhoto Lab, IMRE, A*STAR",
+    orgUrl: "https://www.nanophoto.org/team",
     period: "Sep 2025 – present",
     detail: "Physics-informed optimization for integrated quantum photonic source and detection structures.",
   },
   {
     role: "Research Intern",
     org: "OPST Group, Alexandria University",
+    orgUrl: "https://www.alexu.edu.eg",
     period: "2023 – 2025",
     detail: "Photonic device simulation, analog and mixed-signal modeling, and integrated photonics design workflows.",
   },
-] as const
+]
 
 export default async function CvPage() {
   const publications = await loadPublications()
@@ -115,7 +125,15 @@ export default async function CvPage() {
                   <p className="mt-0.5 text-xs text-muted-foreground">{exp.period}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">{exp.org}</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {exp.orgUrl ? (
+                      <a href={exp.orgUrl} target="_blank" rel="noreferrer" className="text-accent hover:text-accent-strong hover:underline">
+                        {exp.org}
+                      </a>
+                    ) : (
+                      exp.org
+                    )}
+                  </p>
                   <p className="mt-1 text-sm leading-6 text-muted-foreground">{exp.detail}</p>
                 </div>
               </div>
@@ -142,7 +160,13 @@ export default async function CvPage() {
           <div className="mt-4 divide-y divide-border border-y border-border">
             {publications.map((pub) => (
               <div key={pub.id} className="py-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-border ${pub.status === "published" ? "bg-secondary text-foreground" : "bg-surface text-muted-foreground"}`}>
+                <span
+                  className={
+                    pub.status === "published"
+                      ? "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-secondary text-foreground ring-1 ring-border"
+                      : "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide border border-border text-muted-foreground"
+                  }
+                >
                   {pub.status === "published" ? "Published" : "Preprint"}
                 </span>
                 <p className="text-sm font-medium text-foreground">{pub.title}</p>
