@@ -40,22 +40,22 @@ export const researchThemes = [
     title: "Integrated Nanophotonics",
     image: "/images/integrated-nanophotonics.png",
     problem:
-      "Integrating emerging materials and physical effects (including BTO, NbOCl₂, liquid crystals, and quasi-BIC) on silicon dioxide (SiO₂) substrates to enable new capabilities in chip-scale platforms.",
+      "Understanding the dynamic interaction between guided optical modes, material properties (such as liquid crystals, 2D layers, and ferroelectrics), and external physical stimuli (thermal shifts, electric fields, or phase transition behavior) on SiO₂ substrates.",
     methods:
-      "Full-wave FDTD simulation, electromagnetic mode solving, anisotropic material modeling, waveguide structure analysis, and microring resonator design.",
+      "Full-wave FDTD simulation, anisotropic material modeling, multiphysics coupling analysis, waveguide structure analysis, and microring resonator design.",
     physicalRelevance:
-      "Utilizing mechanisms like Bound States in the Continuum (BIC and quasi-BIC) and electro-optic modulation to control light propagation and confinement in integrated circuits.",
+      "Exploring how external physical phenomena tune material responses (such as electro-optic modulation and BIC/quasi-BIC transitions) to control and route light on-chip.",
   },
   {
-    id: "nonlinear-quantum-photonics",
-    title: "Nonlinear Quantum Photonics",
+    id: "quantum-integrated-photonics",
+    title: "Quantum Integrated Photonics",
     image: "/images/nonlinear-quantum-photonics.png",
     problem:
-      "Integrated quantum photonic systems need efficient light generation, manipulation, and detection under loss, phase-matching, and coupling constraints.",
+      "Scaling optical quantum information processing requires integrating photon generation sources, quantum memory interfaces, routing components, and coherent detectors on-chip while managing losses and maintaining state coherence.",
     methods:
-      "Nonlinear optics analysis, source and detector structure optimization, phase-matching reasoning, and simulation-guided design of integrated quantum photonic components.",
+      "Nonlinear optics simulation, quantum state representation, optical memory interface modeling, design of quantum coherent circuits, and phase-matching optimization.",
     physicalRelevance:
-      "The central physical question is how geometry and material response shape photon-pair generation, bandwidth, collection efficiency, and integration density.",
+      "Governing phase-matching criteria and coherent light-matter interactions to execute quantum information processing, state manipulation, and memory storage in PIC architectures.",
   },
   {
     id: "intelligent-photonics",

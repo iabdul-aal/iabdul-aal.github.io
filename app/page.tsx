@@ -140,7 +140,7 @@ export default async function Home() {
           </div>
           <div className="max-w-3xl space-y-6">
             <p className="text-base leading-8 text-muted-foreground">
-              Connecting device physics to computational workflows that remain interpretable and reproducible across three main focus areas.
+              Connecting materials-level device physics, integrated quantum circuit topologies, and neuromorphic computing architectures to computational workflows that remain interpretable and reproducible.
             </p>
             
             <div className="overflow-hidden rounded-md border border-border bg-card w-full max-w-xl">

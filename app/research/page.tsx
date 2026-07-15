@@ -21,7 +21,7 @@ function getThemeFormula(id: string) {
         latex: "\\nabla^2 \\mathbf{E} + k_0^2 n^2(\\mathbf{r}) \\mathbf{E} = 0",
         desc: "Modal dispersion and wave confinement modeling.",
       }
-    case "nonlinear-quantum-photonics":
+    case "quantum-integrated-photonics":
       return {
         label: "Phase-Matching Constraint",
         latex: "\\Delta\\beta = \\beta_s + \\beta_i - \\beta_p = 0",
