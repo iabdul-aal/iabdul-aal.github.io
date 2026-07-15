@@ -8,18 +8,18 @@
       "detail": "Graduated from Alexandria University with a degree in Electronics and Communications Engineering."
     },
     {
-      "date_iso": "2026-06-20",
-      "date": "Jun 2026",
-      "type": "preprint",
-      "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
-      "detail": "Preprint posted on arXiv."
-    },
-    {
-      "date_iso": "2026-06-15",
-      "date": "Jun 2026",
+      "date_iso": "2026-01-01",
+      "date": "Jan 2026",
       "type": "paper",
       "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
       "detail": "Paper accepted in Journal of Optics."
+    },
+    {
+      "date_iso": "2026-01-01",
+      "date": "Jan 2026",
+      "type": "preprint",
+      "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
+      "detail": "Preprint posted on arXiv."
     },
     {
       "date_iso": "2025-09-01",
@@ -57,5 +57,5 @@
       "detail": "Published on Medium."
     }
   ],
-  "fetchedAt": "2026-07-14T10:24:31.638023+00:00"
+  "fetchedAt": "2026-07-15T05:10:44.288587+00:00"
 }
