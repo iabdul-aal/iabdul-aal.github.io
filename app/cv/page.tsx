@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Download, ExternalLink, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { identity, methodStack } from "@/lib/academic-content"
+import { identity } from "@/lib/academic-content"
 import { loadPublications } from "@/lib/publications"
 import { createPageMetadata } from "@/lib/seo"
 
@@ -177,18 +177,6 @@ export default async function CvPage() {
         </div>
       </section>
 
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
-          <h2 className="text-sm font-semibold text-foreground">Methods and Tools</h2>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {methodStack.map((item) => (
-              <li key={item} className="rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-muted-foreground">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
 
       <section className="border-t border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">

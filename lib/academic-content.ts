@@ -150,17 +150,3 @@ export const cvSummary = [
     ],
   },
 ] as const
-
-export const methodStack = [
-  "Theoretical Electrodynamics",
-  "FDTD and Finite Element Solvers",
-  "Adjoint and Evolutionary Inverse Design",
-  "Drift-Diffusion Transport Modeler",
-  "Photonic Circuit Simulator",
-  "Scientific Computing and Numerical Methods",
-  "Python / PyTorch",
-  "Integrated Layout Editors",
-  "Experimental Prototyping and Optical Testing",
-  "Scientific Automation",
-  "LaTeX Typesetting",
-] as const
