@@ -156,3 +156,17 @@
  * Alternate section:   bg-surface (every other section, starting second)
  * ─────────────────────────────────────────────────────────────────────────────
  */
+
+/* Prevent KaTeX display math from causing horizontal page layout overflow */
+.katex-display {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 0.5rem 0 !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katex {
+  max-width: 100% !important;
+  text-wrap: nowrap !important;
+}

@@ -110,9 +110,9 @@ export default async function ResearchPage() {
                       const formula = getThemeFormula(theme.id)
                       if (!formula) return null
                       return (
-                        <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)]">
+                        <div className="grid gap-1.5 sm:grid-cols-[9rem_minmax(0,1fr)] w-full min-w-0">
                           <dt className="text-sm font-medium text-foreground pt-0.5">Governing Physics</dt>
-                          <dd className="rounded-md border border-border bg-card p-4 border-l-2 border-l-accent/60">
+                          <dd className="rounded-md border border-border bg-card p-4 border-l-2 border-l-accent/60 w-full min-w-0 overflow-hidden">
                             <p className="text-xs font-semibold text-foreground">{formula.label}</p>
                             <div
                               className="mt-3 overflow-x-auto py-2 text-accent"
