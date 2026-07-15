@@ -70,7 +70,7 @@ const collectionConfig: MaterialCollection[] = [
   },
   {
     slug: "templates",
-    title: "Templates & Tools",
+    title: "Templates and Tools",
     description:
       "Reusable templates for reports, presentations, and code documentation.",
     href: "/materials#templates",

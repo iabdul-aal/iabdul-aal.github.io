@@ -64,7 +64,7 @@ export const researchThemes = [
     problem:
       "Optimizing complex optical responses requires bridging physical modeling with machine learning, both by using AI to design custom photonic devices and by developing photonic hardware (such as neuromorphic networks) to accelerate AI computations.",
     methods:
-      "Physics-informed neural networks, adjoint & evolutionary optimization, neuromorphic optical computing architectures, photonic neural network modeling, and inverse design algorithms.",
+      "Physics-informed neural networks, adjoint and evolutionary optimization, neuromorphic optical computing architectures, photonic neural network modeling, and inverse design algorithms.",
     physicalRelevance:
       "Creates a bidirectional link where physical wave equations constrain machine learning models, and analog photonic systems perform mathematical operations at the speed of light.",
   },
@@ -146,21 +146,21 @@ export const cvSummary = [
     heading: "Methods",
     items: [
       "Integrated, nonlinear, and quantum photonics, FBG optical sensing, and chip-scale device modeling.",
-      "Theoretical modeling, multiphysics simulation (FDTD, FEM, drift-diffusion), adjoint & evolutionary inverse design, machine learning optimization, and experimental prototyping validation.",
+      "Theoretical modeling, multiphysics simulation (FDTD, FEM, drift-diffusion), adjoint and evolutionary inverse design, machine learning optimization, and experimental prototyping validation.",
     ],
   },
 ] as const
 
 export const methodStack = [
   "Theoretical Electrodynamics",
-  "FDTD & Finite Element Solvers",
-  "Adjoint & Evolutionary Inverse Design",
+  "FDTD and Finite Element Solvers",
+  "Adjoint and Evolutionary Inverse Design",
   "Drift-Diffusion Transport Modeler",
   "Photonic Circuit Simulator",
-  "Scientific Computing & DSP",
+  "Scientific Computing and DSP",
   "Python / PyTorch",
   "Integrated Layout Editors",
-  "Experimental Prototyping & Optical Testing",
+  "Experimental Prototyping and Optical Testing",
   "Scientific Automation",
   "LaTeX Typesetting",
 ] as const
