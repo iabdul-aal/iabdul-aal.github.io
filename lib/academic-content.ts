@@ -157,7 +157,7 @@ export const methodStack = [
   "Adjoint and Evolutionary Inverse Design",
   "Drift-Diffusion Transport Modeler",
   "Photonic Circuit Simulator",
-  "Scientific Computing and DSP",
+  "Scientific Computing and Numerical Methods",
   "Python / PyTorch",
   "Integrated Layout Editors",
   "Experimental Prototyping and Optical Testing",
