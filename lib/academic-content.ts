@@ -11,12 +11,12 @@ export const navigationItems = [
 
 export const identity = {
   name: "Islam I. Abdulaal",
-  shortTitle: "Photonics researcher, B.Sc. in Electronics and Communications Engineering",
+  shortTitle: "Researcher in Integrated and Quantum Photonics",
   affiliation: "Alexandria University",
   location: "Alexandria, Egypt",
   email: socialLinks.email,
   statement:
-    "Researcher in integrated, nonlinear, and quantum photonics, combining theoretical modeling, computational design, and experimental validation to develop next-generation chip-scale optical devices.",
+    "Researcher in integrated, nonlinear, and quantum photonics, combining theoretical modeling, advanced computational design, and experimental characterization to develop next-generation chip-scale optical devices.",
   compactStatement:
     "Integrated, nonlinear, and quantum photonics, combining theoretical, computational, and experimental methods for next-generation devices.",
 } as const
@@ -29,7 +29,7 @@ export const profileLinks = [
 ] as const
 
 export const aboutParagraphs = [
-  "I hold a B.Sc. in Electronics and Communications Engineering from Alexandria University. My research spans integrated, nonlinear, and quantum photonics, combining theoretical physics, computational design, and experimental workflows to develop next-generation chip-scale optical devices.",
+  "I am a researcher in integrated, nonlinear, and quantum photonics, combining theoretical physics, advanced computational design, and experimental characterization to develop next-generation chip-scale optical systems. My academic background is in Electronics and Communications Engineering from Alexandria University.",
   "At NanoPhoto Lab, IMRE, A*STAR, I have focused on optimizing integrated quantum light sources and optical structures, bridging theoretical models with active experimental constraints. I treat computational tools and machine learning not in isolation, but as accelerators to explore and validate physical phenomena under realistic experimental conditions.",
   "My earlier research work includes fiber Bragg grating (FBG) optical sensing for biomedical monitoring and silicon photonic device optimization. Across these areas, my goal is connecting fundamental physical theories, rigorous simulations, and experimental validation in integrated optoelectronic systems.",
 ] as const
@@ -40,33 +40,33 @@ export const researchThemes = [
     title: "Integrated Nanophotonics",
     image: "/images/integrated-nanophotonics.png",
     problem:
-      "Understanding the dynamic interaction between guided optical modes, material properties (such as liquid crystals, 2D layers, and ferroelectrics), and external physical stimuli (thermal shifts, electric fields, or phase transition behavior) on SiO₂ substrates.",
+      "Harnessing the dynamic interaction between guided optical modes, hybrid active material layers (such as thin-film ferroelectrics, liquid crystals, and 2D materials), and external physical fields (thermal, electrostatic, or strain-induced) on silicon dioxide (SiO₂) substrates.",
     methods:
-      "Full-wave FDTD simulation, anisotropic material modeling, multiphysics coupling analysis, waveguide structure analysis, and experimental prototyping validation.",
+      "Full-wave electromagnetic simulation, anisotropic material tensor modeling, multiphysics finite-element coupling, topological state engineering (BIC and quasi-BIC resonances), and experimental optoelectronic characterization.",
     physicalRelevance:
-      "Exploring how external physical phenomena tune material responses (such as electro-optic modulation and BIC/quasi-BIC transitions) to control and route light on-chip.",
+      "Elucidating how external physical stimuli dynamically alter material tensors to enable non-volatile modulation, switchable topological states, and highly reconfigurable light routing on-chip.",
   },
   {
     id: "quantum-photonics",
     title: "Quantum Photonics",
     image: "/images/nonlinear-quantum-photonics.png",
     problem:
-      "Scaling optical quantum information processing on-chip requires harnessing nonlinear physical effects for photon generation, interface routing, and quantum memory storage, bridging theoretical circuit constraints with experimental implementation.",
+      "Scaling on-chip quantum information processing by co-integrating nonlinear photon-pair sources, coherent quantum memory interfaces, phase-shifter networks, and low-noise detectors while minimizing propagation loss and maintaining quantum state coherence.",
     methods:
-      "Nonlinear optics simulation, quantum state representation, optical memory interface modeling, design of quantum coherent circuits, and phase-matching optimization.",
+      "Nonlinear optics modeling, quantum state tomography representation, coherent light-matter interface simulation, and reconfigurable quantum circuit design.",
     physicalRelevance:
-      "Governing nonlinear optical phenomena and coherent light-matter interactions to execute quantum information processing, state manipulation, and memory storage in PIC architectures.",
+      "Governing nonlinear optical coefficients and coherent interactions to execute high-fidelity quantum state preparation, routing, and memory storage in photonic integrated circuit (PIC) topologies.",
   },
   {
     id: "intelligent-photonics",
     title: "Intelligent Photonics",
     image: "/images/intelligent-photonics.png",
     problem:
-      "Optimizing complex optical responses requires bridging physical modeling with machine learning, both by using AI to design custom photonic devices and by developing photonic hardware (such as neuromorphic networks) to accelerate AI computations.",
+      "Bridging physical wave equations with optimization and machine learning, focusing on physics-constrained deep learning for device inverse design (AI for Photonics) and analog wave-based neuromorphic processing hardware (Photonics for AI).",
     methods:
-      "Physics-informed neural networks, adjoint and evolutionary optimization, neuromorphic optical computing architectures, photonic neural network modeling, and inverse design algorithms.",
+      "Physics-informed neural networks (PINNs), adjoint-based gradient optimization, evolutionary search algorithms, optical neural network (ONN) architectures, and wave-based hardware co-design.",
     physicalRelevance:
-      "Creates a bidirectional link where physical wave equations constrain machine learning models, and analog photonic systems perform mathematical operations at the speed of light.",
+      "Establishing a bidirectional framework where physical wave propagation constrains network training, and analog multi-port interferometric circuits execute mathematical operations at the speed of light.",
   },
 ] as const
 
