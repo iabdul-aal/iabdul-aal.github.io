@@ -16,9 +16,9 @@ export const identity = {
   location: "Alexandria, Egypt",
   email: socialLinks.email,
   statement:
-    "Researcher in computational and integrated photonics focused on nonlinear and quantum photonic systems, inverse design, and physics-informed computational methods.",
+    "Researcher in integrated, nonlinear, and quantum photonics, combining theoretical modeling, computational design, and experimental validation to develop next-generation chip-scale optical devices.",
   compactStatement:
-    "Computational and integrated photonics, with emphasis on nonlinear and quantum photonic systems, inverse design, and physics-informed modeling.",
+    "Integrated, nonlinear, and quantum photonics, combining theoretical, computational, and experimental methods for next-generation devices.",
 } as const
 
 export const profileLinks = [
@@ -29,9 +29,9 @@ export const profileLinks = [
 ] as const
 
 export const aboutParagraphs = [
-  "I hold a B.Sc. in Electronics and Communications Engineering from Alexandria University. My current work sits in computational and integrated photonics, with an emphasis on device modeling, inverse design, and physics-informed computational methods for nonlinear and quantum-compatible photonic systems.",
-  "At NanoPhoto Lab, IMRE, A*STAR I have worked on physics-informed neural network methods for optimizing integrated quantum light source and detection structures. I treat machine learning as a modeling and optimization tool, useful when it remains constrained by the underlying physics and by reproducible simulation evidence.",
-  "My earlier research work includes fiber Bragg grating sensing for biomedical monitoring and silicon photonic device modeling for intra-data-center optical links. Across these projects, the common thread is the connection between electromagnetic simulation, device physics, and system-level constraints.",
+  "I hold a B.Sc. in Electronics and Communications Engineering from Alexandria University. My research spans integrated, nonlinear, and quantum photonics, combining theoretical physics, computational design, and experimental workflows to develop next-generation chip-scale optical devices.",
+  "At NanoPhoto Lab, IMRE, A*STAR, I have focused on optimizing integrated quantum light sources and optical structures, bridging theoretical models with active experimental constraints. I treat computational tools and machine learning not in isolation, but as accelerators to explore and validate physical phenomena under realistic experimental conditions.",
+  "My earlier research work includes fiber Bragg grating (FBG) optical sensing for biomedical monitoring and silicon photonic device optimization. Across these areas, my goal is connecting fundamental physical theories, rigorous simulations, and experimental validation in integrated optoelectronic systems.",
 ] as const
 
 export const researchThemes = [
@@ -42,20 +42,20 @@ export const researchThemes = [
     problem:
       "Understanding the dynamic interaction between guided optical modes, material properties (such as liquid crystals, 2D layers, and ferroelectrics), and external physical stimuli (thermal shifts, electric fields, or phase transition behavior) on SiO₂ substrates.",
     methods:
-      "Full-wave FDTD simulation, anisotropic material modeling, multiphysics coupling analysis, waveguide structure analysis, and microring resonator design.",
+      "Full-wave FDTD simulation, anisotropic material modeling, multiphysics coupling analysis, waveguide structure analysis, and experimental prototyping validation.",
     physicalRelevance:
       "Exploring how external physical phenomena tune material responses (such as electro-optic modulation and BIC/quasi-BIC transitions) to control and route light on-chip.",
   },
   {
-    id: "quantum-integrated-photonics",
-    title: "Quantum Integrated Photonics",
+    id: "quantum-photonics",
+    title: "Quantum Photonics",
     image: "/images/nonlinear-quantum-photonics.png",
     problem:
-      "Scaling optical quantum information processing requires integrating photon generation sources, quantum memory interfaces, routing components, and coherent detectors on-chip while managing losses and maintaining state coherence.",
+      "Scaling optical quantum information processing on-chip requires harnessing nonlinear physical effects for photon generation, interface routing, and quantum memory storage, bridging theoretical circuit constraints with experimental implementation.",
     methods:
       "Nonlinear optics simulation, quantum state representation, optical memory interface modeling, design of quantum coherent circuits, and phase-matching optimization.",
     physicalRelevance:
-      "Governing phase-matching criteria and coherent light-matter interactions to execute quantum information processing, state manipulation, and memory storage in PIC architectures.",
+      "Governing nonlinear optical phenomena and coherent light-matter interactions to execute quantum information processing, state manipulation, and memory storage in PIC architectures.",
   },
   {
     id: "intelligent-photonics",
@@ -145,13 +145,14 @@ export const cvSummary = [
   {
     heading: "Methods",
     items: [
-      "Integrated photonics, nanophotonics, nonlinear and quantum photonics, FBG sensing, and photonic system modeling.",
-      "FDTD, drift-diffusion simulation, compact modeling, Python/MATLAB scientific analysis, PyTorch, and physics-informed optimization.",
+      "Integrated, nonlinear, and quantum photonics, FBG optical sensing, and chip-scale device modeling.",
+      "Theoretical modeling, multiphysics simulation (FDTD, FEM, drift-diffusion), machine learning optimization, and experimental prototyping validation.",
     ],
   },
 ] as const
 
 export const methodStack = [
+  "Theoretical Electrodynamics",
   "FDTD Electromagnetic Solver",
   "Drift-Diffusion Transport Modeler",
   "Finite Element Method (FEM) Solvers",
@@ -159,6 +160,7 @@ export const methodStack = [
   "Scientific Computing & DSP",
   "Python / PyTorch",
   "Integrated Layout Editors",
+  "Experimental Prototyping & Optical Testing",
   "Scientific Automation",
   "LaTeX Typesetting",
 ] as const

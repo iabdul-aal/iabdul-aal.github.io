@@ -2,9 +2,9 @@ import { socialLinks } from "@/lib/social-links"
 
 export const siteConfig = {
   name: "Islam I. Abdulaal",
-  title: "Islam I. Abdulaal | Computational and Integrated Photonics",
+  title: "Islam I. Abdulaal | Integrated, Nonlinear, and Quantum Photonics",
   description:
-    "Academic website of Islam I. Abdulaal, focused on computational and integrated photonics, nonlinear and quantum photonic systems, inverse design, and physics-informed methods.",
+    "Academic website of Islam I. Abdulaal, focused on integrated, nonlinear, and quantum photonics, combining theoretical, computational, and experimental methods.",
   url: "https://iabdul-aal.me",
   locale: "en_US",
   ogImage: "/personal-pic.png",
@@ -15,6 +15,8 @@ export const siteConfig = {
   keywords: [
     "Islam I. Abdulaal",
     "computational photonics",
+    "experimental photonics",
+    "theoretical photonics",
     "integrated photonics",
     "nonlinear photonics",
     "quantum photonics",
@@ -51,7 +53,9 @@ export const personConfig = {
   phone: socialLinks.phone,
   orcid: siteConfig.orcidId,
   focusAreas: [
+    "Theoretical photonics",
     "Computational photonics",
+    "Experimental photonics",
     "Integrated photonics",
     "Nonlinear photonics",
     "Quantum photonics",
