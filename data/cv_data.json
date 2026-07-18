@@ -1,0 +1,253 @@
+{
+  "personalInfo": {
+    "name": "Islam I. Abdulaal",
+    "specialization": "Integrated Photonics Researcher",
+    "specialization_de": "Forscher für Integrierte Photonik",
+    "city": "Alexandria",
+    "country": "Egypt",
+    "phone": "+20-120-460-9271",
+    "email": "contact@iabdul-aal.me",
+    "website": "iabdul-aal.me",
+    "linkedin": "iabdul-aal",
+    "github": "iabdul-aal",
+    "orcid": "0009-0004-9300-3936",
+    "_updated": "2026-07-22T20:28:00Z"
+  },
+  "researchInterests": "Integrated nanophotonics, quantum photonic sources, nonlinear on-chip devices, physics-informed inverse design, and wave-equation-constrained neural networks for photonic device optimization.",
+  "researchInterests_de": "Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauelemente, physikinformiertes Inversdesign und wellengleichungsbeschränkte neuronale Netze zur Optimierung photonischer Bauelemente.",
+  "education": [
+    {
+      "degree": "B.Sc. in Electronics and Communications Engineering",
+      "degree_de": "B.Sc. in Elektronik und Kommunikationstechnik",
+      "period": "Aug 2021 -- Aug 2026",
+      "institution": "Alexandria University, Faculty of Engineering",
+      "institution_de": "Universität Alexandria, Fakultät für Ingenieurwissenschaften",
+      "location": "Onsite",
+      "location_de": "Vor Ort",
+      "bullets": [
+        "Core curriculum: integrated photonics, electromagnetic theory, optical fiber communications, and digital signal processing.",
+        "Awarded Dean's Honors for Academic Excellence every year from 2021 to 2025."
+      ]
+    }
+  ],
+  "researchExperience": [
+    {
+      "role": "Research Intern",
+      "role_de": "Forschungspraktikant",
+      "period": "Sep 2025 -- Present",
+      "period_de": "Sep 2025 -- Heute",
+      "org": "NanoPhoto Lab, IMRE, A*STAR",
+      "org_de": "NanoPhoto-Labor, IMRE, A*STAR",
+      "location": "Remote",
+      "location_de": "Fernarbeit",
+      "bullets": [
+        "Conducting device-level FDTD simulations for spontaneous parametric down-conversion (SPDC) sources on emerging material platforms.",
+        "Contributing to co-authored work on terahertz bound-state-in-the-continuum (BIC) metasurfaces, published in the Journal of Optics."
+      ]
+    },
+    {
+      "role": "Research Intern",
+      "role_de": "Forschungspraktikant",
+      "period": "Jul 2025 -- Sep 2025",
+      "period_de": "Jul 2025 -- Sep 2025",
+      "org": "Advanced Labs Program, Egypt Scholars Inc.",
+      "org_de": "Advanced-Labs-Programm, Egypt Scholars Inc.",
+      "location": "Remote",
+      "location_de": "Fernarbeit",
+      "bullets": [
+        "Developed physics-informed neural network (PINN) models for wave-equation-constrained inverse design of NbOCl\\textsubscript{2}-based SPDC sources.",
+        "Trained and benchmarked a 12-million-parameter PINN model against full-wave electromagnetic solvers; work submitted as a preprint."
+      ]
+    },
+    {
+      "role": "Research Intern",
+      "role_de": "Forschungspraktikant",
+      "period": "Jul 2023 -- Aug 2025",
+      "period_de": "Jul 2023 -- Aug 2025",
+      "org": "OPST Group, SmartCI Research Center, Alexandria University",
+      "org_de": "OPST-Gruppe, SmartCI-Forschungszentrum, Universität Alexandria",
+      "location": "Hybrid",
+      "location_de": "Hybrid",
+      "bullets": [
+        "Modeled Fiber Bragg Grating (FBG) mode coupling and validated transfer-matrix results against full-wave FDTD simulations.",
+        "Contributed to the design of an FBG-based vital-sign monitoring sensor using coupled-mode and circuit-level analysis."
+      ]
+    }
+  ],
+  "technicalSkills": [
+    {
+      "category": "Photonic Simulation and Design",
+      "category_de": "Photonische Simulation und Design",
+      "items": "Full-wave FDTD/FEM solvers, semiconductor drift-diffusion transport, coupled-mode theory, transfer-matrix method, waveguide dispersion engineering.",
+      "items_de": "Vollwellen-FDTD/FEM-Löser, Halbleiter-Drift-Diffusions-Transport, Theorie gekoppelter Moden, Transfer-Matrix-Methode, Wellenleiter-Dispersions-Engineering."
+    },
+    {
+      "category": "Programming and Scientific Computing",
+      "category_de": "Programmierung und wissenschaftliches Rechnen",
+      "items": "Python (NumPy, SciPy, Matplotlib), PyTorch, TensorFlow, Git, Linux, LaTeX.",
+      "items_de": "Python (NumPy, SciPy, Matplotlib), PyTorch, TensorFlow, Git, Linux, LaTeX."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Machine Learning Specialization",
+      "name_de": "Spezialisierung Maschinelles Lernen",
+      "issuer": "DeepLearning.AI via Coursera",
+      "issuer_de": "DeepLearning.AI über Coursera",
+      "date": "Dec 2024",
+      "date_de": "Dez 2024"
+    }
+  ],
+  "languages": [
+    { "name": "Arabic", "name_de": "Arabisch", "level": "Native", "level_de": "Muttersprache" },
+    { "name": "English", "name_de": "Englisch", "level": "Professional Working Proficiency", "level_de": "Verhandlungssicher" }
+  ],
+  "awards": [
+    {
+      "award": "Dean's Honors for Academic Excellence",
+      "award_de": "Dekan-Ehrung für akademische Exzellenz",
+      "issuer": "Alexandria University, Faculty of Engineering",
+      "issuer_de": "Universität Alexandria, Fakultät für Ingenieurwissenschaften",
+      "year": "2021 -- 2025"
+    },
+    {
+      "award": "ICMTC Artificial Intelligence Contest (AIC-2) -- 4th Place",
+      "award_de": "ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2) -- 4. Platz",
+      "issuer": "Military Technical College",
+      "issuer_de": "Militärtechnische Hochschule",
+      "year": "2024"
+    },
+    {
+      "award": "Huawei ICT Skills Competition -- National Finalist (AI Track)",
+      "award_de": "Huawei ICT-Fähigkeitswettbewerb -- Nationaler Finalist (KI-Bereich)",
+      "issuer": "Huawei Technologies -- MENA Region",
+      "issuer_de": "Huawei Technologies -- MENA-Region",
+      "year": "2023"
+    },
+    {
+      "award": "NASA Space Apps Challenge -- Global Nominee",
+      "award_de": "NASA Space Apps Challenge -- Globaler Nominierter",
+      "issuer": "NASA",
+      "issuer_de": "NASA",
+      "year": "2021"
+    }
+  ],
+  "leadership": [
+    {
+      "role": "Board Member",
+      "role_de": "Vorstandsmitglied",
+      "period": "Jul 2026 -- Present",
+      "period_de": "Jul 2026 -- Heute",
+      "org": "Optica Egypt Local Section",
+      "org_de": "Optica Sektion Ägypten",
+      "location": "Hybrid",
+      "location_de": "Hybrid",
+      "bullets": []
+    },
+    {
+      "role": "Chairman",
+      "role_de": "Vorsitzender",
+      "period": "Feb 2025 -- Oct 2025",
+      "period_de": "Feb 2025 -- Okt 2025",
+      "org": "IEEE Solid-State Circuits Society (SSCS), Alexandria University Student Branch Chapter",
+      "org_de": "IEEE Solid-State Circuits Society (SSCS), Studentengruppe der Universität Alexandria",
+      "location": "Hybrid",
+      "location_de": "Hybrid",
+      "bullets": [
+        "Led chapter activities, organized technical seminars, and coordinated with IEEE Region 8 for student events."
+      ]
+    },
+    {
+      "role": "General Coordinator",
+      "role_de": "Hauptkoordinator",
+      "period": "Aug 2021 -- Sep 2023",
+      "period_de": "Aug 2021 -- Sep 2023",
+      "org": "Education Clinic (USA-Registered NGO)",
+      "org_de": "Education Clinic (in den USA registrierte NGO)",
+      "location": "Remote",
+      "location_de": "Fernarbeit",
+      "bullets": []
+    }
+  ],
+  "teaching": [
+    {
+      "role": "Tutor / Mentor",
+      "role_de": "Tutor / Mentor",
+      "period": "Jul 2026 -- Present",
+      "period_de": "Jul 2026 -- Heute",
+      "location": "Optica Egypt",
+      "location_de": "Optica Ägypten"
+    }
+  ],
+  "memberships": [
+    {
+      "name": "Optica (formerly OSA)",
+      "name_de": "Optica (ehemals OSA)",
+      "period": "Jul 2026 -- Present",
+      "period_de": "Jul 2026 -- Heute",
+      "detail": "Student Member.",
+      "detail_de": "Studentenmitglied."
+    },
+    {
+      "name": "Institute of Electrical and Electronics Engineers (IEEE)",
+      "name_de": "Institut der Elektro- und Elektronikingenieure (IEEE)",
+      "period": "2025 -- 2026",
+      "detail": "Student Member (ID: 101099759).",
+      "detail_de": "Studentenmitglied (Nr.: 101099759)."
+    }
+  ],
+  "references": [
+    {
+      "name": "Dr. Omar Abdelraouf",
+      "role": "Research Scientist",
+      "role_de": "Wissenschaftlicher Mitarbeiter",
+      "org": "Institute of Materials Research and Engineering (IMRE), A*STAR, Singapore",
+      "org_de": "Institut für Materialforschung und Ingenieurwesen (IMRE), A*STAR, Singapur",
+      "email": "omar_abdelrahman@a-star.edu.sg",
+      "phone": "+65-8349-0207"
+    },
+    {
+      "name": "Prof. Ishac Kandas",
+      "role": "Associate Professor",
+      "role_de": "Außerordentlicher Professor",
+      "org": "Department of Engineering Physics and Mathematics, Alexandria University",
+      "org_de": "Institut für Technische Physik und Mathematik, Universität Alexandria",
+      "email": "ishac.kandas@alexu.edu.eg",
+      "phone": "+20-127-755-2785"
+    }
+  ],
+  "tools": [
+    {
+      "id": "nanophotonet-mpm",
+      "title": "NanoPhotoNet-MPM: Physics-Informed Neural Surrogate for Inverse SPDC Design",
+      "title_de": "NanoPhotoNet-MPM: Physics-Informed Neural Surrogate for Inverse SPDC Design",
+      "status": "Prerelease",
+      "tier": "major",
+      "year": "2026",
+      "objective": "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl2 waveguides.",
+      "objective_de": "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl2 waveguides.",
+      "methods": "Physics-informed neural networks (PINNs), DeepOperator Networks (DeepONet), coupled-wave equations, finite-difference eigenmode (FDE) solvers, genetic algorithm optimization, and joint spectral amplitude (JSA) analysis.",
+      "links": [
+        { "label": "Repository", "href": "https://github.com/iabdul-aal/NanoPhotoNet-MPM" },
+        { "label": "Dataset DOI", "href": "https://doi.org/10.57967/hf/9066" },
+        { "label": "Model DOI", "href": "https://doi.org/10.57967/hf/9068" },
+        { "label": "Code DOI", "href": "https://doi.org/10.5281/zenodo.18653064" }
+      ]
+    },
+    {
+      "id": "pd-design-kit",
+      "title": "Ge-on-Si PIN Photodetector Design Kit",
+      "title_de": "Ge-on-Si PIN Photodetector Design Kit",
+      "status": "",
+      "tier": "minor",
+      "year": "2026",
+      "objective": "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical links.",
+      "objective_de": "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical links.",
+      "methods": "Finite-Difference Time-Domain (FDTD) optical absorption modeling, drift-diffusion electrical transport simulation, transit-time and RC bandwidth analysis, compact-model parameter extraction, system-level link simulation, and layout validation.",
+      "links": [
+        { "label": "Repository", "href": "https://github.com/iabdul-aal/PD-design-kit" },
+        { "label": "DOI", "href": "https://doi.org/10.5281/zenodo.19652934" }
+      ]
+    }
+  ]
+}

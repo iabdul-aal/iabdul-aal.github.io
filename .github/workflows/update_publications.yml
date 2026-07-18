@@ -1,0 +1,74 @@
+name: Update Academic and Talks Data
+
+on:
+  schedule:
+    - cron: "17 2 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-academic-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Fetch publications, profile, talks, Scholar metrics, Medium articles
+        run: |
+          python scripts/fetch_publications.py
+          python scripts/sync_arxiv_publications.py
+          python scripts/update_publications_bib.py
+          python scripts/update_cv_tex.py
+          python scripts/fetch_orcid_profile.py
+          python scripts/fetch_talks.py
+          python scripts/fetch_scholar_metrics.py
+          python scripts/fetch_medium_articles.py
+
+      - name: Fetch per-paper citation metrics (OpenAlex)
+        run: python scripts/fetch_paper_metrics.py
+
+      - name: Fetch project engagement metrics (GitHub + Zenodo)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/fetch_project_metrics.py
+
+      - name: Generate activity feed from all sources
+        run: python scripts/generate_activity.py
+
+      - name: Compile LaTeX CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: data/cv.tex
+
+      - name: Deploy CV PDF to public directory
+        run: cp data/cv.pdf public/cv.pdf
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/publications.json data/orcid_profile.json data/talks.json data/scholar_metrics.json data/medium_articles.json data/paper_metrics.json data/project_metrics.json data/activity.json data/publications.bib public/cv.pdf data/cv_data.json data/cv.tex; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push data files
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/publications.json data/orcid_profile.json data/talks.json data/scholar_metrics.json data/medium_articles.json data/paper_metrics.json data/project_metrics.json data/activity.json data/publications.bib public/cv.pdf data/cv_data.json data/cv.tex
+          git commit -m "chore: update academic data, metrics, activity feed, and CV PDF"
+          git push

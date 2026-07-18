@@ -1,0 +1,244 @@
+% Academic CV Template for PhD Applications
+% Optimized for Professional Standards and ATS Compatibility
+\documentclass[11pt,a4paper]{article}
+
+% ================== PACKAGES ==================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\definecolor{SECTIONCOLOR}{RGB}{0,102,204}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\graphicspath{{data/}{./}}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage[backend=biber,style=ieee,sorting=ydnt,defernumbers=true,maxbibnames=99]{biblatex}
+
+% ================== BIBLIOGRAPHY SETUP ==================
+\addbibresource{publications.bib}
+
+% Bold your name in publications
+\newcommand{\makeauthorbold}[1]{%
+  \DeclareNameFormat{author}{%
+    \ifthenelse{\value{listcount}=1}
+    {%
+      {\expandafter\ifstrequal\expandafter{\namepartfamily}{#1}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}}
+    }{\ifnumless{\value{listcount}}{\value{liststop}}
+        {\expandafter\ifstrequal\expandafter{\namepartfamily}{#1}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}
+        {\expandafter\ifstrequal\expandafter{\namepartfamily}{#1}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}%
+      }
+    \ifthenelse{\value{listcount}<\value{liststop}}
+    {\addcomma\space}{}
+  }
+}
+
+\makeauthorbold{Abdulaal}
+
+% ================== COLOR SCHEME ==================
+\definecolor{headercolor}{RGB}{0,51,102}
+\definecolor{sectioncolor}{RGB}{0,51,102}
+\definecolor{linkcolor}{RGB}{0,102,204}
+\definecolor{mediacolor}{RGB}{0,102,51}
+
+% ================== FORMATTING CONFIGURATION ==================
+\pagestyle{plain}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=linkcolor,
+    citecolor=black,
+    pdfborder={0 0 0}
+}
+
+% ================== SECTION FORMATTING ==================
+\titleformat{\section}
+    {\large\bfseries\color{sectioncolor}\uppercase}
+    {}{0pt}{}[\color{sectioncolor}\titlerule]
+\titlespacing{\section}{0pt}{10pt}{5pt}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries\color{sectioncolor}}
+    {}{0pt}{}
+\titlespacing{\subsection}{0pt}{6pt}{3pt}
+
+% ================== CUSTOM COMMANDS ==================
+
+% Education with integrated thesis and media
+\newcommand{\education}[8]{
+    \textbf{#1} \hfill #2 \\
+    \textit{#3} \hfill \textit{#4}\par
+    \ifstrempty{#5}{}{
+        \vspace{2pt}
+        \begin{itemize}
+            #5
+        \end{itemize}
+    }
+    \ifstrempty{#6}{}{
+        \textcolor{sectioncolor}{\small\textbf{Kenntnisse:}} \textcolor{black}{\small #6} \\
+    }
+    \ifstrempty{#7}{}{
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Anlagen:} #7}
+    }
+    \ifstrempty{#8}{}{\vspace{#8}}
+}
+
+% Research experience
+\newcommand{\research}[8]{
+    \textbf{#1} \hfill #2 \\
+    \textit{#3} \hfill \textit{#4}\par
+    \ifstrempty{#5}{}{
+        \vspace{2pt}
+        \begin{itemize}
+            #5
+        \end{itemize}
+    }
+    \ifstrempty{#6}{}{
+        \textcolor{sectioncolor}{\small\textbf{Kenntnisse:}} \textcolor{black}{\small #6} \\
+    }
+    \ifstrempty{#7}{}{
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Anlagen:} #7}
+    }
+    \ifstrempty{#8}{}{\vspace{#8}}
+}
+
+% Award
+\newcommand{\award}[5]{
+    \textbf{#1} \hfill #2 \\
+    \textit{Aussteller:} #3\par
+    \vspace{2pt}
+    \ifstrempty{#4}{}{
+        \begin{itemize}
+            #4
+        \end{itemize}
+    }
+    \ifstrempty{#5}{}{
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Anlagen:} #5} \\
+    }
+    \vspace{2pt}
+}
+
+% Leadership
+\newcommand{\leadership}[8]{
+    \textbf{#1} \hfill #2 \\
+    \textit{#3} \hfill \textit{#4}\par
+    \ifstrempty{#5}{}{
+        \vspace{2pt}
+        \begin{itemize}
+            #5
+        \end{itemize}
+    }
+    \ifstrempty{#6}{}{
+        \textcolor{sectioncolor}{\small\textbf{Kenntnisse:}} \textcolor{black}{\small #6} \\
+    }
+    \ifstrempty{#7}{}{
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Anlagen:} #7}
+    }
+    \ifstrempty{#8}{}{\vspace{#8}}
+}
+
+% Simple item
+\newcommand{\cvitem}[2]{
+    \textbf{#1} \hfill #2
+}
+
+% Skill category
+\newcommand{\skillcat}[2]{
+    \textbf{#1:} #2 \\
+}
+
+% Reference
+\newcommand{\reference}[4]{
+    \textbf{#1} \\
+    #2 \\
+    #3 \\
+    \faIcon{envelope} \href{mailto:#4}{\nolinkurl{#4}}
+}
+
+% ORCID icon
+\newcommand{\orcidicon}{\includegraphics[height=1em]{orcid.png}}
+
+\begin{document}
+
+% ==================== HEADER ====================
+\begin{center}
+    {\Huge\bfseries\color{headercolor} Islam I. Abdulaal} \\[6pt]
+    {\large\itshape Forscher für Integrierte Photonik}
+    \vspace{8pt}
+    
+    \faIcon{envelope} \href{mailto:contact@iabdul-aal.me}{contact@iabdul-aal.me} \quad
+    \faGlobe\ \href{https://iabdul-aal.me}{iabdul-aal.me} \\
+    \vspace{3pt}
+    \faLinkedinIn\ \href{https://linkedin.com/in/iabdul-aal}{linkedin.com/in/iabdul-aal} \quad
+    \faIcon{github} \href{https://github.com/iabdul-aal}{@iabdul-aal} \quad
+    \orcidicon{} \href{https://orcid.org/0009-0004-9300-3936}{0009-0004-9300-3936}
+\end{center}
+\vspace{-8pt}
+
+\section*{Forschungsinteressen}
+Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauelemente, physikinformiertes Inversdesign und wellengleichungsbeschränkte neuronale Netze zur Optimierung photonischer Bauelemente.
+
+\section*{Ausbildung}
+\education{B.Sc. in Elektronik und Kommunikationstechnik}{Aug 2021 -- Aug 2026}{Universität Alexandria, Fakultät für Ingenieurwissenschaften}{Vor Ort}{}{}{}{0pt}
+
+\section*{Forschungserfahrung}
+\research{Forschungspraktikant}{Sep 2025 -- Heute}{NanoPhoto-Labor, IMRE, A*STAR}{Fernarbeit}{}{}{}{4pt}
+\research{Forschungspraktikant}{Jul 2025 -- Sep 2025}{Advanced-Labs-Programm, Egypt Scholars Inc.}{Fernarbeit}{}{}{}{4pt}
+\research{Forschungspraktikant}{Jul 2023 -- Aug 2025}{OPST-Gruppe, SmartCI-Forschungszentrum, Universität Alexandria}{Hybrid}{}{}{}{0pt}
+
+\section*{Ausgewählte Publikationen}
+\noindent\small\textit{*Zitiermetriken basierend auf Google Scholar (h-index: 2, Zitationen: 11), Juli 2026.}\par
+\nocite{*}
+\subsection*{Zeitschriftenartikel}
+\printbibliography[type=article,heading=none]
+
+\subsection*{Preprints}
+\printbibliography[type=unpublished,heading=none]
+
+\section*{Preise, Auszeichnungen und Forschungsförderung}
+\award{Dekan-Ehrung für akademische Exzellenz}{2021 -- 2025}{Universität Alexandria, Fakultät für Ingenieurwissenschaften}{}{}
+\award{ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2) -- 4. Platz}{2024}{Militärtechnische Hochschule}{}{}
+\award{Huawei ICT-Fähigkeitswettbewerb -- Nationaler Finalist (KI-Bereich)}{2023}{Huawei Technologies -- MENA-Region}{}{}
+\award{NASA Space Apps Challenge -- Globaler Nominierter}{2021}{NASA}{}{}
+
+\section*{Führungserfahrung und akademischer Dienst}
+\leadership{Vorstandsmitglied}{Jul 2026 -- Heute}{Optica Sektion Ägypten}{Hybrid}{}{}{}{4pt}
+\leadership{Vorsitzender}{Feb 2025 -- Okt 2025}{IEEE Solid-State Circuits Society (SSCS), Studentengruppe der Universität Alexandria}{Hybrid}{}{}{}{4pt}
+\leadership{Hauptkoordinator}{Aug 2021 -- Sep 2023}{Education Clinic (in den USA registrierte NGO)}{Fernarbeit}{}{}{}{0pt}
+
+\section*{Lehre und Mentoring-Erfahrung}
+\cvitem{Tutor / Mentor, Optica Ägypten}{Jul 2026 -- Heute}
+
+\section*{Berufsverbände und Mitgliedschaften}
+\begin{itemize}
+  \item \textbf{Optica (ehemals OSA)} \hfill Jul 2026 -- Heute \\  \textcolor{mediacolor}{\small Studentenmitglied.}
+  \item \textbf{Institut der Elektro- und Elektronikingenieure (IEEE)} \hfill 2025 -- 2026 \\  \textcolor{mediacolor}{\small Studentenmitglied (Nr.: 101099759).}
+\end{itemize}
+
+\section*{Referenzen}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Dr. Omar Abdelraouf} \\
+Wissenschaftlicher Mitarbeiter \\
+Institut für Materialforschung und Ingenieurwesen (IMRE), A*STAR, Singapur \\
+\faIcon{envelope} \href{mailto:omar_abdelrahman@a-star.edu.sg}{\nolinkurl{omar_abdelrahman@a-star.edu.sg}}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Prof. Ishac Kandas} \\
+Außerordentlicher Professor \\
+Institut für Technische Physik und Mathematik, Universität Alexandria \\
+\faIcon{envelope} \href{mailto:ishac.kandas@alexu.edu.eg}{\nolinkurl{ishac.kandas@alexu.edu.eg}}
+\end{minipage}
+
+\end{document}

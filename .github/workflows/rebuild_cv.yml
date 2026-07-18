@@ -1,0 +1,76 @@
+name: Rebuild CV PDF on Push
+
+# Triggers when cv_data.json or publications change on main
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/cv_data.json"
+      - "data/cv.tex"
+      - "data/cv_de.tex"
+      - "data/publications.json"
+      - "data/publications.bib"
+      - "scripts/update_cv_tex.py"
+      - "scripts/update_publications_bib.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-cv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Regenerate BibTeX from publications.json
+        run: python scripts/update_publications_bib.py
+
+      - name: Generate cv.tex from cv_data.json
+        run: python scripts/update_cv_tex.py
+
+      - name: Compile LaTeX CV (EN)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: data/cv.tex
+          extra_system_packages: "biber"
+
+      - name: Compile LaTeX CV (DE)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: data/cv_de.tex
+          extra_system_packages: "biber"
+
+      - name: Deploy PDFs to public/
+        run: |
+          cp data/cv.pdf public/cv.pdf
+          cp data/cv_de.pdf public/cv_de.pdf
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/cv.tex data/cv_de.tex data/publications.bib public/cv.pdf public/cv_de.pdf; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push updated CV
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cv.tex data/cv_de.tex data/publications.bib public/cv.pdf public/cv_de.pdf
+          git commit -m "chore: rebuild CV PDFs (EN/DE) from updated source data [skip ci]"
+          git push
