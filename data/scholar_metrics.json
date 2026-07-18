@@ -1,0 +1,25 @@
+{
+  "citations": {
+    "all": 11,
+    "since2021": 11
+  },
+  "hIndex": {
+    "all": 2,
+    "since2021": 2
+  },
+  "i10Index": {
+    "all": 0,
+    "since2021": 0
+  },
+  "citationsPerYear": [
+    {
+      "year": 2025,
+      "count": 2
+    },
+    {
+      "year": 2026,
+      "count": 9
+    }
+  ],
+  "fetchedAt": "2026-07-18T05:05:59.571695+00:00"
+}

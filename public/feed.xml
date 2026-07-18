@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Islam I. Abdulaal: Research Activity Feed</title>
+    <link>https://iabdul-aal.me</link>
+    <description>Updates on research publications, preprints, software tools, and academic milestones in integrated nanophotonics.</description>
+    <language>en-us</language>
+    <pubDate>Wed, 22 Jul 2026 10:59:51 GMT</pubDate>
+    <atom:link href="https://iabdul-aal.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>[Milestone] Completed B.Sc. in Electronics and Communications Engineering</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Graduated from Alexandria University with a degree in Electronics and Communications Engineering.</description>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2026-08-15-538fc4a14524</guid>
+    </item>
+    <item>
+      <title>[Preprint] Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Preprint posted on arXiv.</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2026-06-20-553f2f4c8769</guid>
+    </item>
+    <item>
+      <title>[Paper] Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Paper accepted in Journal of Optics.</description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2026-06-15-10d7df87e229</guid>
+    </item>
+    <item>
+      <title>[Talk] ECE Unlocked | Technical Orientations '26' | Islam I. Abdulaal</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Talk at IEEE SSCS AUSC.</description>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2026-01-04-d85a4eabd5df</guid>
+    </item>
+    <item>
+      <title>[Position] Joined NanoPhoto Lab, IMRE, A*STAR as a research intern</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Work focused on physics-informed optimization for integrated quantum photonic sources structures.</description>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2025-09-01-77d3e5fdc133</guid>
+    </item>
+    <item>
+      <title>[Article] ECE Roadmap: Part II</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Published on Medium.</description>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2023-03-27-b9e7e5cdbdcb</guid>
+    </item>
+    <item>
+      <title>[Article] ECE Career: Part 1</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Published on Medium.</description>
+      <pubDate>Wed, 15 Mar 2023 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2023-03-15-ded755950226</guid>
+    </item>
+    <item>
+      <title>[Article] ECE Philosophy: Part I</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Published on Medium.</description>
+      <pubDate>Wed, 08 Mar 2023 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2023-03-08-7d08569527a3</guid>
+    </item>
+    <item>
+      <title>[Article] ECE Department: Part 0</title>
+      <link>https://iabdul-aal.me/</link>
+      <description>Published on Medium.</description>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/#activity-2023-02-28-3c3553a97b4a</guid>
+    </item>
+    <item>
+      <title>[Publication] Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery</title>
+      <link>https://doi.org/10.48550/ARXIV.2606.21945</link>
+      <description>Published in Preprint (2026).</description>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/publications#2606.21945</guid>
+    </item>
+    <item>
+      <title>[Publication] Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech</title>
+      <link>https://doi.org/10.1088/2040-8986/ae8605</link>
+      <description>Published in Journal of Optics (2026).</description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">https://iabdul-aal.me/publications#2510.00357</guid>
+    </item>
+  </channel>
+</rss>

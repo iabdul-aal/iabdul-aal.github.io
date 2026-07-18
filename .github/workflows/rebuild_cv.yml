@@ -1,0 +1,69 @@
+name: Rebuild CV PDF on Push
+
+# Triggers when cv_data.json or publications change on main
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/cv_data.json"
+      - "data/publications.json"
+      - "data/publications.bib"
+      - "scripts/update_cv_tex.py"
+      - "scripts/update_publications_bib.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-cv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Regenerate BibTeX from publications.json
+        run: python scripts/update_publications_bib.py
+
+      - name: Generate cv.tex from cv_data.json
+        run: python scripts/update_cv_tex.py
+
+      - name: Compile LaTeX CV (pdflatex + biber + pdflatex × 2)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: data/cv.tex
+          latexmk_use_xelatex: false
+          extra_system_packages: "biber"
+          pre_compile: "biber data/cv"
+          post_compile: "pdflatex -interaction=nonstopmode data/cv.tex && pdflatex -interaction=nonstopmode data/cv.tex"
+
+      - name: Deploy PDF to public/
+        run: cp data/cv.pdf public/cv.pdf
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/cv.tex data/publications.bib public/cv.pdf; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push updated CV
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cv.tex data/publications.bib public/cv.pdf
+          git commit -m "chore: rebuild CV PDF from updated source data [skip ci]"
+          git push
