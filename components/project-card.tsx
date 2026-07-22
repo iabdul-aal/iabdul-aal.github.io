@@ -76,8 +76,8 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
         )}
       </div>
 
-      {/* Action Links */}
-      {project.links.length > 0 && (
+      {/* Action Links (Full view only) */}
+      {!compact && project.links.length > 0 && (
         <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs pt-1">
           {project.links.map((link) => {
             const label =
