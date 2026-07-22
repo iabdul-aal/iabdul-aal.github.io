@@ -13,9 +13,10 @@ interface EntryProps {
   period: string
   org: string
   location: string
+  bullets?: string[]
 }
 
-function Entry({ role, period, org, location }: EntryProps) {
+function Entry({ role, period, org, location, bullets }: EntryProps) {
   return (
     <Row as="div">
       <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-0.5">
@@ -24,13 +25,20 @@ function Entry({ role, period, org, location }: EntryProps) {
       </div>
       <p className="text-sm text-accent">{org}</p>
       <p className="text-xs text-muted-foreground">{location}</p>
+      {bullets && bullets.length > 0 && (
+        <ul className="mt-2 list-disc list-inside text-xs text-muted-foreground space-y-1">
+          {bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      )}
     </Row>
   )
 }
 
-// Translations for specific CV entry fields when German is active
 const germanCvTranslations: Record<string, string> = {
   "B.Sc. in Electronics and Communications Engineering": "B.Sc. in Elektronik und Kommunikationstechnik",
+  "Alexandria University, Faculty of Engineering": "Universität Alexandria, Fakultät für Ingenieurwissenschaften",
   "Research Intern": "Forschungspraktikant",
   "Onsite": "Vor Ort",
   "Remote": "Remote",
@@ -42,6 +50,25 @@ const germanCvTranslations: Record<string, string> = {
   "Tutor / Mentor": "Tutor / Mentor",
 }
 
+const germanBulletTranslations: Record<string, string> = {
+  "Core curriculum: integrated photonics, electromagnetic theory, optical fiber communications, and digital signal processing.":
+    "Kernlehrplan: Integrierte Photonik, Elektromagnetische Theorie, Optische Nachrichtentechnik und Digitale Signalverarbeitung.",
+  "Awarded Dean's Honors for Academic Excellence every year from 2021 to 2025.":
+    "Auszeichnung mit dem Ehrenpreis des Dekans für akademische Spitzenleistungen in jedem Jahr von 2021 bis 2025.",
+  "Conducting device-level FDTD simulations for spontaneous parametric down-conversion (SPDC) sources on emerging material platforms.":
+    "Durchführung von FDTD-Simulationen auf Bauelementebene für SPDC-Quellen auf neuartigen Materialplattformen.",
+  "Contributing to co-authored work on terahertz bound-state-in-the-continuum (BIC) metasurfaces, published in the Journal of Optics.":
+    "Beitrag zu einer gemeinsamen Veröffentlichung über Terahertz-BIC-Metasurflächen im Journal of Optics.",
+  "Developed physics-informed neural network (PINN) models for wave-equation-constrained inverse design of NbOCl2-based SPDC sources.":
+    "Entwicklung physikinformierter neuronaler Netze (PINN) für das wellengleichungsbeschränkte Inversdesign von NbOCl2-basierten SPDC-Quellen.",
+  "Trained and benchmarked a 12-million-parameter PINN model against full-wave electromagnetic solvers; work submitted as a preprint.":
+    "Training und Benchmarking eines PINN-Modells mit 12 Millionen Parametern gegen Vollwellen-Elektromagnetik-Solver; Arbeit als Preprint eingereicht.",
+  "Modeled Fiber Bragg Grating (FBG) mode coupling and validated transfer-matrix results against full-wave FDTD simulations.":
+    "Modellierung von Faser-Bragg-Gitter (FBG) Modenkopplungen und Validierung von Transfer-Matrix-Ergebnissen gegen FDTD-Vollwellensimulationen.",
+  "Contributed to the design of an FBG-based vital-sign monitoring sensor using coupled-mode and circuit-level analysis.":
+    "Beitrag zum Design eines FBG-basierten Sensors zur Überwachung von Vitalparametern mittels Kopplungsmoden- und Schaltungsanalyse.",
+}
+
 export default function CvPage() {
   const { lang, t } = useLanguage()
   const isDe = lang === "de"
@@ -51,7 +78,13 @@ export default function CvPage() {
 
   const translateText = (text: string) => {
     if (!isDe) return text
-    return germanCvTranslations[text] || text
+    return germanCvTranslations[text] || text.replace("Present", "Heute")
+  }
+
+  const translateBullets = (bullets?: string[]) => {
+    if (!bullets) return undefined
+    if (!isDe) return bullets
+    return bullets.map((b) => germanBulletTranslations[b] || b)
   }
 
   return (
@@ -112,8 +145,9 @@ export default function CvPage() {
               key={ed.degree}
               role={translateText(ed.degree)}
               period={translateText(ed.period)}
-              org={ed.institution}
+              org={translateText(ed.institution)}
               location={translateText(ed.location)}
+              bullets={translateBullets(ed.bullets)}
             />
           ))}
         </div>
@@ -129,6 +163,7 @@ export default function CvPage() {
               period={translateText(exp.period)}
               org={exp.org}
               location={translateText(exp.location)}
+              bullets={translateBullets(exp.bullets)}
             />
           ))}
         </div>

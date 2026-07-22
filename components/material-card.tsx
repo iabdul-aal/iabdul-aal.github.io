@@ -38,12 +38,24 @@ const germanEventMap: Record<string, string> = {
   "Public Sessions": "Öffentliche Vorträge",
 }
 
+const germanDescriptionMap: Record<string, string> = {
+  "Presentation slides, lecture decks, and seminar visual materials.":
+    "Präsentationsfolien, Vorlesungsunterlagen und visuelle Seminarmaterialien.",
+  "Technical notes, executive summaries, and condensed literature reviews.":
+    "Technische Notizen, Zusammenfassungen und komprimierte Literaturübersichten.",
+  "Structured learning paths, field overviews, and topic reading guides.":
+    "Strukturierte Lernpfade, Fachgebietsübersichten und Leseempfehlungen.",
+  "Clean document, slide deck, and presentation templates for academic workflows.":
+    "Vorlagen für Dokumente, Folien und Präsentationen im akademischen Workflow.",
+}
+
 export function MaterialCard({ item }: MaterialCardProps) {
   const { lang, t } = useLanguage()
   const isDe = lang === "de"
 
   const formatLabel = isDe ? germanFormatLabelMap[item.formatLabel] || item.formatLabel : item.formatLabel
   const eventText = isDe && item.event ? germanEventMap[item.event] || item.event : item.event
+  const descriptionText = isDe && item.description ? germanDescriptionMap[item.description] || item.description : item.description
 
   return (
     <Row aria-label={item.title}>
@@ -62,9 +74,9 @@ export function MaterialCard({ item }: MaterialCardProps) {
         </div>
 
         {/* Description */}
-        {item.description && (
+        {descriptionText && (
           <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
-            {item.description}
+            {descriptionText}
           </p>
         )}
 
