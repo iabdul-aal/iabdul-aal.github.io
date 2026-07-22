@@ -30,9 +30,11 @@ type TalksListProps = {
 const germanFormatMap: Record<string, string> = {
   "Poster Presentation": "Posterpräsentation",
   "Technical Workshop": "Technischer Workshop",
+  "Technical Talk": "Technischer Vortrag",
   "Lecture": "Vorlesung",
   "Seminar Talk": "Seminarvortrag",
   "Conference Talk": "Konferenzvortrag",
+  "Featured Public Talk": "Ausgewählter öffentlicher Vortrag",
 }
 
 export function TalksList({ talks }: TalksListProps) {

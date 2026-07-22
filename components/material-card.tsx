@@ -1,8 +1,11 @@
+"use client"
+
 import * as React from "react"
 import { ArrowUpRight, Download } from "lucide-react"
 import { Row } from "@/components/ui/row"
 import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
+import { useLanguage } from "@/lib/i18n-context"
 
 export interface MaterialItem {
   id: string
@@ -23,7 +26,25 @@ export interface MaterialCardProps {
   item: MaterialItem
 }
 
+const germanFormatLabelMap: Record<string, string> = {
+  "Medium Article": "Medium-Artikel",
+  "Session": "Vortrag",
+  "Technical Talk": "Technischer Vortrag",
+  "Featured Public Talk": "Ausgewählter öffentlicher Vortrag",
+}
+
+const germanEventMap: Record<string, string> = {
+  "Featured Public Talk": "Ausgewählter öffentlicher Vortrag",
+  "Public Sessions": "Öffentliche Vorträge",
+}
+
 export function MaterialCard({ item }: MaterialCardProps) {
+  const { lang, t } = useLanguage()
+  const isDe = lang === "de"
+
+  const formatLabel = isDe ? germanFormatLabelMap[item.formatLabel] || item.formatLabel : item.formatLabel
+  const eventText = isDe && item.event ? germanEventMap[item.event] || item.event : item.event
+
   return (
     <Row aria-label={item.title}>
       <div className="space-y-1.5 w-full">
@@ -37,7 +58,7 @@ export function MaterialCard({ item }: MaterialCardProps) {
           <span className="text-muted-foreground">
             {item.date ? formatDate(item.date, "short") : item.year}
           </span>
-          <Badge variant="custom">{item.formatLabel}</Badge>
+          <Badge variant="custom">{formatLabel}</Badge>
         </div>
 
         {/* Description */}
@@ -48,10 +69,10 @@ export function MaterialCard({ item }: MaterialCardProps) {
         )}
 
         {/* Event & Source metadata */}
-        {item.event && (
+        {eventText && (
           <p className="text-xs text-muted-foreground/90 leading-relaxed">
-            <span className="font-semibold text-foreground">Event: </span>
-            {item.event}
+            <span className="font-semibold text-foreground">{isDe ? "Veranstaltung:" : "Event:"} </span>
+            {eventText}
             {item.source ? ` (${item.source})` : ""}
           </p>
         )}
@@ -67,7 +88,7 @@ export function MaterialCard({ item }: MaterialCardProps) {
             download={item.isDownload ? true : undefined}
             className="btn-secondary"
           >
-            {item.isDownload ? "Download" : "Source"}
+            {item.isDownload ? (isDe ? "Herunterladen" : "Download") : t.ui.source}
             {item.isDownload ? (
               <Download className="h-3 w-3" aria-hidden="true" />
             ) : (

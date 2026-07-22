@@ -51,11 +51,12 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
             {[publication.venue, publication.year].filter(Boolean).join(", ")}
           </span>
           {publication.badges?.map((badge) => {
+            const b = badge.toLowerCase()
             const translatedBadge =
               lang === "de"
-                ? badge === "Invited"
-                  ? "Eingeladen"
-                  : badge === "Featured"
+                ? b.includes("invited")
+                  ? "Eingeladener Beitrag"
+                  : b.includes("featured")
                   ? "Ausgewählt"
                   : badge
                 : badge

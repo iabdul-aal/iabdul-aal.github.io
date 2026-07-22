@@ -30,6 +30,13 @@ const germanProjectTranslations: Record<
       "Transfersystem- und Kopplungswellenmodelle für Faser-Bragg-Gitter (FBG) zur schnellen Auslegung optischer Sensoren.",
     methods: "Gekoppelte Modentheorie (CMT), Transfer-Matrix-Methode (TMM) und FDTD-Validierung.",
   },
+  "pd-design-kit": {
+    status: "Veröffentlicht / Open Source",
+    objective:
+      "Ein gekoppelter Multiphysik-Simulations-Workflow für eine wellenleiterintegrierte vertikale n-i-p-Photodiode aus Ge-auf-Si für optische Verbindungen im O-Band in Rechenzentren.",
+    methods:
+      "Finite-Differenzen-Methode im Zeitbereich (FDTD) zur optischen Absorptionsmodellierung, Drift-Diffusions-Transportsimulation, Transitzeit- und RC-Bandbreitenanalyse, Kompaktmodell-Parameterextraktion, System-Link-Simulation und Layout-Validierung.",
+  },
 }
 
 export function ProjectCard({ project, compact = false }: ProjectCardProps) {
