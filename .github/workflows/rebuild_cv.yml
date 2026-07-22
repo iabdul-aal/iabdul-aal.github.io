@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - "data/cv_data.json"
+      - "data/cv.tex"
+      - "data/cv_de.tex"
       - "data/publications.json"
       - "data/publications.bib"
       - "scripts/update_cv_tex.py"
