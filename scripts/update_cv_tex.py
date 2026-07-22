@@ -35,7 +35,7 @@ def latex_escape(text):
     return text
 
 
-def build_preamble(info):
+def build_preamble(info, lang="en"):
     lines = []
     lines += [
         "% Academic CV Template for PhD Applications",
@@ -45,6 +45,10 @@ def build_preamble(info):
         "% ================== PACKAGES ==================",
         "\\usepackage[utf8]{inputenc}",
         "\\usepackage[T1]{fontenc}",
+    ]
+    if lang == "de":
+        lines.append("\\usepackage[ngerman]{babel} % German language and hyphenation support")
+    lines += [
         "\\usepackage{lmodern} % Premium vector computer modern font to prevent pixelated PK fonts",
         "\\usepackage[margin=1.5cm]{geometry}",
         "\\usepackage{enumitem}",
@@ -465,7 +469,7 @@ def generate_tex(data, citations, h_index, date_str, lang="en"):
 
     info = data["personalInfo"]
     sections = []
-    sections += build_preamble(info)
+    sections += build_preamble(info, lang=lang)
     sections += [
         "",
         "\\begin{document}",
