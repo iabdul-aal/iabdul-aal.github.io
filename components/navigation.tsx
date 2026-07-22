@@ -36,17 +36,18 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <nav className="container-layout flex h-14 items-center justify-between" aria-label="Main">
-
-        <Link href="/" className="flex min-w-0 items-center gap-3 text-foreground hover:text-accent transition-colors">
-          <Image src="/logo.png" alt={`${identity.name} logo`} width={40} height={40} className="h-9 w-auto" />
-          <div className="truncate">
-            <p className="text-sm font-semibold leading-tight">{identity.name}</p>
-            <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{identity.shortTitle}</p>
+      <nav className="container-layout flex h-14 items-center justify-between gap-2" aria-label="Main">
+        {/* Brand Logo & Name */}
+        <Link href="/" className="flex min-w-0 items-center gap-2.5 text-foreground hover:text-accent transition-colors shrink">
+          <Image src="/logo.png" alt={`${identity.name} logo`} width={36} height={36} className="h-8 w-auto shrink-0" />
+          <div className="min-w-0 truncate">
+            <p className="text-sm font-semibold leading-tight truncate">{identity.name}</p>
+            <p className="text-[9px] sm:text-[10px] font-medium uppercase tracking-wider text-muted-foreground truncate hidden xs:block">{identity.shortTitle}</p>
           </div>
         </Link>
 
-        <div className="hidden h-full items-center gap-1 lg:flex">
+        {/* Desktop Navigation */}
+        <div className="hidden h-full items-center gap-1 lg:flex shrink-0">
           {navigationItems.map((item) => (
             <Link
               key={item.href}
@@ -68,22 +69,24 @@ export function Navigation() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        {/* Mobile Navigation Controls */}
+        <div className="flex items-center gap-1.5 shrink-0 lg:hidden">
           <LanguageToggle />
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-foreground"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground shrink-0"
             aria-label="Toggle navigation"
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsOpen((value) => !value)}
           >
-            {isOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+            {isOpen ? <X className="h-4.5 w-4.5" aria-hidden="true" /> : <Menu className="h-4.5 w-4.5" aria-hidden="true" />}
           </button>
         </div>
       </nav>
 
+      {/* Mobile Navigation Drawer */}
       {isOpen && (
         <div
           id="mobile-navigation"
@@ -110,6 +113,11 @@ export function Navigation() {
                 {getNavLabel(item.href, item.label)}
               </Link>
             ))}
+
+            <div className="mt-3 pt-3 border-t border-border/60 flex items-center justify-between">
+              <span className="text-xs text-muted-foreground font-medium">Language / Sprache:</span>
+              <LanguageToggle />
+            </div>
           </div>
         </div>
       )}
