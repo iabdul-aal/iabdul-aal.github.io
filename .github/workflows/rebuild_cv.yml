@@ -38,28 +38,22 @@ jobs:
       - name: Generate cv.tex from cv_data.json
         run: python scripts/update_cv_tex.py
 
-      - name: Compile LaTeX CV (pdflatex + biber + pdflatex × 2)
+      - name: Compile LaTeX CV (EN)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: data/cv.tex
-          latexmk_use_xelatex: false
           extra_system_packages: "biber"
-          pre_compile: "biber data/cv"
-          post_compile: "pdflatex -interaction=nonstopmode data/cv.tex && pdflatex -interaction=nonstopmode data/cv.tex"
 
-      - name: Compile German LaTeX CV
+      - name: Compile LaTeX CV (DE)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: data/cv_de.tex
-          latexmk_use_xelatex: false
           extra_system_packages: "biber"
-          pre_compile: "biber data/cv_de"
-          post_compile: "pdflatex -interaction=nonstopmode data/cv_de.tex && pdflatex -interaction=nonstopmode data/cv_de.tex"
 
       - name: Deploy PDFs to public/
         run: |
           cp data/cv.pdf public/cv.pdf
-          cp data/cv_de.pdf public/cv_de.pdf || true
+          cp data/cv_de.pdf public/cv_de.pdf
 
       - name: Detect changes
         id: diff
