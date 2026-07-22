@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, FileText } from "lucide-react"
 import { PublicationsList } from "@/components/publications-list"
-import { ProjectCard } from "@/components/project-card"
+import { ProjectsList } from "@/components/projects-list"
 import { ActivityFeed } from "@/components/activity-feed"
 import { SectionShell } from "@/components/layout/section-shell"
 import {
@@ -38,7 +38,6 @@ export default async function Home() {
   const rankedPublications = rankPublications(publications, paperMetrics)
   const rankedProjects = rankTools(projects, projectMetrics)
 
-  const featuredProject = rankedProjects.length > 0 ? rankedProjects[0] : null
   const featuredPubs = rankedPublications.slice(0, 2)
   const activityItems = activity.items.slice(0, 4)
 
@@ -139,10 +138,10 @@ export default async function Home() {
         </div>
       </SectionShell>
 
-      {/* ── Featured Tool ─────────────────────────────────────────────────── */}
-      {featuredProject && (
+      {/* ── Featured Software ─────────────────────────────────────────────── */}
+      {rankedProjects.length > 0 && (
         <SectionShell label="Featured Software" href="/projects" linkLabel="All tools" i18nKey="featuredSoftware">
-          <ProjectCard project={featuredProject} />
+          <ProjectsList initialProjects={rankedProjects.slice(0, 2)} compact />
         </SectionShell>
       )}
 

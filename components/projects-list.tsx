@@ -9,14 +9,14 @@ import { EmptyState } from "@/components/ui/empty-state"
 import { YearGroupHeader } from "@/components/year-group-header"
 import { Shell } from "@/components/ui/shell"
 import { groupByYear } from "@/lib/utils"
-
 import { useLanguage } from "@/lib/i18n-context"
 
 type ProjectsListProps = {
   initialProjects: readonly Project[]
+  compact?: boolean
 }
 
-export function ProjectsList({ initialProjects }: ProjectsListProps) {
+export function ProjectsList({ initialProjects, compact = false }: ProjectsListProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTier, setSelectedTier] = useState<string>("all")
   const [selectedYear, setSelectedYear] = useState<string>("all")
@@ -54,6 +54,16 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
   const categoryLabels = {
     major: lang === "de" ? "Haupt-Designpakete" : "Major Design Kits",
     minor: lang === "de" ? "Unterstützende Software" : "Supporting Software",
+  }
+
+  if (compact) {
+    return (
+      <div className="list-container">
+        {initialProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} compact />
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -146,7 +156,6 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
                           <ProjectCard key={project.id} project={project} />
                         ))}
                       </div>
-
                     </div>
                   ))}
                 </div>
@@ -155,7 +164,6 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
           })
         )}
       </div>
-
     </div>
   )
 }

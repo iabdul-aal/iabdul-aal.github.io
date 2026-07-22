@@ -15,6 +15,13 @@ export interface SectionShellProps {
   i18nKey?: keyof typeof import("@/lib/i18n").translations["en"]["sections"]
 }
 
+const germanLinkLabels: Record<string, string> = {
+  "Full overview": "Vollständige Übersicht",
+  "All publications": "Alle Publikationen",
+  "All tools": "Alle Werkzeuge",
+  "View details": "Details anzeigen",
+}
+
 export function SectionShell({
   label,
   href,
@@ -24,9 +31,10 @@ export function SectionShell({
   id,
   i18nKey,
 }: SectionShellProps) {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
 
   const displayLabel = i18nKey && t.sections[i18nKey] ? t.sections[i18nKey] : label
+  const displayLinkLabel = lang === "de" ? germanLinkLabels[linkLabel] || linkLabel : linkLabel
 
   return (
     <section id={id} className={`border-t border-border${alt ? " bg-surface" : ""}`}>
@@ -37,7 +45,7 @@ export function SectionShell({
           </h2>
           {href && (
             <Link href={href} className="mt-3 btn-secondary">
-              {linkLabel}
+              {displayLinkLabel}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           )}

@@ -10,6 +10,7 @@ import { useLanguage } from "@/lib/i18n-context"
 export interface ProjectCardProps {
   project: Project
   tier?: "major" | "minor"
+  compact?: boolean
 }
 
 const germanProjectTranslations: Record<
@@ -31,7 +32,7 @@ const germanProjectTranslations: Record<
   },
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, compact = false }: ProjectCardProps) {
   const { lang, t } = useLanguage()
   const isDe = lang === "de"
 
@@ -43,8 +44,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Row aria-label={project.title}>
       <div className="space-y-1.5 w-full">
-        {/* Full-width Title */}
-        <h3 className="text-base font-semibold text-foreground leading-snug break-words w-full">
+        {/* Title */}
+        <h3 className="text-sm font-semibold text-foreground leading-snug break-words w-full">
           {project.title}
         </h3>
 
@@ -59,8 +60,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {objective}
         </p>
 
-        {/* Methods */}
-        {methods && (
+        {/* Methods (Full view only) */}
+        {!compact && methods && (
           <p className="text-xs text-muted-foreground/90 leading-relaxed">
             <span className="font-semibold text-foreground">{t.ui.methods}: </span>
             {methods}

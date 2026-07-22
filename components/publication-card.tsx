@@ -18,7 +18,7 @@ export interface PublicationCardProps {
 export function PublicationCard({ publication, compact = false }: PublicationCardProps) {
   const [showAbstract, setShowAbstract] = useState(false)
   const [copiedBibtex, setCopiedBibtex] = useState(false)
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   const handleCopyBibtex = async () => {
     try {
@@ -50,11 +50,21 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           <span className="text-muted-foreground">
             {[publication.venue, publication.year].filter(Boolean).join(", ")}
           </span>
-          {publication.badges?.map((badge) => (
-            <Badge key={badge} variant="invited">
-              {badge}
-            </Badge>
-          ))}
+          {publication.badges?.map((badge) => {
+            const translatedBadge =
+              lang === "de"
+                ? badge === "Invited"
+                  ? "Eingeladen"
+                  : badge === "Featured"
+                  ? "Ausgewählt"
+                  : badge
+                : badge
+            return (
+              <Badge key={badge} variant="invited">
+                {translatedBadge}
+              </Badge>
+            )
+          })}
         </div>
 
         <p className="text-xs text-muted-foreground leading-relaxed">

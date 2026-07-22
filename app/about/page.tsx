@@ -5,6 +5,11 @@ import { ArrowUpRight, Mail } from "lucide-react"
 import { aboutParagraphs, aboutEpigraph, aboutEpigraphAuthor, identity, profileLinks } from "@/lib/academic-content"
 import { useLanguage } from "@/lib/i18n-context"
 
+const germanAboutParagraphs = [
+  "Die Forschungsaktivitäten konzentrieren sich auf wellengleichungsbeschränkte numerische Modellierung und Bauelementsimulation in der integrierten Nanophotonik. Übergeordnetes Ziel ist die Entwicklung reproduzierbarer Berechnungsworkflows von der elektromagnetischen Theorie bis hin zu fertigbaren Geometrien durch FDTD-Simulationen, Kopplungsmodenanalyse und physikinformiertes Inversdesign.",
+  "Veröffentlichte Peer-Review-Arbeiten umfassen einen Beitrag im Journal of Optics über Terahertz-BIC-Metasurflächen. Eingereichte Arbeiten umfassen einen Preprint über physikinformierte Inversdesign-Pipelines für SPDC-Quellen.",
+]
+
 export default function AboutPage() {
   const { lang, t } = useLanguage()
   const isDe = lang === "de"
@@ -43,8 +48,9 @@ export default function AboutPage() {
           <h1 className="mt-3 text-3xl font-semibold leading-tight text-foreground md:text-4xl">
             {t.headers.aboutTitle}
           </h1>
+
           <div className="mt-6 space-y-5 text-base leading-8 text-muted-foreground">
-            {aboutParagraphs.map((paragraph, idx) => (
+            {(isDe ? germanAboutParagraphs : aboutParagraphs).map((paragraph, idx) => (
               <p key={idx}>{paragraph}</p>
             ))}
           </div>
