@@ -305,7 +305,7 @@ def build_publications(citations, h_index, date_str, lang="en"):
 
 
 def build_teaching(teaching, lang="en"):
-    title = "Lehre und Mentoring" if lang == "de" else "Teaching and Mentoring Experience"
+    title = "Lehre und Mentoring-Erfahrung" if lang == "de" else "Teaching and Mentoring Experience"
     lines = [f"\\section*{{{title}}}"]
     for i, t in enumerate(teaching):
         newline = " \\\\" if i < len(teaching) - 1 else ""
@@ -316,7 +316,7 @@ def build_teaching(teaching, lang="en"):
 
 
 def build_leadership(leadership, lang="en"):
-    title = "Führungs- und Gremienerfahrung" if lang == "de" else "Leadership Experience and Academic Service"
+    title = "Führungserfahrung und akademischer Dienst" if lang == "de" else "Leadership Experience and Academic Service"
     lines = [f"\\section*{{{title}}}"]
     for i, lead in enumerate(leadership):
         vspace = "4pt" if i < len(leadership) - 1 else "0pt"
@@ -335,7 +335,7 @@ def build_leadership(leadership, lang="en"):
 
 
 def build_awards(awards, lang="en"):
-    title = "Preise und Auszeichnungen" if lang == "de" else "Honors, Awards, and Research Funding"
+    title = "Preise, Auszeichnungen und Forschungsförderung" if lang == "de" else "Honors, Awards, and Research Funding"
     lines = [f"\\section*{{{title}}}"]
     for aw in awards:
         lines.append(
@@ -350,7 +350,7 @@ def build_awards(awards, lang="en"):
 
 
 def build_memberships(memberships, lang="en"):
-    title = "Mitgliedschaften" if lang == "de" else "Professional Memberships"
+    title = "Berufsverbände und Mitgliedschaften" if lang == "de" else "Professional Memberships"
     lines = [f"\\section*{{{title}}}", "\\begin{itemize}"]
     for m in memberships:
         escaped_detail = latex_escape(m['detail'])
@@ -439,7 +439,7 @@ def translate_data_for_german(data):
         if lead.get("role") in leadership_translations:
             lead["role"] = leadership_translations[lead["role"]]
         if "USA-Registered NGO" in lead.get("org", ""):
-            lead["org"] = lead["org"].replace("USA-Registered NGO", "in den USA registrierte NGO")
+            lead["org"] = lead["org"].replace("USA-Registered NGO", "US-amerikanische NGO")
         lead["location"] = (
             "Remote" if lead.get("location") == "Remote"
             else "Hybrid" if lead.get("location") == "Hybrid"
