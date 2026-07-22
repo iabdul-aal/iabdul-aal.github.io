@@ -10,6 +10,8 @@ import { Shell } from "@/components/ui/shell"
 import { Row } from "@/components/ui/row"
 import { groupByYear, formatDate } from "@/lib/utils"
 
+import { useLanguage } from "@/lib/i18n-context"
+
 export type TalkType = {
   title: string
   event: string
@@ -25,11 +27,27 @@ type TalksListProps = {
   talks: TalkType[]
 }
 
+const germanFormatMap: Record<string, string> = {
+  "Poster Presentation": "Posterpräsentation",
+  "Technical Workshop": "Technischer Workshop",
+  "Lecture": "Vorlesung",
+  "Seminar Talk": "Seminarvortrag",
+  "Conference Talk": "Konferenzvortrag",
+}
+
 export function TalksList({ talks }: TalksListProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedYear, setSelectedYear] = useState<string>("all")
   const [selectedFormat, setSelectedFormat] = useState<string>("all")
   const [pageSize, setPageSize] = useState(10)
+  const { t, lang } = useLanguage()
+
+  const translateFormat = (fmt: string) => {
+    if (lang === "de") {
+      return germanFormatMap[fmt] || fmt
+    }
+    return fmt
+  }
 
   const availableYears = useMemo(() => {
     const years = new Set<string>()
@@ -82,7 +100,7 @@ export function TalksList({ talks }: TalksListProps) {
             setSearchQuery(q)
             setPageSize(10)
           }}
-          placeholder="Search talks by title, event, format, or organizer..."
+          placeholder={t.ui.searchTalks}
         />
 
         <div className="filter-row">
@@ -97,7 +115,7 @@ export function TalksList({ talks }: TalksListProps) {
               }}
               options={[
                 { value: "all", label: "All Formats" },
-                ...availableFormats.map((fmt) => ({ value: fmt, label: fmt })),
+                ...availableFormats.map((fmt) => ({ value: fmt, label: translateFormat(fmt) })),
               ]}
             />
           )}
@@ -122,8 +140,8 @@ export function TalksList({ talks }: TalksListProps) {
       {/* Info indicator */}
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <p>
-          Showing {Math.min(visibleTalks.length, filteredTalks.length)} of {filteredTalks.length} sessions
-          {searchQuery || selectedYear !== "all" || selectedFormat !== "all" ? " (filtered)" : ""}
+          {t.ui.showing} {Math.min(visibleTalks.length, filteredTalks.length)} {t.ui.of} {filteredTalks.length} {t.ui.sessions}
+          {searchQuery || selectedYear !== "all" || selectedFormat !== "all" ? ` ${t.ui.filtered}` : ""}
         </p>
         {(searchQuery || selectedYear !== "all" || selectedFormat !== "all") && (
           <button
@@ -136,14 +154,14 @@ export function TalksList({ talks }: TalksListProps) {
             }}
             className="text-accent hover:text-accent-strong hover:underline"
           >
-            Clear filters
+            {t.ui.clearFilters}
           </button>
         )}
       </div>
 
       <div className="space-y-12">
         {visibleTalks.length === 0 ? (
-          <EmptyState message="No sessions found matching search criteria." />
+          <EmptyState message={lang === "de" ? "Keine Vorträge zu den Kriterien gefunden." : "No sessions found matching search criteria."} />
         ) : (
           talksByYear.map(({ year, items }) => {
             const formats = Array.from(new Set(items.map((t) => t.format || "Session")))
@@ -159,7 +177,7 @@ export function TalksList({ talks }: TalksListProps) {
                   {itemsByFormat.map((group) => (
                     <div key={group.label} className="space-y-2">
                       <div className="category-divider">
-                        <span>{group.label}</span>
+                        <span>{translateFormat(group.label)}</span>
                         <span className="h-px flex-1 bg-border/60" />
                       </div>
                       <div className="list-container">
@@ -186,7 +204,7 @@ export function TalksList({ talks }: TalksListProps) {
                                 rel="noreferrer"
                                 className="btn-secondary md:justify-self-end h-fit"
                               >
-                                Source
+                                {t.ui.source}
                                 <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                               </a>
                             )}
@@ -209,10 +227,12 @@ export function TalksList({ talks }: TalksListProps) {
             onClick={() => setPageSize((prev) => prev + 10)}
             className="btn-primary"
           >
-            Show more sessions
+            {t.ui.showMoreSessions}
           </button>
         </div>
       )}
     </div>
   )
 }
+
+

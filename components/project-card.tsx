@@ -1,15 +1,45 @@
+"use client"
+
 import * as React from "react"
 import { ArrowUpRight } from "lucide-react"
 import { Project } from "@/lib/academic-content"
 import { Badge } from "@/components/ui/badge"
 import { Row } from "@/components/ui/row"
+import { useLanguage } from "@/lib/i18n-context"
 
 export interface ProjectCardProps {
   project: Project
   tier?: "major" | "minor"
 }
 
+const germanProjectTranslations: Record<
+  string,
+  { objective?: string; methods?: string; status?: string }
+> = {
+  "nanophotonet-mpm": {
+    status: "In Begutachtung",
+    objective:
+      "Ein physikinformierter neuronaler Ersatz-Framework zur Kombination von EigenmodeDeepONet-Transversaleigensolver, deterministischer Physikschicht und CWE-PINN-Propagator für das Inversdesign modal phasenangepasster Biphotonen-Quantenlichtquellen in anisotropen NbOCl2-Wellenleitern.",
+    methods:
+      "Physikinformierte neuronale Netze (PINNs), DeepOperator Networks (DeepONet), gekoppelte Wellengleichungen, Finite-Differenzen-Eigenmoden-Solver (FDE) und genetische Algorithmen.",
+  },
+  "fbg-coupled-mode-solver": {
+    status: "Veröffentlicht / Open Source",
+    objective:
+      "Transfersystem- und Kopplungswellenmodelle für Faser-Bragg-Gitter (FBG) zur schnellen Auslegung optischer Sensoren.",
+    methods: "Gekoppelte Modentheorie (CMT), Transfer-Matrix-Methode (TMM) und FDTD-Validierung.",
+  },
+}
+
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { lang, t } = useLanguage()
+  const isDe = lang === "de"
+
+  const deTrans = isDe ? germanProjectTranslations[project.id] : undefined
+  const objective = deTrans?.objective || project.objective
+  const methods = deTrans?.methods || project.methods
+  const status = deTrans?.status || project.status
+
   return (
     <Row aria-label={project.title}>
       <div className="space-y-1.5 w-full">
@@ -21,19 +51,19 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Status Badge & Year */}
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
           <span className="text-muted-foreground">{project.year}</span>
-          {project.status && <Badge variant="invited">{project.status}</Badge>}
+          {status && <Badge variant="invited">{status}</Badge>}
         </div>
 
         {/* Objective */}
         <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
-          {project.objective}
+          {objective}
         </p>
 
         {/* Methods */}
-        {project.methods && (
+        {methods && (
           <p className="text-xs text-muted-foreground/90 leading-relaxed">
-            <span className="font-semibold text-foreground">Methods: </span>
-            {project.methods}
+            <span className="font-semibold text-foreground">{t.ui.methods}: </span>
+            {methods}
           </p>
         )}
       </div>
@@ -58,5 +88,3 @@ export function ProjectCard({ project }: ProjectCardProps) {
     </Row>
   )
 }
-
-

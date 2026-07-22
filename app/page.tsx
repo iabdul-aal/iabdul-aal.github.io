@@ -11,8 +11,6 @@ import {
   profileLinks,
   projects,
   researchThemes,
-  currentPosition,
-  homepageResearchStatement,
 } from "@/lib/academic-content"
 import { loadActivity } from "@/lib/activity"
 import { loadPaperMetrics } from "@/lib/paper-metrics"
@@ -27,8 +25,9 @@ export const metadata = createPageMetadata({
   path: "/",
 })
 
-export default async function Home() {
+import { HeroStatement, HomepageResearchText } from "@/components/hero-statement"
 
+export default async function Home() {
   const [publications, paperMetrics, projectMetrics, activity] = await Promise.all([
     loadPublications(),
     loadPaperMetrics(),
@@ -65,24 +64,8 @@ export default async function Home() {
           <h1 className="text-3xl font-semibold leading-tight text-balance text-foreground md:text-4xl">
             {identity.name}
           </h1>
-          <p className="mt-4 text-base leading-8 text-muted-foreground">{identity.statement}</p>
 
-          {(identity.affiliation || identity.location) && (
-            <p className="mt-2 text-xs text-muted-foreground">
-              {[identity.affiliation, identity.location].filter(Boolean).join(" • ")}
-            </p>
-          )}
-
-          {/* Pulsing current-position indicator */}
-          <div className="mt-4 flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
-            </span>
-            <span className="text-xs font-medium text-muted-foreground">
-              {currentPosition}
-            </span>
-          </div>
+          <HeroStatement />
 
           {/* Profile links — primary for CV, secondary (chip) for all external */}
           <div className="mt-6 flex flex-wrap gap-2.5">
@@ -126,11 +109,9 @@ export default async function Home() {
       </section>
 
       {/* ── Research Overview ─────────────────────────────────────────────── */}
-      <SectionShell label="Research" href="/research" linkLabel="Full overview" alt>
+      <SectionShell label="Research Overview" href="/research" linkLabel="Full overview" i18nKey="researchOverview" alt>
         <div className="max-w-3xl space-y-6">
-          <p className="text-base leading-8 text-muted-foreground">
-            {homepageResearchStatement}
-          </p>
+          <HomepageResearchText />
 
           <div className="overflow-hidden rounded-md border border-border bg-card w-full max-w-xl">
             <Image
@@ -160,13 +141,13 @@ export default async function Home() {
 
       {/* ── Featured Tool ─────────────────────────────────────────────────── */}
       {featuredProject && (
-        <SectionShell label="Featured Tool" href="/projects" linkLabel="All tools">
+        <SectionShell label="Featured Software" href="/projects" linkLabel="All tools" i18nKey="featuredSoftware">
           <ProjectCard project={featuredProject} />
         </SectionShell>
       )}
 
       {/* ── Selected Publications ─────────────────────────────────────────── */}
-      <SectionShell label="Selected Publications" href="/publications" linkLabel="All publications" alt>
+      <SectionShell label="Featured Publications" href="/publications" linkLabel="All publications" i18nKey="featuredPublications" alt>
         <Suspense fallback={<div className="text-xs text-muted-foreground">Loading publications...</div>}>
           <PublicationsList publications={featuredPubs} compact />
         </Suspense>
@@ -174,7 +155,7 @@ export default async function Home() {
 
       {/* ── Recent Activity ───────────────────────────────────────────────── */}
       {activityItems.length > 0 && (
-        <SectionShell label="Recent Activity">
+        <SectionShell label="Recent Activity" i18nKey="recentActivity">
           <ActivityFeed items={activityItems} />
         </SectionShell>
       )}

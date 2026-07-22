@@ -9,10 +9,20 @@ import { YearGroupHeader } from "@/components/year-group-header"
 import { Shell } from "@/components/ui/shell"
 import { MaterialCard, MaterialItem } from "@/components/material-card"
 
+import { useLanguage } from "@/lib/i18n-context"
+
 export type { MaterialItem }
 
 export interface MaterialsListProps {
   items: MaterialItem[]
+}
+
+const germanCategoryMap: Record<string, string> = {
+  "Public Sessions": "Öffentliche Vorträge",
+  "Medium Articles": "Medium-Artikel",
+  "Technical Summaries": "Technische Zusammenfassungen",
+  "Lecture Decks": "Vorlesungsfolien",
+  "Learning Roadmaps": "Lern-Roadmaps",
 }
 
 export function MaterialsList({ items: initialItems }: MaterialsListProps) {
@@ -20,6 +30,14 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
   const [selectedType, setSelectedType] = React.useState("all")
   const [selectedYear, setSelectedYear] = React.useState("all")
   const [pageSize, setPageSize] = React.useState(15)
+  const { t, lang } = useLanguage()
+
+  const translateCategory = (cat: string) => {
+    if (lang === "de") {
+      return germanCategoryMap[cat] || cat
+    }
+    return cat
+  }
 
   // Extract unique categories and years for dropdowns
   const availableTypes = React.useMemo(() => {
@@ -58,18 +76,17 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
     const map = new Map<string, MaterialItem[]>()
     visibleItems.forEach((item) => {
       const year = item.year || "Other"
-      if (!map.has(year)) map.set(year, [])
+      if (!map.has(year)) {
+        map.set(year, [])
+      }
       map.get(year)!.push(item)
     })
-
-    return Array.from(map.entries())
-      .map(([year, list]) => ({ year, list }))
-      .sort((a, b) => Number(b.year) - Number(a.year))
+    return Array.from(map.entries()).sort((a, b) => Number(b[0]) - Number(a[0]))
   }, [visibleItems])
 
   return (
     <div className="space-y-6">
-      {/* Search & Filter Panel */}
+      {/* Search & Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
@@ -77,7 +94,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
             setSearchQuery(q)
             setPageSize(15)
           }}
-          placeholder="Search materials, articles, and public sessions..."
+          placeholder={t.ui.searchMaterials}
         />
 
         <div className="filter-row">
@@ -91,7 +108,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
             }}
             options={[
               { value: "all", label: "All Types" },
-              ...availableTypes.map((t) => ({ value: t, label: t })),
+              ...availableTypes.map((t) => ({ value: t, label: translateCategory(t) })),
             ]}
           />
 
@@ -115,8 +132,8 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
       {/* Info & Clear Filter row */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
         <p>
-          Showing {Math.min(visibleItems.length, filteredItems.length)} of {filteredItems.length} materials
-          {searchQuery || selectedType !== "all" || selectedYear !== "all" ? " (filtered)" : ""}
+          {t.ui.showing} {Math.min(visibleItems.length, filteredItems.length)} {t.ui.of} {filteredItems.length} {t.ui.materialsLabel}
+          {searchQuery || selectedType !== "all" || selectedYear !== "all" ? ` ${t.ui.filtered}` : ""}
         </p>
         {(searchQuery || selectedType !== "all" || selectedYear !== "all") && (
           <button
@@ -129,37 +146,35 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
             }}
             className="cursor-pointer text-accent hover:text-accent-strong hover:underline font-medium"
           >
-            Clear filters
+            {t.ui.clearFilters}
           </button>
         )}
       </div>
 
-      {/* Items List by Year */}
+      {/* Grouped by Year */}
       <div className="space-y-12">
-        {visibleItems.length === 0 ? (
-          <EmptyState message="No materials or sessions found matching search criteria." />
+        {filteredItems.length === 0 ? (
+          <EmptyState message={lang === "de" ? "Keine Materialien zu den Kriterien gefunden." : "No materials found matching search criteria."} />
         ) : (
-          itemsByYear.map(({ year, list }) => {
-            const categories = Array.from(new Set(list.map((i) => i.categoryLabel)))
+          itemsByYear.map(([year, items]) => {
+            const categories = Array.from(new Set(items.map((i) => i.categoryLabel)))
             const itemsByCategory = categories.map((cat) => ({
               label: cat,
-              subList: list.filter((i) => i.categoryLabel === cat),
+              list: items.filter((i) => i.categoryLabel === cat),
             }))
 
             return (
               <div key={year} className="space-y-6">
-                <YearGroupHeader year={year} count={list.length} />
-
+                <YearGroupHeader year={year} count={items.length} />
                 <div className="space-y-6">
                   {itemsByCategory.map((group) => (
-                    <div key={group.label} className="space-y-2">
+                    <div key={group.label} className="space-y-3">
                       <div className="category-divider">
-                        <span>{group.label}</span>
+                        <span>{translateCategory(group.label)}</span>
                         <span className="h-px flex-1 bg-border/60" />
                       </div>
-
                       <div className="list-container">
-                        {group.subList.map((item) => (
+                        {group.list.map((item) => (
                           <MaterialCard key={item.id} item={item} />
                         ))}
                       </div>
@@ -172,7 +187,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
         )}
       </div>
 
-      {/* Show More Pagination */}
+      {/* Pagination */}
       {filteredItems.length > visibleItems.length && (
         <div className="flex justify-center pt-4">
           <button
@@ -180,7 +195,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
             onClick={() => setPageSize((prev) => prev + 15)}
             className="btn-primary"
           >
-            Show more materials
+            {t.ui.showMoreMaterials}
           </button>
         </div>
       )}

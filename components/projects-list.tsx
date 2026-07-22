@@ -10,6 +10,8 @@ import { YearGroupHeader } from "@/components/year-group-header"
 import { Shell } from "@/components/ui/shell"
 import { groupByYear } from "@/lib/utils"
 
+import { useLanguage } from "@/lib/i18n-context"
+
 type ProjectsListProps = {
   initialProjects: readonly Project[]
 }
@@ -18,6 +20,7 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTier, setSelectedTier] = useState<string>("all")
   const [selectedYear, setSelectedYear] = useState<string>("all")
+  const { t, lang } = useLanguage()
 
   const availableYears = useMemo(() => {
     const years = new Set<string>()
@@ -48,14 +51,19 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
     return groupByYear(filteredProjects, (p) => p.year)
   }, [filteredProjects])
 
+  const categoryLabels = {
+    major: lang === "de" ? "Haupt-Designpakete" : "Major Design Kits",
+    minor: lang === "de" ? "Unterstützende Software" : "Supporting Software",
+  }
+
   return (
     <div className="space-y-6">
       {/* Search & Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder="Search by title, objective, methods, or tools..."
+          onChange={(q) => setSearchQuery(q)}
+          placeholder={t.ui.searchTools}
         />
 
         <div className="filter-row">
@@ -63,11 +71,11 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
             label="Tier:"
             showIcon
             value={selectedTier}
-            onChange={setSelectedTier}
+            onChange={(val) => setSelectedTier(val)}
             options={[
-              { value: "all", label: "All Packages" },
-              { value: "major", label: "Major Design Kits" },
-              { value: "minor", label: "Supporting Software" },
+              { value: "all", label: "All Types" },
+              { value: "major", label: categoryLabels.major },
+              { value: "minor", label: categoryLabels.minor },
             ]}
           />
 
@@ -75,7 +83,7 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
             <FilterSelect
               label="Year:"
               value={selectedYear}
-              onChange={setSelectedYear}
+              onChange={(val) => setSelectedYear(val)}
               options={[
                 { value: "all", label: "All Years" },
                 ...availableYears.map((y) => ({ value: y, label: y })),
@@ -88,8 +96,8 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
       {/* Info indicator */}
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <p>
-          Showing {filteredProjects.length} of {initialProjects.length} tools
-          {searchQuery || selectedTier !== "all" || selectedYear !== "all" ? " (filtered)" : ""}
+          {t.ui.showing} {filteredProjects.length} {t.ui.of} {initialProjects.length} {t.ui.toolsLabel}
+          {searchQuery || selectedTier !== "all" || selectedYear !== "all" ? ` ${t.ui.filtered}` : ""}
         </p>
         {(searchQuery || selectedTier !== "all" || selectedYear !== "all") && (
           <button
@@ -101,7 +109,7 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
             }}
             className="text-accent hover:text-accent-strong hover:underline"
           >
-            Clear filters
+            {t.ui.clearFilters}
           </button>
         )}
       </div>
@@ -109,12 +117,12 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
       {/* Projects list by year */}
       <div className="space-y-12">
         {filteredProjects.length === 0 ? (
-          <EmptyState message="No software tools or design packages found matching criteria." />
+          <EmptyState message={lang === "de" ? "Keine Softwarewerkzeuge zu den Kriterien gefunden." : "No software tools or design packages found matching criteria."} />
         ) : (
           projectsByYear.map(({ year, items }) => {
             const categories = [
-              { key: "major", label: "Major Design Kits" },
-              { key: "minor", label: "Supporting Software" },
+              { key: "major", label: categoryLabels.major },
+              { key: "minor", label: categoryLabels.minor },
             ]
             const itemsByCategory = categories
               .map((cat) => ({
