@@ -386,7 +386,83 @@ def build_references(references, lang="en"):
 
 
 
+def translate_data_for_german(data):
+    import copy
+    de_data = copy.deepcopy(data)
+    
+    de_data["personalInfo"]["specialization"] = "Forscher für Integrierte Photonik"
+    de_data["researchInterests"] = (
+        "Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauelemente, "
+        "physikinformiertes Inversdesign und wellengleichungsbeschränkte neuronale Netze zur Optimierung photonischer Bauelemente."
+    )
+    
+    for ed in de_data.get("education", []):
+        if "B.Sc." in ed.get("degree", ""):
+            ed["degree"] = "B.Sc. in Elektronik und Kommunikationstechnik"
+        if "Faculty of Engineering" in ed.get("institution", ""):
+            ed["institution"] = "Universität Alexandria, Fakultät für Ingenieurwissenschaften"
+        ed["location"] = "Vor Ort" if ed.get("location") == "Onsite" else ed.get("location")
+        ed["period"] = ed.get("period", "").replace("Present", "Heute")
+
+    for exp in de_data.get("researchExperience", []):
+        if exp.get("role") == "Research Intern":
+            exp["role"] = "Forschungspraktikant"
+        exp["location"] = (
+            "Remote" if exp.get("location") == "Remote"
+            else "Hybrid" if exp.get("location") == "Hybrid"
+            else exp.get("location")
+        )
+        exp["period"] = exp.get("period", "").replace("Present", "Heute")
+
+    award_translations = {
+        "Dean's Honors for Academic Excellence": "Ehrenpreis des Dekans für akademische Spitzenleistungen",
+        "ICMTC Artificial Intelligence Contest (AIC-2) -- 4th Place": "ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2) -- 4. Platz",
+        "Huawei ICT Skills Competition -- National Finalist (AI Track)": "Huawei ICT Skills Wettbewerb -- Nationaler Finalist (KI-Track)",
+        "NASA Space Apps Challenge -- Global Nominee": "NASA Space Apps Challenge -- Globaler Nominierter",
+    }
+    for aw in de_data.get("awards", []):
+        if aw.get("award") in award_translations:
+            aw["award"] = award_translations[aw["award"]]
+
+    leadership_translations = {
+        "Board Member": "Vorstandsmitglied",
+        "Chairman": "Vorsitzender",
+        "General Coordinator": "Hauptkoordinator",
+    }
+    for lead in de_data.get("leadership", []):
+        if lead.get("role") in leadership_translations:
+            lead["role"] = leadership_translations[lead["role"]]
+        lead["location"] = (
+            "Remote" if lead.get("location") == "Remote"
+            else "Hybrid" if lead.get("location") == "Hybrid"
+            else lead.get("location")
+        )
+        lead["period"] = lead.get("period", "").replace("Present", "Heute")
+
+    for t in de_data.get("teaching", []):
+        if t.get("role") == "Tutor / Mentor":
+            t["role"] = "Tutor / Mentor"
+        t["period"] = t.get("period", "").replace("Present", "Heute")
+
+    for m in de_data.get("memberships", []):
+        m["period"] = m.get("period", "").replace("Present", "Heute")
+        if "Student Member" in m.get("detail", ""):
+            m["detail"] = m["detail"].replace("Student Member", "Studentisches Mitglied")
+
+    for r in de_data.get("references", []):
+        if r.get("role") == "Research Scientist":
+            r["role"] = "Wissenschaftlicher Mitarbeiter"
+        elif r.get("role") == "Postdoctoral Researcher":
+            r["role"] = "Postdoktorand"
+
+    return de_data
+
+
 def generate_tex(data, citations, h_index, date_str, lang="en"):
+    if lang == "de":
+        data = translate_data_for_german(data)
+        date_str = datetime.datetime.now().strftime("%B %Y").replace("July", "Juli").replace("August", "August").replace("September", "September")
+
     info = data["personalInfo"]
     sections = []
     sections += build_preamble(info)

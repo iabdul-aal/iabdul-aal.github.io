@@ -4,15 +4,17 @@ import * as React from "react"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { useLanguage } from "@/lib/i18n-context"
+import { TranslationSchema } from "@/lib/i18n"
 
 export interface SectionShellProps {
   label: string
   href?: string
   linkLabel?: string
+  i18nLinkLabel?: keyof TranslationSchema["ui"]
   alt?: boolean
   children: React.ReactNode
   id?: string
-  i18nKey?: keyof typeof import("@/lib/i18n").translations["en"]["sections"]
+  i18nKey?: keyof TranslationSchema["sections"]
 }
 
 const germanLinkLabels: Record<string, string> = {
@@ -26,6 +28,7 @@ export function SectionShell({
   label,
   href,
   linkLabel = "View details",
+  i18nLinkLabel,
   alt = false,
   children,
   id,
@@ -34,7 +37,13 @@ export function SectionShell({
   const { lang, t } = useLanguage()
 
   const displayLabel = i18nKey && t.sections[i18nKey] ? t.sections[i18nKey] : label
-  const displayLinkLabel = lang === "de" ? germanLinkLabels[linkLabel] || linkLabel : linkLabel
+
+  let displayLinkLabel = linkLabel
+  if (i18nLinkLabel && t.ui[i18nLinkLabel]) {
+    displayLinkLabel = t.ui[i18nLinkLabel]
+  } else if (lang === "de") {
+    displayLinkLabel = germanLinkLabels[linkLabel] || linkLabel
+  }
 
   return (
     <section id={id} className={`border-t border-border${alt ? " bg-surface" : ""}`}>

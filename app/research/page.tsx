@@ -1,5 +1,5 @@
 import "katex/dist/katex.min.css"
-import { researchThemes, projects } from "@/lib/academic-content"
+import { researchThemes } from "@/lib/academic-content"
 import { loadPublications } from "@/lib/publications"
 import { createPageMetadata } from "@/lib/seo"
 import { PageHeader } from "@/components/layout/page-header"
@@ -27,7 +27,6 @@ export default async function ResearchPage() {
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">
         <ResearchThemeList
           themes={researchThemes}
-          allProjects={projects}
           publications={publications}
         />
       </section>

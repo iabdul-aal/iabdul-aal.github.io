@@ -140,13 +140,26 @@ export default async function Home() {
 
       {/* ── Featured Software ─────────────────────────────────────────────── */}
       {rankedProjects.length > 0 && (
-        <SectionShell label="Featured Software" href="/projects" linkLabel="All tools" i18nKey="featuredSoftware">
+        <SectionShell
+          label="Featured Software"
+          href="/projects"
+          linkLabel="All tools"
+          i18nLinkLabel="allTools"
+          i18nKey="featuredSoftware"
+        >
           <ProjectsList initialProjects={rankedProjects.slice(0, 2)} compact />
         </SectionShell>
       )}
 
       {/* ── Selected Publications ─────────────────────────────────────────── */}
-      <SectionShell label="Featured Publications" href="/publications" linkLabel="All publications" i18nKey="featuredPublications" alt>
+      <SectionShell
+        label="Featured Publications"
+        href="/publications"
+        linkLabel="All publications"
+        i18nLinkLabel="allPublications"
+        i18nKey="featuredPublications"
+        alt
+      >
         <Suspense fallback={<div className="text-xs text-muted-foreground">Loading publications...</div>}>
           <PublicationsList publications={featuredPubs} compact />
         </Suspense>

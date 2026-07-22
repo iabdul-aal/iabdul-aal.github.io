@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { useLanguage } from "@/lib/i18n-context"
-import { Project } from "@/lib/academic-content"
 import { PublicationRecord } from "@/types/publication"
 
 interface ThemeItem {
@@ -48,18 +47,16 @@ const germanThemeData: Record<string, Partial<ThemeItem>> = {
 
 interface ResearchThemeListProps {
   themes: readonly ThemeItem[]
-  allProjects: readonly Project[]
   publications: PublicationRecord[]
 }
 
-export function ResearchThemeList({ themes, allProjects, publications }: ResearchThemeListProps) {
+export function ResearchThemeList({ themes, publications }: ResearchThemeListProps) {
   const { lang, t } = useLanguage()
   const isDe = lang === "de"
 
   return (
     <div className="divide-y divide-border border-t border-border">
       {themes.map((theme, idx) => {
-        const themeProjects = allProjects.filter((p) => p.relatedThemes?.includes(theme.id))
         const themePublications = publications.filter((pub) => pub.relatedThemes?.includes(theme.id))
         const isEven = idx % 2 === 1
 
@@ -133,25 +130,6 @@ export function ResearchThemeList({ themes, allProjects, publications }: Researc
                     <dd className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{physicalRelevance}</dd>
                   </div>
 
-                  {themeProjects.length > 0 && (
-                    <div>
-                      <dt className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                        {t.ui.featuredTools}
-                      </dt>
-                      <dd className="flex flex-wrap gap-2">
-                        {themeProjects.map((project) => (
-                          <Link
-                            key={project.id}
-                            href={`/projects#${project.id}`}
-                            className="trigger-secondary-chip truncate max-w-[18rem]"
-                            title={project.title}
-                          >
-                            {project.title}
-                          </Link>
-                        ))}
-                      </dd>
-                    </div>
-                  )}
                 </dl>
               </div>
             </div>

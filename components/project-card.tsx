@@ -72,18 +72,32 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
       {/* Action Links */}
       {project.links.length > 0 && (
         <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs pt-1">
-          {project.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-secondary"
-            >
-              {link.label}
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
-            </a>
-          ))}
+          {project.links.map((link) => {
+            const label =
+              isDe
+                ? link.label === "Code DOI"
+                  ? "Code-DOI"
+                  : link.label === "Dataset DOI"
+                  ? "Datensatz-DOI"
+                  : link.label === "Model DOI"
+                  ? "Modell-DOI"
+                  : link.label === "Paper"
+                  ? "Publikation"
+                  : link.label
+                : link.label
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-secondary"
+              >
+                {label}
+                <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              </a>
+            )
+          })}
         </div>
       )}
     </Row>
