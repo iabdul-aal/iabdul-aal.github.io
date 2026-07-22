@@ -49,10 +49,6 @@ def build_preamble(info, lang="en"):
         "% ================== PACKAGES ==================",
         "\\usepackage[utf8]{inputenc}",
         "\\usepackage[T1]{fontenc}",
-    ]
-    if lang == "de":
-        lines.append("\\usepackage[ngerman]{babel} % German language and hyphenation support")
-    lines += [
         "\\usepackage{lmodern} % Premium vector computer modern font to prevent pixelated PK fonts",
         "\\usepackage[margin=1.5cm]{geometry}",
         "\\usepackage{enumitem}",
