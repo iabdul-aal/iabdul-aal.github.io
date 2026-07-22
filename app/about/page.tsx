@@ -1,17 +1,14 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowUpRight, Mail } from "lucide-react"
 import { aboutParagraphs, aboutEpigraph, aboutEpigraphAuthor, identity, profileLinks } from "@/lib/academic-content"
-import { createPageMetadata } from "@/lib/seo"
-import { siteConfig } from "@/lib/site-config"
-
-export const metadata = createPageMetadata({
-  title: "About",
-  description:
-    `Research-oriented profile of ${siteConfig.name}, focused on integrated photonics.`,
-  path: "/about",
-})
+import { useLanguage } from "@/lib/i18n-context"
 
 export default function AboutPage() {
+  const { lang, t } = useLanguage()
+  const isDe = lang === "de"
+
   return (
     <main>
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-[13rem_minmax(0,1fr)] md:py-16 lg:px-8">
@@ -40,23 +37,29 @@ export default function AboutPage() {
         </aside>
 
         <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">About</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            {t.headers.aboutEyebrow}
+          </p>
           <h1 className="mt-3 text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-            Research profile
+            {t.headers.aboutTitle}
           </h1>
           <div className="mt-6 space-y-5 text-base leading-8 text-muted-foreground">
-            {aboutParagraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {aboutParagraphs.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
             ))}
           </div>
 
-          <figure className="mt-8 featured-rule py-2.5 px-4 text-muted-foreground text-sm max-w-2xl bg-surface/40 rounded-r-md border-l-2 border-l-accent">
-            <blockquote className="italic">“{aboutEpigraph}”</blockquote>
-            <figcaption className="mt-1.5 text-xs font-semibold not-italic text-foreground text-right">{aboutEpigraphAuthor}</figcaption>
+          <figure className="mt-8 featured-rule py-2.5 px-4 text-muted-foreground text-sm max-w-2xl bg-surface/40 rounded-r-md">
+            <blockquote className="italic">“{isDe ? t.identity.aboutEpigraph : aboutEpigraph}”</blockquote>
+            <figcaption className="mt-1.5 text-xs font-semibold not-italic text-foreground text-right">
+              {aboutEpigraphAuthor}
+            </figcaption>
           </figure>
 
           <div className="mt-10 border-t border-border pt-8">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Academic Profiles</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              {t.sections.academicProfiles}
+            </h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {profileLinks.map((link) =>
                 link.external ? (
@@ -70,7 +73,6 @@ export default function AboutPage() {
                     {link.label}
                     <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </a>
-
                 ) : null,
               )}
             </div>

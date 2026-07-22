@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
+import { LanguageProvider } from "@/lib/i18n-context"
 import { personConfig, siteConfig } from "@/lib/site-config"
 
 const inter = Inter({
@@ -158,12 +159,14 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-        <Navigation />
-        <div id="main-content" tabIndex={-1}>
-          {children}
-        </div>
-        <Footer />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
+        <LanguageProvider>
+          <Navigation />
+          <div id="main-content" tabIndex={-1}>
+            {children}
+          </div>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )

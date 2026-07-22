@@ -24,6 +24,7 @@ export default async function ResearchPage() {
         eyebrow="Research"
         title="Research themes in integrated photonics"
         description="Research is organized by physical and computational theme rather than by individual output. The underlying methodology is full-wave electromagnetic simulation and device physics, connecting structural geometry to optical and electrical behavior."
+        i18nKey="research"
       />
 
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">
@@ -35,7 +36,7 @@ export default async function ResearchPage() {
 
             return (
               <article
-                key={theme.title}
+                key={theme.id}
                 id={theme.id}
                 className={`py-8 sm:py-10 scroll-mt-24 ${
                   isEven ? "-mx-5 px-5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 bg-surface/40" : ""

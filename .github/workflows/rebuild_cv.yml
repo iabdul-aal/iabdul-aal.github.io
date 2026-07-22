@@ -47,13 +47,24 @@ jobs:
           pre_compile: "biber data/cv"
           post_compile: "pdflatex -interaction=nonstopmode data/cv.tex && pdflatex -interaction=nonstopmode data/cv.tex"
 
-      - name: Deploy PDF to public/
-        run: cp data/cv.pdf public/cv.pdf
+      - name: Compile German LaTeX CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: data/cv_de.tex
+          latexmk_use_xelatex: false
+          extra_system_packages: "biber"
+          pre_compile: "biber data/cv_de"
+          post_compile: "pdflatex -interaction=nonstopmode data/cv_de.tex && pdflatex -interaction=nonstopmode data/cv_de.tex"
+
+      - name: Deploy PDFs to public/
+        run: |
+          cp data/cv.pdf public/cv.pdf
+          cp data/cv_de.pdf public/cv_de.pdf || true
 
       - name: Detect changes
         id: diff
         run: |
-          if git diff --quiet -- data/cv.tex data/publications.bib public/cv.pdf; then
+          if git diff --quiet -- data/cv.tex data/cv_de.tex data/publications.bib public/cv.pdf public/cv_de.pdf; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -64,6 +75,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cv.tex data/publications.bib public/cv.pdf
-          git commit -m "chore: rebuild CV PDF from updated source data [skip ci]"
+          git add data/cv.tex data/cv_de.tex data/publications.bib public/cv.pdf public/cv_de.pdf
+          git commit -m "chore: rebuild CV PDFs (EN/DE) from updated source data [skip ci]"
           git push

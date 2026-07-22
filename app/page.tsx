@@ -57,7 +57,7 @@ export default async function Home() {
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       {/* ── Hero ── unique two-column layout with portrait ───────────────── */}
       <section className="hero-glow-bg mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:px-6 md:grid-cols-[minmax(0,1fr)_11rem] md:items-start md:py-16 lg:px-8">

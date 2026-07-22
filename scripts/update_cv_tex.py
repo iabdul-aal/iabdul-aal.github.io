@@ -234,15 +234,17 @@ def build_header(info):
     return lines
 
 
-def build_research_interests(text):
+def build_research_interests(text, lang="en"):
+    title = "Forschungsinteressen" if lang == "de" else "Research Interests"
     return [
-        "\\section*{Research Interests}",
+        f"\\section*{{{title}}}",
         latex_escape(text),
     ]
 
 
-def build_education(education):
-    lines = ["\\section*{Education}"]
+def build_education(education, lang="en"):
+    title = "Ausbildung" if lang == "de" else "Education"
+    lines = [f"\\section*{{{title}}}"]
     for ed in education:
         lines.append(
             f"\\education"
@@ -258,8 +260,9 @@ def build_education(education):
     return lines
 
 
-def build_research_experience(experience):
-    lines = ["\\section*{Research Experience}"]
+def build_research_experience(experience, lang="en"):
+    title = "Forschungserfahrung" if lang == "de" else "Research Experience"
+    lines = [f"\\section*{{{title}}}"]
     for i, exp in enumerate(experience):
         vspace = "4pt" if i < len(experience) - 1 else "0pt"
         lines.append(
@@ -276,22 +279,30 @@ def build_research_experience(experience):
     return lines
 
 
-def build_publications(citations, h_index, date_str):
-    lines = ["\\section*{Selected Publications}"]
-    lines.append(f"\\noindent\\small\\textit{{*Citation metrics based on Google Scholar (h-index: {h_index}, citations: {citations}), {date_str}.}}\\par")
+def build_publications(citations, h_index, date_str, lang="en"):
+    title = "Ausgewählte Publikationen" if lang == "de" else "Selected Publications"
+    j_title = "Zeitschriftenartikel" if lang == "de" else "Journal Articles"
+    p_title = "Preprints"
+    note = (
+        f"\\noindent\\small\\textit{{*Zitiermetriken basierend auf Google Scholar (h-index: {h_index}, Zitationen: {citations}), {date_str}.}}\\par"
+        if lang == "de"
+        else f"\\noindent\\small\\textit{{*Citation metrics based on Google Scholar (h-index: {h_index}, citations: {citations}), {date_str}.}}\\par"
+    )
+    lines = [f"\\section*{{{title}}}", note]
     lines += [
         "\\nocite{*}",
-        "\\subsection*{Journal Articles}",
+        f"\\subsection*{{{j_title}}}",
         "\\printbibliography[type=article,heading=none]",
         "",
-        "\\subsection*{Preprints}",
+        f"\\subsection*{{{p_title}}}",
         "\\printbibliography[type=preprint,heading=none]",
     ]
     return lines
 
 
-def build_teaching(teaching):
-    lines = ["\\section*{Teaching and Mentoring Experience}"]
+def build_teaching(teaching, lang="en"):
+    title = "Lehre und Mentoring" if lang == "de" else "Teaching and Mentoring Experience"
+    lines = [f"\\section*{{{title}}}"]
     for i, t in enumerate(teaching):
         newline = " \\\\" if i < len(teaching) - 1 else ""
         lines.append(
@@ -300,8 +311,9 @@ def build_teaching(teaching):
     return lines
 
 
-def build_leadership(leadership):
-    lines = ["\\section*{Leadership Experience and Academic Service}"]
+def build_leadership(leadership, lang="en"):
+    title = "Führungs- und Gremienerfahrung" if lang == "de" else "Leadership Experience and Academic Service"
+    lines = [f"\\section*{{{title}}}"]
     for i, lead in enumerate(leadership):
         vspace = "4pt" if i < len(leadership) - 1 else "0pt"
         lines.append(
@@ -318,8 +330,9 @@ def build_leadership(leadership):
     return lines
 
 
-def build_awards(awards):
-    lines = ["\\section*{Honors, Awards, and Research Funding}"]
+def build_awards(awards, lang="en"):
+    title = "Preise und Auszeichnungen" if lang == "de" else "Honors, Awards, and Research Funding"
+    lines = [f"\\section*{{{title}}}"]
     for aw in awards:
         lines.append(
             f"\\award"
@@ -332,8 +345,9 @@ def build_awards(awards):
     return lines
 
 
-def build_memberships(memberships):
-    lines = ["\\section*{Professional Memberships}", "\\begin{itemize}"]
+def build_memberships(memberships, lang="en"):
+    title = "Mitgliedschaften" if lang == "de" else "Professional Memberships"
+    lines = [f"\\section*{{{title}}}", "\\begin{itemize}"]
     for m in memberships:
         escaped_detail = latex_escape(m['detail'])
         escaped_detail = escaped_detail.replace(". Societies:", ". \\\\ Societies:")
@@ -345,25 +359,22 @@ def build_memberships(memberships):
     return lines
 
 
-def build_references(references):
+def build_references(references, lang="en"):
+    title = "Referenzen" if lang == "de" else "References"
     lines = [
-        "\\section*{References}",
+        f"\\section*{{{title}}}",
         "\\noindent",
         "\\begin{tabularx}{\\textwidth}{@{} X X @{}}"
     ]
-    # Row 1: Names
     names = [f"\\textbf{{{latex_escape(ref['name'])}}}" for ref in references]
     lines.append("    " + " & ".join(names) + " \\\\")
     
-    # Row 2: Roles
     roles = [f"{latex_escape(ref['role'])}" for ref in references]
     lines.append("    " + " & ".join(roles) + " \\\\")
     
-    # Row 3: Organizations
     orgs = [f"{latex_escape(ref['org'])}" for ref in references]
     lines.append("    " + " & ".join(orgs) + " \\\\")
     
-    # Row 4: Emails
     emails = []
     for ref in references:
         email = ref['email']
@@ -374,9 +385,45 @@ def build_references(references):
     return lines
 
 
+
+def generate_tex(data, citations, h_index, date_str, lang="en"):
+    info = data["personalInfo"]
+    sections = []
+    sections += build_preamble(info)
+    sections += [
+        "",
+        "\\begin{document}",
+        "",
+    ]
+    sections += build_header(info)
+    sections += [""]
+    sections += build_research_interests(data.get("researchInterests", ""), lang=lang)
+    
+    sections += [""]
+    sections += build_education(data["education"], lang=lang)
+    sections += [""]
+    sections += build_research_experience(data["researchExperience"], lang=lang)
+    sections += [""]
+    sections += build_publications(citations, h_index, date_str, lang=lang)
+    sections += [""]
+    sections += build_awards(data["awards"], lang=lang)
+    sections += [""]
+    sections += build_leadership(data["leadership"], lang=lang)
+    sections += [""]
+    sections += build_teaching(data["teaching"], lang=lang)
+    sections += [""]
+    sections += build_memberships(data["memberships"], lang=lang)
+    sections += [""]
+    sections += build_references(data["references"], lang=lang)
+    
+    sections += ["", "\\end{document}", ""]
+    return "\n".join(sections)
+
+
 def main():
     json_path = os.path.join(os.path.dirname(__file__), "..", "data", "cv_data.json")
-    tex_path  = os.path.join(os.path.dirname(__file__), "..", "data", "cv.tex")
+    tex_path_en = os.path.join(os.path.dirname(__file__), "..", "data", "cv.tex")
+    tex_path_de = os.path.join(os.path.dirname(__file__), "..", "data", "cv_de.tex")
 
     if not os.path.exists(json_path):
         raise FileNotFoundError(f"cv_data.json not found at {json_path}")
@@ -384,9 +431,6 @@ def main():
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    info = data["personalInfo"]
-
-    # Read scholar metrics
     scholar_path = os.path.join(os.path.dirname(__file__), "..", "data", "scholar_metrics.json")
     citations = 0
     h_index = 0
@@ -402,51 +446,16 @@ def main():
     now = datetime.datetime.now()
     date_str = now.strftime("%B %Y")
 
-    sections = []
-    sections += build_preamble(info)
-    sections += [
-        "",
-        "\\begin{document}",
-        "",
-    ]
-    sections += build_header(info)
-    sections += [""]
-    sections += build_research_interests(data.get("researchInterests", ""))
-    
-    # EXACT ORIGINAL FLOW WITH CONSISTENT SECTION BLANK LINES:
-    # 1. Education
-    sections += [""]
-    sections += build_education(data["education"])
-    # 2. Research Experience
-    sections += [""]
-    sections += build_research_experience(data["researchExperience"])
-    # 3. Publications
-    sections += [""]
-    sections += build_publications(citations, h_index, date_str)
-    # 4. Honors & Awards
-    sections += [""]
-    sections += build_awards(data["awards"])
-    # 5. Leadership
-    sections += [""]
-    sections += build_leadership(data["leadership"])
-    # 6. Teaching
-    sections += [""]
-    sections += build_teaching(data["teaching"])
-    # 7. Professional Memberships
-    sections += [""]
-    sections += build_memberships(data["memberships"])
-    # 8. References
-    sections += [""]
-    sections += build_references(data["references"])
-    
-    sections += ["", "\\end{document}", ""]
+    output_en = generate_tex(data, citations, h_index, date_str, lang="en")
+    with open(tex_path_en, "w", encoding="utf-8", newline="\n") as f:
+        f.write(output_en)
+    print(f"Generated {os.path.abspath(tex_path_en)} from cv_data.json.")
 
-    output = "\n".join(sections)
+    output_de = generate_tex(data, citations, h_index, date_str, lang="de")
+    with open(tex_path_de, "w", encoding="utf-8", newline="\n") as f:
+        f.write(output_de)
+    print(f"Generated {os.path.abspath(tex_path_de)} from cv_data.json.")
 
-    with open(tex_path, "w", encoding="utf-8", newline="\n") as f:
-        f.write(output)
-
-    print(f"Generated {os.path.abspath(tex_path)} from cv_data.json.")
 
 
 if __name__ == "__main__":

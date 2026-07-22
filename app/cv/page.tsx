@@ -1,25 +1,13 @@
-import Link from "next/link"
-import { Download, ExternalLink, ArrowUpRight, Mail } from "lucide-react"
+"use client"
+
+import { Download, ExternalLink, Mail } from "lucide-react"
 import { Trigger } from "@/components/ui/trigger"
 import { Shell } from "@/components/ui/shell"
 import { Row } from "@/components/ui/row"
 import { SectionShell } from "@/components/layout/section-shell"
-import { projects } from "@/lib/academic-content"
-import { loadPaperMetrics } from "@/lib/paper-metrics"
-import { loadProjectMetrics } from "@/lib/project-metrics"
-import { loadPublications, rankPublications, rankTools } from "@/lib/publications"
-import { createPageMetadata } from "@/lib/seo"
 import cvData from "@/data/cv_data.json"
-import { siteConfig } from "@/lib/site-config"
+import { useLanguage } from "@/lib/i18n-context"
 
-export const metadata = createPageMetadata({
-  title: "CV",
-  description:
-    `Curriculum vitae summary of ${siteConfig.name}, with links to the full academic CV document.`,
-  path: "/cv",
-})
-
-// ── Single-Responsibility: one row of CV timeline entry ──────────────────────
 interface EntryProps {
   role: string
   period: string
@@ -40,18 +28,31 @@ function Entry({ role, period, org, location }: EntryProps) {
   )
 }
 
-export default async function CvPage() {
-  const [publications, paperMetrics, projectMetrics] = await Promise.all([
-    loadPublications(),
-    loadPaperMetrics(),
-    loadProjectMetrics(),
-  ])
+// Translations for specific CV entry fields when German is active
+const germanCvTranslations: Record<string, string> = {
+  "B.Sc. in Electronics and Communications Engineering": "B.Sc. in Elektronik und Kommunikationstechnik",
+  "Research Intern": "Forschungspraktikant",
+  "Onsite": "Vor Ort",
+  "Remote": "Remote",
+  "Hybrid": "Hybrid",
+  "Present": "Heute",
+  "Board Member": "Vorstandsmitglied",
+  "Chairman": "Vorsitzender",
+  "General Coordinator": "Hauptkoordinator",
+  "Tutor / Mentor": "Tutor / Mentor",
+}
 
-  const rankedPublications = rankPublications(publications, paperMetrics)
-  const featuredPubs = rankedPublications.slice(0, 2)
-  const rankedTools = rankTools(projects, projectMetrics)
+export default function CvPage() {
+  const { lang, t } = useLanguage()
+  const isDe = lang === "de"
+  const pdfUrl = isDe ? "/cv_de.pdf" : "/cv.pdf"
 
   const { personalInfo: info } = cvData
+
+  const translateText = (text: string) => {
+    if (!isDe) return text
+    return germanCvTranslations[text] || text
+  }
 
   return (
     <main className="pb-20">
@@ -60,21 +61,21 @@ export default async function CvPage() {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Curriculum Vitae
+              {t.headers.cvEyebrow}
             </p>
             <h1 className="mt-3 text-3xl font-semibold text-foreground md:text-4xl">
               {info.name}
             </h1>
-            <p className="mt-1 text-sm text-accent">{info.specialization}</p>
+            <p className="mt-1 text-sm text-accent">{isDe ? t.identity.role : info.specialization}</p>
             <p className="mt-4 text-sm leading-7 text-muted-foreground max-w-xl">
-              {cvData.researchInterests}
+              {isDe ? t.identity.statement : cvData.researchInterests}
             </p>
           </div>
 
-          {/* CV download card — Shell (secondary = card variant) */}
+          {/* CV download card */}
           <Shell variant="secondary" className="self-start">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-              Full CV Documents
+              {t.ui.fullCvDoc}
             </p>
             <div className="space-y-1.5 text-xs text-muted-foreground mb-4">
               <a
@@ -87,15 +88,15 @@ export default async function CvPage() {
             </div>
             <div className="flex flex-col gap-2">
               <Trigger variant="primary" asChild>
-                <a href="/cv.pdf" download>
+                <a href={pdfUrl} download>
                   <Download className="h-3.5 w-3.5" />
-                  Download PDF
+                  {isDe ? t.ui.downloadPdfDe : t.ui.downloadPdf}
                 </a>
               </Trigger>
               <Trigger variant="chip" asChild>
-                <a href="/cv.pdf" target="_blank" rel="noreferrer">
+                <a href={pdfUrl} target="_blank" rel="noreferrer">
                   <ExternalLink className="h-3.5 w-3.5" />
-                  Open PDF
+                  {t.ui.openPdf}
                 </a>
               </Trigger>
             </div>
@@ -104,125 +105,48 @@ export default async function CvPage() {
       </div>
 
       {/* Education */}
-      <SectionShell label="Education" alt>
+      <SectionShell label={t.sections.education} alt>
         <div className="list-container">
           {cvData.education.map((ed) => (
             <Entry
               key={ed.degree}
-              role={ed.degree}
-              period={ed.period}
+              role={translateText(ed.degree)}
+              period={translateText(ed.period)}
               org={ed.institution}
-              location={ed.location}
+              location={translateText(ed.location)}
             />
           ))}
         </div>
       </SectionShell>
 
       {/* Research Experience */}
-      <SectionShell label="Research Experience">
+      <SectionShell label={t.sections.researchExperience}>
         <div className="list-container">
           {cvData.researchExperience.map((exp) => (
             <Entry
               key={exp.role + exp.org}
-              role={exp.role}
-              period={exp.period}
+              role={translateText(exp.role)}
+              period={translateText(exp.period)}
               org={exp.org}
-              location={exp.location}
+              location={translateText(exp.location)}
             />
           ))}
         </div>
       </SectionShell>
 
-      {/* Featured Publications */}
-      <SectionShell label="Featured Publications" alt>
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-xs text-muted-foreground">
-            Top citation-ranked papers. {publications.length} total.
-          </p>
-          <Link href="/publications" className="btn-secondary">
-            All publications
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
-        </div>
-        <div className="list-container">
-          {featuredPubs.map((pub) => (
-            <Row key={pub.id} as="div">
-              <h3 className="text-sm font-semibold text-foreground leading-snug break-words w-full">
-                {pub.title}
-              </h3>
-              <div className="mt-1 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
-                <span className="text-muted-foreground">
-                  {[pub.venue, pub.year].filter(Boolean).join(", ")}
-                </span>
-                {pub.badges?.map((badge) => (
-                  <span
-                    key={badge}
-                    className="badge-subtle text-amber-600 dark:text-amber-400 bg-amber-500/10 ring-amber-500/20"
-                  >
-                    {badge}
-                  </span>
-                ))}
-              </div>
-            </Row>
-          ))}
-        </div>
-      </SectionShell>
-
-      {/* Featured Software */}
-      {rankedTools.length > 0 && (
-        <SectionShell label="Featured Software">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-xs text-muted-foreground">Key software platforms.</p>
-            <Link href="/projects" className="btn-secondary">
-              All tools
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-          <div className="space-y-4">
-            {rankedTools.slice(0, 1).map((tool) => (
-              <div key={tool.id} className="featured-rule bg-card py-2">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                  {tool.status}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-foreground">{tool.title}</p>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  {tool.objective}
-                </p>
-                {tool.links.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-3">
-                    {tool.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-secondary"
-                      >
-                        {link.label}
-                        <ArrowUpRight className="h-3 w-3" />
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </SectionShell>
-      )}
-
       {/* Full CV Preview */}
-      <SectionShell label="Full CV Document" alt>
+      <SectionShell label={t.sections.fullCvSection} alt>
         <div className="hidden md:block overflow-hidden rounded-md border border-border bg-card">
           <iframe
-            src="/cv.pdf"
+            src={pdfUrl}
             title="CV PDF preview"
             className="h-[82vh] min-h-[600px] w-full min-w-0"
           />
         </div>
         <div className="md:hidden">
           <Trigger variant="chip" asChild className="w-full justify-center">
-            <a href="/cv.pdf" target="_blank" rel="noreferrer">
-              Open Full PDF CV in browser
+            <a href={pdfUrl} target="_blank" rel="noreferrer">
+              {t.ui.fullCvPreview}
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </Trigger>

@@ -12,6 +12,7 @@ import { EmptyState } from "@/components/ui/empty-state"
 import { YearGroupHeader } from "@/components/year-group-header"
 import { downloadText, groupByYear } from "@/lib/utils"
 import { Shell } from "@/components/ui/shell"
+import { useLanguage } from "@/lib/i18n-context"
 
 
 type PublicationsListProps = {
@@ -30,10 +31,16 @@ export function PublicationsList({ publications, compact = false }: Publications
   const [selectedYear, setSelectedYear] = useState<string>("all")
   const [pageSize, setPageSize] = useState(compact ? 5 : 10)
   const [copiedAllBib, setCopiedAllBib] = useState(false)
+  const { t, lang } = useLanguage()
 
   const selectedTopic = selectedTopicState ?? urlTopic
   const selectedType = selectedTypeState ?? urlType
 
+  const categoryLabels = {
+    journal: lang === "de" ? "Zeitschriftenartikel" : "Journal Articles",
+    preprint: lang === "de" ? "Preprints" : "Preprints",
+    conference: lang === "de" ? "Konferenzbeiträge" : "Conference Papers",
+  }
 
   const availableYears = useMemo(() => {
     const years = new Set<string>()
@@ -61,7 +68,8 @@ export function PublicationsList({ publications, compact = false }: Publications
         query === "" ||
         pub.title.toLowerCase().includes(query) ||
         pub.authors.some((author) => author.toLowerCase().includes(query)) ||
-        (pub.venue && pub.venue.toLowerCase().includes(query))
+        (pub.venue && pub.venue.toLowerCase().includes(query)) ||
+        (pub.abstract && pub.abstract.toLowerCase().includes(query))
 
       const matchesTopic =
         selectedTopic === "all" || pub.relatedThemes?.includes(selectedTopic)
@@ -85,9 +93,9 @@ export function PublicationsList({ publications, compact = false }: Publications
   }, [visiblePublications])
 
   const handleCopyAllBibtex = async () => {
-    const allBibtex = filteredPublications.map((p) => p.bibtex).join("\n\n")
+    const allBib = filteredPublications.map((p) => p.bibtex).join("\n\n")
     try {
-      await navigator.clipboard.writeText(allBibtex)
+      await navigator.clipboard.writeText(allBib)
       setCopiedAllBib(true)
       setTimeout(() => setCopiedAllBib(false), 2000)
     } catch {
@@ -114,37 +122,20 @@ export function PublicationsList({ publications, compact = false }: Publications
     <div className="space-y-6">
       {/* Search & Filter Bar */}
       <Shell variant="primary">
-
           <SearchInput
             value={searchQuery}
             onChange={(q) => {
               setSearchQuery(q)
               setPageSize(10)
             }}
-            placeholder="Search by title, author, or venue..."
+            placeholder={t.ui.searchPubs}
           />
-
 
         <div className="filter-row">
-          <FilterSelect
-            label="Filter:"
-            showIcon
-            value={selectedType}
-            onChange={(val) => {
-              setSelectedType(val)
-              setPageSize(10)
-            }}
-            options={[
-              { value: "all", label: "All Formats" },
-              { value: "journal", label: "Journal Articles" },
-              { value: "conference", label: "Conference Papers" },
-              { value: "preprint", label: "Preprints" },
-            ]}
-          />
-
           {availableTopics.length > 0 && (
             <FilterSelect
               label="Topic:"
+              showIcon
               value={selectedTopic}
               onChange={(val) => {
                 setSelectedTopic(val)
@@ -156,6 +147,21 @@ export function PublicationsList({ publications, compact = false }: Publications
               ]}
             />
           )}
+
+          <FilterSelect
+            label="Type:"
+            value={selectedType}
+            onChange={(val) => {
+              setSelectedType(val)
+              setPageSize(10)
+            }}
+            options={[
+              { value: "all", label: "All Types" },
+              { value: "journal", label: categoryLabels.journal },
+              { value: "preprint", label: categoryLabels.preprint },
+              { value: "conference", label: categoryLabels.conference },
+            ]}
+          />
 
           {availableYears.length > 0 && (
             <FilterSelect
@@ -177,8 +183,8 @@ export function PublicationsList({ publications, compact = false }: Publications
       {/* Info & Export Actions */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
         <p>
-          Showing {Math.min(visiblePublications.length, filteredPublications.length)} of {filteredPublications.length} publications
-          {searchQuery || selectedTopic !== "all" || selectedType !== "all" || selectedYear !== "all" ? " (filtered)" : ""}
+          {t.ui.showing} {Math.min(visiblePublications.length, filteredPublications.length)} {t.ui.of} {filteredPublications.length} {t.ui.publications}
+          {searchQuery || selectedTopic !== "all" || selectedType !== "all" || selectedYear !== "all" ? ` ${t.ui.filtered}` : ""}
         </p>
 
         <div className="flex items-center gap-3">
@@ -194,7 +200,7 @@ export function PublicationsList({ publications, compact = false }: Publications
               }}
               className="text-accent hover:text-accent-strong hover:underline"
             >
-              Clear filters
+              {t.ui.clearFilters}
             </button>
           )}
 
@@ -205,7 +211,7 @@ export function PublicationsList({ publications, compact = false }: Publications
             title="Copy BibTeX for current view"
           >
             {copiedAllBib ? <Check className="h-3 w-3 text-accent" /> : <Copy className="h-3 w-3" />}
-            {copiedAllBib ? "Copied BibTeX" : "Export BibTeX"}
+            {copiedAllBib ? t.ui.copiedBibtex : t.ui.exportBibtex}
           </button>
 
           <button
@@ -215,7 +221,7 @@ export function PublicationsList({ publications, compact = false }: Publications
             title="Download RIS for current view"
           >
             <Download className="h-3 w-3" />
-            Export RIS
+            {t.ui.exportRis}
           </button>
         </div>
       </div>
@@ -223,13 +229,13 @@ export function PublicationsList({ publications, compact = false }: Publications
       {/* Publications list by year */}
       <div className="space-y-12">
         {visiblePublications.length === 0 ? (
-          <EmptyState message="No publications found matching search criteria." />
+          <EmptyState message={lang === "de" ? "Keine Publikationen zu den Kriterien gefunden." : "No publications found matching search criteria."} />
         ) : (
           publicationsByYear.map(({ year, items }) => {
             const categories = [
-              { key: "journal", label: "Journal Articles" },
-              { key: "preprint", label: "Preprints" },
-              { key: "conference", label: "Conference Papers" },
+              { key: "journal", label: categoryLabels.journal },
+              { key: "preprint", label: categoryLabels.preprint },
+              { key: "conference", label: categoryLabels.conference },
             ]
             const itemsByCategory = categories
               .map((cat) => ({
@@ -269,7 +275,7 @@ export function PublicationsList({ publications, compact = false }: Publications
             onClick={() => setPageSize((prev) => prev + 10)}
             className="btn-primary"
           >
-            Show more publications
+            {t.ui.showMorePubs}
           </button>
         </div>
       )}

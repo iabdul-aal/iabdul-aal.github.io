@@ -173,7 +173,7 @@ export function TalksList({ talks }: TalksListProps) {
                               {formatDate(talk.date || talk.year, "short")}
                             </p>
                             <div>
-                              <h4 className="text-base font-semibold leading-snug text-foreground">{talk.title}</h4>
+                              <h3 className="text-base font-semibold leading-snug text-foreground">{talk.title}</h3>
                               <p className="mt-1 text-xs leading-5 text-muted-foreground">
                                 {talk.event}
                                 {talk.source ? `, ${talk.source}` : ""}

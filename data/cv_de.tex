@@ -1,0 +1,239 @@
+% Academic CV Template for PhD Applications
+% Optimized for Professional Standards and ATS Compatibility
+\documentclass[11pt,a4paper]{article}
+
+% ================== PACKAGES ==================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Premium vector computer modern font to prevent pixelated PK fonts
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\urlstyle{same} % Render URLs/emails in same body font instead of typewriter font
+\usepackage{xcolor}
+\definecolor{SECTIONCOLOR}{RGB}{0,102,204}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X} % Right-aligned X column
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage[backend=biber,style=ieee,sorting=ydnt,defernumbers=true,maxbibnames=99]{biblatex}
+
+% ================== BIBLIOGRAPHY SETUP ==================
+\addbibresource{publications.bib}
+
+% Bold your name in publications
+\newcommand{\makeauthorbold}[1]{%
+  \DeclareNameFormat{author}{%
+    \ifthenelse{\value{listcount}=1}
+    {%
+      {\expandafter\ifstrequal\expandafter{\namepartfamily}{#1}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}}
+    }{\ifnumless{\value{listcount}}{\value{liststop}}
+        {\expandafter\ifstrequal\expandafter{\namepartfamily}{#1}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}
+        {\expandafter\ifstrequal\expandafter{\namepartfamily}{#1}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}%
+      }
+    \ifthenelse{\value{listcount}<\value{liststop}}
+    {\addcomma\space}{}
+  }
+}
+
+\makeauthorbold{Abdulaal}
+
+% ================== COLOR SCHEME ==================
+\definecolor{headercolor}{RGB}{0,51,102}
+\definecolor{sectioncolor}{RGB}{0,51,102}
+\definecolor{linkcolor}{RGB}{0,102,204}
+\definecolor{mediacolor}{RGB}{0,102,51}
+
+% ================== FORMATTING CONFIGURATION ==================
+\pagestyle{plain}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=linkcolor,
+    citecolor=black,
+    pdfborder={0 0 0}
+}
+
+% ================== SECTION FORMATTING ==================
+\titleformat{\section}
+    {\large\bfseries\color{sectioncolor}\uppercase}
+    {}{0pt}{}[\color{sectioncolor}\titlerule]
+\titlespacing{\section}{0pt}{10pt}{5pt}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries\color{sectioncolor}}
+    {}{0pt}{}
+\titlespacing{\subsection}{0pt}{6pt}{3pt}
+
+% ================== CUSTOM COMMANDS ==================
+
+% Education with integrated thesis and media
+\newcommand{\education}[8]{%
+    \textbf{#1} \hfill #2 \\%
+    \textit{#3} \hfill \textit{#4}%
+    \ifblank{#5}{}{%
+        \vspace{2pt}%
+        \begin{itemize}%
+            #5%
+        \end{itemize}%
+    }%
+    \ifblank{#6}{}{%
+        \textcolor{sectioncolor}{\small\textbf{Skills:}} \textcolor{black}{\small #6} \\%
+    }%
+    \ifblank{#7}{}{%
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Attachments:} #7}%
+    }%
+    \ifblank{#8}{}{\vspace{#8}}%
+    \par\vspace{3pt}% Ensure paragraph break and spacing
+}
+
+% Research experience
+\newcommand{\research}[8]{%
+    \textbf{#1} \hfill #2 \\%
+    \textit{#3} \hfill \textit{#4}%
+    \ifblank{#5}{}{%
+        \vspace{2pt}%
+        \begin{itemize}%
+            #5%
+        \end{itemize}%
+    }%
+    \ifblank{#6}{}{%
+        \textcolor{sectioncolor}{\small\textbf{Skills:}} \textcolor{black}{\small #6} \\%
+    }%
+    \ifblank{#7}{}{%
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Attachments:} #7}%
+    }%
+    \ifblank{#8}{}{\vspace{#8}}%
+    \par\vspace{3pt}% Ensure paragraph break and spacing
+}
+
+% Award
+\newcommand{\award}[5]{%
+    \textbf{#1} \hfill #2 \\%
+    \textit{Issuer:} #3%
+    \vspace{2pt}%
+    \ifblank{#4}{}{%
+        \begin{itemize}%
+            #4%
+        \end{itemize}%
+    }%
+    \ifblank{#5}{}{%
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Attachments:} #5} \\%
+    }%
+    \vspace{2pt}%
+    \par\vspace{3pt}% Ensure paragraph break and spacing
+}
+
+% Leadership
+\newcommand{\leadership}[8]{%
+    \textbf{#1} \hfill #2 \\%
+    \textit{#3} \hfill \textit{#4}%
+    \ifblank{#5}{}{%
+        \vspace{2pt}%
+        \begin{itemize}%
+            #5%
+        \end{itemize}%
+    }%
+    \ifblank{#6}{}{%
+        \textcolor{sectioncolor}{\small\textbf{Skills:}} \textcolor{black}{\small #6} \\%
+    }%
+    \ifblank{#7}{}{%
+        \textcolor{mediacolor}{\small\faIcon{link} \textbf{Attachments:} #7}%
+    }%
+    \ifblank{#8}{}{\vspace{#8}}%
+    \par\vspace{3pt}% Ensure paragraph break and spacing
+}
+
+% Simple item
+\newcommand{\cvitem}[2]{%
+    \textbf{#1} \hfill #2%
+}
+
+% Reference (no phone number)
+\newcommand{\reference}[4]{%
+    \textbf{#1} \\%
+    #2 \\%
+    #3 \\%
+    \faIcon{envelope} \href{mailto:#4}{\nolinkurl{#4}}%
+    \par\vspace{3pt}% Ensure column/paragraph separation
+}
+
+% ORCID icon
+\newcommand{\orcidicon}{\includegraphics[height=1em]{orcid.png}}
+
+\begin{document}
+
+% ==================== HEADER ====================
+\begin{center}
+    {\Huge\bfseries\color{headercolor} Islam I. Abdulaal} \\[6pt]
+    {\large\itshape Integrated Photonics Researcher}
+    \vspace{8pt}
+    
+    \faIcon{envelope} \href{mailto:contact@iabdul-aal.me}{contact@iabdul-aal.me} \quad
+    \faGlobe\ \href{https://iabdul-aal.me}{iabdul-aal.me} \\
+    \vspace{3pt}
+    \faLinkedinIn\ \href{https://linkedin.com/in/iabdul-aal}{linkedin.com/in/iabdul-aal} \quad
+    \faIcon{github} \href{https://github.com/iabdul-aal}{@iabdul-aal} \quad
+    \orcidicon{} \href{https://orcid.org/0009-0004-9300-3936}{0009-0004-9300-3936}
+\end{center}
+\vspace{-8pt}
+
+\section*{Forschungsinteressen}
+Integrated nanophotonics, quantum photonic sources, nonlinear on-chip devices, physics-informed inverse design, and wave-equation-constrained neural networks for photonic device optimization.
+
+\section*{Ausbildung}
+\education{B.Sc. in Electronics and Communications Engineering}{Aug 2021 -- Aug 2026}{Alexandria University, Faculty of Engineering}{Onsite}{}{}{}{0pt}
+
+\section*{Forschungserfahrung}
+\research{Research Intern}{Sep 2025 -- Present}{NanoPhoto Lab, IMRE, A*STAR}{Remote}{}{}{}{4pt}
+\research{Research Intern}{Jul 2025 -- Sep 2025}{Advanced Labs Program, Egypt Scholars Inc.}{Remote}{}{}{}{4pt}
+\research{Research Intern}{Jul 2023 -- Aug 2025}{OPST Group, SmartCI Research Center, Alexandria University}{Hybrid}{}{}{}{0pt}
+
+\section*{Ausgewählte Publikationen}
+\noindent\small\textit{*Zitiermetriken basierend auf Google Scholar (h-index: 2, Zitationen: 11), July 2026.}\par
+\nocite{*}
+\subsection*{Zeitschriftenartikel}
+\printbibliography[type=article,heading=none]
+
+\subsection*{Preprints}
+\printbibliography[type=preprint,heading=none]
+
+\section*{Preise und Auszeichnungen}
+\award{Dean's Honors for Academic Excellence}{2021 -- 2025}{Alexandria University, Faculty of Engineering}{}{}
+\award{ICMTC Artificial Intelligence Contest (AIC-2) -- 4th Place}{2024}{Military Technical College}{}{}
+\award{Huawei ICT Skills Competition -- National Finalist (AI Track)}{2023}{Huawei Technologies -- MENA Region}{}{}
+\award{NASA Space Apps Challenge -- Global Nominee}{2021}{NASA}{}{}
+
+\section*{Führungs- und Gremienerfahrung}
+\leadership{Board Member}{Jul 2026 -- Present}{Optica Egypt Local Section}{Hybrid}{}{}{}{4pt}
+\leadership{Chairman}{Feb 2025 -- Oct 2025}{IEEE Solid-State Circuits Society (SSCS), Alexandria University Student Branch Chapter}{Hybrid}{}{}{}{4pt}
+\leadership{General Coordinator}{Aug 2021 -- Sep 2023}{Education Clinic (USA-Registered NGO)}{Remote}{}{}{}{0pt}
+
+\section*{Lehre und Mentoring}
+\cvitem{Tutor / Mentor, Optica Egypt}{Jul 2026 -- Present}
+
+\section*{Mitgliedschaften}
+\begin{itemize}
+  \item \textbf{Optica (formerly OSA)} \hfill Jul 2026 -- Present \\  \textcolor{mediacolor}{\small Student Member.}
+  \item \textbf{Institute of Electrical and Electronics Engineers (IEEE)} \hfill 2025 -- 2026 \\  \textcolor{mediacolor}{\small Student Member (ID: 101099759).}
+\end{itemize}
+
+\section*{Referenzen}
+\noindent
+\begin{tabularx}{\textwidth}{@{} X X @{}}
+    \textbf{Dr. Omar Abdelraouf} & \textbf{Prof. Ishac Kandas} \\
+    Research Scientist & Associate Professor \\
+    Institute of Materials Research and Engineering (IMRE), A*STAR, Singapore & Department of Engineering Physics and Mathematics, Alexandria University \\
+    \faIcon{envelope} \href{mailto:omar_abdelrahman@a-star.edu.sg}{\nolinkurl{omar_abdelrahman@a-star.edu.sg}} & \faIcon{envelope} \href{mailto:ishac.kandas@alexu.edu.eg}{\nolinkurl{ishac.kandas@alexu.edu.eg}} \\
+\end{tabularx}
+
+\end{document}

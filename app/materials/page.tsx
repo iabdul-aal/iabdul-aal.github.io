@@ -91,6 +91,7 @@ export default async function MaterialsPage() {
         eyebrow="Materials"
         title="Technical materials, articles, and public sessions"
         description="Downloadable teaching and reference materials, technical articles, and a chronological record of talks, workshops, and poster presentations."
+        i18nKey="materials"
       />
 
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">

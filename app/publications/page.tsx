@@ -73,12 +73,13 @@ export default async function PublicationsPage() {
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       <PageHeader
         eyebrow="Publications"
         title="Papers, preprints, and citable outputs"
-        description="Publication records include journal articles and preprints, with direct links to DOI records, arXiv entries, PDFs where available, and BibTeX and RIS citation exports."
+        description="Peer-reviewed journal articles, preprints, and citable technical reports in integrated photonics and computational device design."
+        i18nKey="pub"
       />
 
       {/* Scholar metrics bar */}

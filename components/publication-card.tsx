@@ -6,10 +6,9 @@ import { ArrowUpRight, Copy, Check, Download } from "lucide-react"
 import { PublicationRecord } from "@/types/publication"
 import { Badge } from "@/components/ui/badge"
 import { downloadText } from "@/lib/utils"
-
-
 import { Row } from "@/components/ui/row"
 
+import { useLanguage } from "@/lib/i18n-context"
 
 export interface PublicationCardProps {
   publication: PublicationRecord
@@ -19,6 +18,7 @@ export interface PublicationCardProps {
 export function PublicationCard({ publication, compact = false }: PublicationCardProps) {
   const [showAbstract, setShowAbstract] = useState(false)
   const [copiedBibtex, setCopiedBibtex] = useState(false)
+  const { t } = useLanguage()
 
   const handleCopyBibtex = async () => {
     try {
@@ -26,7 +26,7 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
       setCopiedBibtex(true)
       setTimeout(() => setCopiedBibtex(false), 2000)
     } catch {
-      // fallback
+      // fallback: clipboard unavailable
     }
   }
 
@@ -40,12 +40,11 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
 
   return (
     <Row aria-label={publication.title}>
-
-
       <div className="space-y-1.5 w-full">
-        <h2 className="text-sm font-semibold text-foreground leading-snug break-words w-full">
+        {/* h3 — below h2 section/year headings in the page hierarchy */}
+        <h3 className="text-sm font-semibold text-foreground leading-snug break-words w-full">
           {publication.title}
-        </h2>
+        </h3>
 
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
           <span className="text-muted-foreground">
@@ -72,7 +71,6 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           })}
         </p>
       </div>
-
 
       {!compact && (
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
@@ -118,7 +116,7 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
               title="Copy BibTeX"
             >
               {copiedBibtex ? <Check className="h-3 w-3 text-accent" /> : <Copy className="h-3 w-3" />}
-              {copiedBibtex ? "Copied" : "BibTeX"}
+              {copiedBibtex ? t.ui.copied : t.ui.bibtex}
             </button>
 
             <button
@@ -136,23 +134,29 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
             <button
               type="button"
               onClick={() => setShowAbstract((prev) => !prev)}
+              aria-expanded={showAbstract}
+              aria-controls={`abstract-${publication.id}`}
               className="btn-secondary"
             >
-              {showAbstract ? "Hide Abstract" : "Abstract"}
+              {showAbstract ? t.ui.hideAbstract : t.ui.abstract}
             </button>
           )}
         </div>
-
       )}
 
-      {showAbstract && publication.abstract && (
-        <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground pt-2 border-t border-border/40">
-          {publication.abstract}
-        </p>
+      {publication.abstract && (
+        <div
+          id={`abstract-${publication.id}`}
+          role="region"
+          aria-label="Abstract"
+          className="overflow-hidden transition-all duration-300 ease-in-out"
+          style={{ maxHeight: showAbstract ? "40rem" : "0", opacity: showAbstract ? 1 : 0 }}
+        >
+          <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground pt-2 border-t border-border/40">
+            {publication.abstract}
+          </p>
+        </div>
       )}
     </Row>
   )
 }
-
-
-

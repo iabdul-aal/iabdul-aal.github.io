@@ -7,13 +7,21 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { navigationItems, identity } from "@/lib/academic-content"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/lib/i18n-context"
+import { LanguageToggle } from "@/components/ui/language-toggle"
 
 export function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const mobileNavRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+
+  const getNavLabel = (href: string, defaultLabel: string) => {
+    const key = href.replace("/", "") as keyof typeof t.nav
+    return t.nav[key] || defaultLabel
+  }
 
   // Close mobile menu on escape key
   useEffect(() => {
@@ -51,21 +59,29 @@ export function Navigation() {
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              {item.label}
+              {getNavLabel(item.href, item.label)}
             </Link>
           ))}
+
+          <div className="ms-2 ps-2 border-s border-border">
+            <LanguageToggle />
+          </div>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
-          aria-label="Toggle navigation"
-          aria-expanded={isOpen}
-          aria-controls="mobile-navigation"
-          onClick={() => setIsOpen((value) => !value)}
-        >
-          {isOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageToggle />
+
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-foreground"
+            aria-label="Toggle navigation"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsOpen((value) => !value)}
+          >
+            {isOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+          </button>
+        </div>
       </nav>
 
       {isOpen && (
@@ -91,7 +107,7 @@ export function Navigation() {
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground",
                 )}
               >
-                {item.label}
+                {getNavLabel(item.href, item.label)}
               </Link>
             ))}
           </div>
@@ -100,4 +116,3 @@ export function Navigation() {
     </header>
   )
 }
-
