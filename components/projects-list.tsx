@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { PublicationRecord } from "@/lib/publications"
 import { Project } from "@/lib/academic-content"
 import { ProjectCard } from "@/components/project-card"
 import { SearchInput } from "@/components/ui/search-input"
@@ -13,7 +12,6 @@ import { groupByYear } from "@/lib/utils"
 
 type ProjectsListProps = {
   initialProjects: readonly Project[]
-  publications?: PublicationRecord[]
 }
 
 export function ProjectsList({ initialProjects }: ProjectsListProps) {
@@ -95,6 +93,7 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
         </p>
         {(searchQuery || selectedTier !== "all" || selectedYear !== "all") && (
           <button
+            type="button"
             onClick={() => {
               setSearchQuery("")
               setSelectedTier("all")
@@ -130,10 +129,8 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
                 <div className="space-y-6">
                   {itemsByCategory.map((group) => (
                     <div key={group.label} className="space-y-3">
-                      <div className="flex items-center gap-2 px-1">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                          {group.label}
-                        </span>
+                      <div className="category-divider">
+                        <span>{group.label}</span>
                         <span className="h-px flex-1 bg-border/60" />
                       </div>
                       <div className="list-container">

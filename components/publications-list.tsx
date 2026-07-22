@@ -174,8 +174,6 @@ export function PublicationsList({ publications, compact = false }: Publications
         </div>
       </Shell>
 
-
-
       {/* Info & Export Actions */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
         <p>
@@ -186,6 +184,7 @@ export function PublicationsList({ publications, compact = false }: Publications
         <div className="flex items-center gap-3">
           {(searchQuery || selectedTopic !== "all" || selectedType !== "all" || selectedYear !== "all") && (
             <button
+              type="button"
               onClick={() => {
                 setSearchQuery("")
                 setSelectedTopic("all")
@@ -245,13 +244,11 @@ export function PublicationsList({ publications, compact = false }: Publications
                 <div className="space-y-6">
                   {itemsByCategory.map((group) => (
                     <div key={group.label} className="space-y-2">
-                      <div className="flex items-center gap-2 px-1">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                          {group.label}
-                        </span>
+                      <div className="category-divider">
+                        <span>{group.label}</span>
                         <span className="h-px flex-1 bg-border/60" />
                       </div>
-                      <div className="space-y-4">
+                      <div className="list-container">
                         {group.list.map((pub) => (
                           <PublicationCard key={pub.id} publication={pub} />
                         ))}
@@ -268,12 +265,12 @@ export function PublicationsList({ publications, compact = false }: Publications
       {filteredPublications.length > visiblePublications.length && (
         <div className="flex justify-center pt-4">
           <button
+            type="button"
             onClick={() => setPageSize((prev) => prev + 10)}
             className="btn-primary"
           >
             Show more publications
           </button>
-
         </div>
       )}
 

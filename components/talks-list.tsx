@@ -7,6 +7,7 @@ import { FilterSelect } from "@/components/ui/filter-select"
 import { EmptyState } from "@/components/ui/empty-state"
 import { YearGroupHeader } from "@/components/year-group-header"
 import { Shell } from "@/components/ui/shell"
+import { Row } from "@/components/ui/row"
 import { groupByYear, formatDate } from "@/lib/utils"
 
 export type TalkType = {
@@ -126,6 +127,7 @@ export function TalksList({ talks }: TalksListProps) {
         </p>
         {(searchQuery || selectedYear !== "all" || selectedFormat !== "all") && (
           <button
+            type="button"
             onClick={() => {
               setSearchQuery("")
               setSelectedYear("all")
@@ -162,14 +164,16 @@ export function TalksList({ talks }: TalksListProps) {
                       </div>
                       <div className="list-container">
                         {group.list.map((talk) => (
-                          <article key={talk.url || talk.title} className="item-row-grid">
+                          <Row
+                            key={talk.url || talk.title}
+                            variant="grid"
+                            className="sm:grid-cols-[5.5rem_minmax(0,1fr)_auto]"
+                          >
                             <p className="text-xs text-muted-foreground pt-1">
                               {formatDate(talk.date || talk.year, "short")}
                             </p>
                             <div>
                               <h4 className="text-base font-semibold leading-snug text-foreground">{talk.title}</h4>
-
-
                               <p className="mt-1 text-xs leading-5 text-muted-foreground">
                                 {talk.event}
                                 {talk.source ? `, ${talk.source}` : ""}
@@ -186,7 +190,7 @@ export function TalksList({ talks }: TalksListProps) {
                                 <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                               </a>
                             )}
-                          </article>
+                          </Row>
                         ))}
                       </div>
                     </div>
@@ -198,16 +202,15 @@ export function TalksList({ talks }: TalksListProps) {
         )}
       </div>
 
-
       {filteredTalks.length > visibleTalks.length && (
         <div className="flex justify-center pt-4">
           <button
+            type="button"
             onClick={() => setPageSize((prev) => prev + 10)}
             className="btn-primary"
           >
             Show more sessions
           </button>
-
         </div>
       )}
     </div>

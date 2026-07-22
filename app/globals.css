@@ -196,18 +196,6 @@
   .hero-glow-bg {
     background: radial-gradient(circle at 50% 0%, oklch(0.68 0.10 65 / 0.08) 0%, transparent 70%);
   }
-
-  .glass-card {
-    background-color: var(--card);
-    border: 1px solid var(--border);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .glass-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 10px 25px -5px oklch(0.68 0.10 65 / 0.1), 0 8px 10px -6px oklch(0.68 0.10 65 / 0.05);
-    transform: translateY(-2px);
-  }
   /* ── Object-Oriented Component Architecture (OOCSS) ── */
 
   /* 1. PRIMARY (MAIN) COMPONENT HIERARCHY */

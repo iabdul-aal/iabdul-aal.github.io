@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, FileText } from "lucide-react"
 import { PublicationsList } from "@/components/publications-list"
 import { ProjectCard } from "@/components/project-card"
 import { ActivityFeed } from "@/components/activity-feed"
@@ -106,6 +106,7 @@ export default async function Home() {
                   className={isCv ? "btn-primary" : "trigger-secondary-chip"}
                 >
                   {link.label}
+                  {isCv && <FileText className="h-3.5 w-3.5" aria-hidden="true" />}
                 </Link>
               )
             })}

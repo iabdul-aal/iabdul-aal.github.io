@@ -62,7 +62,7 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           {publication.authors.map((author, idx) => {
             const isMe = author.toLowerCase().includes("abdulaal")
             return (
-              <span key={author}>
+              <span key={`${author}-${idx}`}>
                 {idx > 0 && ", "}
                 <span className={isMe ? "font-semibold text-foreground" : undefined}>
                   {author}

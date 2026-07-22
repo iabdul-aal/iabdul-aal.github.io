@@ -120,6 +120,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
         </p>
         {(searchQuery || selectedType !== "all" || selectedYear !== "all") && (
           <button
+            type="button"
             onClick={() => {
               setSearchQuery("")
               setSelectedType("all")
@@ -175,12 +176,12 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
       {filteredItems.length > visibleItems.length && (
         <div className="flex justify-center pt-4">
           <button
+            type="button"
             onClick={() => setPageSize((prev) => prev + 15)}
             className="btn-primary"
           >
             Show more materials
           </button>
-
         </div>
       )}
 
