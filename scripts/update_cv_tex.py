@@ -36,6 +36,10 @@ def latex_escape(text):
 
 
 def build_preamble(info, lang="en"):
+    skills_label = "Kenntnisse:" if lang == "de" else "Skills:"
+    attachments_label = "Anlagen:" if lang == "de" else "Attachments:"
+    issuer_label = "Aussteller:" if lang == "de" else "Issuer:"
+
     lines = []
     lines += [
         "% Academic CV Template for PhD Applications",
@@ -131,10 +135,10 @@ def build_preamble(info, lang="en"):
         "        \\end{itemize}%",
         "    }%",
         "    \\ifblank{#6}{}{%",
-        "        \\textcolor{sectioncolor}{\\small\\textbf{Skills:}} \\textcolor{black}{\\small #6} \\\\%",
+        f"        \\textcolor{{sectioncolor}}{{\\small\\textbf{{{skills_label}}}}} \\textcolor{{black}}{{\\small #6}} \\\\%",
         "    }%",
         "    \\ifblank{#7}{}{%",
-        "        \\textcolor{mediacolor}{\\small\\faIcon{link} \\textbf{Attachments:} #7}%",
+        f"        \\textcolor{{mediacolor}}{{\\small\\faIcon{{link}} \\textbf{{{attachments_label}}} #7}}%",
         "    }%",
         "    \\ifblank{#8}{}{\\vspace{#8}}%",
         "    \\par\\vspace{3pt}% Ensure paragraph break and spacing",
@@ -151,10 +155,10 @@ def build_preamble(info, lang="en"):
         "        \\end{itemize}%",
         "    }%",
         "    \\ifblank{#6}{}{%",
-        "        \\textcolor{sectioncolor}{\\small\\textbf{Skills:}} \\textcolor{black}{\\small #6} \\\\%",
+        f"        \\textcolor{{sectioncolor}}{{\\small\\textbf{{{skills_label}}}}} \\textcolor{{black}}{{\\small #6}} \\\\%",
         "    }%",
         "    \\ifblank{#7}{}{%",
-        "        \\textcolor{mediacolor}{\\small\\faIcon{link} \\textbf{Attachments:} #7}%",
+        f"        \\textcolor{{mediacolor}}{{\\small\\faIcon{{link}} \\textbf{{{attachments_label}}} #7}}%",
         "    }%",
         "    \\ifblank{#8}{}{\\vspace{#8}}%",
         "    \\par\\vspace{3pt}% Ensure paragraph break and spacing",
@@ -163,7 +167,7 @@ def build_preamble(info, lang="en"):
         "% Award",
         "\\newcommand{\\award}[5]{%",
         "    \\textbf{#1} \\hfill #2 \\\\%",
-        "    \\textit{Issuer:} #3%",
+        f"    \\textit{{{issuer_label}}} #3%",
         "    \\vspace{2pt}%",
         "    \\ifblank{#4}{}{%",
         "        \\begin{itemize}%",
@@ -171,7 +175,7 @@ def build_preamble(info, lang="en"):
         "        \\end{itemize}%",
         "    }%",
         "    \\ifblank{#5}{}{%",
-        "        \\textcolor{mediacolor}{\\small\\faIcon{link} \\textbf{Attachments:} #5} \\\\%",
+        f"        \\textcolor{{mediacolor}}{{\\small\\faIcon{{link}} \\textbf{{{attachments_label}}} #5}} \\\\%",
         "    }%",
         "    \\vspace{2pt}%",
         "    \\par\\vspace{3pt}% Ensure paragraph break and spacing",
@@ -188,10 +192,10 @@ def build_preamble(info, lang="en"):
         "        \\end{itemize}%",
         "    }%",
         "    \\ifblank{#6}{}{%",
-        "        \\textcolor{sectioncolor}{\\small\\textbf{Skills:}} \\textcolor{black}{\\small #6} \\\\%",
+        f"        \\textcolor{{sectioncolor}}{{\\small\\textbf{{{skills_label}}}}} \\textcolor{{black}}{{\\small #6}} \\\\%",
         "    }%",
         "    \\ifblank{#7}{}{%",
-        "        \\textcolor{mediacolor}{\\small\\faIcon{link} \\textbf{Attachments:} #7}%",
+        f"        \\textcolor{{mediacolor}}{{\\small\\faIcon{{link}} \\textbf{{{attachments_label}}} #7}}%",
         "    }%",
         "    \\ifblank{#8}{}{\\vspace{#8}}%",
         "    \\par\\vspace{3pt}% Ensure paragraph break and spacing",
@@ -427,6 +431,8 @@ def translate_data_for_german(data):
     for aw in de_data.get("awards", []):
         if aw.get("award") in award_translations:
             aw["award"] = award_translations[aw["award"]]
+        if "Faculty of Engineering" in aw.get("issuer", ""):
+            aw["issuer"] = "Universität Alexandria, Fakultät für Ingenieurwissenschaften"
 
     leadership_translations = {
         "Board Member": "Vorstandsmitglied",
@@ -436,12 +442,14 @@ def translate_data_for_german(data):
     for lead in de_data.get("leadership", []):
         if lead.get("role") in leadership_translations:
             lead["role"] = leadership_translations[lead["role"]]
+        if "USA-Registered NGO" in lead.get("org", ""):
+            lead["org"] = lead["org"].replace("USA-Registered NGO", "in den USA registrierte NGO")
         lead["location"] = (
             "Remote" if lead.get("location") == "Remote"
             else "Hybrid" if lead.get("location") == "Hybrid"
             else lead.get("location")
         )
-        lead["period"] = lead.get("period", "").replace("Present", "Heute")
+        lead["period"] = lead.get("period", "").replace("Present", "Heute").replace("Oct", "Okt")
 
     for t in de_data.get("teaching", []):
         if t.get("role") == "Tutor / Mentor":
@@ -450,6 +458,8 @@ def translate_data_for_german(data):
 
     for m in de_data.get("memberships", []):
         m["period"] = m.get("period", "").replace("Present", "Heute")
+        if "formerly OSA" in m.get("name", ""):
+            m["name"] = m["name"].replace("formerly OSA", "ehemals OSA")
         if "Student Member" in m.get("detail", ""):
             m["detail"] = m["detail"].replace("Student Member", "Studentisches Mitglied")
 
@@ -458,6 +468,11 @@ def translate_data_for_german(data):
             r["role"] = "Wissenschaftlicher Mitarbeiter"
         elif r.get("role") == "Postdoctoral Researcher":
             r["role"] = "Postdoktorand"
+        elif r.get("role") == "Associate Professor":
+            r["role"] = "Außerordentlicher Professor"
+
+        if "Department of Engineering Physics and Mathematics" in r.get("department", ""):
+            r["department"] = "Institut für Technische Physik und Mathematik, Universität Alexandria"
 
     return de_data
 
