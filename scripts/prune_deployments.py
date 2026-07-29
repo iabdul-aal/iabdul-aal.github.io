@@ -8,7 +8,7 @@ import time
 OWNER = "iabdul-aal"
 REPO = "iabdul-aal.github.io"
 TOKEN = os.environ.get("GITHUB_TOKEN")
-KEEP_COUNT = 5  # Number of recent deployments to keep
+KEEP_COUNT = 1  # Keep only the latest deployment and delete all older ones
 
 if not TOKEN:
     print("Error: GITHUB_TOKEN environment variable not set.")
