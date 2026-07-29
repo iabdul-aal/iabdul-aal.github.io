@@ -9,8 +9,9 @@ import { personConfig } from "@/lib/site-config"
 import { useLanguage } from "@/lib/i18n-context"
 
 const germanAboutParagraphs = [
-  "Die Forschungsaktivitäten konzentrieren sich auf wellengleichungsbeschränkte numerische Modellierung und Bauelementsimulation in der integrierten Nanophotonik. Übergeordnetes Ziel ist die Entwicklung reproduzierbarer Berechnungsworkflows von der elektromagnetischen Theorie bis hin zu fertigbaren Geometrien durch FDTD-Simulationen, Kopplungsmodenanalyse und physikinformiertes Inversdesign.",
-  "Veröffentlichte Peer-Review-Arbeiten umfassen einen Beitrag im Journal of Optics über Terahertz-BIC-Metasurflächen. Eingereichte Arbeiten umfassen einen Preprint über physikinformierte Inversdesign-Pipelines für SPDC-Quellen.",
+  "Die Forschungsaktivitäten konzentrieren sich auf wellengleichungsbeschränkte numerische Elektrodynamik und Bauelementsimulation in der integrierten Nanophotonik. Übergeordnetes Ziel ist die Entwicklung reproduzierbarer Berechnungsworkflows von der elektromagnetischen Theorie bis hin zu fertigbaren Geometrien durch FDTD-Simulationen, Kopplungsmodenanalyse und physikinformiertes Inversdesign.",
+  "Die wissenschaftlichen Schwerpunkte erstrecken sich über drei Kernbereiche: integrierte aktive Nanophotonik, nichtlineare Quantenphotonik und physikinformierte neuronale Surrogate. Im Bereich der Quantenphotonik stehen wellenleiterbasierte Quellen verschränkter Photonenpaare durch spontane parametrische Fluoreszenz (SPDC) sowie die Optimierung modaler Phasenanpassung im Fokus.",
+  "Um den Rechenaufwand iterativer Vollwellensimulationen zu reduzieren, werden physikinformierte neuronale Netze und Operator-Architekturen mit exakten Differentialgleichungs-Formulierungen kombiniert. Das akademische Fundament im Ingenieurwesen an der Universität Alexandria wird durch Forschungsarbeiten am NanoPhoto Lab des Instituts für Materialforschung und Ingenieurwesen (IMRE), A*STAR ergänzt.",
 ]
 
 export function AboutView() {
