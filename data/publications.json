@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
+    "venue": "Preprint",
+    "year": "2026",
+    "doi": "10.48550/ARXIV.2606.21945",
+    "url": "https://arxiv.org/abs/2606.21945",
+    "date": "2026-06-20",
+    "arxiv": "2606.21945",
+    "authors": [
+      "Amir H. M. Labeb",
+      "Basmala Sallam",
+      "Abdelrahman W. Elsayed",
+      "Islam I. Abdulaal",
+      "Amany M. Kamal",
+      "Omar A. M. Abdelraouf"
+    ]
+  },
+  {
+    "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
+    "venue": "Journal of Optics",
+    "year": "2026",
+    "doi": "10.1088/2040-8986/ae8605",
+    "url": "https://doi.org/10.1088/2040-8986/ae8605",
+    "date": "2026-06-15",
+    "arxiv": "2510.00357",
+    "pdfUrl": "https://cfn-live-content-bucket-iop-org.s3.eu-west-1.amazonaws.com/journals/2040-8986/28/7/073001/revision2/jopt_28_7_073001.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260720T062709Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAYDKQL6LTX22PGTP5%2F20260720%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=30cb9cb1c864ec62ac2a831769d628f993ef9f6419f0af1d583d5341765c72e6",
+    "badges": [
+      "Invited Paper"
+    ],
+    "authors": [
+      "Islam I. Abdulaal",
+      "Abdelrahman W. A. Elsayed",
+      "Omar A. M. Abdelraouf"
+    ]
+  }
+]
