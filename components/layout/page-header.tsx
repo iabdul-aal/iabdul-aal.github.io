@@ -60,7 +60,7 @@ export function PageHeader({
   }
 
   return (
-    <section className="mx-auto max-w-6xl px-5 pt-10 pb-6 sm:px-6 md:pt-14 md:pb-8 lg:px-8 min-w-0 w-full border-b border-border/50">
+    <section className="mx-auto max-w-6xl px-5 pt-10 pb-6 sm:px-6 md:pt-14 md:pb-8 lg:px-8 min-w-0 w-full border-b border-border/50 mb-8 sm:mb-10">
       <div className={cn(maxWidthClass, "min-w-0 w-full")}>
         <p className="text-sm font-medium text-muted-foreground break-words min-w-0 w-full">{displayEyebrow}</p>
         <h1 className="mt-4 text-3xl font-semibold leading-tight text-foreground md:text-4xl break-words min-w-0 w-full">
