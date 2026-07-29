@@ -43,13 +43,13 @@ jobs:
         run: python scripts/update_cv_tex.py
 
       - name: Compile LaTeX CV (EN)
-        uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v4
         with:
           root_file: data/cv.tex
           extra_system_packages: "biber"
 
       - name: Compile LaTeX CV (DE)
-        uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v4
         with:
           root_file: data/cv_de.tex
           extra_system_packages: "biber"
