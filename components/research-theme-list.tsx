@@ -55,7 +55,7 @@ export function ResearchThemeList({ themes, publications }: ResearchThemeListPro
   const isDe = lang === "de"
 
   return (
-    <div className="divide-y divide-border border-t border-border">
+    <div className="divide-y divide-border">
       {themes.map((theme, idx) => {
         const themePublications = publications.filter((pub) => pub.relatedThemes?.includes(theme.id))
         const isEven = idx % 2 === 1
