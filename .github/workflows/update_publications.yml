@@ -50,7 +50,7 @@ jobs:
         run: python scripts/generate_activity.py
 
       - name: Compile LaTeX CV
-        uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v4
         with:
           root_file: data/cv.tex
 
