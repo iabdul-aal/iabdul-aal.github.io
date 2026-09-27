@@ -1,17 +1,23 @@
 {
   "papers": {
     "2026-recent-advances-in-terahertz-based-bound-states-in-the-continuum-metasurfaces-for-6g-communications-and-medtech": {
-      "cited_by_count": 1,
+      "cited_by_count": 2,
       "referenced_works_count": 0,
       "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
       "openalex_id": "https://openalex.org/W7167259199"
+    },
+    "nanophotonet-mpm-a-physics-informed-deep-learning-for-inverse-design-of-nbocl-sub-2-sub-biphoton-quantum-sources": {
+      "cited_by_count": 0,
+      "referenced_works_count": 0,
+      "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl2 Biphoton Quantum Sources",
+      "openalex_id": "https://openalex.org/W7213258492"
     },
     "2026-beyond-data-driven-how-physics-informed-neural-networks-are-reshaping-multi-physics-design-and-discovery": {
       "cited_by_count": 0,
       "referenced_works_count": 0,
       "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
-      "openalex_id": "https://openalex.org/W7165817142"
+      "openalex_id": "https://openalex.org/W7165689228"
     }
   },
-  "fetchedAt": "2026-09-20T07:46:22.089111+00:00"
+  "fetchedAt": "2026-09-27T08:16:19.516446+00:00"
 }
