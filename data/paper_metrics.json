@@ -1,7 +1,7 @@
 {
   "papers": {
     "2026-recent-advances-in-terahertz-based-bound-states-in-the-continuum-metasurfaces-for-6g-communications-and-medtech": {
-      "cited_by_count": 2,
+      "cited_by_count": 3,
       "referenced_works_count": 0,
       "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
       "openalex_id": "https://openalex.org/W7167259199"
@@ -19,5 +19,5 @@
       "openalex_id": "https://openalex.org/W7165689228"
     }
   },
-  "fetchedAt": "2026-09-27T08:16:19.516446+00:00"
+  "fetchedAt": "2026-10-04T08:30:02.877854+00:00"
 }
