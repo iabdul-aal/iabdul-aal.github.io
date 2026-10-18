@@ -70,7 +70,7 @@ def events_from_publications(pubs: list) -> list[dict]:
         venue = (pub.get("venue") or "").strip()
         doi = (pub.get("doi") or "").strip()
         arxiv_prefix = "10.48550/arxiv."
-        is_preprint = doi.lower().startswith(arxiv_prefix) if doi else not bool(venue)
+        is_preprint = doi.lower().startswith(arxiv_prefix) or "preprint" in venue.lower() or "preprints" in doi.lower() if doi else not bool(venue)
 
         dt = parse_date(year)
         if not dt:
@@ -78,7 +78,14 @@ def events_from_publications(pubs: list) -> list[dict]:
 
         event_type = "preprint" if is_preprint else "paper"
         verb = "Preprint posted" if is_preprint else "Paper accepted"
-        detail = f"{verb} in {venue}." if venue and not is_preprint else f"{verb} on arXiv." if is_preprint else f"{verb}."
+        if "preprints" in venue.lower():
+            detail = f"{verb} on Preprints.org."
+        elif is_preprint and doi.lower().startswith(arxiv_prefix):
+            detail = f"{verb} on arXiv."
+        elif venue and not is_preprint:
+            detail = f"{verb} in {venue}."
+        else:
+            detail = f"{verb}."
 
         events.append({
             "date_iso": dt.strftime(DATE_FMT),

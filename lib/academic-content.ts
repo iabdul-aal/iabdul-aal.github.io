@@ -20,8 +20,8 @@ export const identity = {
   name: cvData.personalInfo.name,
   // Specialization used as the short running title across the site
   shortTitle: cvData.personalInfo.specialization,
-  affiliation: "",
-  location: "",
+  affiliation: "FAU Erlangen-Nürnberg • Max Planck School of Photonics",
+  location: "Erlangen, Germany",
   email: socialLinks.email,
   // Primary research statement — same text on homepage, about, and CV PDF header
   statement: cvData.researchInterests,
@@ -65,7 +65,7 @@ export const profileLinks = [
 export const aboutParagraphs = [
   "Research activities focus on wave-equation-constrained computational electrodynamics and device-level modeling within integrated nanophotonics. The central methodology bridges classical Maxwell field theory and fabricable integrated optical components through rigorous full-wave electromagnetic simulation, coupled-mode analysis, and physics-informed computational frameworks. The primary objective is establishing open, reproducible simulation workflows that map structural geometric parameters directly to optical, electrical, and quantum behavior.",
   "Investigation spans three primary physical domains: integrated active nanophotonics, nonlinear quantum photonics, and physics-informed neural surrogates. Work in active nanophotonics examines field-guided optical modes interacting with anisotropic material tensors in bound-state-in-the-continuum metasurfaces and resonant cavity geometries. In quantum photonics, research targets the synthesis of entangled photon-pair sources via spontaneous parametric down-conversion in anisotropic waveguides, optimizing modal phase-matching and joint spectral characteristics for quantum state generation.",
-  "To overcome computational bottlenecks inherent in iterative full-wave simulations, physics-informed neural networks and operator architectures are combined with exact differential equation formulations, yielding fast surrogate solvers for gradient-based inverse design. Academic training in Electronics and Communications Engineering at Alexandria University is complemented by ongoing research experience at the NanoPhoto Lab within the Institute of Materials Research and Engineering (IMRE), A*STAR.",
+  "To overcome computational bottlenecks inherent in iterative full-wave simulations, physics-informed neural networks and operator architectures are combined with exact differential equation formulations, yielding fast surrogate solvers for gradient-based inverse design. Academic training includes the MAOT program at FAU Erlangen-Nürnberg and a B.Sc. from Alexandria University, alongside research at the Max Planck School of Photonics and IMRE, A*STAR.",
 ] as const
 
 export const aboutEpigraph =

@@ -3,10 +3,10 @@
     "name": "Islam I. Abdulaal",
     "specialization": "Integrated Photonics Researcher",
     "specialization_de": "Forscher für Integrierte Photonik",
-    "city": "Alexandria",
-    "country": "Egypt",
-    "phone": "+20-120-460-9271",
-    "email": "contact@iabdul-aal.me",
+    "city": "Erlangen",
+    "country": "Germany",
+    "phone": "+49 163 4708095",
+    "email": "islam.abdulaal@fau.de",
     "website": "iabdul-aal.me",
     "linkedin": "iabdul-aal",
     "github": "iabdul-aal",
@@ -17,13 +17,26 @@
   "researchInterests_de": "Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauelemente, physikinformiertes Inversdesign und wellengleichungsbeschränkte neuronale Netze zur Optimierung photonischer Bauelemente.",
   "education": [
     {
+      "degree": "M.Sc. in Advanced Optical Technologies (MAOT)",
+      "degree_de": "M.Sc. in Advanced Optical Technologies (MAOT)",
+      "period": "Oct 2026 -- Present",
+      "period_de": "Okt 2026 -- Heute",
+      "institution": "Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)",
+      "institution_de": "Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)",
+      "location": "Erlangen, Germany",
+      "location_de": "Erlangen, Deutschland",
+      "bullets": [
+        "Elite Network of Bavaria graduate program focusing on computational optics, optical material processing, and nanophotonics."
+      ]
+    },
+    {
       "degree": "B.Sc. in Electronics and Communications Engineering",
       "degree_de": "B.Sc. in Elektronik und Kommunikationstechnik",
       "period": "Aug 2021 -- Aug 2026",
       "institution": "Alexandria University, Faculty of Engineering",
       "institution_de": "Universität Alexandria, Fakultät für Ingenieurwissenschaften",
-      "location": "Onsite",
-      "location_de": "Vor Ort",
+      "location": "Alexandria, Egypt",
+      "location_de": "Alexandria, Ägypten",
       "bullets": [
         "Core curriculum: integrated photonics, electromagnetic theory, optical fiber communications, and digital signal processing.",
         "Awarded Dean's Honors for Academic Excellence every year from 2021 to 2025."
@@ -34,15 +47,15 @@
     {
       "role": "Research Intern",
       "role_de": "Forschungspraktikant",
-      "period": "Sep 2025 -- Present",
-      "period_de": "Sep 2025 -- Heute",
+      "period": "Sep 2025 -- Jul 2026",
+      "period_de": "Sep 2025 -- Jul 2026",
       "org": "NanoPhoto Lab, IMRE, A*STAR",
       "org_de": "NanoPhoto-Labor, IMRE, A*STAR",
       "location": "Remote",
       "location_de": "Fernarbeit",
       "bullets": [
-        "Conducting device-level FDTD simulations for spontaneous parametric down-conversion (SPDC) sources on emerging material platforms.",
-        "Contributing to co-authored work on terahertz bound-state-in-the-continuum (BIC) metasurfaces, published in the Journal of Optics."
+        "Conducted device-level FDTD simulations for spontaneous parametric down-conversion (SPDC) sources on emerging material platforms.",
+        "Contributed to co-authored work on terahertz bound-state-in-the-continuum (BIC) metasurfaces, published in the Journal of Optics."
       ]
     },
     {
@@ -103,6 +116,14 @@
     { "name": "English", "name_de": "Englisch", "level": "Professional Working Proficiency", "level_de": "Verhandlungssicher" }
   ],
   "awards": [
+    {
+      "award": "Max Planck School of Photonics (MPSP) Scholarship",
+      "award_de": "Stipendium der Max Planck School of Photonics (MPSP)",
+      "issuer": "Max Planck Schools",
+      "issuer_de": "Max Planck Schools",
+      "year": "2026 -- Present",
+      "year_de": "2026 -- Heute"
+    },
     {
       "award": "Dean's Honors for Academic Excellence",
       "award_de": "Dekan-Ehrung für akademische Exzellenz",
@@ -169,17 +190,15 @@
       "bullets": []
     }
   ],
-  "teaching": [
-    {
-      "role": "Tutor / Mentor",
-      "role_de": "Tutor / Mentor",
-      "period": "Jul 2026 -- Present",
-      "period_de": "Jul 2026 -- Heute",
-      "location": "Optica Egypt",
-      "location_de": "Optica Ägypten"
-    }
-  ],
   "memberships": [
+    {
+      "name": "Elite Network of Bavaria",
+      "name_de": "Elitenetzwerk Bayern",
+      "period": "Oct 2026 -- Present",
+      "period_de": "Okt 2026 -- Heute",
+      "detail": "Student Member.",
+      "detail_de": "Studentisches Mitglied."
+    },
     {
       "name": "Optica (formerly OSA)",
       "name_de": "Optica (ehemals OSA)",

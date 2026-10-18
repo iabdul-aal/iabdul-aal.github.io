@@ -58,6 +58,17 @@ const publicationOverrides: Record<
     relatedProjects: [],
     abstract: "Physics-Informed Neural Networks (PINNs) have emerged as a transformative paradigm in computational science, embedding fundamental physical laws directly into deep learning objective functions. This paper presents a systematic analysis of PINN architectures for complex multi-physics modeling in electromagnetic, wave propagation, and coupled physical systems, demonstrating how hybrid physical-data constraints overcome traditional mesh generation limitations and accelerate inverse design.",
   },
+  "10.20944/preprints202609.1239.v1": {
+    doi: "10.20944/preprints202609.1239.v1",
+    authors: ["Islam I. Abdulaal", "Omar A. M. Abdelraouf"],
+    submitted: "15 Sep 2026",
+    subjects: ["Optics", "Quantum Physics", "Computational Physics"],
+    bibtexKey: "abdulaal2026nanophotonetmpm",
+    primaryClass: "physics.optics",
+    relatedThemes: ["intelligent-photonics", "integrated-nanophotonics"],
+    relatedProjects: ["nanophotonet-mpm"],
+    pdfUrl: "https://www.preprints.org/manuscript/202609.1239/v1/download",
+  },
 }
 
 function slugify(value: string): string {
@@ -197,7 +208,12 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
         const venue = (item.venue ?? item.publisher ?? "").trim() || (arxiv ? "arXiv preprint" : "Publication")
         const authors = item.authors && item.authors.length > 0 ? item.authors : override?.authors ?? []
 
-        const isPreprint = Boolean(arxiv && (!doi || doi.toLowerCase().startsWith(ARXIV_DOI_PREFIX)))
+        const isPreprint = Boolean(
+          (arxiv && (!doi || doi.toLowerCase().startsWith(ARXIV_DOI_PREFIX))) ||
+          venue.toLowerCase().includes("preprint") ||
+          venue.toLowerCase().includes("working paper") ||
+          (doi && doi.toLowerCase().includes("preprints"))
+        )
         const badges = Array.from(new Set([...(item.badges ?? []), ...(override?.badges ?? [])]))
         const pdfUrl = (item.pdfUrl ?? override?.pdfUrl ?? "").trim() || (isPreprint && arxiv ? `https://arxiv.org/pdf/${arxiv}` : undefined)
 

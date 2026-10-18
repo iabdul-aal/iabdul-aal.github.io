@@ -22,6 +22,19 @@ def generate_bib_key(authors, year, title):
     
     return f"{first_author_lastname}{year}{first_title_word}"
 
+def clean_title_for_bibtex(title: str) -> str:
+    clean = re.sub(r"<sub>(.*?)</sub>", r"\\textsubscript{\1}", title)
+    clean = re.sub(r"<sup>(.*?)</sup>", r"\\textsuperscript{\1}", clean)
+    clean = re.sub(r"(NbOCl(?:\\textsubscript\{2\}|2))", r"{\1}", clean)
+    clean = re.sub(r"(NanoPhotoNet-MPM)", r"{\1}", clean)
+    clean = re.sub(r"\b(6G)\b", r"{\1}", clean)
+    clean = re.sub(r"\b(MedTech)\b", r"{\1}", clean)
+    clean = re.sub(r"\b(PINNs)\b", r"{\1}", clean)
+    clean = re.sub(r"\b(PINN)\b", r"{\1}", clean)
+    clean = re.sub(r"\b(DeepONet)\b", r"{\1}", clean)
+    clean = re.sub(r"\b(BIC)\b", r"{\1}", clean)
+    return clean
+
 def main():
     json_path = os.path.join(os.path.dirname(__file__), "..", "data", "publications.json")
     bib_path = os.path.join(os.path.dirname(__file__), "..", "data", "publications.bib")
@@ -35,7 +48,7 @@ def main():
         
     new_entries = []
     for pub in publications:
-        title = pub.get("title", "")
+        title = clean_title_for_bibtex(pub.get("title", ""))
         venue = pub.get("venue", "")
         year = pub.get("year", "")
         doi = pub.get("doi", "")
@@ -44,15 +57,17 @@ def main():
         authors = pub.get("authors", [])
         
         formatted_authors = " and ".join(format_author(a) for a in authors)
-        key = generate_bib_key(authors, year, title)
+        key = generate_bib_key(authors, year, pub.get("title", ""))
         
         is_preprint = "preprint" in venue.lower() or "arxiv" in venue.lower()
         
         if is_preprint:
+            note_val = f"arXiv:{arxiv}" if arxiv else venue
+            doi_line = f"\n  doi          = {{{doi}}}," if doi else ""
             entry = f"""@unpublished{{{key},
   author       = {{{formatted_authors}}},
   title        = {{{title}}},
-  note         = {{arXiv:{arxiv}}},
+  note         = {{{note_val}}},{doi_line}
   year         = {{{year}}},
   url          = {{{url}}}
 }}"""

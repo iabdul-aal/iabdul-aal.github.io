@@ -253,10 +253,11 @@ def build_education(education, lang="en"):
         degree = ed.get("degree_de", ed["degree"]) if lang == "de" else ed["degree"]
         institution = ed.get("institution_de", ed["institution"]) if lang == "de" else ed["institution"]
         location = ed.get("location_de", ed["location"]) if lang == "de" else ed["location"]
+        period = ed.get("period_de", ed["period"]) if lang == "de" else ed["period"]
         lines.append(
             f"\\education"
             f"{{{latex_escape(degree)}}}"
-            f"{{{latex_escape(ed['period'])}}}"
+            f"{{{latex_escape(period)}}}"
             f"{{{latex_escape(institution)}}}"
             f"{{{latex_escape(location)}}}"
             f"{{}}"  # No bullet details
@@ -310,6 +311,8 @@ def build_publications(citations, h_index, date_str, lang="en"):
 
 
 def build_teaching(teaching, lang="en"):
+    if not teaching:
+        return []
     title = "Lehre und Mentoring-Erfahrung" if lang == "de" else "Teaching and Mentoring Experience"
     lines = [f"\\section*{{{title}}}"]
     for i, t in enumerate(teaching):
@@ -352,10 +355,11 @@ def build_awards(awards, lang="en"):
     for aw in awards:
         award = aw.get("award_de", aw["award"]) if lang == "de" else aw["award"]
         issuer = aw.get("issuer_de", aw["issuer"]) if lang == "de" else aw["issuer"]
+        year = aw.get("year_de", aw["year"]) if lang == "de" else aw["year"]
         lines.append(
             f"\\award"
             f"{{{latex_escape(award)}}}"
-            f"{{{latex_escape(aw['year'])}}}"
+            f"{{{latex_escape(year)}}}"
             f"{{{latex_escape(issuer)}}}"
             f"{{}}" # No details
             f"{{}}" # No attachments
@@ -427,8 +431,9 @@ def generate_tex(data, citations, h_index, date_str, lang="en"):
     sections += [""]
     sections += build_leadership(data["leadership"], lang=lang)
     sections += [""]
-    sections += build_teaching(data["teaching"], lang=lang)
-    sections += [""]
+    if data.get("teaching"):
+        sections += build_teaching(data["teaching"], lang=lang)
+        sections += [""]
     sections += build_memberships(data["memberships"], lang=lang)
     sections += [""]
     sections += build_references(data["references"], lang=lang)

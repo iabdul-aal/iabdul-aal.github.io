@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-10-01",
+    "type": "milestone",
+    "title": "Admitted to M.Sc. in Advanced Optical Technologies (MAOT) at FAU Erlangen-Nürnberg",
+    "detail": "Began graduate studies within the Elite Network of Bavaria focusing on optical technologies and nanophotonics."
+  },
+  {
+    "date": "2026-10-01",
+    "type": "award",
+    "title": "Awarded Max Planck School of Photonics (MPSP) Scholarship",
+    "detail": "Selected for the national photonics excellence scholarship program."
+  },
+  {
     "date": "2026-08-15",
     "type": "milestone",
     "title": "Completed B.Sc. in Electronics and Communications Engineering",

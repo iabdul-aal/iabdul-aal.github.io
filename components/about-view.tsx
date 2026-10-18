@@ -11,7 +11,7 @@ import { useLanguage } from "@/lib/i18n-context"
 const germanAboutParagraphs = [
   "Die Forschungsaktivitäten konzentrieren sich auf wellengleichungsbeschränkte numerische Elektrodynamik und Bauelementsimulation in der integrierten Nanophotonik. Übergeordnetes Ziel ist die Entwicklung reproduzierbarer Berechnungsworkflows von der elektromagnetischen Theorie bis hin zu fertigbaren Geometrien durch FDTD-Simulationen, Kopplungsmodenanalyse und physikinformiertes Inversdesign.",
   "Die wissenschaftlichen Schwerpunkte erstrecken sich über drei Kernbereiche: integrierte aktive Nanophotonik, nichtlineare Quantenphotonik und physikinformierte neuronale Surrogate. Im Bereich der Quantenphotonik stehen wellenleiterbasierte Quellen verschränkter Photonenpaare durch spontane parametrische Fluoreszenz (SPDC) sowie die Optimierung modaler Phasenanpassung im Fokus.",
-  "Um den Rechenaufwand iterativer Vollwellensimulationen zu reduzieren, werden physikinformierte neuronale Netze und Operator-Architekturen mit exakten Differentialgleichungs-Formulierungen kombiniert. Das akademische Fundament im Ingenieurwesen an der Universität Alexandria wird durch Forschungsarbeiten am NanoPhoto Lab des Instituts für Materialforschung und Ingenieurwesen (IMRE), A*STAR ergänzt.",
+  "Um den Rechenaufwand iterativer Vollwellensimulationen zu reduzieren, werden physikinformierte neuronale Netze und Operator-Architekturen mit exakten Differentialgleichungs-Formulierungen kombiniert. Das akademische Fundament im MAOT-Programm an der FAU Erlangen-Nürnberg und der B.Sc. der Universität Alexandria werden durch Forschungserfahrung an der Max Planck School of Photonics sowie am IMRE, A*STAR ergänzt.",
 ]
 
 export function AboutView() {
