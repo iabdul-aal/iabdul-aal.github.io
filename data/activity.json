@@ -19,7 +19,7 @@
       "date": "Sep 2026",
       "type": "preprint",
       "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl<sub>2</sub> Biphoton Quantum Sources",
-      "detail": "Preprint posted on Preprints.org."
+      "detail": "Preprint posted."
     },
     {
       "date_iso": "2026-08-15",
@@ -71,5 +71,5 @@
       "detail": "Published on Medium."
     }
   ],
-  "fetchedAt": "2026-10-18T07:15:53.459882+00:00"
+  "fetchedAt": "2026-10-25T07:38:06.299769+00:00"
 }

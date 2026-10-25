@@ -15,17 +15,11 @@
   },
   {
     "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl<sub>2</sub> Biphoton Quantum Sources",
-    "venue": "Preprints.org",
-    "year": "2026",
+    "venue": "Working Paper",
+    "year": "",
     "doi": "10.20944/preprints202609.1239.v1",
     "url": "https://doi.org/10.20944/preprints202609.1239.v1",
-    "date": "2026-09-15",
-    "authors": [
-      "Islam I. Abdulaal",
-      "Omar A. M. Abdelraouf"
-    ],
-    "abstract": "Integrated quantum photonics requires chip-scale biphoton sources, but phase matching, nonlinear coupling, loss, and spectral purity are coupled in high-index anisotropic waveguides. We present NanoPhotoNet-MPM, a physics-informed neural surrogate for modal spontaneous parametric down-conversion (SPDC) in monoclinic NbOCl2 waveguides (d_22≈100 pm V^(-1)). The framework couples a DeepONet transverse eigensolver, regularised by the full-vectorial Helmholtz equations, with a quantum coupled-wave-equation propagator trained on 70 audited finite-difference eigenmode geometries. The trained model predicts a degenerate phase-matched crossing at w=283.13 nm and h=500.00 nm with an effective-index MAE of (4.16±0.75)×10^(-3), outperforming Gaussian process regression and plain multi-layer perceptron baselines by one to two orders of magnitude while guaranteeing wave-equation consistency. Joint spectral amplitude analysis at the degenerate design yields a heralded purity of P=0.122 (K=8.20), limited by symmetry-enforced group-velocity mismatch. A multi-mode genetic-algorithm search across Type-0, Type-I, and Type-II SPDC configurations identifies a Type-II design (m_p=4, m_s=0, m_i=1) at w=592.0 nm and h=270.0 nm that reaches P≈0.350 at L=0.5 mm with 95.9% idler survival under realistic propagation loss. The resulting framework is a generalizable surrogate-assisted design and active-learning guidance method for anisotropic van der Waals quantum photonic platforms.",
-    "pdfUrl": "https://www.preprints.org/manuscript/202609.1239/v1/download"
+    "date": "2026-09-15"
   },
   {
     "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
