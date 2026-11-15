@@ -58,6 +58,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLangState(newLang)
     try {
       localStorage.setItem(STORAGE_KEY, newLang)
+    } catch {
+      // storage may be restricted in private browsing modes
+    }
+
+    try {
       if (typeof window !== "undefined" && window.history) {
         const url = new URL(window.location.href)
         if (newLang === "de") {
@@ -68,7 +73,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         window.history.replaceState(null, "", url.toString())
       }
     } catch {
-      // ignore state update error
+      // ignore history update error
     }
   }
 

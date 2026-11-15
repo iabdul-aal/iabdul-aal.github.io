@@ -1,7 +1,7 @@
 import cvData from "@/data/cv_data.json"
 import { socialLinks } from "@/lib/social-links"
 
-// ── Navigation ─────────────────────────────────────────────────────────────
+// Navigation
 
 export const navigationItems = [
   { href: "/about", label: "About" },
@@ -12,26 +12,25 @@ export const navigationItems = [
   { href: "/cv", label: "CV" },
 ] as const
 
-// ── Identity ───────────────────────────────────────────────────────────────
-// Single source of truth: cv_data.json → personalInfo and researchInterests.
+// Identity
+// Single source of truth: cv_data.json -> personalInfo and researchInterests.
 // The website is the detailed view; the PDF CV is the condensed form.
 
 export const identity = {
   name: cvData.personalInfo.name,
-  // Specialization used as the short running title across the site
+  specialization: cvData.personalInfo.specialization,
   shortTitle: cvData.personalInfo.specialization,
-  affiliation: "FAU Erlangen-Nürnberg • Max Planck School of Photonics",
-  location: "Erlangen, Germany",
+  affiliation: "FAU Erlangen-Nürnberg and Max Planck School of Photonics",
+  location: `${cvData.personalInfo.city}, ${cvData.personalInfo.country}`,
   email: socialLinks.email,
-  // Primary research statement — same text on homepage, about, and CV PDF header
+  orcid: cvData.personalInfo.orcid,
   statement: cvData.researchInterests,
-  // Compact form used where space is limited
   compactStatement:
-    "Integrated nanophotonics, quantum photonic sources, nonlinear on-chip devices, and physics-informed inverse design.",
+    "Integrated nanophotonics, quantum photon-pair sources, and physics-informed inverse design.",
 } as const
 
 export const homepageResearchStatement =
-  "Research concentrates on integrated nanophotonic devices: quantum entangled-photon sources, nonlinear material platforms, and physics-informed computational methods for device inverse design."
+  "Research investigates guided-mode integrated electrodynamics, nonlinear chip-scale biphoton quantum sources, and wave-equation-constrained neural surrogate models for active photonic and nanophotonic device synthesis."
 
 export const activityTypeLabel: Record<string, string> = {
   paper: "Paper",
@@ -39,15 +38,19 @@ export const activityTypeLabel: Record<string, string> = {
   software: "Software",
   position: "Position",
   milestone: "Education",
+  award: "Award",
   talk: "Talk",
   article: "Article",
 }
 
-// ── Current position ───────────────────────────────────────────────────────
-export const currentPosition = cvData.personalInfo.specialization
+// Current position
+export const currentPosition =
+  "Ph.D. Candidate (Study Phase, MPSP) and M.Sc. Student (MAOT, FAU)"
 
+export const mpspFundingAcknowledgement: string =
+  cvData.personalInfo.fundingAcknowledgement
 
-// ── Profile links ─────────────────────────────────────────────────────────
+// Profile links
 
 export const profileLinks = [
   { label: "CV", href: "/cv", external: false },
@@ -57,25 +60,21 @@ export const profileLinks = [
   { label: "ResearchGate", href: socialLinks.researchGate, external: true },
 ] as const
 
-// ── About page ─────────────────────────────────────────────────────────────
-// Narrative paragraphs for the About page. These are the full, discursive
-// version of the CV experience entries — same facts, more context.
-// Keep coherent with cv_data.json researchExperience bullets.
+// About page
+// Concise academic biography aligned with cv_data.json and free of curriculum bloat.
 
 export const aboutParagraphs = [
-  "Research activities focus on wave-equation-constrained computational electrodynamics and device-level modeling within integrated nanophotonics. The central methodology bridges classical Maxwell field theory and fabricable integrated optical components through rigorous full-wave electromagnetic simulation, coupled-mode analysis, and physics-informed computational frameworks. The primary objective is establishing open, reproducible simulation workflows that map structural geometric parameters directly to optical, electrical, and quantum behavior.",
-  "Investigation spans three primary physical domains: integrated active nanophotonics, nonlinear quantum photonics, and physics-informed neural surrogates. Work in active nanophotonics examines field-guided optical modes interacting with anisotropic material tensors in bound-state-in-the-continuum metasurfaces and resonant cavity geometries. In quantum photonics, research targets the synthesis of entangled photon-pair sources via spontaneous parametric down-conversion in anisotropic waveguides, optimizing modal phase-matching and joint spectral characteristics for quantum state generation.",
-  "To overcome computational bottlenecks inherent in iterative full-wave simulations, physics-informed neural networks and operator architectures are combined with exact differential equation formulations, yielding fast surrogate solvers for gradient-based inverse design. Academic training includes the MAOT program at FAU Erlangen-Nürnberg and a B.Sc. from Alexandria University, alongside research at the Max Planck School of Photonics and IMRE, A*STAR.",
+  "Islam I. Abdulaal is a Ph.D. candidate in the Study Phase at the Max Planck School of Photonics and is pursuing an M.Sc. in Advanced Optical Technologies (MAOT) at Friedrich-Alexander-Universität Erlangen-Nürnberg. He holds a B.Sc. in Electronics and Communications Engineering from Alexandria University and conducted prior integrated photonics research at the NanoPhoto Lab, IMRE, A*STAR, and the OPST Group at Alexandria University.",
+  "His research centers on integrated nanophotonics, quantum photonics, and intelligent photonics, connecting full-wave electromagnetic theory with physics-informed neural surrogates for waveguide modeling and inverse device design.",
+  "He is a student member of the Elite Network of Bavaria, serves on the founding board of the Optica Egypt Local Section, and previously chaired the IEEE Solid-State Circuits Society Student Branch Chapter at Alexandria University.",
 ] as const
 
-export const aboutEpigraph =
-  "The ones who are crazy enough to think they can change the world are the ones who do."
+export const aboutEpigraph: string | null = null
 
-export const aboutEpigraphAuthor = "Steve Jobs"
+export const aboutEpigraphAuthor: string | null = null
 
-// ── Research themes ────────────────────────────────────────────────────────
-// Rich website-specific content. Narratively coherent with cv_data.json
-// researchInterests and experience bullets.
+// Research themes
+// Website-specific thematic descriptions coherent with cv_data.json.
 
 export const researchThemes = [
   {
@@ -83,40 +82,37 @@ export const researchThemes = [
     title: "Integrated Nanophotonics",
     image: "/images/integrated-nanophotonics.png",
     problem:
-      "Harnessing the interaction between guided optical modes, hybrid active materials (ferroelectrics, liquid crystals, 2D layers), and surrounding acoustic, thermal, or electrostatic fields in cavity, photonic crystal, plasmonic, and bound-state-in-the-continuum (BIC) structures.",
-
-
+      "Harnessing the interaction between guided optical modes, hybrid active materials (ferroelectrics, liquid crystals, 2D layers), and surrounding acoustic, thermal, or electrostatic fields across cavity, photonic crystal, plasmonic, and bound-state-in-the-continuum (BIC) nanophotonic structures.",
     methods:
-      "Full-wave electromagnetic simulation, anisotropic permittivity tensor modeling, multi-physical finite-element coupling, waveguide dispersion engineering, and resonant cavity analysis.",
+      "Three-dimensional full-wave FDTD and finite-element electromagnetic modeling, anisotropic permittivity tensor formulation, coupled semiconductor drift-diffusion transport, waveguide dispersion engineering, transfer-matrix calculation, and high-quality-factor resonant cavity eigenmode extraction across integrated dielectric platforms.",
     physicalRelevance:
-      "External stimuli and material responses dynamically modify the local permittivity tensor, shifting resonances and tuning propagation constants. Modeling these optoacoustic or electro-optic couplings enables active tunability, reconfigurability, and switchable light routing on-chip.",
+      "External stimuli and material responses dynamically modify the local permittivity tensor, shifting optical resonances and tuning propagation constants. Quantifying these optoacoustic or electro-optic couplings enables active tunability, reconfigurability, and switchable light routing on-chip.",
   },
   {
     id: "quantum-photonics",
     title: "Quantum Photonics",
     image: "/images/nonlinear-quantum-photonics.png",
     problem:
-      "Scaling on-chip quantum technologies by co-integrating waveguide-based nonlinear photon-pair sources, coherent interfaces, and phase-shifter networks within the low-loss routing topologies established on the nanophotonic platform.",
+      "Scaling integrated quantum photonic technologies requires co-designing waveguide-based nonlinear photon-pair sources, low-loss modal splitters, and phase-shifter networks while maintaining spectral purity and modal phase-matching across compact anisotropic nanophotonic platforms.",
     methods:
-      "Nonlinear optics modeling, quantum state tomography representation, coherent waveguide interface simulation, and reconfigurable circuit design.",
+      "Second-order nonlinear coupled-wave modeling, spontaneous parametric down-conversion (SPDC) joint spectral amplitude analysis, finite-difference eigenmode overlap integration, quantum state purity evaluation, and coherent photonic circuit co-simulation across waveguides.",
     physicalRelevance:
-      "Governing waveguide nonlinear coefficients and coherent interactions to execute high-fidelity quantum state preparation, routing, and manipulation in photonic circuit topologies.",
+      "Controlling nonlinear susceptibility tensors, group-velocity dispersion, and coherent waveguide interactions enables high-purity entangled biphoton generation, deterministic state preparation, and low-decoherence routing within scalable integrated quantum optical circuits.",
   },
   {
     id: "intelligent-photonics",
     title: "Intelligent Photonics",
     image: "/images/intelligent-photonics.png",
     problem:
-      "Accelerating device design and discovery by bridging wave equations with deep learning and optimization methods, while developing all-optical neuromorphic processing hardware.",
+      "Accelerating photonic device discovery requires overcoming the high computational cost of iterative full-wave electromagnetic sweeps by embedding physical wave equations into differentiable neural surrogates and developing optical neuromorphic processing architectures.",
     methods:
-      "Physics-informed neural networks (PINNs), adjoint and gradient-free optimization, evolutionary search algorithms, optical neural network (ONN) architectures, and wave-based co-design.",
+      "Physics-informed neural networks (PINNs), deep operator surrogates (DeepONet), coupled-wave equation residuals, adjoint gradient and evolutionary genetic optimization, interferometric optical computing models, and automated multi-physics nanophotonic inverse-design workflows.",
     physicalRelevance:
-      "Establishing a bidirectional framework where physical wave propagation constrains network training, and multi-port interferometric circuits execute mathematical operations at the speed of light.",
+      "Establishing a bidirectional framework where Maxwell and coupled-wave conservation laws constrain neural surrogate training enables fast, physically consistent inverse design while multi-port interferometric circuits execute linear transformations optically.",
   },
 ] as const
 
-
-// ── Projects ───────────────────────────────────────────────────────────────
+// Projects
 // Source of truth for the Tools page and homepage featured tool.
 // Tier "minor": not featured on homepage, not listed under research themes.
 // Tier "major" (default): featured on homepage, ranked by project_metrics.json score.
@@ -130,6 +126,11 @@ export type Project = {
   readonly methods: string
   readonly tools: readonly string[]
   readonly results: string
+  readonly github?: string
+  readonly zenodo?: string
+  readonly huggingface?: string
+  readonly huggingfaceDataset?: string
+  readonly paperDoi?: string
   readonly links: readonly { readonly label: string; readonly href: string }[]
   readonly relatedThemes: readonly string[]
   readonly tier: "major" | "minor"
@@ -142,7 +143,7 @@ export const projects: readonly Project[] = [
     title: "NanoPhotoNet-MPM: Physics-Informed Neural Surrogate for Inverse SPDC Design",
     status: "Prerelease",
     objective:
-      "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl2 waveguides.",
+      "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl₂ waveguides.",
     methods:
       "Physics-informed neural networks (PINNs), DeepOperator Networks (DeepONet), coupled-wave equations, finite-difference eigenmode (FDE) solvers, genetic algorithm optimization, and joint spectral amplitude (JSA) analysis.",
     tools: [
@@ -156,13 +157,17 @@ export const projects: readonly Project[] = [
     ],
     results:
       "Predicts phase-matching zeros with 1.43e-3 effective-index MAE, identifies Type-II SPDC designs reaching P = 0.350 purity ceiling, and provides public code, model checkpoints, and FDE field dataset.",
+    zenodo: "https://doi.org/10.5281/zenodo.18653064",
+    huggingface: "https://huggingface.co/iabdul-aal/NanoPhotoNet-MPM",
+    huggingfaceDataset: "https://huggingface.co/datasets/iabdul-aal/NanoPhotoNet-MPM",
+    paperDoi: "10.20944/preprints202609.1239.v1",
     links: [
-      { label: "Repository", href: "https://github.com/iabdul-aal/NanoPhotoNet-MPM" },
-      { label: "Dataset DOI", href: "https://doi.org/10.57967/hf/9066" },
-      { label: "Model DOI", href: "https://doi.org/10.57967/hf/9068" },
       { label: "Code DOI", href: "https://doi.org/10.5281/zenodo.18653064" },
+      { label: "HuggingFace", href: "https://huggingface.co/iabdul-aal/NanoPhotoNet-MPM" },
+      { label: "Dataset", href: "https://huggingface.co/datasets/iabdul-aal/NanoPhotoNet-MPM" },
+      { label: "Paper", href: "https://doi.org/10.20944/preprints202609.1239.v1" },
     ],
-    relatedThemes: ["intelligent-photonics", "integrated-nanophotonics", "nonlinear-quantum-photonics"],
+    relatedThemes: ["intelligent-photonics", "integrated-nanophotonics", "quantum-photonics"],
     tier: "major",
     year: "2026",
   },
@@ -170,25 +175,26 @@ export const projects: readonly Project[] = [
     id: "pd-design-kit",
     title: "Ge-on-Si PIN Photodetector Design Kit",
     status: "",
-
     objective:
-      "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical links.",
+      "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical interconnects.",
     methods:
-      "Finite-Difference Time-Domain (FDTD) optical absorption modeling, drift-diffusion electrical transport simulation, transit-time and RC bandwidth analysis, compact-model parameter extraction, system-level link simulation, and layout validation.",
+      "3D Finite-Difference Time-Domain (FDTD) optical absorption modeling, 3D semiconductor drift-diffusion transport simulation, transit-time and RC bandwidth analysis, compact-model parameter extraction, circuit co-simulation, and GDSII layout validation.",
     tools: [
-      "FDTD Solvers",
-      "Drift-Diffusion Simulators",
-      "Circuit Simulators",
-      "Scientific Computing",
-      "Layout Editors",
+      "3D FDTD Solvers",
+      "Drift-Diffusion Transport",
+      "Circuit Co-Simulation",
+      "GDSII Layout",
+      "Scientific Python",
       "Automation Scripts",
       "Typesetting",
     ],
     results:
-      "Public repository containing solver-derived data flows, generated figures, compact model library (CML) artifacts, automation scripts, and a Zenodo DOI record for citation.",
+      "Public repository containing solver-derived data flows, generated figures, compact model library artifacts, automation scripts, and a Zenodo archive record (DOI 10.5281/zenodo.21089184).",
+    github: "https://github.com/iabdul-aal/PD-design-kit",
+    zenodo: "https://doi.org/10.5281/zenodo.21089184",
     links: [
       { label: "Repository", href: "https://github.com/iabdul-aal/PD-design-kit" },
-      { label: "DOI", href: "https://doi.org/10.5281/zenodo.19652934" },
+      { label: "DOI", href: "https://doi.org/10.5281/zenodo.21089184" },
     ],
     relatedThemes: [],
     tier: "minor",
@@ -196,12 +202,7 @@ export const projects: readonly Project[] = [
   },
 ]
 
-// ── Recent activity ────────────────────────────────────────────────────────
-// Activity items are auto-generated by the daily cron pipeline into
-// activity.json. The homepage reads from loadActivity(). No manual
-// array is maintained here.
-
-// ── CV summary ────────────────────────────────────────────────────────────
+// CV summary
 // Derived from cv_data.json so the website summary and PDF CV are coherent.
 
 export const cvSummary = [
@@ -223,16 +224,13 @@ export const cvSummary = [
   },
 ] as const
 
-// ── Method stack ───────────────────────────────────────────────────────────
-// Derived from the first entry in cv_data.json technicalSkills.
-// Used for the tag cloud on the CV page and research pages.
+// Method stack
 
 export const methodStack = [
-  "FDTD Simulation",
+  "3D FDTD Simulation",
   "Drift-Diffusion Transport",
   "Finite Element Method (FEM)",
   "Physics-Informed Neural Networks",
   "Transfer-Matrix Method",
   "Python and PyTorch",
 ] as const
-

@@ -27,6 +27,7 @@ export function FilterSelect({ label, value, options, onChange, showIcon = false
     if (optLabel === "All Topics") return t.ui.allTopics
     if (optLabel === "All Types") return t.ui.allTypes
     if (optLabel === "All Formats") return t.ui.allFormats
+    if (optLabel === "All Categories") return t.ui.allCategories
     return optLabel
   }
 
@@ -39,6 +40,7 @@ export function FilterSelect({ label, value, options, onChange, showIcon = false
       if (lbl === "Format:") return "Format:"
       if (lbl === "Type:") return "Typ:"
       if (lbl === "Tier:") return "Kategorie:"
+      if (lbl === "Category:") return "Kategorie:"
     }
     return lbl
   }
@@ -61,7 +63,11 @@ export function FilterSelect({ label, value, options, onChange, showIcon = false
         className="rounded border border-border bg-card px-2 py-1 text-[11px] font-medium text-foreground outline-none transition-colors focus:border-accent max-w-full min-w-0 truncate"
       >
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option
+            key={opt.value}
+            value={opt.value}
+            className="bg-card text-card-foreground"
+          >
             {translateOptionLabel(opt.label)}
           </option>
         ))}

@@ -9,7 +9,7 @@ import { ResearchThemeList } from "@/components/research-theme-list"
 export const metadata: Metadata = createPageMetadata({
   title: "Integrated Photonics and Inverse Design Research",
   description:
-    `Research themes in integrated nanophotonics, nonlinear quantum photonics, photonic inverse design, and physics-informed neural surrogates by ${siteConfig.name}.`,
+    `Research themes in integrated nanophotonics, quantum photonics, photonic inverse design, and physics-informed neural surrogates by ${siteConfig.name}.`,
   path: "/research",
   keywords: [
     "Integrated Photonics Research",
@@ -29,7 +29,7 @@ export default async function ResearchPage() {
       <PageHeader
         eyebrow="Research"
         title="Research themes in integrated photonics"
-        description="Research is organized by physical and computational theme rather than by individual output. The underlying methodology is full-wave electromagnetic simulation and device physics, connecting structural geometry to optical and electrical behavior."
+        description="Research is organized by physical and numerical domain, applying full-wave electromagnetic solvers and device physics to connect optical geometry with waveguide and resonator behavior."
         i18nKey="research"
       />
 

@@ -1,26 +1,32 @@
 [
   {
-    "date": "2026-10-01",
+    "date": "2026-10-12",
     "type": "milestone",
-    "title": "Admitted to M.Sc. in Advanced Optical Technologies (MAOT) at FAU Erlangen-Nürnberg",
-    "detail": "Began graduate studies within the Elite Network of Bavaria focusing on optical technologies and nanophotonics."
+    "title": "Began M.Sc. in Advanced Optical Technologies (MAOT) at FAU Erlangen-Nürnberg",
+    "detail": "Started graduate studies focusing on computational photonics, light physics, and biomedical optical processing."
   },
   {
     "date": "2026-10-01",
-    "type": "award",
-    "title": "Awarded Max Planck School of Photonics (MPSP) Scholarship",
-    "detail": "Selected for the national photonics excellence scholarship program."
+    "type": "position",
+    "title": "Joined Max Planck School of Photonics (Cohort 8 Study Phase)",
+    "detail": "Selected as a Ph.D. candidate in the national photonics fellowship and graduate study program."
+  },
+  {
+    "date": "2026-09-10",
+    "type": "position",
+    "title": "Co-initiated Optica Egypt Local Section",
+    "detail": "Serving as founding board member and webmaster following official Optica section approval."
   },
   {
     "date": "2026-08-15",
     "type": "milestone",
-    "title": "Completed B.Sc. in Electronics and Communications Engineering",
-    "detail": "Graduated from Alexandria University with a degree in Electronics and Communications Engineering."
+    "title": "Completed B.Sc. in Electronics and Communications Engineering at Alexandria University",
+    "detail": "Graduated with 3.39/4.0 CGPA and five consecutive Dean's List honors from 2021 to 2026."
   },
   {
     "date": "2025-09-01",
     "type": "position",
     "title": "Joined NanoPhoto Lab, IMRE, A*STAR as a research intern",
-    "detail": "Work focused on physics-informed optimization for integrated quantum photonic source structures."
+    "detail": "Conducted FDTD and physics-informed optimization studies for integrated quantum photonic sources."
   }
 ]

@@ -1,6 +1,6 @@
 {
   "orcid": "0009-0004-9300-3936",
-  "fetchedAt": "2026-11-15T09:31:26.972786+00:00",
+  "fetchedAt": "2026-11-15T14:00:00+00:00",
   "profile": {
     "name": "Islam I. Abdulaal",
     "biography": "",
@@ -42,16 +42,24 @@
   },
   "educations": [
     {
-      "degree": "Master of Science in Advanced Optical Technologies",
+      "degree": "Master of Science in Advanced Optical Technologies (MAOT)",
       "org": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
       "period": "2026 - Present",
-      "summary": ""
+      "summary": "Winter Semester 2026/27 onward; Physics of Light and Biomedical Photonics and Data Processing tracks with computational photonics focus."
     },
     {
       "degree": "Bachelor of Science in Electronics and Communications Engineering",
       "org": "Alexandria University",
       "period": "2021 - 2026",
-      "summary": ""
+      "summary": "CGPA 3.39/4.0; Dean's List of Honors across all five academic years (2021 to 2026)."
+    }
+  ],
+  "employments": [
+    {
+      "role": "Ph.D. Candidate (Study Phase, Cohort 8)",
+      "org": "Max Planck School of Photonics",
+      "period": "2026 - Present",
+      "summary": "Study Phase (October 2026 to September 2028) transitioning into the Ph.D. Research Phase."
     }
   ],
   "memberships": []

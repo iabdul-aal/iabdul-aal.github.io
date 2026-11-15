@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Row } from "@/components/ui/row"
+import { ScientificText } from "@/components/ui/scientific-text"
 import { activityTypeLabel } from "@/lib/academic-content"
 import { formatDate } from "@/lib/utils"
 import { useLanguage } from "@/lib/i18n-context"
@@ -48,13 +49,17 @@ export function ActivityFeed({ items, limit = 4 }: ActivityFeedProps) {
     <div className="list-container">
       {visibleItems.map((item) => (
         <Row key={`${item.date_iso}-${item.title}`} variant="grid" className="sm:grid-cols-[5.5rem_minmax(0,1fr)]">
-          <p className="text-xs text-muted-foreground pt-0.5">{formatDate(item.date_iso || item.date)}</p>
+          <p className="text-xs text-muted-foreground pt-0.5">{formatDate(item.date_iso || item.date, "short", lang)}</p>
           <div className="min-w-0 w-full">
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="custom">{getLabel(item.type)}</Badge>
             </div>
-            <h3 className="font-medium text-sm text-foreground break-words min-w-0 w-full">{item.title}</h3>
-            <p className="mt-1 text-xs leading-6 text-muted-foreground break-words min-w-0 w-full">{item.detail}</p>
+            <h3 className="font-medium text-sm text-foreground break-words min-w-0 w-full">
+              <ScientificText text={item.title} />
+            </h3>
+            <p className="mt-1 text-xs leading-6 text-muted-foreground break-words min-w-0 w-full">
+              <ScientificText text={item.detail} />
+            </p>
           </div>
         </Row>
       ))}

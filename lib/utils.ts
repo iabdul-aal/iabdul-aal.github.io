@@ -50,7 +50,8 @@ export function downloadText(content: string, fileName: string, mimeType: string
  */
 export function formatDate(
   value: string | Date,
-  style: "short" | "long" | "year" = "short"
+  style: "short" | "long" | "year" = "short",
+  lang: "en" | "de" = "en"
 ): string {
   const date = typeof value === "string" ? new Date(value) : value
   if (isNaN(date.getTime())) return String(value)
@@ -59,6 +60,36 @@ export function formatDate(
     style === "long"
       ? { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }
       : { year: "numeric", month: "short", timeZone: "UTC" }
-  return new Intl.DateTimeFormat("en", options).format(date)
+  return new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-US", options).format(date)
+}
+
+/**
+ * Copy text using navigator.clipboard with textarea execCommand fallback.
+ */
+export async function copyTextWithFallback(text: string): Promise<boolean> {
+  if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch {
+      // fall through to textarea fallback
+    }
+  }
+
+  if (typeof document === "undefined") return false
+  try {
+    const textarea = document.createElement("textarea")
+    textarea.value = text
+    textarea.setAttribute("readonly", "")
+    textarea.style.position = "fixed"
+    textarea.style.opacity = "0"
+    document.body.appendChild(textarea)
+    textarea.select()
+    const ok = document.execCommand("copy")
+    document.body.removeChild(textarea)
+    return ok
+  } catch {
+    return false
+  }
 }
 

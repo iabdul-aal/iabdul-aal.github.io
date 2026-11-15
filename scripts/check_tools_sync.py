@@ -5,30 +5,26 @@ Exits 0 if synced, 1 if out of sync.
 """
 import json
 import os
-import re
 import sys
+
+from config_helper import get_project_records
+
 
 def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     cv_data_path = os.path.join(root, "data", "cv_data.json")
-    academic_content_path = os.path.join(root, "lib", "academic-content.ts")
 
     with open(cv_data_path, "r", encoding="utf-8") as f:
         cv_data = json.load(f)
 
-    tools_in_cv = set(tool.get("id") for tool in cv_data.get("tools", []) if "id" in tool)
+    tools_in_cv = {tool.get("id") for tool in cv_data.get("tools", []) if tool.get("id")}
 
-    with open(academic_content_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # Extract projects array block
-    match = re.search(r"export const projects.*?\n\]", content, re.DOTALL)
-    if not match:
+    project_records = get_project_records()
+    if not project_records:
         print("ERROR: Could not locate export const projects in academic-content.ts")
         sys.exit(1)
 
-    projects_block = match.group(0)
-    projects_in_code = set(re.findall(r'id:\s*["\']([^"\']+)["\']', projects_block))
+    projects_in_code = {proj.get("id") for proj in project_records if proj.get("id")}
 
     diff_cv = tools_in_cv - projects_in_code
     diff_code = projects_in_code - tools_in_cv
@@ -43,6 +39,7 @@ def main():
 
     print(f"SUCCESS: Tools/Projects in sync ({len(tools_in_cv)} items matched).")
     sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

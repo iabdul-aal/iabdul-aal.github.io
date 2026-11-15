@@ -183,16 +183,68 @@ def extract_memberships(memberships: dict[str, Any]) -> list[dict[str, str]]:
     return items
 
 
+def extract_employments(employments: dict[str, Any]) -> list[dict[str, str]]:
+    items: list[dict[str, str]] = []
+
+    for group in employments.get("affiliation-group", []):
+        for summary in group.get("summaries", []):
+            emp = summary.get("employment-summary", {})
+            role = nested_value(emp, "role-title")
+            department = nested_value(emp, "department-name")
+            org = nested_value(emp, "organization", "name")
+            period = format_period(emp.get("start-date"), emp.get("end-date"))
+
+            title = role
+            if department:
+                title = f"{role}, {department}" if role else department
+
+            items.append(
+                {
+                    "role": title or "Researcher",
+                    "org": org or "Unknown institution",
+                    "period": period,
+                }
+            )
+
+    def sort_key(item: dict[str, str]) -> tuple[int, str]:
+        period = item.get("period", "")
+        start = period.split(" - ")[0].strip()
+        return (int(start) if start.isdigit() else 0, item.get("role", ""))
+
+    return sorted(items, key=sort_key, reverse=True)
+
+
+def load_existing() -> dict[str, Any]:
+    if OUTPUT_PATH.exists():
+        try:
+            return json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            pass
+    return {}
+
+
 def main() -> None:
+    existing = load_existing()
     person = fetch_json("person")
     educations = fetch_json("educations")
     memberships = fetch_json("memberships")
+
+    existing_employments = existing.get("employments", [])
+    employments = existing_employments
+    try:
+        raw_employments = fetch_json("employments")
+        parsed_employments = extract_employments(raw_employments)
+        if parsed_employments or not existing_employments:
+            employments = parsed_employments
+    except Exception as exc:
+        print(f"Warning: could not fetch ORCID employments ({exc}); preserving existing list.")
 
     payload = {
         "orcid": ORCID_ID,
         "fetchedAt": datetime.now(timezone.utc).isoformat(),
         "profile": extract_profile(person),
         "educations": extract_educations(educations),
+        "employments": employments,
         "memberships": extract_memberships(memberships),
     }
 

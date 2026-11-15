@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows:
+      - "Update Academic and Talks Data"
+      - "Rebuild CV PDF on Push"
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -18,10 +24,13 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,14 +38,24 @@ jobs:
           node-version: 20
           cache: "npm"
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install dependencies
         run: npm ci
 
       - name: Run verification checks
-        run: npm run check
+        run: |
+          python scripts/check_tools_sync.py
+          npm run check
 
       - name: Build static Next.js site
         run: npm run build
+
+      - name: Verify governance and built HTML
+        run: python scripts/verify_site.py --ci
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -52,6 +71,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.ref }}
 
       - name: Deploy to GitHub Pages
         id: deployment

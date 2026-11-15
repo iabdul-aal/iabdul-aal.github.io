@@ -6,9 +6,22 @@ import { identity, navigationItems, profileLinks } from "@/lib/academic-content"
 import { useLanguage } from "@/lib/i18n-context"
 import { LanguageToggle } from "@/components/ui/language-toggle"
 
-export function Footer() {
-  const currentYear = new Date().getFullYear()
-  const { t } = useLanguage()
+export interface FooterProps {
+  lastUpdated?: string
+}
+
+export function Footer({ lastUpdated }: FooterProps) {
+  const currentYear = lastUpdated ? Number(lastUpdated.slice(0, 4)) : new Date().getFullYear()
+  const { t, lang } = useLanguage()
+
+  const formattedLastUpdated = lastUpdated
+    ? new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        timeZone: "UTC",
+      }).format(new Date(`${lastUpdated}T00:00:00Z`))
+    : null
 
   const getNavLabel = (href: string, defaultLabel: string) => {
     const key = href.replace("/", "") as keyof typeof t.nav
@@ -66,8 +79,15 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border">
-        <div className="container-layout py-4 text-xs text-muted-foreground">
-          © {currentYear} {identity.name}. {t.sections.footerCopyright}
+        <div className="container-layout flex flex-col gap-1 py-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            © {currentYear} {identity.name}. {t.sections.footerCopyright}
+          </span>
+          {formattedLastUpdated && (
+            <span>
+              {t.ui.lastUpdated}: {formattedLastUpdated}
+            </span>
+          )}
         </div>
       </div>
     </footer>

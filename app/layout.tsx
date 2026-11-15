@@ -4,8 +4,10 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
+import { SkipLink } from "@/components/skip-link"
 import { LanguageProvider } from "@/lib/i18n-context"
 import { personConfig, siteConfig } from "@/lib/site-config"
+import activityData from "@/data/activity.json"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +19,7 @@ const securityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
   "form-action 'self'",
-  "object-src 'none'",
+  "object-src 'self'",
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
@@ -64,8 +66,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: siteConfig.ogImage,
-        width: 320,
-        height: 320,
+        width: 400,
+        height: 400,
         alt: personConfig.name,
       },
     ],
@@ -147,33 +149,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const fetchedDate =
+    typeof activityData.fetchedAt === "string" && activityData.fetchedAt.length >= 10
+      ? activityData.fetchedAt.slice(0, 10)
+      : undefined
+
   return (
     <html lang="en" dir="ltr" className={inter.variable}>
       <head>
         <meta httpEquiv="Content-Security-Policy" content={securityPolicy} />
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
-        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
-        <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} - Activity Feed`} href="/feed.xml" />
+        <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} Activity Feed`} href="/feed.xml" />
       </head>
       <body>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-card focus:px-3 focus:py-2 focus:text-sm focus:text-foreground focus:shadow-sm"
-        >
-          Skip to main content
-        </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
         <LanguageProvider>
+          <SkipLink />
           <Navigation />
           <div id="main-content" tabIndex={-1}>
             {children}
           </div>
-          <Footer />
+          <Footer lastUpdated={fetchedDate} />
         </LanguageProvider>
       </body>
     </html>
   )
 }
-

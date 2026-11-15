@@ -7,7 +7,7 @@ Rules for all user-facing text on the website. Read this file before editing any
 Use **third person** throughout all static site text. Write "Research activities center on..." rather than "My research focuses on..." or "I focus on...".
 
 Exceptions:
-- Direct quotations (e.g., the About page epigraph) may use first-person-impersonal naturally.
+- Verbatim source abstracts (on `/publications`) and official source summaries for non-publication records preserve original wording unless character governance rules require replacing `&` or U+2014.
 - UI action labels use imperative voice: "Download PDF", "Clear filters", "Return home".
 
 Do not use imperative voice in descriptive or explanatory text.
@@ -40,9 +40,9 @@ Do not use imperative voice in descriptive or explanatory text.
 Every content page must follow this anatomy:
 
 ```
-<p>  eyebrow   — section label in small muted text (e.g., "Research")
-<h1> heading   — noun-phrase title (e.g., "Research themes in integrated photonics")
-<p>  descriptor — 1-sentence explanation, 20–35 words
+<p>  eyebrow   : section label in small muted text (e.g., "Research")
+<h1> heading   : noun-phrase title (e.g., "Research themes in integrated photonics")
+<p>  descriptor : 1-sentence explanation, 20–35 words
 ```
 
 Rules:
@@ -57,10 +57,12 @@ Use these canonical labels consistently across all pages and components:
 | Concept | Canonical label | Avoid |
 |---|---|---|
 | Navigation items | About, Research, Publications, Tools, Materials, CV | Projects, Software, Talks, Papers |
-| Top-ranked items on CV page | "Featured Publications", "Featured Software" | "Selected", "Top", "Best" |
+| Top-ranked items in CV PDF | "Featured Publications" | "Selected", "Top", "Best" |
 | Algorithm-sorted items on homepage | "Selected Publications" | "Featured" (reserved for CV) |
 | Link to full list | "All [plural noun]" (e.g., "All publications") | "View all", "See more", "Full list" |
 | Algorithm-sorted tool on homepage | "Featured Tool" | "Top Tool", "Best Tool" |
+
+CV views (`/cv`, `cv.pdf`, `cv_de.pdf`) do not use bullet points; `/cv` displays Education, Research Experience, and the embedded PDF viewer, while tools/projects remain on `/tools`.
 
 ## Empty-State Text
 

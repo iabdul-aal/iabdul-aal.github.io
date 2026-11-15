@@ -1,5 +1,5 @@
-Contact: mailto:contact@iabdul-aal.me
+Contact: mailto:islam.abdulaal@fau.de
 Canonical: https://iabdul-aal.me/.well-known/security.txt
-Policy: https://iabdul-aal.me/contact
-Preferred-Languages: en
-Expires: 2027-12-31T23:59:59.000Z
+Policy: https://github.com/iabdul-aal/iabdul-aal.github.io/blob/main/.github/SECURITY.md
+Preferred-Languages: en, de
+Expires: 2027-11-15T00:00:00.000Z

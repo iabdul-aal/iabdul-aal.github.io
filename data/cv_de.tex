@@ -80,9 +80,7 @@
     \textit{#3} \hfill \textit{#4}\par
     \ifstrempty{#5}{}{
         \vspace{2pt}
-        \begin{itemize}
-            #5
-        \end{itemize}
+        {\small #5\par}
     }
     \ifstrempty{#6}{}{
         \textcolor{sectioncolor}{\small\textbf{Kenntnisse:}} \textcolor{black}{\small #6} \\
@@ -99,9 +97,7 @@
     \textit{#3} \hfill \textit{#4}\par
     \ifstrempty{#5}{}{
         \vspace{2pt}
-        \begin{itemize}
-            #5
-        \end{itemize}
+        {\small #5\par}
     }
     \ifstrempty{#6}{}{
         \textcolor{sectioncolor}{\small\textbf{Kenntnisse:}} \textcolor{black}{\small #6} \\
@@ -118,9 +114,7 @@
     \textit{Aussteller:} #3\par
     \vspace{2pt}
     \ifstrempty{#4}{}{
-        \begin{itemize}
-            #4
-        \end{itemize}
+        {\small #4\par}
     }
     \ifstrempty{#5}{}{
         \textcolor{mediacolor}{\small\faIcon{link} \textbf{Anlagen:} #5} \\
@@ -134,9 +128,7 @@
     \textit{#3} \hfill \textit{#4}\par
     \ifstrempty{#5}{}{
         \vspace{2pt}
-        \begin{itemize}
-            #5
-        \end{itemize}
+        {\small #5\par}
     }
     \ifstrempty{#6}{}{
         \textcolor{sectioncolor}{\small\textbf{Kenntnisse:}} \textcolor{black}{\small #6} \\
@@ -175,7 +167,7 @@
     {\Huge\bfseries\color{headercolor} Islam I. Abdulaal} \\[6pt]
     {\large\itshape Forscher für Integrierte Photonik}
     \vspace{8pt}
-    
+
     \faIcon{envelope} \href{mailto:islam.abdulaal@fau.de}{islam.abdulaal@fau.de} \quad
     \faGlobe\ \href{https://iabdul-aal.me}{iabdul-aal.me} \\
     \vspace{3pt}
@@ -186,10 +178,11 @@
 \vspace{-8pt}
 
 \section*{Forschungsinteressen}
-Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauelemente, physikinformiertes Inversdesign und wellengleichungsbeschränkte neuronale Netze zur Optimierung photonischer Bauelemente.
+Numerische Modellierung und Inversdesign integrierter nanophotonischer Bauelemente durch Verknüpfung von Vollwellen-Elektrodynamik und physikinformierten neuronalen Surrogaten für aktive Wellenleiter sowie Quanten-Photonenpaar-Quellen.
 
 \section*{Ausbildung}
 \education{M.Sc. in Advanced Optical Technologies (MAOT)}{Okt 2026 -- Heute}{Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)}{Erlangen, Deutschland}{}{}{}{0pt}
+\education{Promotionsstipendiat (Studienphase, Kohorte 8)}{Okt 2026 -- Heute}{Max Planck School of Photonics (MPSP)}{Erlangen und Jena, Deutschland}{}{}{}{0pt}
 \education{B.Sc. in Elektronik und Kommunikationstechnik}{Aug 2021 -- Aug 2026}{Universität Alexandria, Fakultät für Ingenieurwissenschaften}{Alexandria, Ägypten}{}{}{}{0pt}
 
 \section*{Forschungserfahrung}
@@ -198,32 +191,33 @@ Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauel
 \research{Forschungspraktikant}{Jul 2023 -- Aug 2025}{OPST-Gruppe, SmartCI-Forschungszentrum, Universität Alexandria}{Hybrid}{}{}{}{0pt}
 
 \section*{Ausgewählte Publikationen}
-\noindent\small\textit{*Zitiermetriken basierend auf Google Scholar (h-index: 3, Zitationen: 23), Oktober 2026.}\par
+\noindent\small\textit{*Zitiermetriken basierend auf Google Scholar (h-index: 3, Zitationen: 25), November 2026.}\par
 \nocite{*}
 \subsection*{Zeitschriftenartikel}
 \printbibliography[type=article,heading=none]
 
 \subsection*{Preprints}
-\printbibliography[type=unpublished,heading=none]
+\printbibliography[nottype=article,heading=none]
 
 \section*{Preise, Auszeichnungen und Forschungsförderung}
-\award{Stipendium der Max Planck School of Photonics (MPSP)}{2026 -- Heute}{Max Planck Schools}{}{}
-\award{Dekan-Ehrung für akademische Exzellenz}{2021 -- 2025}{Universität Alexandria, Fakultät für Ingenieurwissenschaften}{}{}
-\award{ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2) -- 4. Platz}{2024}{Militärtechnische Hochschule}{}{}
-\award{Huawei ICT-Fähigkeitswettbewerb -- Nationaler Finalist (KI-Bereich)}{2023}{Huawei Technologies -- MENA-Region}{}{}
-\award{NASA Space Apps Challenge -- Globaler Nominierter}{2021}{NASA}{}{}
+\award{Stipendium der Max Planck School of Photonics (MPSP, Kohorte 8)}{2026 -- Heute}{Max Planck Schools}{}{}
+\award{Dekanatsliste für akademische Exzellenz}{2021 -- 2026}{Universität Alexandria, Fakultät für Ingenieurwissenschaften}{}{}
+\award{ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2), 4. Platz}{2024}{Militärtechnische Hochschule}{}{}
+\award{Huawei ICT-Fähigkeitswettbewerb, Nationaler Finalist (KI-Bereich)}{2023}{Huawei Technologies, MENA-Region}{}{}
+\award{NASA Space Apps Challenge, Globaler Nominierter}{2021}{NASA}{}{}
 
 \section*{Führungserfahrung und akademischer Dienst}
-\leadership{Vorstandsmitglied}{Jul 2026 -- Heute}{Optica Sektion Ägypten}{Hybrid}{}{}{}{4pt}
+\leadership{Gründungs-Vorstandsmitglied und Webmaster}{Jul 2026 -- Heute}{Optica Sektion Ägypten}{Hybrid}{}{}{}{4pt}
 \leadership{Vorsitzender}{Feb 2025 -- Okt 2025}{IEEE Solid-State Circuits Society (SSCS), Studentengruppe der Universität Alexandria}{Hybrid}{}{}{}{4pt}
 \leadership{Hauptkoordinator}{Aug 2021 -- Sep 2023}{Education Clinic (in den USA registrierte NGO)}{Fernarbeit}{}{}{}{0pt}
 
 \section*{Berufsverbände und Mitgliedschaften}
-\begin{itemize}
-  \item \textbf{Elitenetzwerk Bayern} \hfill Okt 2026 -- Heute \\  \textcolor{mediacolor}{\small Studentisches Mitglied.}
-  \item \textbf{Optica (ehemals OSA)} \hfill Jul 2026 -- Heute \\  \textcolor{mediacolor}{\small Studentenmitglied.}
-  \item \textbf{Institut der Elektro- und Elektronikingenieure (IEEE)} \hfill 2025 -- 2026 \\  \textcolor{mediacolor}{\small Studentenmitglied (Nr.: 101099759).}
-\end{itemize}
+\textbf{Elitenetzwerk Bayern} \hfill Okt 2026 -- Heute \\
+\textcolor{mediacolor}{\small Studentisches Mitglied.}\par\vspace{3pt}
+\textbf{Optica (ehemals OSA)} \hfill Jul 2026 -- Heute \\
+\textcolor{mediacolor}{\small Studentenmitglied.}\par\vspace{3pt}
+\textbf{Institut der Elektro- und Elektronikingenieure (IEEE)} \hfill 2025 -- 2026 \\
+\textcolor{mediacolor}{\small Studentenmitglied (Nr.: 101099759).}\par
 
 \section*{Referenzen}
 \noindent
@@ -240,5 +234,9 @@ Professor \\
 Institut für Technische Physik und Mathematik, Universität Alexandria \\
 \faIcon{envelope} \href{mailto:ishac.kandas@alexu.edu.eg}{\nolinkurl{ishac.kandas@alexu.edu.eg}}
 \end{minipage}
+
+\vspace{8pt}
+\noindent\rule{\textwidth}{0.4pt}\\[3pt]
+{\small\textit{Islam I. Abdulaal ist Teil der Max Planck School of Photonics, die von der Dieter Schwarz Stiftung, dem Bundesministerium für Forschung, Technologie und Raumfahrt (BMFTR) und der Max-Planck-Gesellschaft gefördert wird.}}
 
 \end{document}

@@ -12,6 +12,8 @@ export const metadata: Metadata = createPageMetadata({
     `${siteConfig.name} About`,
     "Academic Biography",
     "Integrated Photonics Research",
+    "FAU Erlangen-Nürnberg",
+    "Max Planck School of Photonics",
     "Alexandria University",
     "A*STAR IMRE",
   ],

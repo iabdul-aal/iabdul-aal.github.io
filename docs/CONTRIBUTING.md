@@ -23,15 +23,18 @@ Before submitting changes:
 
 ```bash
 npm run check
+python scripts/check_tools_sync.py
+python scripts/verify_site.py --ci
 ```
 
-If `npm run check` cannot run in your environment, include that note in your PR/commit message.
+If checks cannot run in your environment, include that note in your PR/commit message.
 
 ## Content Rules
 
 - Do not add unverifiable claims
 - Prefer linking to source pages for achievements and publications
-- Keep personal data centralized in `lib/social-links.ts`
+- Keep canonical personal identity and email in `data/cv_data.json` (`personalInfo`)
+- Keep external profile handles centralized in `lib/social-links.ts`
 - Keep global SEO values centralized in `lib/site-config.ts`
 
 ## Commit Style

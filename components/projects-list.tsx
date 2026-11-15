@@ -1,6 +1,7 @@
 "use client"
 
 import { Project } from "@/lib/academic-content"
+import type { ProjectMetric } from "@/lib/project-metrics"
 import { ProjectCard } from "@/components/project-card"
 import { SearchInput } from "@/components/ui/search-input"
 import { FilterSelect } from "@/components/ui/filter-select"
@@ -12,11 +13,13 @@ import { useProjectsFilter } from "@/hooks/use-projects-filter"
 
 type ProjectsListProps = {
   initialProjects: readonly Project[]
+  metricsMap?: Record<string, ProjectMetric>
   compact?: boolean
 }
 
-export function ProjectsList({ initialProjects, compact = false }: ProjectsListProps) {
+export function ProjectsList({ initialProjects, metricsMap, compact = false }: ProjectsListProps) {
   const { t, lang } = useLanguage()
+  const isDe = lang === "de"
 
   const {
     searchQuery,
@@ -33,15 +36,20 @@ export function ProjectsList({ initialProjects, compact = false }: ProjectsListP
   } = useProjectsFilter(initialProjects)
 
   const categoryLabels = {
-    major: lang === "de" ? "Haupt-Designpakete" : "Major Design Kits",
-    minor: lang === "de" ? "Kleine Designpakete" : "Minor Design Kits",
+    major: t.ui.citableSoftware,
+    minor: t.ui.supportingUtilities,
   }
 
   if (compact) {
     return (
       <div className="list-container">
         {initialProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} compact />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            metrics={metricsMap?.[project.id]}
+            compact
+          />
         ))}
       </div>
     )
@@ -49,7 +57,7 @@ export function ProjectsList({ initialProjects, compact = false }: ProjectsListP
 
   return (
     <div className="space-y-6">
-      {/* Search & Filter Bar */}
+      {/* Search and Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
@@ -59,12 +67,12 @@ export function ProjectsList({ initialProjects, compact = false }: ProjectsListP
 
         <div className="filter-row">
           <FilterSelect
-            label="Tier:"
+            label={isDe ? "Kategorie:" : "Category:"}
             showIcon
             value={selectedTier}
             onChange={(val) => setSelectedTier(val)}
             options={[
-              { value: "all", label: "All Types" },
+              { value: "all", label: t.ui.allCategories },
               { value: "major", label: categoryLabels.major },
               { value: "minor", label: categoryLabels.minor },
             ]}
@@ -72,11 +80,11 @@ export function ProjectsList({ initialProjects, compact = false }: ProjectsListP
 
           {availableYears.length > 0 && (
             <FilterSelect
-              label="Year:"
+              label={isDe ? "Jahr:" : "Year:"}
               value={selectedYear}
               onChange={(val) => setSelectedYear(val)}
               options={[
-                { value: "all", label: "All Years" },
+                { value: "all", label: t.ui.allYears },
                 ...availableYears.map((y) => ({ value: y, label: y })),
               ]}
             />
@@ -104,7 +112,13 @@ export function ProjectsList({ initialProjects, compact = false }: ProjectsListP
       {/* Projects list by year */}
       <div className="space-y-12">
         {filteredProjects.length === 0 ? (
-          <EmptyState message={lang === "de" ? "Keine Softwarewerkzeuge zu den Kriterien gefunden." : "No software tools or design packages found matching criteria."} />
+          <EmptyState
+            message={
+              isDe
+                ? "Softwarewerkzeuge werden angezeigt, sobald Einträge den Filterkriterien entsprechen."
+                : "Software tools will appear as entries match the selected criteria."
+            }
+          />
         ) : (
           projectsByYear.map(({ year, items }) => {
             const categories = [
@@ -130,7 +144,11 @@ export function ProjectsList({ initialProjects, compact = false }: ProjectsListP
                       </div>
                       <div className="list-container">
                         {group.list.map((project) => (
-                          <ProjectCard key={project.id} project={project} />
+                          <ProjectCard
+                            key={project.id}
+                            project={project}
+                            metrics={metricsMap?.[project.id]}
+                          />
                         ))}
                       </div>
                     </div>

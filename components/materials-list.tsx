@@ -19,10 +19,13 @@ export interface MaterialsListProps {
 
 const germanCategoryMap: Record<string, string> = {
   "Public Sessions": "Öffentliche Vorträge",
+  "Talks and Sessions": "Vorträge und Präsentationen",
+  "Presentation Slides": "Präsentationsfolien",
   "Medium Articles": "Medium-Artikel",
   "Technical Summaries": "Technische Zusammenfassungen",
   "Lecture Decks": "Vorlesungsfolien",
   "Learning Roadmaps": "Lern-Roadmaps",
+  Templates: "Vorlagen",
 }
 
 export function MaterialsList({ items: initialItems }: MaterialsListProps) {
@@ -86,7 +89,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
 
   return (
     <div className="space-y-6">
-      {/* Search & Filter Bar */}
+      {/* Search and Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
@@ -99,7 +102,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
 
         <div className="filter-row">
           <FilterSelect
-            label="Type:"
+            label={lang === "de" ? "Typ:" : "Type:"}
             showIcon
             value={selectedType}
             onChange={(val) => {
@@ -107,21 +110,21 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
               setPageSize(15)
             }}
             options={[
-              { value: "all", label: "All Types" },
-              ...availableTypes.map((t) => ({ value: t, label: translateCategory(t) })),
+              { value: "all", label: t.ui.allTypes },
+              ...availableTypes.map((typeLabel) => ({ value: typeLabel, label: translateCategory(typeLabel) })),
             ]}
           />
 
           {availableYears.length > 0 && (
             <FilterSelect
-              label="Year:"
+              label={lang === "de" ? "Jahr:" : "Year:"}
               value={selectedYear}
               onChange={(val) => {
                 setSelectedYear(val)
                 setPageSize(15)
               }}
               options={[
-                { value: "all", label: "All Years" },
+                { value: "all", label: t.ui.allYears },
                 ...availableYears.map((y) => ({ value: y, label: y })),
               ]}
             />
@@ -129,7 +132,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
         </div>
       </Shell>
 
-      {/* Info & Clear Filter row */}
+      {/* Info and Clear Filter row */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
         <p>
           {t.ui.showing} {Math.min(visibleItems.length, filteredItems.length)} {t.ui.of} {filteredItems.length} {t.ui.materialsLabel}
@@ -154,7 +157,17 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
       {/* Grouped by Year */}
       <div className="space-y-12">
         {filteredItems.length === 0 ? (
-          <EmptyState message={lang === "de" ? "Keine Materialien zu den Kriterien gefunden." : "No materials found matching search criteria."} />
+          <EmptyState
+            message={
+              initialItems.length === 0
+                ? lang === "de"
+                  ? "Materialien und Vorträge erscheinen hier, sobald sie indexiert sind."
+                  : "Materials and public talk records will appear as they are indexed."
+                : lang === "de"
+                  ? "Keine Materialien entsprechen den aktuellen Filterkriterien."
+                  : "No materials match the active filter criteria."
+            }
+          />
         ) : (
           itemsByYear.map(([year, items]) => {
             const categories = Array.from(new Set(items.map((i) => i.categoryLabel)))

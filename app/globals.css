@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: oklch(0.99 0.003 70);
   --foreground: oklch(0.18 0.015 70);
   --surface: oklch(0.975 0.005 70);
@@ -27,13 +28,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --background: oklch(0.13 0.008 70);
     --foreground: oklch(0.94 0.008 70);
     --surface: oklch(0.16 0.007 70);
     --card: oklch(0.18 0.006 70);
     --card-foreground: oklch(0.94 0.008 70);
     --popover: oklch(0.18 0.006 70);
-    --popover-foreground: oklch(0.18 0.006 70);
+    --popover-foreground: oklch(0.94 0.008 70);
     --primary: #c9a57a;
     --primary-foreground: oklch(0.13 0.008 70);
     --accent: #c9a57a;
@@ -136,8 +138,13 @@
   }
 
   @media (pointer: coarse) {
-    a, button, [role="button"], select {
+    button,
+    [role="button"],
+    select,
+    nav a,
+    .touch-target {
       min-height: 44px;
+      min-width: 44px;
     }
   }
 }
@@ -192,18 +199,14 @@
     padding-inline-start: 1rem;
   }
 
-  /* Premium UI Aesthetics */
-  .hero-glow-bg {
-    background: radial-gradient(circle at 50% 0%, oklch(0.68 0.10 65 / 0.08) 0%, transparent 70%);
-  }
-  /* ── Object-Oriented Component Architecture (OOCSS) ── */
+  /* Component Shells and Surfaces */
 
   /* 1. PRIMARY (MAIN) COMPONENT HIERARCHY */
 
   .shell-primary,
   .filter-shell,
   .filter-panel {
-    @apply space-y-4 rounded-xl border border-border/80 bg-surface/60 p-4 sm:p-5 shadow-xs transition-colors;
+    @apply space-y-4 rounded-lg border border-border bg-surface/70 p-4 sm:p-5 transition-colors;
   }
 
   /* Filter row: 2-col micro-grid on xs, flex row from sm */
@@ -220,18 +223,17 @@
 
   .trigger-primary,
   .btn-primary {
-    @apply cursor-pointer inline-flex items-center justify-center gap-1.5 rounded-md bg-accent px-3.5 py-1.5 text-xs font-medium text-primary-foreground shadow-2xs transition-all duration-200 hover:bg-accent-strong active:scale-[0.98];
+    @apply cursor-pointer inline-flex items-center justify-center gap-1.5 rounded-md bg-accent px-3.5 py-1.5 text-xs font-medium text-primary-foreground transition-colors duration-150 hover:bg-accent-strong;
   }
 
   .badge-primary {
     @apply inline-block rounded-md bg-accent/10 text-accent ring-1 ring-accent/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide transition-colors;
   }
 
-  /* 2. SECONDARY COMPONENT HIERARCHY WITH INHERITANCE VARIETY */
+  /* 2. SECONDARY COMPONENT HIERARCHY */
 
-  .shell-secondary,
-  .glass-card {
-    @apply rounded-xl border border-border bg-card p-5 shadow-2xs transition-all duration-200 hover:border-accent/40;
+  .shell-secondary {
+    @apply rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent/50;
   }
 
   .trigger-secondary,
@@ -240,7 +242,7 @@
   }
 
   .trigger-secondary-chip {
-    @apply cursor-pointer inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-2xs transition-all duration-200 hover:border-accent hover:text-accent active:scale-[0.98];
+    @apply cursor-pointer inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors duration-150 hover:border-accent hover:text-accent;
   }
 
   .badge-secondary,
@@ -249,7 +251,7 @@
     @apply inline-block rounded-md bg-secondary px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground transition-colors;
   }
 
-  /* 3. LISTING & ROW SHELL HIERARCHY */
+  /* 3. LISTING AND ROW SHELL HIERARCHY */
 
   .list-shell,
   .list-container {
@@ -274,7 +276,7 @@
     @apply text-base font-bold text-foreground border-b border-border pb-2 flex items-center justify-between gap-2;
   }
 
-  /* 4. SHARED LAYOUT CONTAINER (Header & Footer Alignment) */
+  /* 4. SHARED LAYOUT CONTAINER (Header and Footer Alignment) */
   .container-layout {
     @apply mx-auto max-w-6xl px-5 sm:px-6 lg:px-8;
   }
@@ -292,35 +294,11 @@
 @media (min-width: 1536px) { .container-page { padding-inline: 3rem; max-width: 80rem; } }
 
 /*
- * ─── DESIGN TOKEN LAW: THE TWO BUTTON SYSTEM ─────────────────────────
- * Exactly TWO button/trigger styles exist across the entire website:
- *
- * 1. .btn-primary   (Solid gold filled):
- *    Used strictly for key primary page actions & core downloads (e.g. CV 📄).
- *
- * 2. .btn-secondary (Subtle outlined chip):
- *    Used for all external profile links, paper actions (DOI, arXiv, PDF,
- *    BibTeX, RIS, Abstract), topic links, repository links, downloads, and pagination.
- * ─────────────────────────────────────────────────────────────────────────────
+ * Design Token Law: Two-Button System
+ * 1. .btn-primary   (Solid bronze filled):
+ *    Used for key primary page actions and core downloads (e.g. CV).
+ * 2. .btn-secondary (Subtle inline link/action):
+ *    Used for paper actions (DOI, arXiv, PDF, BibTeX, RIS, Abstract),
+ *    topic links, repository links, and secondary actions.
  */
-
-
-/* Prevent KaTeX display math from causing horizontal page layout overflow */
-.katex-display {
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  padding: 0.5rem 0 !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-.katex {
-  max-width: 100% !important;
-  text-wrap: nowrap !important;
-}
-
-.katex .base {
-  max-width: 100%;
-  overflow-x: auto;
-}
 

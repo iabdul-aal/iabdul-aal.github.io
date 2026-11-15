@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
-import { useSearchParams } from "next/navigation"
+import { useEffect, useState, useMemo } from "react"
 import { Download, Copy, Check } from "lucide-react"
 import { PublicationRecord, getPublicationCategory } from "@/types/publication"
 import { researchThemes } from "@/lib/academic-content"
@@ -10,36 +9,46 @@ import { SearchInput } from "@/components/ui/search-input"
 import { FilterSelect } from "@/components/ui/filter-select"
 import { EmptyState } from "@/components/ui/empty-state"
 import { YearGroupHeader } from "@/components/year-group-header"
-import { downloadText, groupByYear } from "@/lib/utils"
+import { copyTextWithFallback, downloadText, groupByYear } from "@/lib/utils"
 import { Shell } from "@/components/ui/shell"
 import { useLanguage } from "@/lib/i18n-context"
-
 
 type PublicationsListProps = {
   publications: PublicationRecord[]
   compact?: boolean
 }
 
-export function PublicationsList({ publications, compact = false }: PublicationsListProps) {
-  const searchParams = useSearchParams()
-  const urlTopic = searchParams?.get("topic") || "all"
-  const urlType = searchParams?.get("type") || searchParams?.get("status") || "all"
+const germanThemeTitles: Record<string, string> = {
+  "integrated-nanophotonics": "Integrierte Nanophotonik",
+  "quantum-photonics": "Quantenphotonik",
+  "intelligent-photonics": "Intelligente Photonik",
+}
 
+export function PublicationsList({ publications, compact = false }: PublicationsListProps) {
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedTopicState, setSelectedTopic] = useState<string | null>(null)
-  const [selectedTypeState, setSelectedType] = useState<string | null>(null)
+  const [selectedTopic, setSelectedTopic] = useState<string>("all")
+  const [selectedType, setSelectedType] = useState<string>("all")
   const [selectedYear, setSelectedYear] = useState<string>("all")
   const [pageSize, setPageSize] = useState(compact ? 5 : 10)
   const [copiedAllBib, setCopiedAllBib] = useState(false)
   const { t, lang } = useLanguage()
+  const isDe = lang === "de"
 
-  const selectedTopic = selectedTopicState ?? urlTopic
-  const selectedType = selectedTypeState ?? urlType
+  useEffect(() => {
+    if (compact || typeof window === "undefined") return
+    const params = new URLSearchParams(window.location.search)
+    const topicParam = params.get("topic")
+    const typeParam = params.get("type") || params.get("status")
+    queueMicrotask(() => {
+      if (topicParam) setSelectedTopic(topicParam)
+      if (typeParam) setSelectedType(typeParam)
+    })
+  }, [compact])
 
   const categoryLabels = {
-    journal: lang === "de" ? "Zeitschriftenartikel" : "Journal Articles",
-    preprint: lang === "de" ? "Preprints" : "Preprints",
-    conference: lang === "de" ? "Konferenzbeiträge" : "Conference Papers",
+    journal: isDe ? "Zeitschriftenartikel" : "Journal Articles",
+    preprint: "Preprints",
+    conference: isDe ? "Konferenzbeiträge" : "Conference Papers",
   }
 
   const availableYears = useMemo(() => {
@@ -57,9 +66,11 @@ export function PublicationsList({ publications, compact = false }: Publications
     })
     return Array.from(ids).map((id) => ({
       id,
-      title: researchThemes.find((t) => t.id === id)?.title ?? id,
+      title: isDe
+        ? germanThemeTitles[id] ?? researchThemes.find((theme) => theme.id === id)?.title ?? id
+        : researchThemes.find((theme) => theme.id === id)?.title ?? id,
     }))
-  }, [publications])
+  }, [publications, isDe])
 
   const filteredPublications = useMemo(() => {
     return publications.filter((pub) => {
@@ -94,13 +105,10 @@ export function PublicationsList({ publications, compact = false }: Publications
 
   const handleCopyAllBibtex = async () => {
     const allBib = filteredPublications.map((p) => p.bibtex).join("\n\n")
-    try {
-      await navigator.clipboard.writeText(allBib)
-      setCopiedAllBib(true)
-      setTimeout(() => setCopiedAllBib(false), 2000)
-    } catch {
-      // fallback
-    }
+    const ok = await copyTextWithFallback(allBib)
+    if (!ok) return
+    setCopiedAllBib(true)
+    setTimeout(() => setCopiedAllBib(false), 2000)
   }
 
   const handleDownloadAllRis = () => {
@@ -110,7 +118,7 @@ export function PublicationsList({ publications, compact = false }: Publications
 
   if (compact) {
     return (
-      <div>
+      <div className="list-container">
         {visiblePublications.map((pub) => (
           <PublicationCard key={pub.id} publication={pub} compact />
         ))}
@@ -120,21 +128,21 @@ export function PublicationsList({ publications, compact = false }: Publications
 
   return (
     <div className="space-y-6">
-      {/* Search & Filter Bar */}
+      {/* Search and Filter Bar */}
       <Shell variant="primary">
-          <SearchInput
-            value={searchQuery}
-            onChange={(q) => {
-              setSearchQuery(q)
-              setPageSize(10)
-            }}
-            placeholder={t.ui.searchPubs}
-          />
+        <SearchInput
+          value={searchQuery}
+          onChange={(q) => {
+            setSearchQuery(q)
+            setPageSize(10)
+          }}
+          placeholder={t.ui.searchPubs}
+        />
 
         <div className="filter-row">
           {availableTopics.length > 0 && (
             <FilterSelect
-              label="Topic:"
+              label={isDe ? "Thema:" : "Topic:"}
               showIcon
               value={selectedTopic}
               onChange={(val) => {
@@ -142,21 +150,21 @@ export function PublicationsList({ publications, compact = false }: Publications
                 setPageSize(10)
               }}
               options={[
-                { value: "all", label: "All Topics" },
-                ...availableTopics.map((t) => ({ value: t.id, label: t.title })),
+                { value: "all", label: t.ui.allTopics },
+                ...availableTopics.map((topic) => ({ value: topic.id, label: topic.title })),
               ]}
             />
           )}
 
           <FilterSelect
-            label="Type:"
+            label={isDe ? "Typ:" : "Type:"}
             value={selectedType}
             onChange={(val) => {
               setSelectedType(val)
               setPageSize(10)
             }}
             options={[
-              { value: "all", label: "All Types" },
+              { value: "all", label: t.ui.allTypes },
               { value: "journal", label: categoryLabels.journal },
               { value: "preprint", label: categoryLabels.preprint },
               { value: "conference", label: categoryLabels.conference },
@@ -165,14 +173,14 @@ export function PublicationsList({ publications, compact = false }: Publications
 
           {availableYears.length > 0 && (
             <FilterSelect
-              label="Year:"
+              label={isDe ? "Jahr:" : "Year:"}
               value={selectedYear}
               onChange={(val) => {
                 setSelectedYear(val)
                 setPageSize(10)
               }}
               options={[
-                { value: "all", label: "All Years" },
+                { value: "all", label: t.ui.allYears },
                 ...availableYears.map((y) => ({ value: y, label: y })),
               ]}
             />
@@ -180,7 +188,7 @@ export function PublicationsList({ publications, compact = false }: Publications
         </div>
       </Shell>
 
-      {/* Info & Export Actions */}
+      {/* Info and Export Actions */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
         <p>
           {t.ui.showing} {Math.min(visiblePublications.length, filteredPublications.length)} {t.ui.of} {filteredPublications.length} {t.ui.publications}
@@ -208,19 +216,19 @@ export function PublicationsList({ publications, compact = false }: Publications
             type="button"
             onClick={handleCopyAllBibtex}
             className="btn-secondary"
-            title="Copy BibTeX for current view"
+            title={isDe ? "BibTeX für aktuelle Ansicht kopieren" : "Copy BibTeX for current view"}
           >
-            {copiedAllBib ? <Check className="h-3 w-3 text-accent" /> : <Copy className="h-3 w-3" />}
-            {copiedAllBib ? t.ui.copiedBibtex : t.ui.exportBibtex}
+            {copiedAllBib ? <Check className="h-3 w-3 text-accent" aria-hidden="true" /> : <Copy className="h-3 w-3" aria-hidden="true" />}
+            <span aria-live="polite">{copiedAllBib ? t.ui.copiedBibtex : t.ui.exportBibtex}</span>
           </button>
 
           <button
             type="button"
             onClick={handleDownloadAllRis}
             className="btn-secondary"
-            title="Download RIS for current view"
+            title={isDe ? "RIS für aktuelle Ansicht herunterladen" : "Download RIS for current view"}
           >
-            <Download className="h-3 w-3" />
+            <Download className="h-3 w-3" aria-hidden="true" />
             {t.ui.exportRis}
           </button>
         </div>
@@ -229,7 +237,13 @@ export function PublicationsList({ publications, compact = false }: Publications
       {/* Publications list by year */}
       <div className="space-y-12">
         {visiblePublications.length === 0 ? (
-          <EmptyState message={lang === "de" ? "Keine Publikationen zu den Kriterien gefunden." : "No publications found matching search criteria."} />
+          <EmptyState
+            message={
+              isDe
+                ? "Publikationen werden angezeigt, sobald Einträge den Filterkriterien entsprechen."
+                : "Publications will appear as entries match the selected criteria."
+            }
+          />
         ) : (
           publicationsByYear.map(({ year, items }) => {
             const categories = [
@@ -279,7 +293,6 @@ export function PublicationsList({ publications, compact = false }: Publications
           </button>
         </div>
       )}
-
     </div>
   )
 }

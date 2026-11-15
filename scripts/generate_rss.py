@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 """
-Generate RSS 2.0 feed for iabdul-aal.github.io.
-Uses Object-Oriented Architecture (BaseFeedItem Mother class & Child Subclasses).
+Generate RSS 2.0 feed at public/feed.xml for iabdul-aal.github.io.
+Uses Object-Oriented Architecture (BaseFeedItem abstract base class and concrete subclasses).
 """
+
+from __future__ import annotations
+
 import hashlib
 import json
 import os
 from abc import ABC, abstractmethod
 from datetime import datetime, timezone
-import xml.etree.ElementTree as ET
 from xml.dom import minidom
+import xml.etree.ElementTree as ET
+
+from config_helper import clean_html_text
 
 
 def format_rfc822(date_str: str) -> str:
@@ -29,7 +34,6 @@ def make_hash(text: str) -> str:
     return hashlib.md5(text.encode("utf-8")).hexdigest()[:12]
 
 
-# ── 1. MOTHER ABSTRACT FEED ITEM CLASS (Base Contract) ──
 class BaseFeedItem(ABC):
     def __init__(self, raw_data: dict):
         self.raw_data = raw_data
@@ -69,20 +73,30 @@ class BaseFeedItem(ABC):
         }
 
 
-# ── 2. CONCRETE CHILD SUBCLASSES (Inheritance Variety) ──
 class ActivityFeedItem(BaseFeedItem):
     @property
     def title(self) -> str:
-        item_type = self.raw_data.get("type", "Activity").capitalize()
-        return f"[{item_type}] {self.raw_data.get('title', '')}"
+        item_type = str(self.raw_data.get("type", "Activity")).capitalize()
+        clean_title = clean_html_text(self.raw_data.get("title", ""), replace_em_dash=True)
+        return f"[{item_type}] {clean_title}"
 
     @property
     def link(self) -> str:
-        return "https://iabdul-aal.me/"
+        item_type = str(self.raw_data.get("type", "")).lower().strip()
+        route_map = {
+            "paper": "https://iabdul-aal.me/publications",
+            "preprint": "https://iabdul-aal.me/publications",
+            "software": "https://iabdul-aal.me/tools",
+            "talk": "https://iabdul-aal.me/materials",
+            "article": "https://iabdul-aal.me/materials",
+            "milestone": "https://iabdul-aal.me/about",
+            "position": "https://iabdul-aal.me/cv",
+        }
+        return route_map.get(item_type, "https://iabdul-aal.me/")
 
     @property
     def description(self) -> str:
-        return self.raw_data.get("detail", "")
+        return clean_html_text(self.raw_data.get("detail", ""), replace_em_dash=True)
 
     @property
     def pub_date(self) -> str:
@@ -92,14 +106,16 @@ class ActivityFeedItem(BaseFeedItem):
     @property
     def guid(self) -> str:
         date_iso = self.raw_data.get("date_iso", "")
-        t_hash = make_hash(self.raw_data.get("title", ""))
+        clean_title = clean_html_text(self.raw_data.get("title", ""), replace_em_dash=True)
+        t_hash = make_hash(clean_title)
         return f"https://iabdul-aal.me/#activity-{date_iso}-{t_hash}"
 
 
 class PublicationFeedItem(BaseFeedItem):
     @property
     def title(self) -> str:
-        return f"[Publication] {self.raw_data.get('title', '')}"
+        clean_title = clean_html_text(self.raw_data.get("title", ""), replace_em_dash=True)
+        return f"[Publication] {clean_title}"
 
     @property
     def link(self) -> str:
@@ -110,37 +126,53 @@ class PublicationFeedItem(BaseFeedItem):
 
     @property
     def description(self) -> str:
-        abstract = self.raw_data.get("abstract")
-        venue = self.raw_data.get("venue", "")
-        year = self.raw_data.get("year", "2026")
-        return abstract or f"Published in {venue} ({year})."
+        abstract = clean_html_text(self.raw_data.get("abstract") or "", replace_em_dash=True)
+        if abstract:
+            return abstract
+        venue = clean_html_text(self.raw_data.get("journal") or self.raw_data.get("venue") or "", replace_em_dash=True)
+        year = str(self.raw_data.get("year") or "").strip()
+        if not year:
+            date = str(self.raw_data.get("date") or "").strip()
+            year = date[:4] if len(date) >= 4 else "2026"
+        arxiv_id = str(self.raw_data.get("arxiv") or "").strip()
+        if venue and venue.lower() not in ("preprint", "arxiv", "arxiv preprint"):
+            if "preprints.org" in venue.lower():
+                return f"Posted on Preprints.org ({year})."
+            return f"Published in {venue} ({year})."
+        if arxiv_id:
+            return f"Posted on arXiv:{arxiv_id} ({year})."
+        return f"Posted as preprint ({year})."
 
     @property
     def pub_date(self) -> str:
-        date_raw = self.raw_data.get("date") or f"{self.raw_data.get('year', '2026')}-01-01"
+        year = str(self.raw_data.get("year") or "2026").strip() or "2026"
+        date_raw = self.raw_data.get("date") or f"{year}-01-01"
         return format_rfc822(date_raw)
 
     @property
     def guid(self) -> str:
-        guid_id = self.raw_data.get("arxiv") or self.raw_data.get("doi") or make_hash(self.raw_data.get("title", ""))
+        clean_title = clean_html_text(self.raw_data.get("title", ""), replace_em_dash=True)
+        guid_id = self.raw_data.get("arxiv") or self.raw_data.get("doi") or make_hash(clean_title)
         return f"https://iabdul-aal.me/publications#{guid_id}"
 
 
-# ── 3. FEED GENERATOR BUILDER OBJECT ──
 class RSSFeedGenerator:
     def __init__(self, root_dir: str):
         self.root_dir = root_dir
         self.items: list[BaseFeedItem] = []
 
-    def load_activity(self, filepath: str):
+    def load_activity(self, filepath: str) -> None:
         if not os.path.exists(filepath):
             return
         with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
             for item in data.get("items", []):
+                # Publications are emitted once via load_publications() with DOI/arXiv links.
+                if str(item.get("type", "")).lower().strip() in ("paper", "preprint"):
+                    continue
                 self.items.append(ActivityFeedItem(item))
 
-    def load_publications(self, filepath: str):
+    def load_publications(self, filepath: str) -> None:
         if not os.path.exists(filepath):
             return
         with open(filepath, "r", encoding="utf-8") as f:
@@ -148,7 +180,7 @@ class RSSFeedGenerator:
             for item in data:
                 self.items.append(PublicationFeedItem(item))
 
-    def generate(self, output_path: str):
+    def generate(self, output_path: str) -> None:
         ET.register_namespace("atom", "http://www.w3.org/2005/Atom")
         rss = ET.Element("rss", version="2.0")
         channel = ET.SubElement(rss, "channel")
@@ -180,13 +212,14 @@ class RSSFeedGenerator:
         parsed = minidom.parseString(xml_str)
         pretty_xml = parsed.toprettyxml(indent="  ")
 
-        with open(output_path, "w", encoding="utf-8") as f:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with open(output_path, "w", encoding="utf-8", newline="\n") as f:
             f.write(pretty_xml)
 
         print(f"Successfully generated RSS feed with {len(self.items)} items at {output_path}")
 
 
-def main():
+def main() -> None:
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     activity_file = os.path.join(root, "data", "activity.json")
     publications_file = os.path.join(root, "data", "publications.json")

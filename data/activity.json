@@ -1,75 +1,75 @@
 {
   "items": [
     {
-      "date_iso": "2026-10-01",
+      "date_iso": "2026-10-12",
       "date": "Oct 2026",
-      "type": "award",
-      "title": "Awarded Max Planck School of Photonics (MPSP) Scholarship",
-      "detail": "Selected for the national photonics excellence scholarship program."
+      "type": "milestone",
+      "title": "Began M.Sc. in Advanced Optical Technologies (MAOT) at FAU Erlangen-Nürnberg",
+      "detail": "Started graduate studies focusing on computational photonics, light physics, and biomedical optical processing."
     },
     {
       "date_iso": "2026-10-01",
       "date": "Oct 2026",
-      "type": "milestone",
-      "title": "Admitted to M.Sc. in Advanced Optical Technologies (MAOT) at FAU Erlangen-Nürnberg",
-      "detail": "Began graduate studies within the Elite Network of Bavaria focusing on optical technologies and nanophotonics."
+      "type": "position",
+      "title": "Joined Max Planck School of Photonics (Cohort 8 Study Phase)",
+      "detail": "Selected as a Ph.D. candidate in the national photonics fellowship and graduate study program."
     },
     {
       "date_iso": "2026-09-15",
       "date": "Sep 2026",
       "type": "preprint",
-      "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl<sub>2</sub> Biphoton Quantum Sources",
-      "detail": "Preprint posted."
+      "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl₂ Biphoton Quantum Sources",
+      "detail": "Posted research preprint on Preprints.org covering nanophotonic inverse design."
+    },
+    {
+      "date_iso": "2026-09-10",
+      "date": "Sep 2026",
+      "type": "position",
+      "title": "Co-initiated Optica Egypt Local Section",
+      "detail": "Serving as founding board member and webmaster following official Optica section approval."
     },
     {
       "date_iso": "2026-08-15",
       "date": "Aug 2026",
       "type": "milestone",
-      "title": "Completed B.Sc. in Electronics and Communications Engineering",
-      "detail": "Graduated from Alexandria University with a degree in Electronics and Communications Engineering."
+      "title": "Completed B.Sc. in Electronics and Communications Engineering at Alexandria University",
+      "detail": "Graduated with 3.39/4.0 CGPA and five consecutive Dean's List honors from 2021 to 2026."
     },
     {
-      "date_iso": "2026-06-15",
-      "date": "Jun 2026",
+      "date_iso": "2026-07-01",
+      "date": "Jul 2026",
       "type": "paper",
       "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
-      "detail": "Paper accepted in Journal of Optics."
+      "detail": "Peer-reviewed article published in Journal of Optics covering nanophotonics."
+    },
+    {
+      "date_iso": "2026-06-20",
+      "date": "Jun 2026",
+      "type": "preprint",
+      "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
+      "detail": "Posted preprint manuscript on arXiv covering physics-informed scientific modeling."
     },
     {
       "date_iso": "2026-01-04",
       "date": "Jan 2026",
       "type": "talk",
       "title": "ECE Unlocked | Technical Orientations '26' | Islam I. Abdulaal",
-      "detail": "Talk at IEEE SSCS AUSC."
-    },
-    {
-      "date_iso": "2026-01-01",
-      "date": "Jan 2026",
-      "type": "preprint",
-      "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
-      "detail": "Preprint posted on arXiv."
+      "detail": "Delivered public technical orientation talk hosted by IEEE SSCS AUSC."
     },
     {
       "date_iso": "2025-09-01",
       "date": "Sep 2025",
       "type": "position",
       "title": "Joined NanoPhoto Lab, IMRE, A*STAR as a research intern",
-      "detail": "Work focused on physics-informed optimization for integrated quantum photonic source structures."
+      "detail": "Conducted FDTD and physics-informed optimization studies for integrated quantum photonic sources."
     },
     {
       "date_iso": "2023-03-27",
       "date": "Mar 2023",
       "type": "article",
       "title": "ECE Roadmap: Part II",
-      "detail": "Published on Medium."
-    },
-    {
-      "date_iso": "2023-03-15",
-      "date": "Mar 2023",
-      "type": "article",
-      "title": "ECE Career: Part 1",
-      "detail": "Published on Medium."
+      "detail": "Published introductory electronics and communications engineering article on Medium."
     }
   ],
-  "fetchedAt": "2026-11-15T09:31:31.385815+00:00"
+  "fetchedAt": "2026-11-15T18:46:07.865162+00:00"
 }

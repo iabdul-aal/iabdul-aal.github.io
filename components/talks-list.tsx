@@ -94,7 +94,7 @@ export function TalksList({ talks }: TalksListProps) {
 
   return (
     <div className="space-y-6">
-      {/* Search & Filter Bar */}
+      {/* Search and Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
@@ -108,7 +108,7 @@ export function TalksList({ talks }: TalksListProps) {
         <div className="filter-row">
           {availableFormats.length > 0 && (
             <FilterSelect
-              label="Filter:"
+              label={lang === "de" ? "Format:" : "Filter:"}
               showIcon
               value={selectedFormat}
               onChange={(val) => {
@@ -116,7 +116,7 @@ export function TalksList({ talks }: TalksListProps) {
                 setPageSize(10)
               }}
               options={[
-                { value: "all", label: "All Formats" },
+                { value: "all", label: t.ui.allFormats },
                 ...availableFormats.map((fmt) => ({ value: fmt, label: translateFormat(fmt) })),
               ]}
             />
@@ -124,14 +124,14 @@ export function TalksList({ talks }: TalksListProps) {
 
           {availableYears.length > 0 && (
             <FilterSelect
-              label="Year:"
+              label={lang === "de" ? "Jahr:" : "Year:"}
               value={selectedYear}
               onChange={(val) => {
                 setSelectedYear(val)
                 setPageSize(10)
               }}
               options={[
-                { value: "all", label: "All Years" },
+                { value: "all", label: t.ui.allYears },
                 ...availableYears.map((y) => ({ value: y, label: y })),
               ]}
             />
@@ -163,7 +163,17 @@ export function TalksList({ talks }: TalksListProps) {
 
       <div className="space-y-12">
         {visibleTalks.length === 0 ? (
-          <EmptyState message={lang === "de" ? "Keine Vorträge zu den Kriterien gefunden." : "No sessions found matching search criteria."} />
+          <EmptyState
+            message={
+              talks.length === 0
+                ? lang === "de"
+                  ? "Vorträge und Präsentationen erscheinen hier, sobald Aufzeichnungen indexiert sind."
+                  : "Public talks and seminar sessions will appear as event records are indexed."
+                : lang === "de"
+                  ? "Keine Vorträge entsprechen den aktuellen Filterkriterien."
+                  : "No sessions match the active filter criteria."
+            }
+          />
         ) : (
           talksByYear.map(({ year, items }) => {
             const formats = Array.from(new Set(items.map((t) => t.format || "Session")))
@@ -190,7 +200,7 @@ export function TalksList({ talks }: TalksListProps) {
                             className="sm:grid-cols-[5.5rem_minmax(0,1fr)_auto]"
                           >
                             <p className="text-xs text-muted-foreground pt-1">
-                              {formatDate(talk.date || talk.year, "short")}
+                              {formatDate(talk.date || talk.year, "short", lang)}
                             </p>
                             <div className="min-w-0 w-full">
                               <h3 className="text-base font-semibold leading-snug text-foreground break-words min-w-0 w-full">{talk.title}</h3>

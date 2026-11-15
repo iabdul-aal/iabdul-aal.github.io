@@ -61,7 +61,7 @@ def slug(year: str, title: str) -> str:
 
 
 def main() -> None:
-    pubs = json.loads(PUBS_FILE.read_text())
+    pubs = json.loads(PUBS_FILE.read_text(encoding="utf-8"))
     metrics: dict[str, dict] = {}
 
     for pub in pubs:
@@ -103,7 +103,7 @@ def main() -> None:
         "papers": metrics,
         "fetchedAt": datetime.now(timezone.utc).isoformat(),
     }
-    OUT_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    OUT_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {OUT_FILE} ({len(metrics)} papers)")
 
 

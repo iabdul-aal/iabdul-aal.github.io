@@ -1,16 +1,16 @@
 {
   "papers": {
+    "2026-nanophotonet-mpm-a-physics-informed-deep-learning-for-inverse-design-of-nbocl-biphoton-quantum-sources": {
+      "cited_by_count": 0,
+      "referenced_works_count": 0,
+      "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl2 Biphoton Quantum Sources",
+      "openalex_id": "https://openalex.org/W7213258492"
+    },
     "2026-recent-advances-in-terahertz-based-bound-states-in-the-continuum-metasurfaces-for-6g-communications-and-medtech": {
       "cited_by_count": 7,
       "referenced_works_count": 200,
       "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
       "openalex_id": "https://openalex.org/W7167259199"
-    },
-    "2026-09-15-nanophotonet-mpm-a-physics-informed-deep-learning-for-inverse-design-of-nbocl-sub-2-sub-biphoton-quantum-sources": {
-      "cited_by_count": 0,
-      "referenced_works_count": 0,
-      "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl2 Biphoton Quantum Sources",
-      "openalex_id": "https://openalex.org/W7213258492"
     },
     "2026-beyond-data-driven-how-physics-informed-neural-networks-are-reshaping-multi-physics-design-and-discovery": {
       "cited_by_count": 5,
@@ -19,5 +19,5 @@
       "openalex_id": "https://openalex.org/W7165689228"
     }
   },
-  "fetchedAt": "2026-11-15T09:31:31.277312+00:00"
+  "fetchedAt": "2026-11-15T14:03:46.406648+00:00"
 }

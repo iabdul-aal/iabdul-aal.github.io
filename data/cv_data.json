@@ -5,16 +5,18 @@
     "specialization_de": "Forscher für Integrierte Photonik",
     "city": "Erlangen",
     "country": "Germany",
-    "phone": "+49 163 4708095",
+    "phone": "",
     "email": "islam.abdulaal@fau.de",
     "website": "iabdul-aal.me",
     "linkedin": "iabdul-aal",
     "github": "iabdul-aal",
     "orcid": "0009-0004-9300-3936",
-    "_updated": "2026-07-22T20:28:00Z"
+    "fundingAcknowledgement": "Islam I. Abdulaal is part of the Max Planck School of Photonics supported by the Dieter Schwarz Foundation, the German Federal Ministry of Research, Technology and Space (BMFTR), and the Max Planck Society.",
+    "fundingAcknowledgement_de": "Islam I. Abdulaal ist Teil der Max Planck School of Photonics, die von der Dieter Schwarz Stiftung, dem Bundesministerium für Forschung, Technologie und Raumfahrt (BMFTR) und der Max-Planck-Gesellschaft gefördert wird.",
+    "_updated": "2026-11-15T14:00:00Z"
   },
-  "researchInterests": "Integrated nanophotonics, quantum photonic sources, nonlinear on-chip devices, physics-informed inverse design, and wave-equation-constrained neural networks for photonic device optimization.",
-  "researchInterests_de": "Integrierte Nanophotonik, quantenphotonische Quellen, nichtlineare On-Chip-Bauelemente, physikinformiertes Inversdesign und wellengleichungsbeschränkte neuronale Netze zur Optimierung photonischer Bauelemente.",
+  "researchInterests": "Computational modeling and inverse design of integrated nanophotonic devices, combining full-wave electrodynamics and physics-informed neural surrogates for active waveguides and nonlinear quantum photon-pair sources.",
+  "researchInterests_de": "Numerische Modellierung und Inversdesign integrierter nanophotonischer Bauelemente durch Verknüpfung von Vollwellen-Elektrodynamik und physikinformierten neuronalen Surrogaten für aktive Wellenleiter sowie Quanten-Photonenpaar-Quellen.",
   "education": [
     {
       "degree": "M.Sc. in Advanced Optical Technologies (MAOT)",
@@ -26,20 +28,46 @@
       "location": "Erlangen, Germany",
       "location_de": "Erlangen, Deutschland",
       "bullets": [
-        "Elite Network of Bavaria graduate program focusing on computational optics, optical material processing, and nanophotonics."
+        "Elite Network of Bavaria graduate program enrolled from Winter Semester 2026/27 onward; tracks in Physics of Light and Biomedical Photonics and Data Processing with computational photonics focus."
+      ],
+      "bullets_de": [
+        "Studiengang des Elitenetzwerks Bayern ab dem Wintersemester 2026/27; Schwerpunkte Physics of Light sowie Biomedical Photonics and Data Processing mit Fokus auf computergestützter Photonik."
+      ]
+    },
+    {
+      "degree": "Ph.D. Candidate (Study Phase, Cohort 8)",
+      "degree_de": "Promotionsstipendiat (Studienphase, Kohorte 8)",
+      "period": "Oct 2026 -- Present",
+      "period_de": "Okt 2026 -- Heute",
+      "institution": "Max Planck School of Photonics (MPSP)",
+      "institution_de": "Max Planck School of Photonics (MPSP)",
+      "location": "Erlangen and Jena, Germany",
+      "location_de": "Erlangen und Jena, Deutschland",
+      "bullets": [
+        "Integrated doctoral Study Phase (October 2026 to September 2028) transitioning directly into the Ph.D. Research Phase."
+      ],
+      "bullets_de": [
+        "Integrierte Promotions-Studienphase (Oktober 2026 bis September 2028) mit anschließendem Übergang in die Forschungsphase."
       ]
     },
     {
       "degree": "B.Sc. in Electronics and Communications Engineering",
       "degree_de": "B.Sc. in Elektronik und Kommunikationstechnik",
       "period": "Aug 2021 -- Aug 2026",
+      "period_de": "Aug 2021 -- Aug 2026",
       "institution": "Alexandria University, Faculty of Engineering",
       "institution_de": "Universität Alexandria, Fakultät für Ingenieurwissenschaften",
       "location": "Alexandria, Egypt",
       "location_de": "Alexandria, Ägypten",
       "bullets": [
-        "Core curriculum: integrated photonics, electromagnetic theory, optical fiber communications, and digital signal processing.",
-        "Awarded Dean's Honors for Academic Excellence every year from 2021 to 2025."
+        "CGPA: 3.39/4.0; awarded Dean's List of Honors across all five academic years (2021 to 2026).",
+        "Graduation thesis: IEEE 802.3 400 Gb/s Ethernet Mode-Division Multiplexing transceiver with a waveguide-integrated Ge/Si vertical n-i-p photodetector.",
+        "Core curriculum: integrated photonics, electromagnetic theory, optical fiber communications, and digital signal processing."
+      ],
+      "bullets_de": [
+        "Abschlussnote (CGPA): 3,39/4,0; Auszeichnung auf der Dekanatsliste für akademische Exzellenz in allen fünf Studienjahren (2021 bis 2026).",
+        "Abschlussarbeit: IEEE 802.3 400 Gb/s Ethernet Mode-Division-Multiplexing-Transceiver mit wellenleiterintegriertem vertikalem Ge/Si-n-i-p-Photodetektor.",
+        "Kernfächer: integrierte Photonik, elektromagnetische Feldtheorie, faseroptische Kommunikation und digitale Signalverarbeitung."
       ]
     }
   ],
@@ -56,6 +84,10 @@
       "bullets": [
         "Conducted device-level FDTD simulations for spontaneous parametric down-conversion (SPDC) sources on emerging material platforms.",
         "Contributed to co-authored work on terahertz bound-state-in-the-continuum (BIC) metasurfaces, published in the Journal of Optics."
+      ],
+      "bullets_de": [
+        "Durchführung von FDTD-Simulationen auf Bauelementebene für SPDC-Quantenlichtquellen auf neuartigen Materialplattformen.",
+        "Beitrag zur ko-verfassten Veröffentlichung über Terahertz-BIC-Metaoberflächen im Journal of Optics."
       ]
     },
     {
@@ -68,8 +100,12 @@
       "location": "Remote",
       "location_de": "Fernarbeit",
       "bullets": [
-        "Developed physics-informed neural network (PINN) models for wave-equation-constrained inverse design of NbOCl\\textsubscript{2}-based SPDC sources.",
-        "Trained and benchmarked a 12-million-parameter PINN model against full-wave electromagnetic solvers; work submitted as a preprint."
+        "Developed physics-informed neural network (PINN) models for wave-equation-constrained inverse design of NbOCl₂-based SPDC sources.",
+        "Trained and benchmarked a 12-million-parameter PINN model against full-wave electromagnetic solvers; work posted as a preprint."
+      ],
+      "bullets_de": [
+        "Entwicklung physikinformierter neuronaler Netze (PINNs) für das wellengleichungsbeschränkte Inversdesign von NbOCl₂-basierten SPDC-Quellen.",
+        "Training und Benchmarking eines 12-Millionen-Parameter-PINN-Modells gegenüber Vollwellen-Elektromagnetik-Lösern; als Preprint veröffentlicht."
       ]
     },
     {
@@ -84,6 +120,10 @@
       "bullets": [
         "Modeled Fiber Bragg Grating (FBG) mode coupling and validated transfer-matrix results against full-wave FDTD simulations.",
         "Contributed to the design of an FBG-based vital-sign monitoring sensor using coupled-mode and circuit-level analysis."
+      ],
+      "bullets_de": [
+        "Modellierung der Modenkopplung in Faser-Bragg-Gittern (FBG) und Validierung von Transfer-Matrix-Ergebnissen mittels Vollwellen-FDTD.",
+        "Beitrag zum Entwurf eines FBG-basierten Vitalparameter-Sensors mithilfe von Kopplungsmoden- und Schaltungsanalyse."
       ]
     }
   ],
@@ -91,8 +131,8 @@
     {
       "category": "Photonic Simulation and Design",
       "category_de": "Photonische Simulation und Design",
-      "items": "Full-wave FDTD/FEM solvers, semiconductor drift-diffusion transport, coupled-mode theory, transfer-matrix method, waveguide dispersion engineering.",
-      "items_de": "Vollwellen-FDTD/FEM-Löser, Halbleiter-Drift-Diffusions-Transport, Theorie gekoppelter Moden, Transfer-Matrix-Methode, Wellenleiter-Dispersions-Engineering."
+      "items": "Full-wave 3D FDTD and finite-element (FEM) solvers, semiconductor drift-diffusion transport, coupled-mode theory, transfer-matrix method, GDSII layout, waveguide dispersion engineering.",
+      "items_de": "Vollwellen-3D-FDTD- und Finite-Elemente-Löser (FEM), Halbleiter-Drift-Diffusions-Transport, Theorie gekoppelter Moden, Transfer-Matrix-Methode, GDSII-Layout, Wellenleiter-Dispersions-Engineering."
     },
     {
       "category": "Programming and Scientific Computing",
@@ -112,58 +152,77 @@
     }
   ],
   "languages": [
-    { "name": "Arabic", "name_de": "Arabisch", "level": "Native", "level_de": "Muttersprache" },
-    { "name": "English", "name_de": "Englisch", "level": "Professional Working Proficiency", "level_de": "Verhandlungssicher" }
+    {
+      "name": "Arabic",
+      "name_de": "Arabisch",
+      "level": "Native",
+      "level_de": "Muttersprache"
+    },
+    {
+      "name": "English",
+      "name_de": "Englisch",
+      "level": "Professional Working Proficiency",
+      "level_de": "Verhandlungssicher"
+    }
   ],
   "awards": [
     {
-      "award": "Max Planck School of Photonics (MPSP) Scholarship",
-      "award_de": "Stipendium der Max Planck School of Photonics (MPSP)",
+      "award": "Max Planck School of Photonics (MPSP) Fellowship (Cohort 8)",
+      "award_de": "Stipendium der Max Planck School of Photonics (MPSP, Kohorte 8)",
       "issuer": "Max Planck Schools",
       "issuer_de": "Max Planck Schools",
       "year": "2026 -- Present",
       "year_de": "2026 -- Heute"
     },
     {
-      "award": "Dean's Honors for Academic Excellence",
-      "award_de": "Dekan-Ehrung für akademische Exzellenz",
+      "award": "Dean's List of Honors for Academic Excellence",
+      "award_de": "Dekanatsliste für akademische Exzellenz",
       "issuer": "Alexandria University, Faculty of Engineering",
       "issuer_de": "Universität Alexandria, Fakultät für Ingenieurwissenschaften",
-      "year": "2021 -- 2025"
+      "year": "2021 -- 2026",
+      "year_de": "2021 -- 2026"
     },
     {
-      "award": "ICMTC Artificial Intelligence Contest (AIC-2) -- 4th Place",
-      "award_de": "ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2) -- 4. Platz",
+      "award": "ICMTC Artificial Intelligence Contest (AIC-2), 4th Place",
+      "award_de": "ICMTC Wettbewerb für Künstliche Intelligenz (AIC-2), 4. Platz",
       "issuer": "Military Technical College",
       "issuer_de": "Militärtechnische Hochschule",
-      "year": "2024"
+      "year": "2024",
+      "year_de": "2024"
     },
     {
-      "award": "Huawei ICT Skills Competition -- National Finalist (AI Track)",
-      "award_de": "Huawei ICT-Fähigkeitswettbewerb -- Nationaler Finalist (KI-Bereich)",
-      "issuer": "Huawei Technologies -- MENA Region",
-      "issuer_de": "Huawei Technologies -- MENA-Region",
-      "year": "2023"
+      "award": "Huawei ICT Skills Competition, National Finalist (AI Track)",
+      "award_de": "Huawei ICT-Fähigkeitswettbewerb, Nationaler Finalist (KI-Bereich)",
+      "issuer": "Huawei Technologies, MENA Region",
+      "issuer_de": "Huawei Technologies, MENA-Region",
+      "year": "2023",
+      "year_de": "2023"
     },
     {
-      "award": "NASA Space Apps Challenge -- Global Nominee",
-      "award_de": "NASA Space Apps Challenge -- Globaler Nominierter",
+      "award": "NASA Space Apps Challenge, Global Nominee",
+      "award_de": "NASA Space Apps Challenge, Globaler Nominierter",
       "issuer": "NASA",
       "issuer_de": "NASA",
-      "year": "2021"
+      "year": "2021",
+      "year_de": "2021"
     }
   ],
   "leadership": [
     {
-      "role": "Board Member",
-      "role_de": "Vorstandsmitglied",
+      "role": "Founding Board Member and Webmaster",
+      "role_de": "Gründungs-Vorstandsmitglied und Webmaster",
       "period": "Jul 2026 -- Present",
       "period_de": "Jul 2026 -- Heute",
       "org": "Optica Egypt Local Section",
       "org_de": "Optica Sektion Ägypten",
       "location": "Hybrid",
       "location_de": "Hybrid",
-      "bullets": []
+      "bullets": [
+        "Co-initiated the Optica Egypt Local Section (approved September 2026) and developed the section web platform."
+      ],
+      "bullets_de": [
+        "Mitinitiator der Optica-Lokalsektion Ägypten (Genehmigung September 2026) und Entwicklung der Sektions-Webplattform."
+      ]
     },
     {
       "role": "Chairman",
@@ -176,6 +235,9 @@
       "location_de": "Hybrid",
       "bullets": [
         "Led chapter activities, organized technical seminars, and coordinated with IEEE Region 8 for student events."
+      ],
+      "bullets_de": [
+        "Leitung der Kapitelaktivitäten, Organisation technischer Seminare und Koordination mit IEEE Region 8 für studentische Veranstaltungen."
       ]
     },
     {
@@ -187,7 +249,8 @@
       "org_de": "Education Clinic (in den USA registrierte NGO)",
       "location": "Remote",
       "location_de": "Fernarbeit",
-      "bullets": []
+      "bullets": [],
+      "bullets_de": []
     }
   ],
   "memberships": [
@@ -211,6 +274,7 @@
       "name": "Institute of Electrical and Electronics Engineers (IEEE)",
       "name_de": "Institut der Elektro- und Elektronikingenieure (IEEE)",
       "period": "2025 -- 2026",
+      "period_de": "2025 -- 2026",
       "detail": "Student Member (ID: 101099759).",
       "detail_de": "Studentenmitglied (Nr.: 101099759)."
     }
@@ -222,8 +286,7 @@
       "role_de": "Wissenschaftlicher Mitarbeiter",
       "org": "Institute of Materials Research and Engineering (IMRE), A*STAR, Singapore",
       "org_de": "Institut für Materialforschung und Ingenieurwesen (IMRE), A*STAR, Singapur",
-      "email": "omar_abdelrahman@a-star.edu.sg",
-      "phone": "+65-8349-0207"
+      "email": "omar_abdelrahman@a-star.edu.sg"
     },
     {
       "name": "Prof. Ishac Kandas",
@@ -231,41 +294,54 @@
       "role_de": "Professor",
       "org": "Department of Engineering Physics and Mathematics, Alexandria University",
       "org_de": "Institut für Technische Physik und Mathematik, Universität Alexandria",
-      "email": "ishac.kandas@alexu.edu.eg",
-      "phone": "+20-127-755-2785"
+      "email": "ishac.kandas@alexu.edu.eg"
     }
   ],
   "tools": [
     {
       "id": "nanophotonet-mpm",
       "title": "NanoPhotoNet-MPM: Physics-Informed Neural Surrogate for Inverse SPDC Design",
-      "title_de": "NanoPhotoNet-MPM: Physics-Informed Neural Surrogate for Inverse SPDC Design",
+      "title_de": "NanoPhotoNet-MPM: Physikinformiertes neuronales Surrogatmodell für inverses SPDC-Design",
       "status": "Prerelease",
+      "status_de": "Vorabversion",
       "tier": "major",
       "year": "2026",
-      "objective": "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl2 waveguides.",
-      "objective_de": "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl2 waveguides.",
+      "objective": "A physics-informed neural surrogate framework combining an EigenmodeDeepONet transverse eigensolver, a deterministic physics conversion layer, and a CWE-PINN longitudinal propagator for inverse design of modal phase-matched biphoton quantum light sources in anisotropic monoclinic NbOCl₂ waveguides.",
+      "objective_de": "Ein physikinformiertes neuronales Surrogat-Framework aus einem EigenmodeDeepONet-Transversal-Eigenlöser, einer deterministischen Physik-Konversionsschicht und einem CWE-PINN-Propagator für das Inversdesign modenphasenangepasster Biphotonen-Quantenlichtquellen in anisotropen monoklinen NbOCl₂-Wellenleitern.",
       "methods": "Physics-informed neural networks (PINNs), DeepOperator Networks (DeepONet), coupled-wave equations, finite-difference eigenmode (FDE) solvers, genetic algorithm optimization, and joint spectral amplitude (JSA) analysis.",
+      "methods_de": "Physikinformierte neuronale Netze (PINNs), Deep-Operator-Netze (DeepONet), gekoppelte Wellengleichungen, Finite-Differenzen-Eigenmodenlöser (FDE), genetische Algorithmus-Optimierung und Analyse der gemeinsamen Spektralamplitude (JSA).",
+      "results": "Predicts phase-matching zeros with 1.43e-3 effective-index MAE, identifies Type-II SPDC designs reaching P = 0.350 purity ceiling, and provides public code, model checkpoints, and FDE field dataset.",
+      "results_de": "Prognostiziert Phasenanpassungs-Nullstellen mit einem effektiven Brechungsindex-MAE von 1,43e-3, identifiziert Typ-II-SPDC-Designs bis zur Reinheitsgrenze P = 0,350 und stellt öffentlichen Code, Modellgewichte und FDE-Felddatensatz bereit.",
+      "zenodo": "https://doi.org/10.5281/zenodo.18653064",
+      "huggingface": "https://huggingface.co/iabdul-aal/NanoPhotoNet-MPM",
+      "huggingfaceDataset": "https://huggingface.co/datasets/iabdul-aal/NanoPhotoNet-MPM",
+      "paperDoi": "10.20944/preprints202609.1239.v1",
       "links": [
-        { "label": "Repository", "href": "https://github.com/iabdul-aal/NanoPhotoNet-MPM" },
-        { "label": "Dataset DOI", "href": "https://doi.org/10.57967/hf/9066" },
-        { "label": "Model DOI", "href": "https://doi.org/10.57967/hf/9068" },
-        { "label": "Code DOI", "href": "https://doi.org/10.5281/zenodo.18653064" }
+        { "label": "Code DOI", "href": "https://doi.org/10.5281/zenodo.18653064" },
+        { "label": "HuggingFace", "href": "https://huggingface.co/iabdul-aal/NanoPhotoNet-MPM" },
+        { "label": "Dataset", "href": "https://huggingface.co/datasets/iabdul-aal/NanoPhotoNet-MPM" },
+        { "label": "Paper", "href": "https://doi.org/10.20944/preprints202609.1239.v1" }
       ]
     },
     {
       "id": "pd-design-kit",
       "title": "Ge-on-Si PIN Photodetector Design Kit",
-      "title_de": "Ge-on-Si PIN Photodetector Design Kit",
+      "title_de": "Ge-on-Si PIN-Photodetektor-Designpaket",
       "status": "",
+      "status_de": "",
       "tier": "minor",
       "year": "2026",
-      "objective": "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical links.",
-      "objective_de": "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical links.",
-      "methods": "Finite-Difference Time-Domain (FDTD) optical absorption modeling, drift-diffusion electrical transport simulation, transit-time and RC bandwidth analysis, compact-model parameter extraction, system-level link simulation, and layout validation.",
+      "objective": "A cascaded multiphysics simulation workflow for a waveguide-integrated Ge-on-Si vertical n-i-p photodiode targeting O-band intra-data-center optical interconnects.",
+      "objective_de": "Ein kaskadierter multiphysikalischer Simulationsworkflow für eine wellenleiterintegrierte vertikale Ge-auf-Si-n-i-p-Photodiode für optische O-Band-Rechenzentrumsverbindungen.",
+      "methods": "3D Finite-Difference Time-Domain (FDTD) optical absorption modeling, 3D semiconductor drift-diffusion transport simulation, transit-time and RC bandwidth analysis, compact-model parameter extraction, circuit co-simulation, and GDSII layout validation.",
+      "methods_de": "3D-FDTD-Simulation der optischen Absorption, 3D-Halbleiter-Drift-Diffusions-Transportmodellierung, Laufzeit- und RC-Bandbreitenanalyse, Extraktion kompakter Modellparameter, Schaltungs-Co-Simulation und GDSII-Layoutvalidierung.",
+      "results": "Public repository containing solver-derived data flows, generated figures, compact model library artifacts, automation scripts, and a Zenodo archive record (DOI 10.5281/zenodo.21089184).",
+      "results_de": "Öffentliches Repository mit löserbasierten Datenflüssen, generierten Abbildungen, Kompaktmodell-Artefakten, Automatisierungsskripten und einem Zenodo-Archiv (DOI 10.5281/zenodo.21089184).",
+      "github": "https://github.com/iabdul-aal/PD-design-kit",
+      "zenodo": "https://doi.org/10.5281/zenodo.21089184",
       "links": [
         { "label": "Repository", "href": "https://github.com/iabdul-aal/PD-design-kit" },
-        { "label": "DOI", "href": "https://doi.org/10.5281/zenodo.19652934" }
+        { "label": "DOI", "href": "https://doi.org/10.5281/zenodo.21089184" }
       ]
     }
   ]

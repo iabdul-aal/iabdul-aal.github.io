@@ -11,6 +11,6 @@ Only the latest state of the `main` branch is supported for security updates.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within this project, please report it by opening a private security advisory on GitHub or sending an email to the repository owner. 
+If you discover a security vulnerability within this repository or website, please report it via a private GitHub Security Advisory or by email to [islam.abdulaal@fau.de](mailto:islam.abdulaal@fau.de).
 
 Please do not open public issues for security vulnerabilities until they have been reviewed and addressed.

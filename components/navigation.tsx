@@ -14,7 +14,10 @@ export function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const mobileNavRef = useRef<HTMLDivElement>(null)
-  const { t } = useLanguage()
+  const toggleBtnRef = useRef<HTMLButtonElement>(null)
+  const wasOpenRef = useRef(false)
+  const { t, lang } = useLanguage()
+  const isDe = lang === "de"
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
@@ -23,7 +26,19 @@ export function Navigation() {
     return t.nav[key] || defaultLabel
   }
 
-  // Close mobile menu on escape key & trap keyboard focus inside mobile drawer
+  // Move focus into mobile drawer when opened and restore to trigger on close
+  useEffect(() => {
+    if (isOpen && mobileNavRef.current) {
+      wasOpenRef.current = true
+      const firstLink = mobileNavRef.current.querySelector<HTMLElement>("a[href]")
+      firstLink?.focus()
+    } else if (!isOpen && wasOpenRef.current) {
+      wasOpenRef.current = false
+      toggleBtnRef.current?.focus()
+    }
+  }, [isOpen])
+
+  // Close mobile menu on escape key and trap keyboard focus inside mobile drawer
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -60,8 +75,11 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <nav className="container-layout flex h-14 items-center justify-between" aria-label="Main">
-        {/* Brand Logo & Name */}
+      <nav
+        className="container-layout flex h-14 items-center justify-between"
+        aria-label={isDe ? "Hauptnavigation" : "Main"}
+      >
+        {/* Brand Logo and Name */}
         <Link href="/" className="flex min-w-0 items-center gap-3 text-foreground hover:text-accent transition-colors">
           <Image src="/logo.png" alt={`${identity.name} logo`} width={36} height={36} className="h-8 w-auto shrink-0" />
           <div className="min-w-0 truncate">
@@ -92,14 +110,15 @@ export function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation Trigger & Toggle */}
+        {/* Mobile Navigation Trigger and Toggle */}
         <div className="flex items-center gap-3 lg:hidden">
           <LanguageToggle />
 
           <button
+            ref={toggleBtnRef}
             type="button"
             className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground"
-            aria-label="Toggle navigation"
+            aria-label={isDe ? "Navigation umschalten" : "Toggle navigation"}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsOpen((value) => !value)}
@@ -116,7 +135,7 @@ export function Navigation() {
           ref={mobileNavRef}
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile navigation"
+          aria-label={isDe ? "Mobile Navigation" : "Mobile navigation"}
           className="border-t border-border bg-background lg:hidden overscroll-contain"
         >
           <div className="mx-auto grid max-w-6xl gap-1 px-5 py-4 sm:px-6">
@@ -127,7 +146,7 @@ export function Navigation() {
                 onClick={() => setIsOpen(false)}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm",
+                  "touch-target flex min-h-[44px] items-center rounded-md px-3 py-2 text-sm",
                   isActive(item.href)
                     ? "bg-secondary text-foreground font-semibold"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground",

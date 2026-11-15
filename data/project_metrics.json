@@ -1,4 +1,47 @@
 {
-  "projects": {},
-  "fetchedAt": "2026-11-15T09:31:31.341997+00:00"
+  "projects": {
+    "nanophotonet-mpm": {
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "open_issues": 0,
+      "pushed_at": "",
+      "zenodo": {
+        "downloads": 17,
+        "unique_downloads": 14,
+        "views": 58,
+        "unique_views": 55
+      },
+      "huggingface": {
+        "model": {
+          "id": "iabdul-aal/NanoPhotoNet-MPM",
+          "downloads": 0,
+          "likes": 0
+        },
+        "dataset": {
+          "id": "iabdul-aal/NanoPhotoNet-MPM",
+          "downloads": 53,
+          "likes": 0
+        },
+        "downloads": 53,
+        "likes": 0
+      },
+      "score": 198
+    },
+    "pd-design-kit": {
+      "stars": 0,
+      "forks": 0,
+      "watchers": 0,
+      "open_issues": 0,
+      "pushed_at": "2026-07-01T12:49:24Z",
+      "zenodo": {
+        "downloads": 28,
+        "unique_downloads": 25,
+        "views": 114,
+        "unique_views": 94
+      },
+      "score": 170
+    }
+  },
+  "fetchedAt": "2026-11-15T14:03:43.070387+00:00"
 }

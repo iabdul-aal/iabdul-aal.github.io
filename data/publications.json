@@ -1,12 +1,29 @@
 [
   {
+    "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl₂ Biphoton Quantum Sources",
+    "venue": "Preprints.org",
+    "year": "2026",
+    "doi": "10.20944/preprints202609.1239.v1",
+    "url": "https://doi.org/10.20944/preprints202609.1239.v1",
+    "date": "2026-09-15",
+    "type": "preprint",
+    "authors": [
+      "Islam I. Abdulaal",
+      "Omar A. M. Abdelraouf"
+    ]
+  },
+  {
     "title": "Recent advances in terahertz-based bound states in the continuum metasurfaces for 6G communications and MedTech",
     "venue": "Journal of Optics",
+    "volume": "28",
+    "issue": "7",
+    "pages": "073001",
     "year": "2026",
     "doi": "10.1088/2040-8986/ae8605",
     "url": "https://doi.org/10.1088/2040-8986/ae8605",
-    "date": "2026-06-15",
+    "date": "2026-07-01",
     "arxiv": "2510.00357",
+    "type": "article",
     "authors": [
       "Islam I. Abdulaal",
       "Abdelrahman W. A. Elsayed",
@@ -14,20 +31,14 @@
     ]
   },
   {
-    "title": "NanoPhotoNet-MPM: A Physics-Informed Deep Learning for Inverse Design of NbOCl<sub>2</sub> Biphoton Quantum Sources",
-    "venue": "Working Paper",
-    "year": "",
-    "doi": "10.20944/preprints202609.1239.v1",
-    "url": "https://doi.org/10.20944/preprints202609.1239.v1",
-    "date": "2026-09-15"
-  },
-  {
     "title": "Beyond Data-Driven: How Physics-Informed Neural Networks are Reshaping Multi-Physics Design and Discovery",
     "venue": "Preprint",
     "year": "2026",
     "doi": "10.48550/arXiv.2606.21945",
     "url": "https://arxiv.org/abs/2606.21945",
+    "date": "2026-06-20",
     "arxiv": "2606.21945",
+    "type": "preprint",
     "authors": [
       "Amir H. M. Labeb",
       "Basmala Sallam",

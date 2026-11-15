@@ -16,12 +16,12 @@ const TALKS_PATH = join(process.cwd(), "data", "talks.json")
 
 const fallbackTalks: TalkEntry[] = [
   {
-    title: "Recent Public Talk",
-    event: "Featured Public Session",
-    date: "",
-    year: "2025",
-    url: "https://www.youtube.com/watch?v=mEboydO5pEk&t=4s",
-    source: "YouTube",
+    title: "ECE Unlocked | Technical Orientations '26' | Islam I. Abdulaal",
+    event: "Featured Public Talk",
+    date: "2026-01-04",
+    year: "2026",
+    url: "https://www.youtube.com/watch?v=mEboydO5pEk",
+    source: "IEEE SSCS AUSC",
     format: "Technical Talk",
     featured: true,
   },

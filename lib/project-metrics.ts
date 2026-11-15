@@ -13,6 +13,14 @@ export type ProjectMetric = {
     views: number
     unique_views: number
   }
+  huggingface?: {
+    downloads: number
+    likes: number
+  }
+  huggingfaceDataset?: {
+    downloads: number
+    likes: number
+  }
   score: number
 }
 

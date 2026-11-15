@@ -6,9 +6,9 @@ A light, typography-first academic site designed for supervisors and collaborato
 
 ## Color
 
-Use a restrained palette: tinted near-white background, dark neutral text, soft borders, and one low-chroma blue-green accent used sparingly for links, focus states, and small metadata.
+Use a restrained palette: tinted near-white background, dark neutral text, soft borders, and one gold/bronze accent (`#b68c61`) used sparingly for links, focus states, and small metadata.
 
-CSS colors should be expressed with OKLCH in `app/globals.css`. Avoid pure white, pure black, broad gradients, dark-blue dominance, neon color, and multi-accent palettes.
+CSS color tokens in `app/globals.css` maintain light neutral surfaces (`#f9fafb`), slate ink (`#0f172a`), subtle dividers, and gold/bronze accents (`#b68c61`). Avoid pure white, pure black, broad gradients, dark-blue dominance, neon color, and multi-accent palettes.
 
 ## Typography
 
@@ -31,7 +31,7 @@ Core components:
 - Publication rows with DOI, arXiv, PDF, and BibTeX copy support.
 - Research theme sections organized by problem, methods, and physical relevance.
 - Project records with objective, methods, tools, status, and links.
-- CV preview/download area with concise summary.
+- CV page with download actions, Education, Research Experience (prose entries without bullets), and embedded PDF preview.
 
 ## Motion
 

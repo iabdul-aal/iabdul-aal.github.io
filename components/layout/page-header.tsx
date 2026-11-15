@@ -37,6 +37,7 @@ export function PageHeader({
     if (i18nKey === "about") {
       displayEyebrow = t.headers.aboutEyebrow
       displayTitle = t.headers.aboutTitle
+      displayDescription = t.headers.aboutDesc
     } else if (i18nKey === "research") {
       displayEyebrow = t.headers.researchEyebrow
       displayTitle = t.headers.researchTitle

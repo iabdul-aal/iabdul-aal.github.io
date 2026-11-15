@@ -39,8 +39,18 @@ jobs:
       - name: Regenerate BibTeX from publications.json
         run: python scripts/update_publications_bib.py
 
-      - name: Generate cv.tex from cv_data.json
+      - name: Generate cv.tex and cv_de.tex from cv_data.json
         run: python scripts/update_cv_tex.py
+
+      - name: Regenerate activity feed and RSS feed
+        run: |
+          python scripts/generate_activity.py
+          python scripts/generate_rss.py
+
+      - name: Verify tool sync and site governance rules
+        run: |
+          python scripts/check_tools_sync.py
+          python scripts/verify_site.py --ci
 
       - name: Compile LaTeX CV (EN)
         uses: xu-cheng/latex-action@v3
@@ -62,7 +72,7 @@ jobs:
       - name: Detect changes
         id: diff
         run: |
-          if git diff --quiet -- data/cv.tex data/cv_de.tex data/publications.bib public/cv.pdf public/cv_de.pdf; then
+          if git diff --quiet -- data/cv.tex data/cv_de.tex data/publications.bib data/activity.json public/feed.xml data/cv.pdf data/cv_de.pdf public/cv.pdf public/cv_de.pdf; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -73,6 +83,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cv.tex data/cv_de.tex data/publications.bib public/cv.pdf public/cv_de.pdf
-          git commit -m "chore: rebuild CV PDFs (EN/DE) from updated source data [skip ci]"
+          git add data/cv.tex data/cv_de.tex data/publications.bib data/activity.json public/feed.xml data/cv.pdf data/cv_de.pdf public/cv.pdf public/cv_de.pdf
+          git commit -m "chore: rebuild CV PDFs (EN/DE) from updated source data"
+          git pull --rebase origin main
           git push

@@ -4,6 +4,7 @@ import * as React from "react"
 import { ArrowUpRight, Download } from "lucide-react"
 import { Row } from "@/components/ui/row"
 import { Badge } from "@/components/ui/badge"
+import { ScientificText } from "@/components/ui/scientific-text"
 import { formatDate } from "@/lib/utils"
 import { useLanguage } from "@/lib/i18n-context"
 
@@ -39,6 +40,14 @@ const germanEventMap: Record<string, string> = {
 }
 
 const germanDescriptionMap: Record<string, string> = {
+  "Lecture decks, seminar slides, and presentation materials.":
+    "Vorlesungsfolien, Seminarunterlagen und Präsentationsmaterialien.",
+  "Concise write-ups and notes summarizing dense literature or methodologies.":
+    "Kompakte Ausarbeitungen und Notizen zu Fachliteratur und Methoden.",
+  "Structured self-study pathways for photonics and scientific computing.":
+    "Strukturierte Lernpfade für Photonik und wissenschaftliches Rechnen.",
+  "Reusable templates for reports, presentations, and code documentation.":
+    "Wiederverwendbare Vorlagen für Berichte, Präsentationen und Codedokumentation.",
   "Presentation slides, lecture decks, and seminar visual materials.":
     "Präsentationsfolien, Vorlesungsunterlagen und visuelle Seminarmaterialien.",
   "Technical notes, executive summaries, and condensed literature reviews.":
@@ -62,13 +71,13 @@ export function MaterialCard({ item }: MaterialCardProps) {
       <div className="space-y-1.5 w-full">
         {/* Title */}
         <h3 className="text-base font-semibold leading-snug text-foreground break-words w-full">
-          {item.title}
+          <ScientificText text={item.title} />
         </h3>
 
         {/* Date, Category, Format Badge */}
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
           <span className="text-muted-foreground">
-            {item.date ? formatDate(item.date, "short") : item.year}
+            {item.date ? formatDate(item.date, "short", lang) : item.year}
           </span>
           <Badge variant="custom">{formatLabel}</Badge>
         </div>
@@ -76,11 +85,11 @@ export function MaterialCard({ item }: MaterialCardProps) {
         {/* Description */}
         {descriptionText && (
           <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
-            {descriptionText}
+            <ScientificText text={descriptionText} />
           </p>
         )}
 
-        {/* Event & Source metadata */}
+        {/* Event and Source metadata */}
         {eventText && (
           <p className="text-xs text-muted-foreground/90 leading-relaxed">
             <span className="font-semibold text-foreground">{isDe ? "Veranstaltung:" : "Event:"} </span>

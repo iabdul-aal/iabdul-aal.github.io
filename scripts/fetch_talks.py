@@ -223,8 +223,40 @@ def sort_talks(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(items, key=sort_key, reverse=True)
 
 
+def load_existing_talks() -> list[dict[str, Any]]:
+    if OUTPUT_PATH.exists():
+        try:
+            raw = json.loads(OUTPUT_PATH.read_text(encoding="utf-8-sig"))
+            if isinstance(raw, list):
+                return [item for item in raw if isinstance(item, dict)]
+        except (OSError, json.JSONDecodeError):
+            pass
+    return []
+
+
+def merge_with_existing(talk: dict[str, Any], existing: dict[str, Any] | None) -> dict[str, Any]:
+    if not existing:
+        return talk
+    merged = dict(talk)
+    if (not merged.get("date")) and existing.get("date"):
+        merged["date"] = str(existing["date"])
+    if (not merged.get("year")) and existing.get("year"):
+        merged["year"] = str(existing["year"])
+    if merged.get("title") == "Featured Public Talk" and existing.get("title"):
+        merged["title"] = str(existing["title"])
+    if merged.get("source") == "YouTube" and existing.get("source"):
+        merged["source"] = str(existing["source"])
+    return merged
+
+
 def main() -> None:
     sources = load_sources()
+    existing_talks = load_existing_talks()
+    existing_by_url = {
+        str(item.get("url", "")).strip(): item
+        for item in existing_talks
+        if str(item.get("url", "")).strip()
+    }
 
     talks: list[dict[str, Any]] = []
 
@@ -241,10 +273,9 @@ def main() -> None:
 
         try:
             talks.extend(fetch_channel_talks(name, url, format_name))
-        except requests.RequestException:
-            continue
-        except ET.ParseError:
-            continue
+        except (requests.RequestException, ET.ParseError, ValueError):
+            fallback = [t for t in existing_talks if not t.get("featured") and t.get("source") == name]
+            talks.extend(fallback)
 
     for item in sources.get("featured", []):
         if not isinstance(item, dict):
@@ -260,6 +291,7 @@ def main() -> None:
             format_name=str(item.get("format", "Technical Talk")).strip(),
         )
         if talk:
+            talk = merge_with_existing(talk, existing_by_url.get(talk.get("url", "").strip()))
             talks.append(talk)
 
     deduped: list[dict[str, Any]] = []

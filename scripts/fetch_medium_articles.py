@@ -38,6 +38,13 @@ NS = {
     "atom": "http://www.w3.org/2005/Atom",
 }
 
+EXCERPT_OVERRIDES = {
+    "https://iabdul-aal.medium.com/how-to-plan-your-career-in-ece-department-part-i-4a01ee43dc20": (
+        "An overview for Electronics and Communications Engineering undergraduates on core "
+        "curriculum structure, technical fundamentals, and systematic academic planning."
+    ),
+}
+
 
 def strip_html(html: str) -> str:
     """Return plain text with HTML tags removed."""
@@ -120,6 +127,7 @@ def parse_articles(xml_text: str) -> list[dict]:
         plain = strip_html(raw_content)
         plain = clean_em_dashes(plain)
         excerpt = plain[:220].rsplit(" ", 1)[0] + "…" if len(plain) > 220 else plain
+        excerpt = EXCERPT_OVERRIDES.get(link, excerpt)
 
         # Tags / categories
         tags = [

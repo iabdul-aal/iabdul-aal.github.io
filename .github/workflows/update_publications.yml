@@ -31,8 +31,6 @@ jobs:
         run: |
           python scripts/fetch_publications.py
           python scripts/sync_arxiv_publications.py
-          python scripts/update_publications_bib.py
-          python scripts/update_cv_tex.py
           python scripts/fetch_orcid_profile.py
           python scripts/fetch_talks.py
           python scripts/fetch_scholar_metrics.py
@@ -41,26 +39,44 @@ jobs:
       - name: Fetch per-paper citation metrics (OpenAlex)
         run: python scripts/fetch_paper_metrics.py
 
-      - name: Fetch project engagement metrics (GitHub + Zenodo)
+      - name: Fetch project engagement metrics (GitHub, Zenodo, HuggingFace)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/fetch_project_metrics.py
 
-      - name: Generate activity feed from all sources
-        run: python scripts/generate_activity.py
+      - name: Regenerate BibTeX, CV TeX, activity feed, and RSS feed
+        run: |
+          python scripts/update_publications_bib.py
+          python scripts/update_cv_tex.py
+          python scripts/generate_activity.py
+          python scripts/generate_rss.py
 
-      - name: Compile LaTeX CV
+      - name: Verify tool sync and site governance rules
+        run: |
+          python scripts/check_tools_sync.py
+          python scripts/verify_site.py --ci
+
+      - name: Compile LaTeX CV (EN)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: data/cv.tex
+          extra_system_packages: "biber"
 
-      - name: Deploy CV PDF to public directory
-        run: cp data/cv.pdf public/cv.pdf
+      - name: Compile LaTeX CV (DE)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: data/cv_de.tex
+          extra_system_packages: "biber"
+
+      - name: Deploy CV PDFs to public directory
+        run: |
+          cp data/cv.pdf public/cv.pdf
+          cp data/cv_de.pdf public/cv_de.pdf
 
       - name: Detect changes
         id: diff
         run: |
-          if git diff --quiet -- data/publications.json data/orcid_profile.json data/talks.json data/scholar_metrics.json data/medium_articles.json data/paper_metrics.json data/project_metrics.json data/activity.json data/publications.bib public/cv.pdf data/cv_data.json data/cv.tex; then
+          if git diff --quiet -- data/publications.json data/orcid_profile.json data/talks.json data/scholar_metrics.json data/medium_articles.json data/paper_metrics.json data/project_metrics.json data/activity.json data/publications.bib data/cv_data.json data/cv.tex data/cv_de.tex data/cv.pdf data/cv_de.pdf public/cv.pdf public/cv_de.pdf public/feed.xml; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -71,6 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/publications.json data/orcid_profile.json data/talks.json data/scholar_metrics.json data/medium_articles.json data/paper_metrics.json data/project_metrics.json data/activity.json data/publications.bib public/cv.pdf data/cv_data.json data/cv.tex
-          git commit -m "chore: update academic data, metrics, activity feed, and CV PDF"
+          git add data/publications.json data/orcid_profile.json data/talks.json data/scholar_metrics.json data/medium_articles.json data/paper_metrics.json data/project_metrics.json data/activity.json data/publications.bib data/cv_data.json data/cv.tex data/cv_de.tex data/cv.pdf data/cv_de.pdf public/cv.pdf public/cv_de.pdf public/feed.xml
+          git commit -m "chore: update academic data, metrics, activity feed, RSS, and CV PDFs"
+          git pull --rebase origin main
           git push
