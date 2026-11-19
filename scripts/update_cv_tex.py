@@ -82,6 +82,8 @@ def build_preamble(lang: str = "en") -> list[str]:
         "\\usepackage{titlesec}",
         "\\usepackage{hyperref}",
         "\\usepackage{xcolor}",
+        "% titlesec's trailing \\uppercase transforms color names in section rules to uppercase",
+        "\\definecolor{SECTIONCOLOR}{RGB}{0,102,204}",
         "\\usepackage{fontawesome5}",
         "\\usepackage{graphicx}",
         "\\graphicspath{{data/}{./}}",
