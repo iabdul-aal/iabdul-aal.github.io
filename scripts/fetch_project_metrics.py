@@ -92,40 +92,56 @@ def huggingface_stats(kind: str, repo_id: str) -> dict:
 def main() -> None:
     token = os.environ.get("GITHUB_TOKEN")
     projects = get_projects()
+    existing_projects: dict[str, dict] = {}
+    if OUT_FILE.exists():
+        try:
+            existing_projects = json.loads(OUT_FILE.read_text(encoding="utf-8")).get("projects", {})
+        except Exception:
+            existing_projects = {}
     metrics: dict[str, dict] = {}
 
     for project in projects:
         pid = project["id"]
+        prev = existing_projects.get(pid, {})
         print(f"Fetching metrics for {pid}...")
         entry: dict = {
-            "stars": 0,
-            "forks": 0,
-            "watchers": 0,
-            "open_issues": 0,
-            "pushed_at": "",
+            "stars": prev.get("stars", 0),
+            "forks": prev.get("forks", 0),
+            "watchers": prev.get("watchers", 0),
+            "open_issues": prev.get("open_issues", 0),
+            "pushed_at": prev.get("pushed_at", ""),
         }
 
         if project.get("github"):
             gh = github_stats(project["github"], token)
-            entry.update(gh)
-            print(f"  GitHub: stars={gh['stars']}, forks={gh['forks']}")
+            if gh.get("pushed_at") or gh.get("stars") or not prev:
+                entry.update(gh)
+            print(f"  GitHub: stars={entry['stars']}, forks={entry['forks']}")
             time.sleep(0.3)
 
         if project.get("zenodo_id"):
             zn = zenodo_stats(project["zenodo_id"])
-            entry["zenodo"] = zn
-            print(f"  Zenodo: downloads={zn['downloads']}, views={zn['views']}")
+            if zn.get("views") or zn.get("downloads") or "zenodo" not in prev:
+                entry["zenodo"] = zn
+            else:
+                entry["zenodo"] = prev["zenodo"]
+            print(f"  Zenodo: downloads={entry['zenodo']['downloads']}, views={entry['zenodo']['views']}")
             time.sleep(0.3)
 
         hf_entry: dict = {}
+        prev_hf = prev.get("huggingface", {}) if isinstance(prev.get("huggingface"), dict) else {}
         if project.get("huggingface"):
             hf_model = huggingface_stats("models", project["huggingface"])
+            if not hf_model.get("downloads") and not hf_model.get("likes") and isinstance(prev_hf.get("model"), dict):
+                hf_model = prev_hf["model"]
             hf_entry["model"] = hf_model
             print(f"  HF Model: downloads={hf_model['downloads']}, likes={hf_model['likes']}")
             time.sleep(0.2)
 
         if project.get("huggingfaceDataset"):
             hf_ds = huggingface_stats("datasets", project["huggingfaceDataset"])
+            if not hf_ds.get("downloads") and not hf_ds.get("likes") and isinstance(prev_hf.get("dataset"), dict):
+                hf_ds = prev_hf["dataset"]
             hf_entry["dataset"] = hf_ds
             print(f"  HF Dataset: downloads={hf_ds['downloads']}, likes={hf_ds['likes']}")
             time.sleep(0.2)

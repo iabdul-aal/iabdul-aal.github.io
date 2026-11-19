@@ -29,7 +29,7 @@ export interface MaterialCardProps {
 
 const germanFormatLabelMap: Record<string, string> = {
   "Medium Article": "Medium-Artikel",
-  "Session": "Vortrag",
+  Session: "Vortrag",
   "Technical Talk": "Technischer Vortrag",
   "Featured Public Talk": "Ausgewählter öffentlicher Vortrag",
 }
@@ -48,14 +48,14 @@ const germanDescriptionMap: Record<string, string> = {
     "Strukturierte Lernpfade für Photonik und wissenschaftliches Rechnen.",
   "Reusable templates for reports, presentations, and code documentation.":
     "Wiederverwendbare Vorlagen für Berichte, Präsentationen und Codedokumentation.",
-  "Presentation slides, lecture decks, and seminar visual materials.":
-    "Präsentationsfolien, Vorlesungsunterlagen und visuelle Seminarmaterialien.",
-  "Technical notes, executive summaries, and condensed literature reviews.":
-    "Technische Notizen, Zusammenfassungen und komprimierte Literaturübersichten.",
-  "Structured learning paths, field overviews, and topic reading guides.":
-    "Strukturierte Lernpfade, Fachgebietsübersichten und Leseempfehlungen.",
-  "Clean document, slide deck, and presentation templates for academic workflows.":
-    "Vorlagen für Dokumente, Folien und Präsentationen im akademischen Workflow.",
+  "Structured technical roadmap covering advanced coursework, specialization tracks, and laboratory skill development in electronics and communications engineering.":
+    "Strukturierter technischer Leitfaden zu fortgeschrittenen Studienmodulen, Vertiefungsrichtungen und Laborpraxis in der Elektronik und Kommunikationstechnik.",
+  "Comparative overview of technical domains, research pathways, and industry specializations within electronics and communications engineering.":
+    "Vergleichender Überblick über technische Fachgebiete, Forschungspfade und Spezialisierungen in der Elektronik und Kommunikationstechnik.",
+  "An overview for Electronics and Communications Engineering undergraduates on core curriculum structure, technical fundamentals, and systematic academic planning.":
+    "Überblick für Studierende der Elektronik und Kommunikationstechnik zu Studienaufbau, technischen Grundlagen und systematischer Studienplanung.",
+  "Foundational introduction to the Electronics and Communications Engineering discipline, its core sub-fields, and undergraduate curriculum organization.":
+    "Grundlegende Einführung in das Fachgebiet Elektronik und Kommunikationstechnik, seine Teilbereiche und die Struktur des Grundstudiums.",
 }
 
 export function MaterialCard({ item }: MaterialCardProps) {
@@ -64,56 +64,57 @@ export function MaterialCard({ item }: MaterialCardProps) {
 
   const formatLabel = isDe ? germanFormatLabelMap[item.formatLabel] || item.formatLabel : item.formatLabel
   const eventText = isDe && item.event ? germanEventMap[item.event] || item.event : item.event
-  const descriptionText = isDe && item.description ? germanDescriptionMap[item.description] || item.description : item.description
+  const descriptionText =
+    isDe && item.description ? germanDescriptionMap[item.description] || item.description : item.description
 
   return (
     <Row aria-label={item.title}>
       <div className="space-y-1.5 w-full">
-        {/* Title */}
-        <h3 className="text-base font-semibold leading-snug text-foreground break-words w-full">
+        <h3 className="text-[15px] font-semibold leading-snug text-foreground break-words w-full">
           <ScientificText text={item.title} />
         </h3>
 
-        {/* Date, Category, Format Badge */}
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
-          <span className="text-muted-foreground">
+          <span className="tabular-nums text-muted-foreground">
             {item.date ? formatDate(item.date, "short", lang) : item.year}
           </span>
           <Badge variant="custom">{formatLabel}</Badge>
         </div>
 
-        {/* Description */}
         {descriptionText && (
-          <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
+          <p className="text-[13px] leading-relaxed text-pretty text-muted-foreground">
             <ScientificText text={descriptionText} />
           </p>
         )}
 
-        {/* Event and Source metadata */}
         {eventText && (
-          <p className="text-xs text-muted-foreground/90 leading-relaxed">
-            <span className="font-semibold text-foreground">{isDe ? "Veranstaltung:" : "Event:"} </span>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            <span className="font-semibold text-foreground">
+              {isDe ? "Veranstaltung:" : "Event:"}{" "}
+            </span>
             {eventText}
             {item.source ? ` (${item.source})` : ""}
           </p>
         )}
       </div>
 
-      {/* Action Links */}
       {item.url && (
-        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs pt-1">
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-0.5 text-xs">
           <a
             href={item.url}
             target={item.isDownload ? undefined : "_blank"}
-            rel={item.isDownload ? undefined : "noreferrer"}
+            rel={item.isDownload ? undefined : "noopener noreferrer"}
             download={item.isDownload ? true : undefined}
-            className="btn-secondary"
+            className="group btn-secondary"
           >
             {item.isDownload ? (isDe ? "Herunterladen" : "Download") : t.ui.source}
             {item.isDownload ? (
               <Download className="h-3 w-3" aria-hidden="true" />
             ) : (
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                aria-hidden="true"
+              />
             )}
           </a>
         </div>

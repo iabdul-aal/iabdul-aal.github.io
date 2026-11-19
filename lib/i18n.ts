@@ -39,7 +39,6 @@ export interface TranslationSchema {
   }
   ui: {
     searchPlaceholder: string
-    searchTalks: string
     searchMaterials: string
     searchTools: string
     searchPubs: string
@@ -49,27 +48,19 @@ export interface TranslationSchema {
     allFormats: string
     allCategories: string
     clearFilters: string
-    showMore: string
     showMorePubs: string
-    showMoreTools: string
-    showMoreSessions: string
     showMoreMaterials: string
     showing: string
     of: string
     publications: string
-    sessions: string
     materialsLabel: string
     toolsLabel: string
     filtered: string
     exportBibtex: string
     exportRis: string
     copiedBibtex: string
-    copied: string
     bibtex: string
-    showBibtex: string
-    hideBibtex: string
     ris: string
-    downloadPdf: string
     downloadPdfEn: string
     openPdf: string
     downloadPdfDe: string
@@ -83,36 +74,21 @@ export interface TranslationSchema {
     arxiv: string
     pdf: string
     source: string
-    featured: string
     problem: string
     methods: string
     physicalRelevance: string
-    featuredTools: string
     topicPublications: string
     citableSoftware: string
     supportingUtilities: string
-    academicProgression: string
-    institutionalAck: string
     lastUpdated: string
   }
   sections: {
     recentActivity: string
     researchOverview: string
     selectedPublications: string
-    featuredPublications: string
-    featuredSoftware: string
     featuredTool: string
-    citableSoftware: string
-    academicProfiles: string
     education: string
     researchExperience: string
-    teaching: string
-    leadership: string
-    awards: string
-    memberships: string
-    technicalCapabilities: string
-    languages: string
-    references: string
     fullCvSection: string
     profiles: string
     sections: string
@@ -160,43 +136,34 @@ export const translations: Record<Language, TranslationSchema> = {
       materialsTitle: "Technical materials, notes, and public sessions",
       materialsEyebrow: "Materials",
       materialsDesc:
-        "Reference notes, seminar slides, archived technical essays, and a chronological archive of public talks and student workshops in optical engineering.",
+        "Reference notes, seminar slides, published technical essays, and a chronological record of public talks and student workshops in optical engineering.",
       cvTitle: "Curriculum Vitae",
       cvEyebrow: "CV",
     },
     ui: {
       searchPlaceholder: "Search...",
-      searchTalks: "Search talks by title, event, format, or organizer...",
-      searchMaterials: "Search materials by title, description, format...",
-      searchTools: "Search tools by title, objective, methods...",
-      searchPubs: "Search publications by title, author, venue...",
+      searchMaterials: "Search materials by title, description, or format...",
+      searchTools: "Search tools by title, objective, or methods...",
+      searchPubs: "Search by title, author, or venue...",
       allYears: "All Years",
       allTopics: "All Topics",
       allTypes: "All Types",
       allFormats: "All Formats",
       allCategories: "All Categories",
       clearFilters: "Clear filters",
-      showMore: "Show more",
       showMorePubs: "Show more publications",
-      showMoreTools: "Show more tools",
-      showMoreSessions: "Show more sessions",
       showMoreMaterials: "Show more materials",
       showing: "Showing",
       of: "of",
       publications: "publications",
-      sessions: "sessions",
       materialsLabel: "materials",
       toolsLabel: "tools",
       filtered: "(filtered)",
       exportBibtex: "Export BibTeX",
       exportRis: "Export RIS",
       copiedBibtex: "Copied BibTeX",
-      copied: "Copied",
       bibtex: "BibTeX",
-      showBibtex: "View BibTeX",
-      hideBibtex: "Hide BibTeX",
       ris: "RIS",
-      downloadPdf: "Download PDF",
       downloadPdfEn: "Download PDF (EN)",
       openPdf: "Open PDF",
       downloadPdfDe: "Download PDF (DE)",
@@ -210,36 +177,21 @@ export const translations: Record<Language, TranslationSchema> = {
       arxiv: "arXiv",
       pdf: "PDF",
       source: "Source",
-      featured: "Featured",
       problem: "Problem",
       methods: "Methods",
       physicalRelevance: "Physical Relevance",
-      featuredTools: "Featured Tools",
       topicPublications: "Topic publications",
       citableSoftware: "Citable Research Software",
       supportingUtilities: "Supporting Utilities",
-      academicProgression: "Academic Progression",
-      institutionalAck: "Institutional Acknowledgement",
       lastUpdated: "Last updated",
     },
     sections: {
       recentActivity: "Recent Activity",
       researchOverview: "Research Overview",
       selectedPublications: "Selected Publications",
-      featuredPublications: "Featured Publications",
-      featuredSoftware: "Featured Software",
       featuredTool: "Featured Tool",
-      citableSoftware: "Citable Research Software",
-      academicProfiles: "Academic Profiles",
       education: "Education",
       researchExperience: "Research Experience",
-      teaching: "Teaching and Academic Supervision",
-      leadership: "Leadership and Service",
-      awards: "Awards and Honors",
-      memberships: "Professional Memberships",
-      technicalCapabilities: "Technical Capabilities",
-      languages: "Languages",
-      references: "References",
       fullCvSection: "Full CV Document",
       profiles: "Profiles",
       sections: "Sections",
@@ -286,43 +238,34 @@ export const translations: Record<Language, TranslationSchema> = {
       materialsTitle: "Technische Materialien, Notizen und Vorträge",
       materialsEyebrow: "Materialien",
       materialsDesc:
-        "Referenzunterlagen, Seminarfolien, archivierte technische Beiträge sowie eine chronologische Übersicht öffentlicher Vorträge und Workshops in der optischen Technik.",
+        "Referenzunterlagen, Seminarfolien, veröffentlichte Fachbeiträge sowie eine chronologische Übersicht öffentlicher Vorträge und Workshops in der optischen Technik.",
       cvTitle: "Lebenslauf",
       cvEyebrow: "Lebenslauf",
     },
     ui: {
       searchPlaceholder: "Suchen...",
-      searchTalks: "Vorträge nach Titel, Veranstaltung oder Format suchen...",
-      searchMaterials: "Materialien nach Titel, Beschreibung oder Format suchen...",
-      searchTools: "Werkzeuge nach Titel, Ziel oder Methode suchen...",
-      searchPubs: "Publikationen nach Titel, Autor oder Journal suchen...",
+      searchMaterials: "Nach Titel, Beschreibung oder Format suchen...",
+      searchTools: "Nach Titel, Ziel oder Methode suchen...",
+      searchPubs: "Nach Titel, Autor oder Journal suchen...",
       allYears: "Alle Jahre",
       allTopics: "Alle Themen",
       allTypes: "Alle Typen",
       allFormats: "Alle Formate",
       allCategories: "Alle Kategorien",
       clearFilters: "Filter zurücksetzen",
-      showMore: "Mehr anzeigen",
       showMorePubs: "Mehr Publikationen anzeigen",
-      showMoreTools: "Mehr Werkzeuge anzeigen",
-      showMoreSessions: "Mehr Vorträge anzeigen",
       showMoreMaterials: "Mehr Materialien anzeigen",
       showing: "Zeigt",
       of: "von",
       publications: "Publikationen",
-      sessions: "Vorträgen",
       materialsLabel: "Materialien",
       toolsLabel: "Werkzeugen",
       filtered: "(gefiltert)",
       exportBibtex: "BibTeX exportieren",
       exportRis: "RIS exportieren",
       copiedBibtex: "BibTeX kopiert",
-      copied: "Kopiert",
       bibtex: "BibTeX",
-      showBibtex: "BibTeX anzeigen",
-      hideBibtex: "BibTeX verbergen",
       ris: "RIS",
-      downloadPdf: "PDF herunterladen",
       downloadPdfEn: "PDF herunterladen (EN)",
       openPdf: "PDF öffnen",
       downloadPdfDe: "PDF herunterladen (DE)",
@@ -336,36 +279,21 @@ export const translations: Record<Language, TranslationSchema> = {
       arxiv: "arXiv",
       pdf: "PDF",
       source: "Quelle",
-      featured: "Ausgewählt",
       problem: "Problemstellung",
       methods: "Methoden",
       physicalRelevance: "Physikalische Relevanz",
-      featuredTools: "Ausgewählte Werkzeuge",
       topicPublications: "Publikationen zum Thema",
       citableSoftware: "Zitierfähige Forschungssoftware",
       supportingUtilities: "Unterstützende Werkzeuge",
-      academicProgression: "Akademischer Werdegang",
-      institutionalAck: "Förderhinweis",
       lastUpdated: "Stand",
     },
     sections: {
       recentActivity: "Neueste Aktivitäten",
       researchOverview: "Forschungsüberblick",
       selectedPublications: "Ausgewählte Publikationen",
-      featuredPublications: "Ausgewählte Publikationen",
-      featuredSoftware: "Ausgewählte Software",
       featuredTool: "Ausgewähltes Werkzeug",
-      citableSoftware: "Zitierfähige Forschungssoftware",
-      academicProfiles: "Akademische Profile",
       education: "Ausbildung",
       researchExperience: "Forschungserfahrung",
-      teaching: "Lehre und akademische Betreuung",
-      leadership: "Leitung und akademischer Dienst",
-      awards: "Preise und Auszeichnungen",
-      memberships: "Mitgliedschaften",
-      technicalCapabilities: "Fachliche Kompetenzen",
-      languages: "Sprachen",
-      references: "Referenzen",
       fullCvSection: "Vollständiger Lebenslauf",
       profiles: "Profile",
       sections: "Bereiche",

@@ -9,6 +9,7 @@ import { navigationItems, identity } from "@/lib/academic-content"
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/lib/i18n-context"
 import { LanguageToggle } from "@/components/ui/language-toggle"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export function Navigation() {
   const pathname = usePathname()
@@ -26,7 +27,11 @@ export function Navigation() {
     return t.nav[key] || defaultLabel
   }
 
-  // Move focus into mobile drawer when opened and restore to trigger on close
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsOpen(false)
+  }, [pathname])
+
   useEffect(() => {
     if (isOpen && mobileNavRef.current) {
       wasOpenRef.current = true
@@ -38,7 +43,6 @@ export function Navigation() {
     }
   }, [isOpen])
 
-  // Close mobile menu on escape key and trap keyboard focus inside mobile drawer
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -60,11 +64,9 @@ export function Navigation() {
             lastElement.focus()
             e.preventDefault()
           }
-        } else {
-          if (document.activeElement === lastElement) {
-            firstElement.focus()
-            e.preventDefault()
-          }
+        } else if (document.activeElement === lastElement) {
+          firstElement.focus()
+          e.preventDefault()
         }
       }
     }
@@ -74,61 +76,76 @@ export function Navigation() {
   }, [isOpen])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md">
       <nav
-        className="container-layout flex h-14 items-center justify-between"
+        className="container-layout flex h-16 items-center justify-between"
         aria-label={isDe ? "Hauptnavigation" : "Main"}
       >
-        {/* Brand Logo and Name */}
-        <Link href="/" className="flex min-w-0 items-center gap-3 text-foreground hover:text-accent transition-colors">
-          <Image src="/logo.png" alt={`${identity.name} logo`} width={36} height={36} className="h-8 w-auto shrink-0" />
-          <div className="min-w-0 truncate">
-            <p className="text-sm font-semibold leading-tight truncate">{identity.name}</p>
-          </div>
+        <Link
+          href="/"
+          className="flex min-w-0 items-center gap-3 text-foreground transition-colors duration-150 hover:text-accent"
+        >
+          <Image
+            src="/logo.png"
+            alt={`${identity.name} monogram`}
+            width={36}
+            height={36}
+            priority
+            className="h-8 w-auto shrink-0"
+          />
+          <span className="truncate text-sm font-semibold leading-tight tracking-[0.01em]">
+            {identity.name}
+          </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden h-full items-center gap-1 lg:flex">
-          {navigationItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={cn(
-                "relative flex h-14 items-center px-3 text-sm transition-colors",
-                isActive(item.href)
-                  ? "text-foreground font-semibold after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-accent"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {getNavLabel(item.href, item.label)}
-            </Link>
-          ))}
+          {navigationItems.map((item) => {
+            const active = isActive(item.href)
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "relative flex h-16 items-center px-3 text-sm transition-colors duration-150",
+                  active
+                    ? "font-semibold text-foreground after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-accent"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {getNavLabel(item.href, item.label)}
+              </Link>
+            )
+          })}
 
-          <div className="ms-2 ps-3 border-s border-border/50">
+          <div className="ms-2 flex items-center gap-1.5 border-s border-border/70 ps-3">
             <LanguageToggle />
+            <ThemeToggle />
           </div>
         </div>
 
-        {/* Mobile Navigation Trigger and Toggle */}
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <LanguageToggle />
+          <ThemeToggle />
 
           <button
             ref={toggleBtnRef}
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-foreground transition-colors hover:border-accent/60 hover:text-accent"
             aria-label={isDe ? "Navigation umschalten" : "Toggle navigation"}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsOpen((value) => !value)}
           >
-            {isOpen ? <X className="h-4.5 w-4.5" aria-hidden="true" /> : <Menu className="h-4.5 w-4.5" aria-hidden="true" />}
+            {isOpen ? (
+              <X className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Menu className="h-4 w-4" aria-hidden="true" />
+            )}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Navigation Drawer */}
       {isOpen && (
         <div
           id="mobile-navigation"
@@ -136,25 +153,28 @@ export function Navigation() {
           role="dialog"
           aria-modal="true"
           aria-label={isDe ? "Mobile Navigation" : "Mobile navigation"}
-          className="border-t border-border bg-background lg:hidden overscroll-contain"
+          className="border-t border-border bg-background/98 backdrop-blur-md lg:hidden overscroll-contain"
         >
-          <div className="mx-auto grid max-w-6xl gap-1 px-5 py-4 sm:px-6">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={cn(
-                  "touch-target flex min-h-[44px] items-center rounded-md px-3 py-2 text-sm",
-                  isActive(item.href)
-                    ? "bg-secondary text-foreground font-semibold"
-                    : "text-muted-foreground hover:bg-secondary hover:text-foreground",
-                )}
-              >
-                {getNavLabel(item.href, item.label)}
-              </Link>
-            ))}
+          <div className="container-layout grid gap-1 py-4">
+            {navigationItems.map((item) => {
+              const active = isActive(item.href)
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "touch-target flex min-h-[44px] items-center rounded-md px-3.5 py-2.5 text-sm transition-colors",
+                    active
+                      ? "bg-secondary font-semibold text-foreground border-s-2 border-accent"
+                      : "text-muted-foreground hover:bg-secondary/70 hover:text-foreground",
+                  )}
+                >
+                  {getNavLabel(item.href, item.label)}
+                </Link>
+              )
+            })}
           </div>
         </div>
       )}

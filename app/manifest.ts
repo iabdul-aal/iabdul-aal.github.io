@@ -6,16 +6,24 @@ export const dynamic = "force-static"
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${siteConfig.name} | Research Website`,
-    short_name: siteConfig.name.split(" ").map((n, i, a) => i === a.length - 1 ? n : `${n.charAt(0)}.`).join(" "),
+    short_name: siteConfig.name
+      .split(" ")
+      .map((n, i, a) => (i === a.length - 1 ? n : `${n.charAt(0)}.`))
+      .join(" "),
     description: siteConfig.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#fafafa",
+    background_color: "#fcfbfa",
     theme_color: "#b68c61",
     icons: [
       {
         src: "/favicon.png",
         sizes: "64x64",
+        type: "image/png",
+      },
+      {
+        src: "/logo.png",
+        sizes: "128x128",
         type: "image/png",
       },
     ],

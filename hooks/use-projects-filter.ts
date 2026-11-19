@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react"
-import type { Project } from "@/lib/academic-content"
+import { getLocalizedProject, type Project } from "@/lib/academic-content"
 import { groupByYear } from "@/lib/utils"
 
 export function useProjectsFilter(initialProjects: readonly Project[]) {
@@ -17,12 +17,16 @@ export function useProjectsFilter(initialProjects: readonly Project[]) {
 
   const filteredProjects = useMemo(() => {
     return initialProjects.filter((project) => {
-      const query = searchQuery.toLowerCase()
+      const query = searchQuery.toLowerCase().trim()
+      const deProj = getLocalizedProject(project, true)
       const matchesSearch =
         query === "" ||
         project.title.toLowerCase().includes(query) ||
         project.objective.toLowerCase().includes(query) ||
         project.methods.toLowerCase().includes(query) ||
+        deProj.title.toLowerCase().includes(query) ||
+        deProj.objective.toLowerCase().includes(query) ||
+        deProj.methods.toLowerCase().includes(query) ||
         project.tools.some((t) => t.toLowerCase().includes(query))
 
       const matchesTier = selectedTier === "all" || project.tier === selectedTier
@@ -42,7 +46,7 @@ export function useProjectsFilter(initialProjects: readonly Project[]) {
     setSelectedYear("all")
   }
 
-  const isFiltered = searchQuery !== "" || selectedTier !== "all" || selectedYear !== "all"
+  const isFiltered = searchQuery.trim() !== "" || selectedTier !== "all" || selectedYear !== "all"
 
   return {
     searchQuery,

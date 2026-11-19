@@ -11,6 +11,7 @@ export interface PageHeaderProps {
   actions?: React.ReactNode
   maxWidth?: "3xl" | "4xl" | "5xl"
   i18nKey?: "about" | "research" | "pub" | "tools" | "materials" | "cv"
+  noBorder?: boolean
 }
 
 export function PageHeader({
@@ -20,6 +21,7 @@ export function PageHeader({
   actions,
   maxWidth = "3xl",
   i18nKey,
+  noBorder = false,
 }: PageHeaderProps) {
   const { t } = useLanguage()
 
@@ -61,18 +63,23 @@ export function PageHeader({
   }
 
   return (
-    <section className="mx-auto max-w-6xl px-5 pt-10 pb-6 sm:px-6 md:pt-14 md:pb-8 lg:px-8 min-w-0 w-full border-b border-border/50 mb-8 sm:mb-10">
+    <section
+      className={cn(
+        "container-layout pt-12 pb-8 sm:pt-14 sm:pb-9 md:pt-16 md:pb-10 min-w-0 w-full",
+        !noBorder && "border-b border-border/70 mb-8 sm:mb-10"
+      )}
+    >
       <div className={cn(maxWidthClass, "min-w-0 w-full")}>
-        <p className="text-sm font-medium text-muted-foreground break-words min-w-0 w-full">{displayEyebrow}</p>
-        <h1 className="mt-4 text-3xl font-semibold leading-tight text-foreground md:text-4xl break-words min-w-0 w-full">
+        <p className="eyebrow-label">{displayEyebrow}</p>
+        <h1 className="mt-3 text-3xl font-semibold leading-[1.18] text-balance text-foreground md:text-4xl break-words min-w-0 w-full">
           {displayTitle}
         </h1>
         {displayDescription && (
-          <p className="mt-6 text-base leading-8 text-muted-foreground break-words min-w-0 w-full">
+          <p className="mt-4 max-w-[64ch] text-[15px] leading-7 text-pretty text-muted-foreground sm:text-base sm:leading-7.5 break-words min-w-0 w-full">
             {displayDescription}
           </p>
         )}
-        {actions && <div className="mt-8 flex flex-wrap gap-3 min-w-0 w-full">{actions}</div>}
+        {actions && <div className="mt-7 flex flex-wrap gap-3 min-w-0 w-full">{actions}</div>}
       </div>
     </section>
   )

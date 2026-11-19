@@ -39,9 +39,21 @@ NS = {
 }
 
 EXCERPT_OVERRIDES = {
+    "https://iabdul-aal.medium.com/ece-roadmap-part-ii-e416042d13b2": (
+        "Structured technical roadmap covering advanced coursework, specialization tracks, "
+        "and laboratory skill development in electronics and communications engineering."
+    ),
+    "https://iabdul-aal.medium.com/ece-career-part-1-f7579e659d71": (
+        "Comparative overview of technical domains, research pathways, and industry "
+        "specializations within electronics and communications engineering."
+    ),
     "https://iabdul-aal.medium.com/how-to-plan-your-career-in-ece-department-part-i-4a01ee43dc20": (
         "An overview for Electronics and Communications Engineering undergraduates on core "
         "curriculum structure, technical fundamentals, and systematic academic planning."
+    ),
+    "https://iabdul-aal.medium.com/what-is-electronics-and-communication-engineering-department-cc5120cb65ab": (
+        "Foundational introduction to the Electronics and Communications Engineering "
+        "discipline, its core sub-fields, and undergraduate curriculum organization."
     ),
 }
 

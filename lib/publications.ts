@@ -1,5 +1,10 @@
+import { cache } from "react"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
+import { PublicationRecord, getPublicationCategory } from "@/types/publication"
+
+export type { PublicationRecord }
+export { getPublicationCategory }
 
 type RawPublication = {
   title?: string
@@ -20,10 +25,6 @@ type RawPublication = {
   pdfUrl?: string
   badges?: string[]
 }
-
-import { PublicationRecord, getPublicationCategory } from "@/types/publication"
-export type { PublicationRecord }
-export { getPublicationCategory }
 
 const ARXIV_DOI_PREFIX = "10.48550/arxiv."
 
@@ -220,7 +221,7 @@ function createRis(publication: {
   return lines.join("\n")
 }
 
-export async function loadPublications(): Promise<PublicationRecord[]> {
+export const loadPublications = cache(async (): Promise<PublicationRecord[]> => {
   try {
     const raw = await readFile(join(process.cwd(), "data", "publications.json"), "utf8")
     const parsed = JSON.parse(raw) as RawPublication[]
@@ -333,7 +334,7 @@ export async function loadPublications(): Promise<PublicationRecord[]> {
   } catch {
     return []
   }
-}
+})
 
 /**
  * Rank publications by citation count (OpenAlex metric) with fallback to natural order.
@@ -342,21 +343,43 @@ export function rankPublications(
   publications: PublicationRecord[],
   paperMetrics: { papers: Record<string, { cited_by_count?: number; openalex_id?: string; title?: string }> },
 ): PublicationRecord[] {
-  return [...publications].sort((a, b) => {
-    const getMetric = (pub: PublicationRecord) => {
-      if (paperMetrics.papers[pub.id]) return paperMetrics.papers[pub.id]
-      return Object.values(paperMetrics.papers).find(
-        (m) =>
-          (pub.doi && m.openalex_id && m.openalex_id.toLowerCase().includes(pub.doi.toLowerCase())) ||
-          (pub.title &&
-            m.title &&
-            m.title.toLowerCase().replace(/[^a-z0-9]/g, "") === pub.title.toLowerCase().replace(/[^a-z0-9]/g, "")),
-      )
+  const byTitleKey = new Map<string, number>()
+  const metricValues = Object.values(paperMetrics.papers)
+
+  for (const m of metricValues) {
+    if (m.title && typeof m.cited_by_count === "number") {
+      byTitleKey.set(m.title.toLowerCase().replace(/[^a-z0-9]/g, ""), m.cited_by_count)
     }
-    const ca = getMetric(a)?.cited_by_count ?? -1
-    const cb = getMetric(b)?.cited_by_count ?? -1
-    if (ca !== cb) return cb - ca
-    return 0
+  }
+
+  const getCitations = (pub: PublicationRecord): number => {
+    const direct = paperMetrics.papers[pub.id]
+    if (direct && typeof direct.cited_by_count === "number") {
+      return direct.cited_by_count
+    }
+    if (pub.doi) {
+      const doiLower = pub.doi.toLowerCase()
+      const byDoi = metricValues.find((m) => m.openalex_id?.toLowerCase().includes(doiLower))
+      if (byDoi && typeof byDoi.cited_by_count === "number") {
+        return byDoi.cited_by_count
+      }
+    }
+    if (pub.title) {
+      const titleKey = pub.title.toLowerCase().replace(/[^a-z0-9]/g, "")
+      const byTitle = byTitleKey.get(titleKey)
+      if (typeof byTitle === "number") {
+        return byTitle
+      }
+    }
+    return -1
+  }
+
+  const citationMap = new Map(publications.map((pub) => [pub.id, getCitations(pub)]))
+
+  return [...publications].sort((a, b) => {
+    const ca = citationMap.get(a.id) ?? -1
+    const cb = citationMap.get(b.id) ?? -1
+    return cb - ca
   })
 }
 

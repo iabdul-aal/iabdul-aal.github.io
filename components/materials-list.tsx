@@ -34,15 +34,15 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
   const [selectedYear, setSelectedYear] = React.useState("all")
   const [pageSize, setPageSize] = React.useState(15)
   const { t, lang } = useLanguage()
+  const isDe = lang === "de"
 
   const translateCategory = (cat: string) => {
-    if (lang === "de") {
+    if (isDe) {
       return germanCategoryMap[cat] || cat
     }
     return cat
   }
 
-  // Extract unique categories and years for dropdowns
   const availableTypes = React.useMemo(() => {
     const set = new Set(initialItems.map((i) => i.categoryLabel))
     return Array.from(set)
@@ -53,17 +53,17 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
     return Array.from(set).sort((a, b) => Number(b) - Number(a))
   }, [initialItems])
 
-  // Filter items
   const filteredItems = React.useMemo(() => {
+    const q = searchQuery.toLowerCase().trim()
     return initialItems.filter((item) => {
-      const q = searchQuery.toLowerCase().trim()
       const matchesSearch =
         !q ||
         item.title.toLowerCase().includes(q) ||
         (item.description && item.description.toLowerCase().includes(q)) ||
         item.categoryLabel.toLowerCase().includes(q) ||
         item.formatLabel.toLowerCase().includes(q) ||
-        (item.event && item.event.toLowerCase().includes(q))
+        (item.event && item.event.toLowerCase().includes(q)) ||
+        (item.source && item.source.toLowerCase().includes(q))
 
       const matchesType = selectedType === "all" || item.categoryLabel === selectedType
       const matchesYear = selectedYear === "all" || item.year === selectedYear
@@ -74,7 +74,6 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
 
   const visibleItems = filteredItems.slice(0, pageSize)
 
-  // Group visible items by year
   const itemsByYear = React.useMemo(() => {
     const map = new Map<string, MaterialItem[]>()
     visibleItems.forEach((item) => {
@@ -87,9 +86,16 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
     return Array.from(map.entries()).sort((a, b) => Number(b[0]) - Number(a[0]))
   }, [visibleItems])
 
+  const isFiltered =
+    searchQuery.trim() !== "" || selectedType !== "all" || selectedYear !== "all"
+
+  const displayDenominator =
+    visibleItems.length < filteredItems.length
+      ? filteredItems.length
+      : initialItems.length
+
   return (
     <div className="space-y-6">
-      {/* Search and Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
@@ -102,7 +108,7 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
 
         <div className="filter-row">
           <FilterSelect
-            label={lang === "de" ? "Typ:" : "Type:"}
+            label={isDe ? "Typ:" : "Type:"}
             showIcon
             value={selectedType}
             onChange={(val) => {
@@ -111,13 +117,16 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
             }}
             options={[
               { value: "all", label: t.ui.allTypes },
-              ...availableTypes.map((typeLabel) => ({ value: typeLabel, label: translateCategory(typeLabel) })),
+              ...availableTypes.map((typeLabel) => ({
+                value: typeLabel,
+                label: translateCategory(typeLabel),
+              })),
             ]}
           />
 
           {availableYears.length > 0 && (
             <FilterSelect
-              label={lang === "de" ? "Jahr:" : "Year:"}
+              label={isDe ? "Jahr:" : "Year:"}
               value={selectedYear}
               onChange={(val) => {
                 setSelectedYear(val)
@@ -132,13 +141,13 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
         </div>
       </Shell>
 
-      {/* Info and Clear Filter row */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
-        <p>
-          {t.ui.showing} {Math.min(visibleItems.length, filteredItems.length)} {t.ui.of} {filteredItems.length} {t.ui.materialsLabel}
-          {searchQuery || selectedType !== "all" || selectedYear !== "all" ? ` ${t.ui.filtered}` : ""}
+        <p className="tabular-nums">
+          {t.ui.showing} {visibleItems.length} {t.ui.of} {displayDenominator}{" "}
+          {t.ui.materialsLabel}
+          {isFiltered ? ` ${t.ui.filtered}` : ""}
         </p>
-        {(searchQuery || selectedType !== "all" || selectedYear !== "all") && (
+        {isFiltered && (
           <button
             type="button"
             onClick={() => {
@@ -147,23 +156,22 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
               setSelectedYear("all")
               setPageSize(15)
             }}
-            className="cursor-pointer text-accent hover:text-accent-strong hover:underline font-medium"
+            className="font-medium text-accent transition-colors hover:text-accent-strong hover:underline underline-offset-4"
           >
             {t.ui.clearFilters}
           </button>
         )}
       </div>
 
-      {/* Grouped by Year */}
       <div className="space-y-12">
         {filteredItems.length === 0 ? (
           <EmptyState
             message={
               initialItems.length === 0
-                ? lang === "de"
+                ? isDe
                   ? "Materialien und Vorträge erscheinen hier, sobald sie indexiert sind."
                   : "Materials and public talk records will appear as they are indexed."
-                : lang === "de"
+                : isDe
                   ? "Keine Materialien entsprechen den aktuellen Filterkriterien."
                   : "No materials match the active filter criteria."
             }
@@ -200,7 +208,6 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
         )}
       </div>
 
-      {/* Pagination */}
       {filteredItems.length > visibleItems.length && (
         <div className="flex justify-center pt-4">
           <button
@@ -212,7 +219,6 @@ export function MaterialsList({ items: initialItems }: MaterialsListProps) {
           </button>
         </div>
       )}
-
     </div>
   )
 }

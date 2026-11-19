@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
@@ -29,11 +30,11 @@ type ProjectMetricsFile = {
   fetchedAt: string
 }
 
-export async function loadProjectMetrics(): Promise<ProjectMetricsFile> {
+export const loadProjectMetrics = cache(async (): Promise<ProjectMetricsFile> => {
   try {
     const raw = await readFile(join(process.cwd(), "data", "project_metrics.json"), "utf8")
     return JSON.parse(raw) as ProjectMetricsFile
   } catch {
     return { projects: {}, fetchedAt: "" }
   }
-}
+})

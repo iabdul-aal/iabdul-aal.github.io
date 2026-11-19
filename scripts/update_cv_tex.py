@@ -82,7 +82,6 @@ def build_preamble(lang: str = "en") -> list[str]:
         "\\usepackage{titlesec}",
         "\\usepackage{hyperref}",
         "\\usepackage{xcolor}",
-        "\\definecolor{SECTIONCOLOR}{RGB}{0,102,204}",
         "\\usepackage{fontawesome5}",
         "\\usepackage{graphicx}",
         "\\graphicspath{{data/}{./}}",
@@ -367,106 +366,6 @@ def build_publications(citations: int, h_index: int, date_str: str, lang: str = 
     return lines
 
 
-def _collect_tool_links(tool: dict[str, Any], lang: str) -> list[tuple[str, str]]:
-    """Collect deduplicated (label, url) pairs from optional fields and `links` array."""
-    links: list[tuple[str, str]] = []
-    seen_urls: set[str] = set()
-
-    def _add(label: str, raw_url: str) -> None:
-        url = raw_url.strip()
-        if not url:
-            return
-        norm = url.rstrip("/").lower()
-        if norm in seen_urls:
-            return
-        seen_urls.add(norm)
-        links.append((label, url))
-
-    if tool.get("github"):
-        _add("GitHub", _normalize_url(str(tool["github"]), "https://github.com/"))
-    if tool.get("zenodo"):
-        _add("Code-DOI" if lang == "de" else "Code DOI", _normalize_url(str(tool["zenodo"]), "https://doi.org/"))
-    if tool.get("huggingface"):
-        _add("HuggingFace", _normalize_url(str(tool["huggingface"]), "https://huggingface.co/"))
-    if tool.get("huggingfaceDataset"):
-        _add(
-            "Datensatz" if lang == "de" else "Dataset",
-            _normalize_url(str(tool["huggingfaceDataset"]), "https://huggingface.co/datasets/"),
-        )
-    if tool.get("paperDoi"):
-        _add("Preprint" if lang == "de" else "Paper", _normalize_url(str(tool["paperDoi"]), "https://doi.org/"))
-
-    for entry in tool.get("links", []):
-        if not isinstance(entry, dict):
-            continue
-        href = str(entry.get("href", "")).strip()
-        label = str(entry.get("label", "")).strip() or "Link"
-        if lang == "de":
-            label = {
-                "Code DOI": "Code-DOI",
-                "Dataset DOI": "Datensatz-DOI",
-                "Model DOI": "Modell-DOI",
-                "Paper": "Publikation",
-            }.get(label, label)
-        _add(label, href)
-
-    return links
-
-
-def build_tools(tools: list[dict[str, Any]], project_metrics: dict[str, Any], lang: str = "en") -> list[str]:
-    major_tools = [t for t in tools if isinstance(t, dict) and t.get("tier") != "minor"]
-    if not major_tools:
-        return []
-
-    metrics_map = project_metrics.get("projects", {}) if isinstance(project_metrics, dict) else {}
-    major_tools.sort(
-        key=lambda t: metrics_map.get(t.get("id", ""), {}).get("score", 0),
-        reverse=True,
-    )
-
-    section_title = "Ausgewählte Software" if lang == "de" else "Featured Software"
-    links_label = "Verweise:" if lang == "de" else "Links:"
-    lines = [f"\\section*{{{section_title}}}"]
-
-    for i, tool in enumerate(major_tools):
-        title = (tool.get("title_de") or tool.get("title", "")) if lang == "de" else tool.get("title", "")
-        objective = (tool.get("objective_de") or tool.get("objective", "")) if lang == "de" else tool.get("objective", "")
-        status = (
-            (tool.get("status_de") or tool.get("status", ""))
-            if lang == "de"
-            else tool.get("status", "")
-        )
-        status = str(status or "").strip()
-        year = str(tool.get("year", "") or "").strip()
-        meta = ", ".join(part for part in (status, year) if part)
-
-        if meta:
-            lines.extend([
-                "\\noindent\\begin{tabularx}{\\textwidth}{@{} >{\\raggedright\\arraybackslash}X r @{}}",
-                f"\\textbf{{{latex_escape(title)}}} & \\textit{{{latex_escape(meta)}}} \\\\",
-                "\\end{tabularx}\\par\\vspace{1pt}",
-            ])
-        else:
-            lines.append(f"\\textbf{{{latex_escape(title)}}}\\\\")
-        if objective:
-            lines.append(f"{{\\small {latex_escape(objective)}}}\\par")
-
-        tool_links = _collect_tool_links(tool, lang)
-        if tool_links:
-            rendered_links = " $\\cdot$ ".join(
-                f"\\href{{{_href_escape(url)}}}{{{latex_escape(label)}}}"
-                for label, url in tool_links
-            )
-            lines.append(
-                f"\\textcolor{{mediacolor}}{{\\small\\faIcon{{link}} \\textbf{{{links_label}}} {rendered_links}}}"
-            )
-
-        if i < len(major_tools) - 1:
-            lines.append("\\vspace{4pt}")
-
-    return lines
-
-
 def build_teaching(teaching: list[dict[str, Any]], lang: str = "en") -> list[str]:
     if not teaching:
         return []
@@ -588,7 +487,6 @@ def generate_tex(
     citations: int,
     h_index: int,
     date_str: str,
-    project_metrics: dict[str, Any] | None = None,
     lang: str = "en",
 ) -> str:
     info = data.get("personalInfo", {})
@@ -612,9 +510,6 @@ def generate_tex(
     sections += build_research_experience(data.get("researchExperience", []), lang=lang)
     sections += [""]
     sections += build_publications(citations, h_index, date_str, lang=lang)
-
-    # Software/project listings live exclusively on the website Tools page.
-    _ = project_metrics
 
     sections += [""]
     sections += build_awards(data.get("awards", []), lang=lang)
@@ -660,15 +555,6 @@ def main() -> None:
         except Exception as e:
             print(f"Warning: could not read scholar_metrics.json: {e}")
 
-    project_metrics_path = os.path.join(root, "data", "project_metrics.json")
-    project_metrics: dict[str, Any] = {}
-    if os.path.exists(project_metrics_path):
-        try:
-            with open(project_metrics_path, "r", encoding="utf-8") as f:
-                project_metrics = json.load(f)
-        except Exception as e:
-            print(f"Warning: could not read project_metrics.json: {e}")
-
     now = datetime.datetime.now()
     date_str_en = now.strftime("%B %Y")
     date_str_de = (
@@ -687,8 +573,8 @@ def main() -> None:
         .replace("December", "Dezember")
     )
 
-    output_en = generate_tex(data, citations, h_index, date_str_en, project_metrics=project_metrics, lang="en")
-    output_de = generate_tex(data, citations, h_index, date_str_de, project_metrics=project_metrics, lang="de")
+    output_en = generate_tex(data, citations, h_index, date_str_en, lang="en")
+    output_de = generate_tex(data, citations, h_index, date_str_de, lang="de")
 
     with open(tex_path_en, "w", encoding="utf-8", newline="\n") as f:
         f.write(output_en)

@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
@@ -22,25 +23,11 @@ const FALLBACK: ScholarMetrics = {
   fetchedAt: "",
 }
 
-export async function loadScholarMetrics(): Promise<ScholarMetrics> {
+export const loadScholarMetrics = cache(async (): Promise<ScholarMetrics> => {
   try {
     const raw = await readFile(join(process.cwd(), "data", "scholar_metrics.json"), "utf8")
-    const parsed = JSON.parse(raw) as ScholarMetrics
-    return parsed
+    return JSON.parse(raw) as ScholarMetrics
   } catch {
     return FALLBACK
   }
-}
-
-export function formatFetchedAt(iso: string): string {
-  if (!iso) return ""
-  try {
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    }).format(new Date(iso))
-  } catch {
-    return ""
-  }
-}
+})

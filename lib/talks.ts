@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
@@ -16,7 +17,7 @@ const TALKS_PATH = join(process.cwd(), "data", "talks.json")
 
 const fallbackTalks: TalkEntry[] = [
   {
-    title: "ECE Unlocked | Technical Orientations '26' | Islam I. Abdulaal",
+    title: "ECE Unlocked | Technical Orientations '26 | Islam I. Abdulaal",
     event: "Featured Public Talk",
     date: "2026-01-04",
     year: "2026",
@@ -43,7 +44,7 @@ function dateScore(item: TalkEntry): number {
 }
 
 function normalizeTalk(item: Partial<TalkEntry>): TalkEntry | null {
-  const title = (item.title ?? "").trim()
+  const title = (item.title ?? "").trim().replace(/'26'/g, "'26")
   const url = (item.url ?? "").trim()
 
   if (!title || !url) {
@@ -65,7 +66,7 @@ function normalizeTalk(item: Partial<TalkEntry>): TalkEntry | null {
   }
 }
 
-export async function loadTalks(): Promise<TalkEntry[]> {
+export const loadTalks = cache(async (): Promise<TalkEntry[]> => {
   try {
     const raw = await readFile(TALKS_PATH, "utf8")
     const parsed = JSON.parse(raw) as Partial<TalkEntry>[]
@@ -99,4 +100,4 @@ export async function loadTalks(): Promise<TalkEntry[]> {
   } catch {
     return fallbackTalks
   }
-}
+})

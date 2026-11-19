@@ -9,8 +9,7 @@ import { siteConfig } from "@/lib/site-config"
 
 export const metadata: Metadata = createPageMetadata({
   title: "Publications and Peer-Reviewed Research",
-  description:
-    `Peer-reviewed journal articles, conference contributions, and preprints by ${siteConfig.name} in integrated photonics, quantum sources, and inverse design.`,
+  description: `Peer-reviewed journal articles, conference contributions, and preprints by ${siteConfig.name} in integrated photonics, quantum sources, and inverse design.`,
   path: "/publications",
   keywords: [
     `${siteConfig.name} publications`,
@@ -28,7 +27,7 @@ export default async function PublicationsPage() {
     loadScholarMetrics(),
   ])
 
-  const jsonLd = generatePublicationsSchema()
+  const jsonLd = generatePublicationsSchema(publications)
 
   return (
     <main>
@@ -39,11 +38,10 @@ export default async function PublicationsPage() {
       <PageHeader
         eyebrow="Publications"
         title="Papers, preprints, and citable outputs"
-        description="Peer-reviewed journal articles, conference contributions, and preprints covering integrated nanophotonics, terahertz metasurfaces, and computational device design, complete with bibliographic metadata and repository links."
         i18nKey="pub"
       />
 
-      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">
+      <section className="container-layout pb-16">
         <CitationsBar scholar={scholar} publicationsCount={publications.length} />
 
         <PublicationsList publications={publications} />

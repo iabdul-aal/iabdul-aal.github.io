@@ -473,15 +473,59 @@ def check_content_governance(errors: list[str]) -> None:
         except json.JSONDecodeError:
             pass
 
+    # About narrative paragraphs (<= 60 words hard limit per docs/CONTENT.md)
+    if ac_path.exists():
+        ac_text = ac_path.read_text(encoding="utf-8")
+        about_body = extract_ts_array_block(ac_text, "aboutParagraphs")
+        if about_body:
+            for idx, (_, para) in enumerate(_extract_ts_string_literals(about_body)):
+                wc = _word_count(para)
+                if wc > 60:
+                    errors.append(
+                        f"[content-length] lib/academic-content.ts aboutParagraphs[{idx}] "
+                        f"has {wc} words (hard limit 60)."
+                    )
+
     # Not-found metadata description length (>= 120 chars)
     not_found_path = ROOT / "app" / "not-found.tsx"
     if not_found_path.exists():
         nf_text = not_found_path.read_text(encoding="utf-8")
-        desc_match = re.search(r'description:\s*\n?\s*"([^"]+)"', nf_text)
-        if desc_match and len(desc_match.group(1).strip()) < 120:
-            errors.append(
-                f"[seo-meta] app/not-found.tsx metadata description is under 120 chars ({len(desc_match.group(1).strip())})."
-            )
+        desc_match = re.search(r'description:\s*\n?\s*["\'`]([^"\'`]+)["\'`]', nf_text)
+        if desc_match:
+            resolved_desc = desc_match.group(1).strip()
+            if "${siteConfig.name}" in resolved_desc and cv_path.exists():
+                try:
+                    name = json.loads(cv_path.read_text(encoding="utf-8-sig")).get("personalInfo", {}).get("name", "")
+                    resolved_desc = resolved_desc.replace("${siteConfig.name}", name)
+                except json.JSONDecodeError:
+                    pass
+            if len(resolved_desc) < 120:
+                errors.append(
+                    f"[seo-meta] app/not-found.tsx metadata description is under 120 chars ({len(resolved_desc)})."
+                )
+
+    # Static public asset health checks (PDFs and core images)
+    for pdf_name in ("cv.pdf", "cv_de.pdf"):
+        pdf_path = ROOT / "public" / pdf_name
+        if not pdf_path.exists():
+            errors.append(f"[assets] public/{pdf_name} is missing.")
+        else:
+            header = pdf_path.read_bytes()[:5]
+            if header != b"%PDF-":
+                errors.append(f"[assets] public/{pdf_name} is not a valid PDF file.")
+
+    for img_rel in (
+        "logo.png",
+        "favicon.png",
+        "personal-pic.png",
+        "images/homepage-toc.png",
+        "images/integrated-nanophotonics.png",
+        "images/nonlinear-quantum-photonics.png",
+        "images/intelligent-photonics.png",
+    ):
+        img_path = ROOT / "public" / img_rel
+        if not img_path.exists() or img_path.stat().st_size == 0:
+            errors.append(f"[assets] public/{img_rel} is missing or empty.")
 
     # CV TeX governance: zero bullet lists and zero software/tools section
     for tex_name in ("cv.tex", "cv_de.tex"):
@@ -500,7 +544,16 @@ def check_built_html(errors: list[str]) -> None:
     out_dir = ROOT / "out"
     if not out_dir.exists():
         return
-    for page_name in ("index.html", "publications.html"):
+    for page_name in (
+        "index.html",
+        "about.html",
+        "research.html",
+        "publications.html",
+        "tools.html",
+        "materials.html",
+        "cv.html",
+        "404.html",
+    ):
         html_path = out_dir / page_name
         if not html_path.exists():
             errors.append(f"[static-html] out/{page_name} is missing after build.")

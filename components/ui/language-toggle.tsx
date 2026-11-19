@@ -10,7 +10,7 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="inline-flex items-center gap-1 text-xs text-muted-foreground"
+      className="inline-flex items-center gap-0.5 text-xs text-muted-foreground"
       role="group"
       aria-label={isDe ? "Sprachauswahl" : "Language selection"}
     >
@@ -19,20 +19,26 @@ export function LanguageToggle() {
         onClick={() => setLang("en")}
         aria-pressed={lang === "en"}
         className={cn(
-          "touch-target transition-colors hover:text-foreground px-1.5 py-0.5",
-          lang === "en" ? "font-semibold text-foreground" : "text-muted-foreground hover:text-foreground"
+          "touch-target rounded px-1.5 py-1 transition-colors duration-150",
+          lang === "en"
+            ? "font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
+            : "text-muted-foreground hover:text-foreground"
         )}
       >
         EN
       </button>
-      <span className="text-muted-foreground/50 select-none">/</span>
+      <span className="select-none text-muted-foreground/45" aria-hidden="true">
+        /
+      </span>
       <button
         type="button"
         onClick={() => setLang("de")}
         aria-pressed={lang === "de"}
         className={cn(
-          "touch-target transition-colors hover:text-foreground px-1.5 py-0.5",
-          lang === "de" ? "font-semibold text-foreground" : "text-muted-foreground hover:text-foreground"
+          "touch-target rounded px-1.5 py-1 transition-colors duration-150",
+          lang === "de"
+            ? "font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
+            : "text-muted-foreground hover:text-foreground"
         )}
       >
         DE

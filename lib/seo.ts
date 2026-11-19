@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { personConfig, siteConfig } from "@/lib/site-config"
+import type { PublicationRecord } from "@/types/publication"
 import cvData from "@/data/cv_data.json"
 import publicationsData from "@/data/publications.json"
 
@@ -37,7 +38,7 @@ export function createPageMetadata({
   const socialTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.name}`
 
   return {
-    title: title,
+    title,
     description,
     keywords,
     alternates: {
@@ -88,49 +89,60 @@ export function generatePersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${siteConfig.url}/#person`,
     name: personConfig.name,
     givenName: personConfig.givenName,
     familyName: personConfig.familyName,
     url: siteConfig.url,
     image: `${siteConfig.url}/personal-pic.png`,
-    jobTitle: personConfig.role,
-    worksFor: {
-      "@type": "EducationalOrganization",
-      name: personConfig.affiliation,
-    },
+    jobTitle: [personConfig.role, personConfig.role_de],
+    affiliation: [
+      ...(personConfig.affiliation ? [{ "@type": "CollegeOrUniversity", name: personConfig.affiliation }] : []),
+      ...(personConfig.lab ? [{ "@type": "Organization", name: personConfig.lab }] : []),
+    ],
     alumniOf: cvData.education.map((ed) => ({
       "@type": "EducationalOrganization",
       name: ed.institution,
     })),
+    knowsAbout: personConfig.focusAreas,
     sameAs: [...siteConfig.sameAs],
-    knowsAbout: [
-      "Integrated Photonics",
-      "Nonlinear Photonics",
-      "Quantum Photonics",
-      "Inverse Design",
-      "Physics-Informed Neural Networks",
-      "Finite-Difference Time-Domain (FDTD)",
+    email: `mailto:${personConfig.email}`,
+    ...(personConfig.location
+      ? { address: { "@type": "PostalAddress", addressLocality: personConfig.location } }
+      : {}),
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "ORCID",
+      value: personConfig.orcid,
+    },
+  }
+}
+
+export function generateRootSchema() {
+  const person = generatePersonSchema()
+  const personNode = Object.fromEntries(Object.entries(person).filter(([k]) => k !== "@context"))
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      personNode,
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: siteConfig.name,
+        description: siteConfig.description,
+        inLanguage: ["en", "de"],
+        publisher: {
+          "@id": `${siteConfig.url}/#person`,
+        },
+      },
     ],
   }
 }
 
-export function generateWebSiteSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
-    author: {
-      "@type": "Person",
-      name: personConfig.name,
-    },
-    inLanguage: ["en", "de"],
-  }
-}
-
-export function generatePublicationsSchema() {
-  const pubs = publicationsData as Array<{
+export function generatePublicationsSchema(publications?: PublicationRecord[]) {
+  const pubs: Array<{
     title: string
     venue: string
     year: string
@@ -138,7 +150,18 @@ export function generatePublicationsSchema() {
     url?: string
     authors: string[]
     abstract?: string
-  }>
+  }> =
+    publications ??
+    (publicationsData as Array<{
+      title: string
+      venue: string
+      year: string
+      doi?: string
+      url?: string
+      authors: string[]
+      abstract?: string
+    }>)
+
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",

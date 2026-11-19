@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useId } from "react"
-import { SlidersHorizontal } from "lucide-react"
+import { ChevronDown, SlidersHorizontal } from "lucide-react"
 import { useLanguage } from "@/lib/i18n-context"
 
 export interface FilterSelectOption {
@@ -18,9 +18,15 @@ export interface FilterSelectProps {
   showIcon?: boolean
 }
 
-export function FilterSelect({ label, value, options, onChange, showIcon = false }: FilterSelectProps) {
+export function FilterSelect({
+  label,
+  value,
+  options,
+  onChange,
+  showIcon = false,
+}: FilterSelectProps) {
   const id = useId()
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   const translateOptionLabel = (optLabel: string) => {
     if (optLabel === "All Years") return t.ui.allYears
@@ -32,17 +38,17 @@ export function FilterSelect({ label, value, options, onChange, showIcon = false
   }
 
   const translateLabel = (lbl?: string) => {
-    if (!lbl) return lbl
-    if (t.ui?.allYears === "Alle Jahre") {
-      if (lbl === "Year:") return "Jahr:"
-      if (lbl === "Topic:") return "Thema:"
-      if (lbl === "Filter:") return "Filter:"
-      if (lbl === "Format:") return "Format:"
-      if (lbl === "Type:") return "Typ:"
-      if (lbl === "Tier:") return "Kategorie:"
-      if (lbl === "Category:") return "Kategorie:"
+    if (!lbl || lang !== "de") return lbl
+    const map: Record<string, string> = {
+      "Year:": "Jahr:",
+      "Topic:": "Thema:",
+      "Filter:": "Filter:",
+      "Format:": "Format:",
+      "Type:": "Typ:",
+      "Tier:": "Kategorie:",
+      "Category:": "Kategorie:",
     }
-    return lbl
+    return map[lbl] ?? lbl
   }
 
   return (
@@ -50,28 +56,34 @@ export function FilterSelect({ label, value, options, onChange, showIcon = false
       {label && (
         <label
           htmlFor={id}
-          className="text-muted-foreground font-medium flex items-center gap-1 cursor-pointer shrink-0 text-xs"
+          className="flex shrink-0 cursor-pointer items-center gap-1.5 text-xs font-medium text-muted-foreground"
         >
-          {showIcon && <SlidersHorizontal className="h-3 w-3" aria-hidden="true" />}
+          {showIcon && <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground/80" aria-hidden="true" />}
           {translateLabel(label)}
         </label>
       )}
-      <select
-        id={id}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="rounded border border-border bg-card px-2 py-1 text-[11px] font-medium text-foreground outline-none transition-colors focus:border-accent max-w-full min-w-0 truncate"
-      >
-        {options.map((opt) => (
-          <option
-            key={opt.value}
-            value={opt.value}
-            className="bg-card text-card-foreground"
-          >
-            {translateOptionLabel(opt.label)}
-          </option>
-        ))}
-      </select>
+      <div className="relative min-w-0 max-w-full">
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="h-8.5 max-w-full min-w-0 appearance-none truncate rounded-md border border-border bg-card ps-2.5 pe-7 text-xs font-medium text-foreground outline-none transition-colors duration-150 hover:border-accent/60 focus:border-accent focus:ring-1 focus:ring-accent/60"
+        >
+          {options.map((opt) => (
+            <option
+              key={opt.value}
+              value={opt.value}
+              className="bg-card text-card-foreground"
+            >
+              {translateOptionLabel(opt.label)}
+            </option>
+          ))}
+        </select>
+        <ChevronDown
+          className="pointer-events-none absolute end-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+          aria-hidden="true"
+        />
+      </div>
     </div>
   )
 }

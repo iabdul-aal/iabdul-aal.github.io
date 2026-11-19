@@ -33,7 +33,8 @@ def parse_arxiv_profile() -> list[dict]:
     req = urllib.request.Request(ARXIV_PROFILE_URL, headers=headers)
 
     try:
-        html_doc = urllib.request.urlopen(req, timeout=15).read().decode("utf-8")
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html_doc = resp.read().decode("utf-8")
     except Exception as e:
         print(f"Error fetching arXiv profile: {e}")
         return []

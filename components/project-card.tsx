@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { ArrowUpRight } from "lucide-react"
-import { Project } from "@/lib/academic-content"
+import { getLocalizedProject, type Project } from "@/lib/academic-content"
 import type { ProjectMetric } from "@/lib/project-metrics"
 import { Row } from "@/components/ui/row"
 import { ScientificText } from "@/components/ui/scientific-text"
@@ -11,20 +11,7 @@ import { useLanguage } from "@/lib/i18n-context"
 export interface ProjectCardProps {
   project: Project
   metrics?: ProjectMetric
-  tier?: "major" | "minor"
   compact?: boolean
-}
-
-type ExtendedProject = Project & {
-  github?: string
-  zenodo?: string
-  huggingface?: string
-  huggingfaceDataset?: string
-  paperDoi?: string
-  title_de?: string
-  objective_de?: string
-  methods_de?: string
-  results_de?: string
 }
 
 type ResolvedLink = {
@@ -55,7 +42,7 @@ function translateLinkLabel(label: string, isDe: boolean): string {
   return map[label] ?? label
 }
 
-function collectProjectLinks(project: ExtendedProject, isDe: boolean): ResolvedLink[] {
+function collectProjectLinks(project: Project, isDe: boolean): ResolvedLink[] {
   const result: ResolvedLink[] = []
   const seen = new Set<string>()
 
@@ -103,41 +90,31 @@ function buildMetricsSummary(metrics: ProjectMetric | undefined, isDe: boolean):
 export function ProjectCard({ project, metrics, compact = false }: ProjectCardProps) {
   const { lang, t } = useLanguage()
   const isDe = lang === "de"
-  const ext = project as ExtendedProject
 
-  const title = isDe && ext.title_de ? ext.title_de : project.title
-  const objective = isDe && ext.objective_de ? ext.objective_de : project.objective
-  const methods = isDe && ext.methods_de ? ext.methods_de : project.methods
-  const results = isDe && ext.results_de ? ext.results_de : project.results
-  const status = isDe && project.status === "Prerelease" ? "Vorabversion" : project.status
-
-  const resolvedLinks = collectProjectLinks(ext, isDe)
+  const { title, status, objective, methods, results } = getLocalizedProject(project, isDe)
+  const resolvedLinks = collectProjectLinks(project, isDe)
   const metricsSummary = buildMetricsSummary(metrics, isDe)
   const metaParts = [status, project.year, ...metricsSummary].filter(Boolean)
 
   return (
     <Row aria-label={title}>
       <div className="space-y-1.5 w-full">
-        {/* Title */}
-        <h3 className="text-sm font-semibold text-foreground leading-snug break-words w-full">
+        <h3 className="text-[15px] font-semibold leading-snug text-foreground break-words w-full">
           <ScientificText text={title} />
         </h3>
 
-        {/* Status, Year, and non-zero engagement metadata */}
         {metaParts.length > 0 && (
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tabular-nums text-muted-foreground">
             <span>{metaParts.join(" · ")}</span>
           </div>
         )}
 
-        {/* Objective */}
-        <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
+        <p className="text-[13px] leading-relaxed text-pretty text-muted-foreground">
           <ScientificText text={objective} />
         </p>
 
-        {/* Results and Methods (Full view) */}
         {!compact && results && (
-          <p className="text-xs text-foreground/85 leading-relaxed">
+          <p className="pt-0.5 text-xs leading-relaxed text-foreground/90">
             <span className="font-semibold text-foreground">
               {isDe ? "Ergebnisse: " : "Verification: "}
             </span>
@@ -146,26 +123,28 @@ export function ProjectCard({ project, metrics, compact = false }: ProjectCardPr
         )}
 
         {!compact && methods && (
-          <p className="text-xs text-muted-foreground/90 leading-relaxed">
+          <p className="text-xs leading-relaxed text-muted-foreground">
             <span className="font-semibold text-foreground">{t.ui.methods}: </span>
             {methods}
           </p>
         )}
       </div>
 
-      {/* Action Links */}
       {resolvedLinks.length > 0 && (
-        <div className="mt-2.5 flex flex-wrap items-center gap-x-3.5 gap-y-1.5 text-xs pt-0.5">
+        <div className="mt-3 flex flex-wrap items-center gap-x-3.5 gap-y-1.5 pt-0.5 text-xs">
           {resolvedLinks.map((link) => (
             <a
               key={`${link.label}-${link.href}`}
               href={link.href}
               target="_blank"
-              rel="noreferrer"
-              className="btn-secondary"
+              rel="noopener noreferrer"
+              className="group btn-secondary"
             >
               {link.label}
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                aria-hidden="true"
+              />
             </a>
           ))}
         </div>

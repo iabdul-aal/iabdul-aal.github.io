@@ -1,15 +1,16 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { ArrowUpRight, Copy, Check, Download } from "lucide-react"
 
 import { PublicationRecord } from "@/types/publication"
 import { projects } from "@/lib/academic-content"
 import { Badge } from "@/components/ui/badge"
 import { ScientificText } from "@/components/ui/scientific-text"
-import { downloadText, copyTextWithFallback } from "@/lib/utils"
+import { downloadText } from "@/lib/utils"
 import { Row } from "@/components/ui/row"
 import { useLanguage } from "@/lib/i18n-context"
+import { useCopyFeedback } from "@/hooks/use-copy-feedback"
 
 export interface PublicationCardProps {
   publication: PublicationRecord
@@ -28,14 +29,6 @@ type OptionalPublicationFields = PublicationRecord & {
   huggingfaceUrl?: string
   githubUrl?: string
   links?: readonly { readonly label: string; readonly href: string }[]
-}
-
-type OptionalProjectFields = (typeof projects)[number] & {
-  github?: string
-  zenodo?: string
-  huggingface?: string
-  huggingfaceDataset?: string
-  paperDoi?: string
 }
 
 function classifyArtifactLink(label: string, href: string, isDe: boolean): string | null {
@@ -72,7 +65,7 @@ function collectArtifactLinks(publication: OptionalPublicationFields, isDe: bool
   pushLink("GitHub", publication.githubUrl)
   pushLink("Zenodo", publication.zenodoUrl)
   pushLink("HuggingFace", publication.huggingfaceUrl)
-  pushLink(isDe ? "Code" : "Code", publication.codeUrl)
+  pushLink("Code", publication.codeUrl)
   pushLink(isDe ? "Datensatz" : "Dataset", publication.datasetUrl)
 
   if (Array.isArray(publication.links)) {
@@ -84,7 +77,7 @@ function collectArtifactLinks(publication: OptionalPublicationFields, isDe: bool
 
   if (Array.isArray(publication.relatedProjects)) {
     publication.relatedProjects.forEach((projectId) => {
-      const project = projects.find((p) => p.id === projectId) as OptionalProjectFields | undefined
+      const project = projects.find((p) => p.id === projectId)
       if (!project) return
 
       pushLink("GitHub", project.github)
@@ -106,26 +99,9 @@ function collectArtifactLinks(publication: OptionalPublicationFields, isDe: bool
 
 export function PublicationCard({ publication, compact = false }: PublicationCardProps) {
   const [showAbstract, setShowAbstract] = useState(false)
-  const [copiedBibtex, setCopiedBibtex] = useState(false)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const { copied: copiedBibtex, copy } = useCopyFeedback(2200)
   const { t, lang } = useLanguage()
   const isDe = lang === "de"
-
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current)
-      }
-    }
-  }, [])
-
-  const handleCopyBibtex = async () => {
-    const ok = await copyTextWithFallback(publication.bibtex)
-    if (!ok) return
-    setCopiedBibtex(true)
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => setCopiedBibtex(false), 2200)
-  }
 
   const handleDownloadRis = () => {
     downloadText(
@@ -146,27 +122,25 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
   return (
     <Row aria-label={publication.title}>
       <div className="space-y-1.5 w-full">
-        {/* h3 below h2 section/year headings in the page hierarchy */}
-        <h3 className="text-sm font-semibold text-foreground leading-snug break-words w-full">
+        <h3 className="text-[15px] font-semibold leading-snug text-foreground break-words w-full">
           <ScientificText text={publication.title} />
         </h3>
 
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
-          <span className="text-muted-foreground">
+          <span className="text-muted-foreground tabular-nums">
             {[publication.venue, publication.year].filter(Boolean).join(", ")}
           </span>
           {publication.badges?.map((badge) => {
             const b = badge.toLowerCase()
-            const translatedBadge =
-              isDe
-                ? b.includes("topical review")
-                  ? "Übersichtsartikel"
-                  : b.includes("invited")
+            const translatedBadge = isDe
+              ? b.includes("topical review")
+                ? "Übersichtsartikel"
+                : b.includes("invited")
                   ? "Eingeladener Beitrag"
                   : b.includes("featured")
-                  ? "Ausgewählt"
-                  : badge
-                : badge
+                    ? "Ausgewählt"
+                    : badge
+              : badge
             return (
               <Badge key={badge} variant="published">
                 {translatedBadge}
@@ -175,7 +149,7 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           })}
         </div>
 
-        <p className="text-xs text-muted-foreground leading-relaxed">
+        <p className="text-xs leading-relaxed text-muted-foreground">
           {publication.authors.map((author, idx) => {
             const isMe = author.toLowerCase().includes("abdulaal")
             return (
@@ -190,40 +164,48 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
         </p>
       </div>
 
-      {/* Inline action micro-links rendered on both homepage compact cards and full archive */}
-      <div className="mt-2.5 flex flex-wrap items-center justify-between gap-3 text-xs pt-0.5">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-3 pt-0.5 text-xs">
         <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1.5">
           {doiHref && (
             <a
               href={doiHref}
               target="_blank"
-              rel="noreferrer"
-              className="btn-secondary"
+              rel="noopener noreferrer"
+              className="group btn-secondary"
             >
               {t.ui.doi}
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                aria-hidden="true"
+              />
             </a>
           )}
           {publication.arxiv && (
             <a
               href={`https://arxiv.org/abs/${publication.arxiv}`}
               target="_blank"
-              rel="noreferrer"
-              className="btn-secondary"
+              rel="noopener noreferrer"
+              className="group btn-secondary"
             >
               arXiv:{publication.arxiv}
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                aria-hidden="true"
+              />
             </a>
           )}
           {publication.pdfUrl && (
             <a
               href={publication.pdfUrl}
               target="_blank"
-              rel="noreferrer"
-              className="btn-secondary"
+              rel="noopener noreferrer"
+              className="group btn-secondary"
             >
               {t.ui.pdf}
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                aria-hidden="true"
+              />
             </a>
           )}
 
@@ -232,17 +214,20 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
               key={`${item.label}-${item.href}`}
               href={item.href}
               target="_blank"
-              rel="noreferrer"
-              className="btn-secondary"
+              rel="noopener noreferrer"
+              className="group btn-secondary"
             >
               {item.label}
-              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              <ArrowUpRight
+                className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                aria-hidden="true"
+              />
             </a>
           ))}
 
           <button
             type="button"
-            onClick={handleCopyBibtex}
+            onClick={() => copy(publication.bibtex)}
             className="btn-secondary"
             title={isDe ? "BibTeX kopieren" : "Copy BibTeX"}
           >
@@ -288,9 +273,9 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           role="region"
           aria-label={t.ui.abstract}
           hidden={!showAbstract}
-          className="pt-2"
+          className="mt-3 border-t border-border/50 pt-3"
         >
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground pt-2 border-t border-border/50">
+          <p className="border-s-2 border-accent/45 ps-3.5 text-[13px] leading-relaxed text-muted-foreground">
             <ScientificText text={publication.abstract} />
           </p>
         </div>

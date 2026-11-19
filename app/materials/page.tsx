@@ -9,8 +9,7 @@ import { siteConfig } from "@/lib/site-config"
 
 export const metadata: Metadata = createPageMetadata({
   title: "Academic Materials, Slides and Technical Articles",
-  description:
-    `Downloadable lecture slides, presentation decks, technical summaries, learning roadmaps, and public talk records by ${siteConfig.name}.`,
+  description: `Downloadable lecture slides, presentation decks, technical summaries, learning roadmaps, and public talk records by ${siteConfig.name}.`,
   path: "/materials",
   keywords: [
     "Academic Presentation Decks",
@@ -32,13 +31,12 @@ export default async function MaterialsPage() {
 
   talks.forEach((talk) => {
     allMaterials.push({
-      id: `talk-${talk.title}`,
+      id: `talk-${talk.url || talk.title}`,
       type: "talk",
       categoryLabel: "Talks and Sessions",
       title: talk.title,
       year: talk.year,
       date: talk.date,
-      description: talk.event,
       formatLabel: talk.format || "Technical Talk",
       url: talk.url || "",
       isDownload: false,
@@ -51,21 +49,20 @@ export default async function MaterialsPage() {
     assets.forEach((asset) => {
       const year = asset.updatedAt.slice(-4) || "2026"
       allMaterials.push({
-        id: `asset-${asset.fileName}`,
+        id: `asset-${collection.slug}-${asset.fileName}`,
         type: (collection.slug === "slides"
           ? "slide"
           : collection.slug === "summaries"
-          ? "summary"
-          : collection.slug === "roadmaps"
-          ? "roadmap"
-          : "template") as MaterialItem["type"],
-
+            ? "summary"
+            : collection.slug === "roadmaps"
+              ? "roadmap"
+              : "template") as MaterialItem["type"],
         categoryLabel: collection.title,
         title: asset.displayName,
         year,
         date: asset.updatedAt,
         description: collection.description,
-        formatLabel: `${asset.extension} • ${asset.sizeLabel}`,
+        formatLabel: `${asset.extension} · ${asset.sizeLabel}`,
         url: asset.href,
         isDownload: true,
       })
@@ -93,11 +90,10 @@ export default async function MaterialsPage() {
       <PageHeader
         eyebrow="Materials"
         title="Technical materials, notes, and public sessions"
-        description="Reference notes, seminar slides, archived technical essays, and a chronological archive of public talks and student workshops in optical engineering."
         i18nKey="materials"
       />
 
-      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">
+      <section className="container-layout pb-16">
         <MaterialsList items={allMaterials} />
       </section>
     </main>

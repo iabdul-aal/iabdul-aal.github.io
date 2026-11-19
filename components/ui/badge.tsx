@@ -7,9 +7,9 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export function Badge({ className, variant = "custom", children, ...props }: BadgeProps) {
   const variantStyles = {
-    published: "bg-accent/10 text-accent ring-accent/20",
+    published: "bg-accent/10 text-accent ring-accent/25",
     preprint: "bg-muted text-muted-foreground ring-border",
-    invited: "bg-amber-500/10 text-amber-600 dark:text-amber-400 ring-amber-500/20",
+    invited: "bg-accent/15 text-accent-strong ring-accent/30",
     custom: "bg-secondary text-secondary-foreground ring-border",
   }[variant]
 

@@ -70,10 +70,10 @@ export function ResearchThemeList({ themes, publications }: ResearchThemeListPro
   const isDe = lang === "de"
 
   return (
-    <div className="divide-y divide-border">
+    <div>
       {themes.map((theme, idx) => {
         const themePublications = publications.filter((pub) => pub.relatedThemes?.includes(theme.id))
-        const isEven = idx % 2 === 1
+        const isAlt = idx % 2 === 1
         const num = String(idx + 1).padStart(2, "0")
 
         const deData = isDe ? germanThemeData[theme.id] : undefined
@@ -88,84 +88,84 @@ export function ResearchThemeList({ themes, publications }: ResearchThemeListPro
           : title
 
         return (
-          <article
+          <section
             key={theme.id}
             id={theme.id}
-            className={`py-8 sm:py-10 scroll-mt-24 ${
-              isEven ? "-mx-5 px-5 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 bg-surface/40" : ""
-            }`}
+            className={`scroll-mt-20 border-t border-border/80 ${isAlt ? "bg-surface" : ""}`}
           >
-            <div className="space-y-5">
-              {/* Theme Header Bar */}
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4 border-b border-border/70 pb-3 min-w-0 w-full">
-                <h2 className="flex items-baseline gap-2.5 text-lg sm:text-xl font-semibold text-foreground break-words min-w-0">
-                  <span className="font-mono text-xs font-semibold tabular-nums text-accent shrink-0">
-                    {num}
-                  </span>
-                  <span>{title}</span>
-                </h2>
+            <article className="container-layout py-10 sm:py-14">
+              <div className="space-y-6">
+                <div className="flex flex-col gap-2 border-b border-border/70 pb-3.5 md:flex-row md:items-center md:justify-between md:gap-4 min-w-0 w-full">
+                  <h2 className="flex items-baseline gap-3 text-lg font-semibold text-foreground sm:text-xl break-words min-w-0">
+                    <span className="shrink-0 font-mono text-xs font-semibold tabular-nums text-accent">
+                      {num}
+                    </span>
+                    <span>{title}</span>
+                  </h2>
 
-                {themePublications.length > 0 && (
-                  <Link
-                    href={`/publications?topic=${theme.id}`}
-                    className="btn-secondary self-start md:self-auto shrink-0"
-                  >
-                    <span>{t.ui.topicPublications}</span>
-                    <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
-                  </Link>
-                )}
-              </div>
-
-              {/* Body Grid */}
-              <div className="grid gap-8 md:grid-cols-[17rem_minmax(0,1fr)] items-start min-w-0 w-full">
-                {theme.image && (
-                  <figure className="space-y-2 shrink-0 w-full max-w-full">
-                    <div className="overflow-hidden rounded-md border border-border bg-card p-1.5">
-                      <Image
-                        src={theme.image}
-                        alt={caption}
-                        width={480}
-                        height={300}
-                        priority={idx === 0}
-                        loading={idx === 0 ? "eager" : "lazy"}
-                        className="aspect-[1.6] h-auto w-full object-contain rounded-sm"
+                  {themePublications.length > 0 && (
+                    <Link
+                      href={`/publications?topic=${theme.id}`}
+                      className="group btn-secondary shrink-0 self-start md:self-auto"
+                    >
+                      <span>{t.ui.topicPublications}</span>
+                      <ArrowUpRight
+                        className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
+                        aria-hidden="true"
                       />
-                    </div>
-                    <figcaption className="text-[11px] leading-relaxed text-muted-foreground">
-                      {caption}
-                    </figcaption>
-                  </figure>
-                )}
+                    </Link>
+                  )}
+                </div>
 
-                <dl className="space-y-4 min-w-0 w-full">
-                  <div className="min-w-0 w-full">
-                    <dt className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                      {t.ui.problem}
-                    </dt>
-                    <dd className="mt-0.5 text-sm leading-relaxed text-foreground/90 break-words min-w-0 w-full">
-                      {problem}
-                    </dd>
-                  </div>
-                  <div className="min-w-0 w-full">
-                    <dt className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                      {t.ui.methods}
-                    </dt>
-                    <dd className="mt-0.5 text-sm leading-relaxed text-muted-foreground break-words min-w-0 w-full">
-                      {methods}
-                    </dd>
-                  </div>
-                  <div className="min-w-0 w-full">
-                    <dt className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                      {t.ui.physicalRelevance}
-                    </dt>
-                    <dd className="mt-0.5 text-sm leading-relaxed text-muted-foreground break-words min-w-0 w-full">
-                      {physicalRelevance}
-                    </dd>
-                  </div>
-                </dl>
+                <div className="grid items-start gap-8 md:grid-cols-[18.5rem_minmax(0,1fr)] lg:grid-cols-[20rem_minmax(0,1fr)] min-w-0 w-full">
+                  {theme.image && (
+                    <figure className="w-full max-w-full shrink-0 space-y-2.5">
+                      <div className="figure-plate">
+                        <Image
+                          src={theme.image}
+                          alt={caption}
+                          width={1200}
+                          height={750}
+                          priority={idx === 0}
+                          className="figure-plate-img aspect-[1.6] h-auto w-full object-contain"
+                        />
+                      </div>
+                      <figcaption className="text-[11px] leading-relaxed text-muted-foreground">
+                        {caption}
+                      </figcaption>
+                    </figure>
+                  )}
+
+                  <dl className="divide-y divide-border/50 min-w-0 w-full">
+                    <div className="pb-4 min-w-0 w-full">
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+                        {t.ui.problem}
+                      </dt>
+                      <dd className="mt-1.5 max-w-[66ch] text-sm leading-[1.7] text-foreground/90 break-words">
+                        {problem}
+                      </dd>
+                    </div>
+                    <div className="py-4 min-w-0 w-full">
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                        {t.ui.methods}
+                      </dt>
+                      <dd className="mt-1.5 max-w-[66ch] text-sm leading-[1.7] text-muted-foreground break-words">
+                        {methods}
+                      </dd>
+                    </div>
+                    <div className="pt-4 min-w-0 w-full">
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                        {t.ui.physicalRelevance}
+                      </dt>
+                      <dd className="mt-1.5 max-w-[66ch] text-sm leading-[1.7] text-muted-foreground break-words">
+                        {physicalRelevance}
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </section>
         )
       })}
     </div>

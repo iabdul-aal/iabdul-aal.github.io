@@ -1,5 +1,7 @@
+import { cache } from "react"
 import { readdir, stat } from "node:fs/promises"
 import { extname, join } from "node:path"
+import { formatDate } from "@/lib/utils"
 
 export type MaterialCollectionSlug = "slides" | "summaries" | "roadmaps" | "templates"
 
@@ -96,9 +98,6 @@ function formatBytes(size: number): string {
   return `${value.toFixed(value >= 10 ? 0 : 1)} ${units[unitIndex]}`
 }
 
-import { formatDate } from "@/lib/utils"
-
-
 function toDisplayName(fileName: string): string {
   const withoutExtension = fileName.replace(/\.[^.]+$/, "")
   return withoutExtension
@@ -109,10 +108,6 @@ function toDisplayName(fileName: string): string {
 
 export function getMaterialCollections(): MaterialCollection[] {
   return collectionConfig
-}
-
-export function getMaterialCollection(slug: MaterialCollectionSlug): MaterialCollection | null {
-  return collectionConfig.find((item) => item.slug === slug) ?? null
 }
 
 export async function getCollectionAssets(slug: MaterialCollectionSlug): Promise<MaterialAsset[]> {
@@ -170,7 +165,7 @@ export async function getCollectionAssets(slug: MaterialCollectionSlug): Promise
     }))
 }
 
-export async function getMaterialsOverview() {
+export const getMaterialsOverview = cache(async () => {
   const collections = getMaterialCollections()
 
   const withAssets = await Promise.all(
@@ -186,4 +181,4 @@ export async function getMaterialsOverview() {
     collections: withAssets,
     totalAssets,
   }
-}
+})

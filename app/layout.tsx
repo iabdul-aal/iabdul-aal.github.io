@@ -6,6 +6,8 @@ import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
 import { SkipLink } from "@/components/skip-link"
 import { LanguageProvider } from "@/lib/i18n-context"
+import { ThemeProvider } from "@/lib/theme-context"
+import { generateRootSchema } from "@/lib/seo"
 import { personConfig, siteConfig } from "@/lib/site-config"
 import activityData from "@/data/activity.json"
 
@@ -15,20 +17,24 @@ const inter = Inter({
   display: "swap",
 })
 
+const isDev = process.env.NODE_ENV === "development"
+
 const securityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https:",
+  "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "connect-src 'self'",
   "frame-src 'self'",
   "manifest-src 'self'",
   "upgrade-insecure-requests",
 ].join("; ")
+
+const themeInitScript = `(function(){try{var t=localStorage.getItem("site_theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}})();`
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -99,50 +105,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: "light dark",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#b68c61" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1714" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfbfa" },
+    { media: "(prefers-color-scheme: dark)", color: "#191714" },
   ],
 }
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": `${siteConfig.url}/#person`,
-      name: personConfig.name,
-      givenName: personConfig.givenName,
-      familyName: personConfig.familyName,
-      url: siteConfig.url,
-      image: `${siteConfig.url}/personal-pic.png`,
-      jobTitle: [personConfig.role, personConfig.role_de],
-      affiliation: [
-        ...(personConfig.affiliation ? [{ "@type": "CollegeOrUniversity", name: personConfig.affiliation }] : []),
-        ...(personConfig.lab ? [{ "@type": "Organization", name: personConfig.lab }] : []),
-      ].filter(Boolean),
-      knowsAbout: personConfig.focusAreas,
-      sameAs: siteConfig.sameAs,
-      email: `mailto:${personConfig.email}`,
-      ...(personConfig.location ? { address: { "@type": "PostalAddress", addressLocality: personConfig.location } } : {}),
-      identifier: {
-        "@type": "PropertyValue",
-        propertyID: "ORCID",
-        value: personConfig.orcid,
-      },
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${siteConfig.url}/#website`,
-      url: siteConfig.url,
-      name: siteConfig.name,
-      description: siteConfig.description,
-      inLanguage: ["en", "de"],
-      publisher: {
-        "@id": `${siteConfig.url}/#person`,
-      },
-    },
-  ],
-}
+const structuredData = generateRootSchema()
 
 export default function RootLayout({
   children,
@@ -155,22 +123,28 @@ export default function RootLayout({
       : undefined
 
   return (
-    <html lang="en" dir="ltr" className={inter.variable}>
+    <html lang="en" dir="ltr" data-scroll-behavior="smooth" suppressHydrationWarning className={inter.variable}>
       <head>
         <meta httpEquiv="Content-Security-Policy" content={securityPolicy} />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} Activity Feed`} href="/feed.xml" />
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
-        <LanguageProvider>
-          <SkipLink />
-          <Navigation />
-          <div id="main-content" tabIndex={-1}>
-            {children}
-          </div>
-          <Footer lastUpdated={fetchedDate} />
-        </LanguageProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+        />
+        <ThemeProvider>
+          <LanguageProvider>
+            <SkipLink />
+            <Navigation />
+            <div id="main-content" tabIndex={-1}>
+              {children}
+            </div>
+            <Footer lastUpdated={fetchedDate} />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

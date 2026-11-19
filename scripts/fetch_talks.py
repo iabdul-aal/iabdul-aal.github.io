@@ -186,7 +186,7 @@ def fetch_featured_talk(url: str, event: str, format_name: str) -> dict[str, Any
         pass
 
     return {
-        "title": title,
+        "title": title.replace("'26'", "'26"),
         "event": event or "Featured Public Talk",
         "date": date,
         "year": date[:4] if date else "",

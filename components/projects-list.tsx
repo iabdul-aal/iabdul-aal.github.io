@@ -57,11 +57,10 @@ export function ProjectsList({ initialProjects, metricsMap, compact = false }: P
 
   return (
     <div className="space-y-6">
-      {/* Search and Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
-          onChange={(q) => setSearchQuery(q)}
+          onChange={setSearchQuery}
           placeholder={t.ui.searchTools}
         />
 
@@ -70,7 +69,7 @@ export function ProjectsList({ initialProjects, metricsMap, compact = false }: P
             label={isDe ? "Kategorie:" : "Category:"}
             showIcon
             value={selectedTier}
-            onChange={(val) => setSelectedTier(val)}
+            onChange={setSelectedTier}
             options={[
               { value: "all", label: t.ui.allCategories },
               { value: "major", label: categoryLabels.major },
@@ -82,7 +81,7 @@ export function ProjectsList({ initialProjects, metricsMap, compact = false }: P
             <FilterSelect
               label={isDe ? "Jahr:" : "Year:"}
               value={selectedYear}
-              onChange={(val) => setSelectedYear(val)}
+              onChange={setSelectedYear}
               options={[
                 { value: "all", label: t.ui.allYears },
                 ...availableYears.map((y) => ({ value: y, label: y })),
@@ -92,24 +91,23 @@ export function ProjectsList({ initialProjects, metricsMap, compact = false }: P
         </div>
       </Shell>
 
-      {/* Info indicator */}
-      <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <p>
-          {t.ui.showing} {filteredProjects.length} {t.ui.of} {initialProjects.length} {t.ui.toolsLabel}
+      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+        <p className="tabular-nums">
+          {t.ui.showing} {filteredProjects.length} {t.ui.of} {initialProjects.length}{" "}
+          {t.ui.toolsLabel}
           {isFiltered ? ` ${t.ui.filtered}` : ""}
         </p>
         {isFiltered && (
           <button
             type="button"
             onClick={resetFilters}
-            className="text-accent hover:text-accent-strong hover:underline"
+            className="font-medium text-accent transition-colors hover:text-accent-strong hover:underline underline-offset-4"
           >
             {t.ui.clearFilters}
           </button>
         )}
       </div>
 
-      {/* Projects list by year */}
       <div className="space-y-12">
         {filteredProjects.length === 0 ? (
           <EmptyState

@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
@@ -14,11 +15,11 @@ type ActivityFile = {
   fetchedAt: string
 }
 
-export async function loadActivity(): Promise<ActivityFile> {
+export const loadActivity = cache(async (): Promise<ActivityFile> => {
   try {
     const raw = await readFile(join(process.cwd(), "data", "activity.json"), "utf8")
     return JSON.parse(raw) as ActivityFile
   } catch {
     return { items: [], fetchedAt: "" }
   }
-}
+})

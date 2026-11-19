@@ -9,9 +9,10 @@ import { SearchInput } from "@/components/ui/search-input"
 import { FilterSelect } from "@/components/ui/filter-select"
 import { EmptyState } from "@/components/ui/empty-state"
 import { YearGroupHeader } from "@/components/year-group-header"
-import { copyTextWithFallback, downloadText, groupByYear } from "@/lib/utils"
+import { downloadText, groupByYear } from "@/lib/utils"
 import { Shell } from "@/components/ui/shell"
 import { useLanguage } from "@/lib/i18n-context"
+import { useCopyFeedback } from "@/hooks/use-copy-feedback"
 
 type PublicationsListProps = {
   publications: PublicationRecord[]
@@ -24,15 +25,25 @@ const germanThemeTitles: Record<string, string> = {
   "intelligent-photonics": "Intelligente Photonik",
 }
 
+const VALID_TYPES = new Set(["journal", "preprint", "conference"])
+
 export function PublicationsList({ publications, compact = false }: PublicationsListProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTopic, setSelectedTopic] = useState<string>("all")
   const [selectedType, setSelectedType] = useState<string>("all")
   const [selectedYear, setSelectedYear] = useState<string>("all")
   const [pageSize, setPageSize] = useState(compact ? 5 : 10)
-  const [copiedAllBib, setCopiedAllBib] = useState(false)
+  const { copied: copiedAllBib, copy: copyAllBib } = useCopyFeedback(2000)
   const { t, lang } = useLanguage()
   const isDe = lang === "de"
+
+  const validTopicIds = useMemo(() => {
+    const ids = new Set<string>()
+    publications.forEach((pub) => {
+      pub.relatedThemes?.forEach((themeId) => ids.add(themeId))
+    })
+    return ids
+  }, [publications])
 
   useEffect(() => {
     if (compact || typeof window === "undefined") return
@@ -40,10 +51,10 @@ export function PublicationsList({ publications, compact = false }: Publications
     const topicParam = params.get("topic")
     const typeParam = params.get("type") || params.get("status")
     queueMicrotask(() => {
-      if (topicParam) setSelectedTopic(topicParam)
-      if (typeParam) setSelectedType(typeParam)
+      if (topicParam && validTopicIds.has(topicParam)) setSelectedTopic(topicParam)
+      if (typeParam && VALID_TYPES.has(typeParam)) setSelectedType(typeParam)
     })
-  }, [compact])
+  }, [compact, validTopicIds])
 
   const categoryLabels = {
     journal: isDe ? "Zeitschriftenartikel" : "Journal Articles",
@@ -60,21 +71,17 @@ export function PublicationsList({ publications, compact = false }: Publications
   }, [publications])
 
   const availableTopics = useMemo(() => {
-    const ids = new Set<string>()
-    publications.forEach((pub) => {
-      pub.relatedThemes?.forEach((themeId) => ids.add(themeId))
-    })
-    return Array.from(ids).map((id) => ({
+    return Array.from(validTopicIds).map((id) => ({
       id,
       title: isDe
         ? germanThemeTitles[id] ?? researchThemes.find((theme) => theme.id === id)?.title ?? id
         : researchThemes.find((theme) => theme.id === id)?.title ?? id,
     }))
-  }, [publications, isDe])
+  }, [validTopicIds, isDe])
 
   const filteredPublications = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim()
     return publications.filter((pub) => {
-      const query = searchQuery.toLowerCase()
       const matchesSearch =
         query === "" ||
         pub.title.toLowerCase().includes(query) ||
@@ -103,12 +110,15 @@ export function PublicationsList({ publications, compact = false }: Publications
     return groupByYear(visiblePublications, (pub) => pub.year)
   }, [visiblePublications])
 
+  const isFiltered =
+    searchQuery.trim() !== "" ||
+    selectedTopic !== "all" ||
+    selectedType !== "all" ||
+    selectedYear !== "all"
+
   const handleCopyAllBibtex = async () => {
     const allBib = filteredPublications.map((p) => p.bibtex).join("\n\n")
-    const ok = await copyTextWithFallback(allBib)
-    if (!ok) return
-    setCopiedAllBib(true)
-    setTimeout(() => setCopiedAllBib(false), 2000)
+    await copyAllBib(allBib)
   }
 
   const handleDownloadAllRis = () => {
@@ -126,9 +136,13 @@ export function PublicationsList({ publications, compact = false }: Publications
     )
   }
 
+  const displayDenominator =
+    visiblePublications.length < filteredPublications.length
+      ? filteredPublications.length
+      : publications.length
+
   return (
     <div className="space-y-6">
-      {/* Search and Filter Bar */}
       <Shell variant="primary">
         <SearchInput
           value={searchQuery}
@@ -188,15 +202,15 @@ export function PublicationsList({ publications, compact = false }: Publications
         </div>
       </Shell>
 
-      {/* Info and Export Actions */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
-        <p>
-          {t.ui.showing} {Math.min(visiblePublications.length, filteredPublications.length)} {t.ui.of} {filteredPublications.length} {t.ui.publications}
-          {searchQuery || selectedTopic !== "all" || selectedType !== "all" || selectedYear !== "all" ? ` ${t.ui.filtered}` : ""}
+        <p className="tabular-nums">
+          {t.ui.showing} {visiblePublications.length} {t.ui.of} {displayDenominator}{" "}
+          {t.ui.publications}
+          {isFiltered ? ` ${t.ui.filtered}` : ""}
         </p>
 
-        <div className="flex items-center gap-3">
-          {(searchQuery || selectedTopic !== "all" || selectedType !== "all" || selectedYear !== "all") && (
+        <div className="flex flex-wrap items-center gap-3.5">
+          {isFiltered && (
             <button
               type="button"
               onClick={() => {
@@ -206,35 +220,44 @@ export function PublicationsList({ publications, compact = false }: Publications
                 setSelectedYear("all")
                 setPageSize(10)
               }}
-              className="text-accent hover:text-accent-strong hover:underline"
+              className="font-medium text-accent transition-colors hover:text-accent-strong hover:underline underline-offset-4"
             >
               {t.ui.clearFilters}
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={handleCopyAllBibtex}
-            className="btn-secondary"
-            title={isDe ? "BibTeX für aktuelle Ansicht kopieren" : "Copy BibTeX for current view"}
-          >
-            {copiedAllBib ? <Check className="h-3 w-3 text-accent" aria-hidden="true" /> : <Copy className="h-3 w-3" aria-hidden="true" />}
-            <span aria-live="polite">{copiedAllBib ? t.ui.copiedBibtex : t.ui.exportBibtex}</span>
-          </button>
+          {filteredPublications.length > 0 && (
+            <>
+              <button
+                type="button"
+                onClick={handleCopyAllBibtex}
+                className="btn-secondary"
+                title={isDe ? "BibTeX für aktuelle Ansicht kopieren" : "Copy BibTeX for current view"}
+              >
+                {copiedAllBib ? (
+                  <Check className="h-3 w-3 text-accent" aria-hidden="true" />
+                ) : (
+                  <Copy className="h-3 w-3" aria-hidden="true" />
+                )}
+                <span aria-live="polite">
+                  {copiedAllBib ? t.ui.copiedBibtex : t.ui.exportBibtex}
+                </span>
+              </button>
 
-          <button
-            type="button"
-            onClick={handleDownloadAllRis}
-            className="btn-secondary"
-            title={isDe ? "RIS für aktuelle Ansicht herunterladen" : "Download RIS for current view"}
-          >
-            <Download className="h-3 w-3" aria-hidden="true" />
-            {t.ui.exportRis}
-          </button>
+              <button
+                type="button"
+                onClick={handleDownloadAllRis}
+                className="btn-secondary"
+                title={isDe ? "RIS für aktuelle Ansicht herunterladen" : "Download RIS for current view"}
+              >
+                <Download className="h-3 w-3" aria-hidden="true" />
+                {t.ui.exportRis}
+              </button>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Publications list by year */}
       <div className="space-y-12">
         {visiblePublications.length === 0 ? (
           <EmptyState

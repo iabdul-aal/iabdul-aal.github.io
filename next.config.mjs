@@ -4,6 +4,7 @@ const nextConfig = {
   output: "export",
   reactStrictMode: true,
   poweredByHeader: false,
+  agentRules: false,
   images: {
     // Required for static exports when using the Next.js Image component
     unoptimized: true,

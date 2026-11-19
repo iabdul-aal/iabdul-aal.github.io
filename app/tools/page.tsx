@@ -8,8 +8,7 @@ import { siteConfig } from "@/lib/site-config"
 
 export const metadata: Metadata = createPageMetadata({
   title: "Open Source Solvers and Design Kits",
-  description:
-    `Open-source computational solvers, surrogate modeling kits, and citable design packages by ${siteConfig.name} in integrated photonics and inverse design.`,
+  description: `Open-source computational solvers, surrogate modeling kits, and citable design packages by ${siteConfig.name} in integrated photonics and inverse design.`,
   path: "/tools",
   keywords: [
     "NanoPhotoNet-MPM",
@@ -33,11 +32,10 @@ export default async function ProjectsPage() {
       <PageHeader
         eyebrow="Tools"
         title="Software tools and codebases"
-        description="Open-source simulation workflows, neural surrogate solvers, and verified device packages published to support reproducible photonic engineering and citable software artifacts."
         i18nKey="tools"
       />
 
-      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6 lg:px-8">
+      <section className="container-layout pb-16">
         <ProjectsList initialProjects={projects} metricsMap={projectMetrics.projects} />
       </section>
     </main>

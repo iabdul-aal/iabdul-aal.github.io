@@ -62,6 +62,12 @@ def slug(year: str, title: str) -> str:
 
 def main() -> None:
     pubs = json.loads(PUBS_FILE.read_text(encoding="utf-8"))
+    existing_papers: dict[str, dict] = {}
+    if OUT_FILE.exists():
+        try:
+            existing_papers = json.loads(OUT_FILE.read_text(encoding="utf-8")).get("papers", {})
+        except Exception:
+            existing_papers = {}
     metrics: dict[str, dict] = {}
 
     for pub in pubs:
@@ -90,6 +96,9 @@ def main() -> None:
                 "openalex_id": work.get("id", ""),
             }
             print(f"  [{pub_id}] citations={metrics[pub_id]['cited_by_count']}")
+        elif pub_id in existing_papers:
+            metrics[pub_id] = existing_papers[pub_id]
+            print(f"  [{pub_id}] preserving cached OpenAlex metrics")
         else:
             metrics[pub_id] = {
                 "cited_by_count": 0,
