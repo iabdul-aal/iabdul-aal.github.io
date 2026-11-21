@@ -62,7 +62,7 @@ export default async function MaterialsPage() {
         year,
         date: asset.updatedAt,
         description: collection.description,
-        formatLabel: `${asset.extension} · ${asset.sizeLabel}`,
+        formatLabel: `${asset.extension}, ${asset.sizeLabel}`,
         url: asset.href,
         isDownload: true,
       })

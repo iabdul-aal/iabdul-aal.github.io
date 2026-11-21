@@ -17,6 +17,7 @@ Apply these rules before adding or editing any prose, JSON dataset, TypeScript m
 
 - Never use `&` as a written connective in prose, JSON string values, TypeScript copy, documentation, or CV text. Always write `and`.
 - Never use the Unicode em-dash character (U+2014) anywhere in repository content, code strings, JSON data, markdown docs, or LaTeX source. Restructure sentences with commas, semicolons, or separate sentences. In LaTeX source only, `--` is permitted for numeric ranges and `---` is permitted for LaTeX typesetting punctuation.
+- Never use middle dots (`U+00B7`), bullet glyphs, or periods as inline dividers between clauses, affiliations, or metadata items; use commas (`,`) or hyphens (`-`), reserving `.` for full stops and standard abbreviations.
 - Store chemical formulas with Unicode subscripts (`NbOCl₂`, `Si₃N₄`) in JSON, TypeScript, activity, and RSS outputs. Never leave raw `<sub>` or `<sup>` HTML tags in data files or feeds. LaTeX math-mode subscripts (`$_2$`, `$_3$`) belong only in generated `.bib` and `.tex` files.
 
 ## 3. Terminology, Word Budgets, and Privacy

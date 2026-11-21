@@ -62,7 +62,7 @@ export function HeroSection() {
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
             <span>{locationLine}</span>
             <span aria-hidden="true" className="text-muted-foreground/50">
-              ·
+              -
             </span>
             <a
               href={`mailto:${identity.email}`}

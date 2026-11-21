@@ -168,6 +168,27 @@ def check_em_dash(files: dict[str, list[Path]], errors: list[str]) -> None:
                 errors.append(f"[em-dash] {_rel(path)}:{lineno}: forbidden Unicode em-dash U+2014 found.")
 
 
+DOT_DIVIDER_RE = re.compile(r"[\u00b7\u2022\u22c5\u2027]|&middot;|&bull;", re.IGNORECASE)
+
+
+def check_dot_dividers(files: dict[str, list[Path]], errors: list[str]) -> None:
+    targets = (
+        files["data_json"]
+        + files["data_tex"]
+        + files["lib_ts"]
+        + files["app_tsx"]
+        + files["app_ts"]
+        + files["comp_tsx"]
+        + files["comp_ts"]
+        + files["feed_xml"]
+    )
+    for path in targets:
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for lineno, line in enumerate(text.splitlines(), 1):
+            if DOT_DIVIDER_RE.search(line):
+                errors.append(f"[dot-divider] {_rel(path)}:{lineno}: forbidden dot/bullet divider found; use comma or hyphen instead.")
+
+
 def check_standalone_ampersands(errors: list[str]) -> None:
     json_targets = [
         ROOT / "data" / "cv_data.json",
@@ -563,6 +584,11 @@ def check_built_html(errors: list[str]) -> None:
             errors.append(
                 f"[static-html] out/{page_name} contains BAILOUT_TO_CLIENT_SIDE_RENDERING SSR fallback."
             )
+        rendered_markup = re.sub(r"<(?:script|style)\b[^>]*>.*?</(?:script|style)>", " ", html, flags=re.DOTALL | re.IGNORECASE)
+        if DOT_DIVIDER_RE.search(rendered_markup):
+            errors.append(
+                f"[dot-divider] out/{page_name} contains forbidden middle-dot or bullet divider in rendered HTML."
+            )
 
 
 def main() -> int:
@@ -574,6 +600,7 @@ def main() -> int:
     errors: list[str] = []
 
     check_em_dash(files, errors)
+    check_dot_dividers(files, errors)
     check_standalone_ampersands(errors)
     check_commercial_software(files, errors)
     check_pii_s3_and_ai_slop(files, errors)

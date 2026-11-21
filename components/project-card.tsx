@@ -105,7 +105,7 @@ export function ProjectCard({ project, metrics, compact = false }: ProjectCardPr
 
         {metaParts.length > 0 && (
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tabular-nums text-muted-foreground">
-            <span>{metaParts.join(" · ")}</span>
+            <span>{metaParts.join(", ")}</span>
           </div>
         )}
 

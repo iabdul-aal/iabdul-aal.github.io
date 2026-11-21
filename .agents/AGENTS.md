@@ -47,6 +47,7 @@ python scripts/update_cv_tex.py  # Regenerate cv.tex and cv_de.tex from cv_data.
 4. **Character and writing style rules**, applied to ALL written content (JSON data files, markdown, TypeScript strings, LaTeX source):
    * The `&` character is **forbidden** as a written connective. Always write "and".
    * The em-dash character `U+2014` is **forbidden**. Restructure sentences to avoid it; use a comma, semicolon, or separate sentence instead.
+   * Dot dividers (`U+00B7` middle dots, bullet dots, or periods between clauses/metadata items) are **forbidden**; use a comma (`,`) or hyphen (`-`), reserving `.` strictly for full stops and abbreviations.
    * Academic writing style is required: precise, impersonal, and concise. Avoid colloquialisms, marketing language, redundant qualifiers, and first-person framing.
    * Font choices must remain consistent with the existing design system. Do not introduce new font families or break the established typographic scale.
    * In LaTeX source, the only permitted dash forms are `--` (en-dash, for ranges) and `---` (em-dash, for sentence punctuation in LaTeX typesetting only). Raw Unicode em-dashes are forbidden everywhere.

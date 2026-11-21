@@ -44,7 +44,7 @@ export function AboutView() {
               {isDe ? "Doktorand (Studienphase)" : "Ph.D. Candidate (Study Phase)"}
             </p>
             <p className="leading-relaxed">
-              Max Planck School of Photonics · FAU Erlangen-Nürnberg (MAOT)
+              Max Planck School of Photonics, FAU Erlangen-Nürnberg (MAOT)
             </p>
             <p>{isDe ? identity.location_de : identity.location}</p>
             <div className="space-y-1.5 border-t border-border/60 pt-2.5">

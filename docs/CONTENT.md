@@ -78,6 +78,7 @@ These rules are inherited from `AGENTS.md` and apply to all text:
 
 - The `&` character is forbidden as a written connective. Always write "and".
 - The em-dash character (U+2014) is forbidden. Use a comma, semicolon, or separate sentence.
+- Middle dots (`U+00B7`) and bullet or period dividers between clauses, affiliations, or metadata items are forbidden; use a comma (`,`) or hyphen (`-`), reserving periods (`.`) for sentence full stops and abbreviations.
 - No commercial software names (e.g., MATLAB, COMSOL, Lumerical). Use generic physical or computational terms.
 - No colloquialisms, marketing language, redundant qualifiers, or first-person framing.
 - No phrases from the anti-reference list in `PRODUCT.md` (e.g., "visionary", "innovator", "building the future").

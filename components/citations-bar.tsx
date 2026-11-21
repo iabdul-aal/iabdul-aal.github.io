@@ -54,7 +54,7 @@ export function CitationsBar({
     <div className="mb-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-border/70 py-3 text-xs text-muted-foreground">
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 tabular-nums">
         {summaryParts.length > 0 ? (
-          <span className="font-medium text-foreground/90">{summaryParts.join(" · ")}</span>
+          <span className="font-medium text-foreground/90">{summaryParts.join(", ")}</span>
         ) : (
           <span>{isDe ? "Bibliografische Nachweise" : "Scholarly index profiles"}</span>
         )}
