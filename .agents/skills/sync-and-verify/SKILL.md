@@ -39,20 +39,14 @@ python scripts/generate_activity.py
 python scripts/generate_rss.py
 ```
 
-If `pdflatex` and `biber` are installed locally, compile both EN and DE CVs in `data/`:
+If `latexmk` (`pdflatex` and `biber`) is installed locally, compile both EN and DE CVs cleanly in `data/`:
 
 ```bash
-pdflatex -interaction=nonstopmode cv.tex
-biber cv
-pdflatex -interaction=nonstopmode cv.tex
-pdflatex -interaction=nonstopmode cv.tex
-pdflatex -interaction=nonstopmode cv_de.tex
-biber cv_de
-pdflatex -interaction=nonstopmode cv_de.tex
-pdflatex -interaction=nonstopmode cv_de.tex
+latexmk -pdf -cd -interaction=nonstopmode data/cv.tex
+latexmk -pdf -cd -interaction=nonstopmode data/cv_de.tex
 ```
 
-Copy compiled PDFs from `data/cv.pdf` and `data/cv_de.pdf` to `public/cv.pdf` and `public/cv_de.pdf`.
+Keep `\definecolor{SECTIONCOLOR}{RGB}{0,102,204}` intact in `scripts/update_cv_tex.py`, because `titlesec` applies `\uppercase` to `\color{sectioncolor}`. Copy compiled PDFs from `data/cv.pdf` and `data/cv_de.pdf` to `public/cv.pdf` and `public/cv_de.pdf`.
 
 ## 4. Mandatory Verification Suite
 
@@ -63,6 +57,7 @@ python scripts/check_tools_sync.py
 npm run check
 npm run build
 python scripts/verify_site.py --ci
+python -m compileall -q scripts
 ```
 
-When `./out` exists, `verify_site.py --ci` also validates `out/index.html` and `out/publications.html` for zero `BAILOUT_TO_CLIENT_SIDE_RENDERING`, in addition to enforcing zero bullet macros and zero software sections in `data/cv.tex` and `data/cv_de.tex`.
+When `./out` exists, `verify_site.py --ci` validates all eight static routes (`index.html`, `about.html`, `research.html`, `publications.html`, `tools.html`, `materials.html`, `cv.html`, `404.html`) for zero `BAILOUT_TO_CLIENT_SIDE_RENDERING` and zero dot dividers, verifies `public/cv*.pdf` and core image assets, checks `.agents/` hooks and skill manifests, and enforces zero bullet macros or software sections in `data/cv.tex` and `data/cv_de.tex`.

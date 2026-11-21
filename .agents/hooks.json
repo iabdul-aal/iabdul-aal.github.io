@@ -1,0 +1,16 @@
+{
+  "push-and-branch-guard": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ./hooks/guard.py",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

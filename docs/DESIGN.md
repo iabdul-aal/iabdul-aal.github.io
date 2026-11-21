@@ -2,23 +2,23 @@
 
 ## Theme
 
-A light, typography-first academic site designed for supervisors and collaborators reading in office, lab, or conference settings. The visual scene is a quiet research profile opened on a laptop beside papers and simulation notes, so the design stays light, restrained, and text-led.
+A refined, typography-first academic site designed for supervisors and collaborators reading in office, lab, or conference settings. The visual system pairs a warm ivory light surface with an optional curated obsidian dark mode (`ThemeProvider` and `ThemeToggle`), keeping both modes calm, low-glare, and text-led.
 
 ## Color
 
-Use a restrained palette: tinted near-white background, dark neutral text, soft borders, and one gold/bronze accent (`#b68c61`) used sparingly for links, focus states, and small metadata.
+Use a restrained warm neutral palette paired with a single bronze/gold accent (`#b68c61` primary token, `#825c36` light accessible ink, `#c9a57a` dark ink) used sparingly for links, focus states, active navigation underlines, and small metadata.
 
-CSS color tokens in `app/globals.css` maintain light neutral surfaces (`#f9fafb`), slate ink (`#0f172a`), subtle dividers, and gold/bronze accents (`#b68c61`). Avoid pure white, pure black, broad gradients, dark-blue dominance, neon color, and multi-accent palettes.
+CSS color tokens in `app/globals.css` maintain warm paper light surfaces (`oklch(0.99 0.003 70)`) and obsidian dark surfaces (`oklch(0.13 0.007 65)`) with soft borders and consistent bronze accenting. Avoid pure `#ffffff` / `#000000` glare, broad gradients, neon color, and multi-accent palettes.
 
 ## Typography
 
-Use a clean sans-serif system stack for speed and durability. Maintain 65 to 75 character line lengths for body copy. Use hierarchy through size, weight, spacing, and section structure rather than decorative type treatments.
+Use `Inter` (loaded via `next/font/google`) with clean system fallbacks for fast rendering and tabular-num alignment. Maintain 65 to 75 character line lengths for body copy. Use commas (`,`) or hyphens (`-`) for metadata dividers rather than middle-dot glyphs (`U+00B7`), and keep expanded abstracts and active mobile navigation links clean without left vertical accent bars.
 
 Do not use negative letter spacing. Avoid large display typography except for the homepage name.
 
 ## Layout
 
-Use generous whitespace, narrow reading measures, and calm page rhythms. Prefer ruled sections, definition-list style metadata, and full-width content bands over decorative cards. Cards are acceptable for repeated publications, projects, and software records, with border radii of 8px or less.
+Use generous whitespace, narrow reading measures, and calm page rhythms. Prefer ruled sections, definition-list style metadata, borderless transparent 3D schematic PNGs with soft ambient shadow, and full-width alternating content bands over decorative cards. Subtle borders are used sparingly on filter shells, interactive controls, and secondary action chips.
 
 Main navigation contains only: About, Research, Publications, Tools, Materials, CV.
 

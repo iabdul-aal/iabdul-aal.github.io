@@ -62,11 +62,15 @@ python scripts/update_cv_tex.py  # Regenerate cv.tex and cv_de.tex from cv_data.
 
 7. **Single source of truth for identity**: the canonical name, specialization, email, and ORCID are in `data/cv_data.json` (`personalInfo`). `lib/site-config.ts` and `lib/academic-content.ts` must derive these from `data/cv_data.json`. Never hardcode the full name in component JSX; always reference `identity.name` or `siteConfig.name`.
 
-## Agentic Skills and Verification
+## Agentic Rules, Hooks, and Verification
 
-- Run `python scripts/verify_site.py --ci` alongside `python scripts/check_tools_sync.py` and `npm run check` before pushing changes to `main`. `verify_site.py` checks forbidden characters, commercial software names, PII/expiring URL patterns, banned CSS classes, `relatedThemes` integrity, raw HTML subscripts in feeds/publications, and `docs/CONTENT.md` word counts.
+- Scoped directory rules live in `data/AGENTS.md` (databases, TeX, formulas) and `scripts/AGENTS.md` (fetchers, generators, shared helpers), loaded hierarchically when editing inside those folders.
+- Pre-tool lifecycle hooks in `.agents/hooks.json` (`.agents/hooks/guard.py`) block force-pushes, reject `[skip ci]` on CV/data commits, and run `check_tools_sync.py` plus `verify_site.py --ci` before allowing `git push`.
+- Publications support arbitrary preprint servers (`arXiv`, `Preprints.org`, `Optica Open`, `TechRxiv`, `bioRxiv`, `chemRxiv`, `Research Square`, `OSF Preprints`, `SSRN`, `HAL`) uniformly via `resolvePreprintInfo()` in `lib/publications.ts` and `infer_preprint_info()` in `scripts/config_helper.py`.
+- Run `python scripts/verify_site.py --ci` alongside `python scripts/check_tools_sync.py` and `npm run check` before pushing changes to `main`. `verify_site.py` validates forbidden characters, commercial software names, PII/expiring URL patterns, banned CSS classes, `relatedThemes` integrity, raw HTML subscripts, `docs/CONTENT.md` word counts, static HTML routes, and `.agents/` hook and skill integrity.
 - Reusable task workflows are documented under `.agents/skills/`:
   - `.agents/skills/content-governance/SKILL.md`: writing style, character rules, terminology constraints, and privacy checks.
   - `.agents/skills/sync-and-verify/SKILL.md`: ordered regeneration of BibTeX, EN/DE CV TeX sources, activity JSON, RSS XML, and validation checks.
+  - `.agents/skills/browser-and-ui-qa/SKILL.md`: desktop and mobile visual, theme (`light`/`dark`), `EN`/`DE`, filter, and endpoint verification (interactive `browser` subagent or bundled `audit_site.mjs` CDP runner).
   - `.agents/skills/agentic-release/SKILL.md`: pre-push verification gate, linear `git pull --rebase` pushes, GitHub Actions workflow coordination, and live site confirmation.
 

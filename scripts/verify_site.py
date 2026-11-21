@@ -131,6 +131,15 @@ def _collect_scan_files() -> dict[str, list[Path]]:
         )
         if p.exists()
     ]
+    agent_rules = [
+        p
+        for p in (
+            ROOT / ".agents" / "AGENTS.md",
+            ROOT / "data" / "AGENTS.md",
+            ROOT / "scripts" / "AGENTS.md",
+        )
+        if p.exists()
+    ]
     feed_xml = [ROOT / "public" / "feed.xml"] if (ROOT / "public" / "feed.xml").exists() else []
     return {
         "data_json": data_json,
@@ -143,6 +152,7 @@ def _collect_scan_files() -> dict[str, list[Path]]:
         "comp_ts": comp_ts,
         "docs_md": docs_md,
         "extra_docs": extra_docs,
+        "agent_rules": agent_rules,
         "feed_xml": feed_xml,
     }
 
@@ -159,6 +169,7 @@ def check_em_dash(files: dict[str, list[Path]], errors: list[str]) -> None:
         + files["comp_ts"]
         + files["docs_md"]
         + files["extra_docs"]
+        + files["agent_rules"]
         + files["feed_xml"]
     )
     for path in targets:
@@ -591,6 +602,59 @@ def check_built_html(errors: list[str]) -> None:
             )
 
 
+def check_agentic_setup(errors: list[str]) -> None:
+    agents_dir = ROOT / ".agents"
+    for rule_path in (agents_dir / "AGENTS.md", ROOT / "data" / "AGENTS.md", ROOT / "scripts" / "AGENTS.md"):
+        if rule_path.exists():
+            size_bytes = len(rule_path.read_bytes())
+            if size_bytes > 24000:
+                errors.append(f"[agentic] {_rel(rule_path)} exceeds 24,000-byte per-file rule cap ({size_bytes} bytes).")
+
+    skills_dir = agents_dir / "skills"
+    if skills_dir.exists():
+        for skill_md in sorted(skills_dir.glob("*/SKILL.md")):
+            text = skill_md.read_text(encoding="utf-8", errors="replace")
+            if "\u2014" in text:
+                errors.append(f"[em-dash] {_rel(skill_md)}: forbidden Unicode em-dash U+2014 found.")
+            fm = re.match(r"^---\s*\n(.*?)\n---", text, re.DOTALL)
+            if not fm:
+                errors.append(f"[agentic] {_rel(skill_md)}: missing YAML frontmatter.")
+                continue
+            block = fm.group(1)
+            if not re.search(r"^name:\s*\S+", block, re.MULTILINE):
+                errors.append(f"[agentic] {_rel(skill_md)}: frontmatter missing 'name'.")
+            if not re.search(r"^description:\s*\S+", block, re.MULTILINE):
+                errors.append(f"[agentic] {_rel(skill_md)}: frontmatter missing 'description'.")
+
+    hooks_path = agents_dir / "hooks.json"
+    if hooks_path.exists():
+        try:
+            hooks_cfg = json.loads(hooks_path.read_text(encoding="utf-8-sig"))
+        except json.JSONDecodeError as exc:
+            errors.append(f"[agentic] .agents/hooks.json: invalid JSON ({exc}).")
+            return
+        if isinstance(hooks_cfg, dict):
+            for hook_name, spec in hooks_cfg.items():
+                if not isinstance(spec, dict):
+                    continue
+                for event_groups in spec.values():
+                    if not isinstance(event_groups, list):
+                        continue
+                    for group in event_groups:
+                        handlers = group.get("hooks", []) if isinstance(group, dict) and "hooks" in group else [group]
+                        for handler in handlers:
+                            if not isinstance(handler, dict):
+                                continue
+                            cmd = str(handler.get("command") or "").strip()
+                            m = re.search(r"\./([^\s\"']+)", cmd)
+                            if m:
+                                ref_path = agents_dir / m.group(1)
+                                if not ref_path.exists():
+                                    errors.append(
+                                        f"[agentic] .agents/hooks.json ({hook_name}): referenced script './{m.group(1)}' not found."
+                                    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate content, governance, sync, and hygiene across the site.")
     parser.add_argument("--ci", action="store_true", help="Run in strict CI verification mode.")
@@ -606,6 +670,7 @@ def main() -> int:
     check_pii_s3_and_ai_slop(files, errors)
     check_data_integrity(files, errors)
     check_content_governance(errors)
+    check_agentic_setup(errors)
     check_built_html(errors)
 
     mode = "CI" if args.ci else "local"

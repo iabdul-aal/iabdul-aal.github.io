@@ -12,6 +12,7 @@ Academic website of Islam I. Abdulaal, presenting research in integrated photoni
 | `data/` | Directory | JSON databases (`cv_data.json`, `publications.json`, `talks.json`, metrics) and TeX sources |
 | `public/` | Directory | Static assets (favicons, logos, PDFs, RSS feed, CNAME) |
 | `scripts/` | Directory | Python synchronization, CV generation, and governance verification scripts |
+| `.agents/` | Directory | Workspace agent rules, lifecycle hooks (`hooks.json`), and domain skills (`skills/`) |
 
 ## Quick Reference
 
@@ -35,9 +36,10 @@ python scripts/verify_site.py --ci  # Run content and build governance checks
 
 ## Universal Rules
 
-1. Run `npm run check`, `python scripts/check_tools_sync.py`, and `python scripts/verify_site.py --ci` before pushing.
+1. Run `npm run check`, `python scripts/check_tools_sync.py`, and `python scripts/verify_site.py --ci` before pushing; follow `.agents/AGENTS.md` (along with scoped `data/AGENTS.md` and `scripts/AGENTS.md`) and `.agents/skills/`.
 2. Keep codebase minimal and research-focused:
    * Accent color is gold/bronze (`#b68c61`).
    * Never mention commercial software names (e.g. MATLAB, COMSOL, Lumerical) in research descriptions; use generic physical/computational terms (e.g., FDTD, drift-diffusion).
-   * All publications are managed dynamically in `data/publications.json` with overrides in `lib/publications.ts`.
-3. Force-pushes to the default branch are blocked. Update using linear commits after syncing with remote.
+   * All publications are managed dynamically in `data/publications.json` with overrides and adaptable preprint server normalization in `lib/publications.ts`.
+   * Avoid `&` as a written connective, `U+2014` em-dashes, and inline dot dividers (`U+00B7` or bullet dots).
+3. Force-pushes to the default branch are blocked (including via `.agents/hooks.json`). Update using linear commits after syncing with remote.

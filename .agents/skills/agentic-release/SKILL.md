@@ -22,12 +22,12 @@ Verify with `git status` that generated artifacts (`data/cv.tex`, `data/cv_de.te
 
 ## 2. Linear Commit and Push Discipline
 
-- Force-pushes to `main` are blocked by repository policy. Always integrate with linear history:
+- Force-pushes to `main` are blocked both by GitHub branch rules and `.agents/hooks.json` (`.agents/hooks/guard.py`), which also runs `check_tools_sync.py` and `verify_site.py --ci` before any `git push` and blocks `[skip ci]` on CV or data commits. Always integrate with linear history:
 
 ```bash
-git pull --rebase origin main
 git add <files>
 git commit -m "<type>: <concise description>"
+git pull --rebase origin main
 git push origin main
 ```
 
@@ -48,4 +48,4 @@ Verify CI and GitHub Pages completion after pushing:
 gh run list --limit 5
 ```
 
-Confirm both any triggered CV/data workflow and `Deploy academic website` conclude with `success` and serve the updated content at `https://iabdul-aal.me`.
+If `gh` CLI is unavailable, inspect `https://api.github.com/repos/iabdul-aal/iabdul-aal.github.io/actions/runs?per_page=5` via Python. Confirm both any triggered `Rebuild CV PDF on Push` workflow and the chained `Deploy academic website` run conclude with `success`, run `git pull --rebase origin main` if CI committed rebuilt PDFs/feeds, and verify `https://iabdul-aal.me` with `.agents/skills/browser-and-ui-qa/SKILL.md`.
