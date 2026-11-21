@@ -167,7 +167,7 @@ export function Navigation() {
                   className={cn(
                     "touch-target flex min-h-[44px] items-center rounded-md px-3.5 py-2.5 text-sm transition-colors",
                     active
-                      ? "bg-secondary font-semibold text-foreground border-s-2 border-accent"
+                      ? "bg-secondary font-semibold text-foreground"
                       : "text-muted-foreground hover:bg-secondary/70 hover:text-foreground",
                   )}
                 >

@@ -16,7 +16,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from config_helper import clean_html_text
+from config_helper import clean_html_text, infer_preprint_info
 
 ROOT = Path(__file__).parent.parent
 MAX_ITEMS = 10
@@ -71,30 +71,29 @@ def events_from_publications(pubs: list) -> list[dict]:
             continue
         date_or_year = (pub.get("date") or pub.get("year") or "").strip()
         venue = clean_html_text(pub.get("venue") or "", replace_em_dash=True)
-        doi = (pub.get("doi") or "").strip()
-        pub_type = (pub.get("type") or "").lower().strip()
-        arxiv_prefix = "10.48550/arxiv."
-        is_preprint = (
-            pub_type == "preprint"
-            or doi.lower().startswith(arxiv_prefix)
-            or "preprint" in venue.lower()
-            or "preprints" in doi.lower()
-            or not bool(venue)
-        )
+        preprint_info = infer_preprint_info(pub)
+        is_preprint = bool(preprint_info["is_preprint"])
+        server = preprint_info["server"]
 
         dt = parse_date(date_or_year)
         if not dt:
             continue
 
         event_type = "preprint" if is_preprint else "paper"
-        if "preprints" in venue.lower() or "preprints" in doi.lower():
+        if server == "Preprints.org":
             detail = "Posted research preprint on Preprints.org covering nanophotonic inverse design."
-        elif is_preprint and doi.lower().startswith(arxiv_prefix):
+        elif server == "arXiv":
             detail = "Posted preprint manuscript on arXiv covering physics-informed scientific modeling."
-        elif venue and not is_preprint:
+        elif is_preprint:
+            detail = (
+                f"Posted research preprint on {server}."
+                if server and server.lower() != "preprint"
+                else "Posted research preprint in an open repository."
+            )
+        elif venue:
             detail = f"Peer-reviewed article published in {venue} covering nanophotonics."
         else:
-            detail = f"Research manuscript posted in {event_type} repository format."
+            detail = "Peer-reviewed research article published."
 
         events.append({
             "date_iso": dt.strftime(DATE_FMT),

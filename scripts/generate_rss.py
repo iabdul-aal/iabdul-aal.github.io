@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
 
-from config_helper import clean_html_text
+from config_helper import clean_html_text, infer_preprint_info
 
 
 def format_rfc822(date_str: str) -> str:
@@ -134,14 +134,18 @@ class PublicationFeedItem(BaseFeedItem):
         if not year:
             date = str(self.raw_data.get("date") or "").strip()
             year = date[:4] if len(date) >= 4 else "2026"
-        arxiv_id = str(self.raw_data.get("arxiv") or "").strip()
-        if venue and venue.lower() not in ("preprint", "arxiv", "arxiv preprint"):
-            if "preprints.org" in venue.lower():
-                return f"Posted on Preprints.org ({year})."
+        preprint_info = infer_preprint_info(self.raw_data)
+        arxiv_id = preprint_info["arxiv"] or str(self.raw_data.get("arxiv") or "").strip()
+        if preprint_info["is_preprint"]:
+            server = preprint_info["server"]
+            if server == "arXiv" and arxiv_id:
+                return f"Posted on arXiv:{arxiv_id} ({year})."
+            if server and server.lower() != "preprint":
+                return f"Posted on {server} ({year})."
+            return f"Posted as preprint ({year})."
+        if venue:
             return f"Published in {venue} ({year})."
-        if arxiv_id:
-            return f"Posted on arXiv:{arxiv_id} ({year})."
-        return f"Posted as preprint ({year})."
+        return f"Published manuscript ({year})."
 
     @property
     def pub_date(self) -> str:

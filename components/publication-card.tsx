@@ -112,12 +112,33 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
   }
 
   const doiHref = publication.doi
-    ? publication.url && !publication.url.includes("arxiv.org")
+    ? publication.url &&
+      !publication.url.includes("arxiv.org") &&
+      !publication.url.includes("preprints.org/manuscript")
       ? publication.url
       : `https://doi.org/${publication.doi}`
-    : undefined
+    : publication.url && publication.url !== publication.preprint?.url
+      ? publication.url
+      : undefined
+
+  const preprintHref =
+    publication.preprint?.url ||
+    (publication.arxiv ? `https://arxiv.org/abs/${publication.arxiv}` : undefined)
+  const preprintLabel = publication.preprint
+    ? publication.preprint.id
+      ? `${publication.preprint.server}:${publication.preprint.id}`
+      : publication.preprint.server
+    : publication.arxiv
+      ? `arXiv:${publication.arxiv}`
+      : undefined
+  const showPreprintLink = Boolean(
+    preprintHref && preprintLabel && preprintHref !== doiHref
+  )
 
   const artifactLinks = collectArtifactLinks(publication as OptionalPublicationFields, isDe)
+  const hasExplicitPreprintBadge = Boolean(
+    publication.badges?.some((b) => b.toLowerCase().includes("preprint"))
+  )
 
   return (
     <Row aria-label={publication.title}>
@@ -130,6 +151,9 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           <span className="text-muted-foreground tabular-nums">
             {[publication.venue, publication.year].filter(Boolean).join(", ")}
           </span>
+          {publication.status === "preprint" && !hasExplicitPreprintBadge && (
+            <Badge variant="preprint">Preprint</Badge>
+          )}
           {publication.badges?.map((badge) => {
             const b = badge.toLowerCase()
             const translatedBadge = isDe
@@ -142,7 +166,7 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
                     : badge
               : badge
             return (
-              <Badge key={badge} variant="published">
+              <Badge key={badge} variant={b.includes("preprint") ? "preprint" : "published"}>
                 {translatedBadge}
               </Badge>
             )
@@ -180,14 +204,14 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
               />
             </a>
           )}
-          {publication.arxiv && (
+          {showPreprintLink && preprintHref && (
             <a
-              href={`https://arxiv.org/abs/${publication.arxiv}`}
+              href={preprintHref}
               target="_blank"
               rel="noopener noreferrer"
               className="group btn-secondary"
             >
-              arXiv:{publication.arxiv}
+              {preprintLabel}
               <ArrowUpRight
                 className="h-3 w-3 transition-transform duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]"
                 aria-hidden="true"
@@ -275,7 +299,7 @@ export function PublicationCard({ publication, compact = false }: PublicationCar
           hidden={!showAbstract}
           className="mt-3 border-t border-border/50 pt-3"
         >
-          <p className="border-s-2 border-accent/45 ps-3.5 text-[13px] leading-relaxed text-muted-foreground">
+          <p className="text-[13px] leading-[1.7] text-muted-foreground">
             <ScientificText text={publication.abstract} />
           </p>
         </div>

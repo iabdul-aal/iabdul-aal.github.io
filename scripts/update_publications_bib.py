@@ -7,7 +7,7 @@ import json
 import os
 import re
 
-from config_helper import to_latex_sub_sup
+from config_helper import infer_preprint_info, to_latex_sub_sup
 
 
 def format_author(author_name: str) -> str:
@@ -69,32 +69,6 @@ def _infer_year(pub: dict) -> str:
     return ""
 
 
-def _is_preprints_org_or_working_paper(pub: dict) -> bool:
-    venue = str(pub.get("venue", "")).lower().strip()
-    doi = str(pub.get("doi", "")).lower().strip()
-    url = str(pub.get("url", "")).lower().strip()
-    pub_type = str(pub.get("type", "")).lower().strip()
-    arxiv = str(pub.get("arxiv", "")).strip()
-
-    if "preprints.org" in venue or "preprints.org" in url or doi.startswith("10.20944/preprints"):
-        return True
-    if pub_type in ("working-paper", "posted-content") or "working paper" in venue:
-        return True
-    if pub_type == "preprint" and not arxiv and not doi.startswith("10.48550/arxiv."):
-        return True
-    return False
-
-
-def _is_arxiv_preprint(pub: dict) -> bool:
-    venue = str(pub.get("venue", "")).lower().strip()
-    doi = str(pub.get("doi", "")).lower().strip()
-    if doi.startswith("10.48550/arxiv."):
-        return True
-    if "preprint" in venue or "arxiv" in venue:
-        return True
-    return False
-
-
 def _build_entry(entry_type: str, key: str, fields: list[tuple[str, str]]) -> str:
     lines = [f"@{entry_type}{{{key},"]
     non_empty = [(k, v) for k, v in fields if v]
@@ -133,17 +107,24 @@ def main() -> None:
         formatted_authors = " and ".join(format_author(a) for a in authors)
         key = generate_bib_key(authors, year, raw_title, used_keys)
 
-        if _is_preprints_org_or_working_paper(pub):
-            howpublished = (
-                "Preprints.org"
-                if (
-                    "preprints.org" in venue.lower()
-                    or "preprints.org" in url.lower()
-                    or doi.lower().startswith("10.20944/preprints")
-                    or venue.lower() in ("working paper", "unspecified venue", "")
-                )
-                else escape_bibtex_text(venue)
-            )
+        preprint_info = infer_preprint_info(pub)
+
+        if preprint_info["is_arxiv"]:
+            arxiv_id = preprint_info["arxiv"] or arxiv
+            note_val = f"arXiv:{arxiv_id}" if arxiv_id else escape_bibtex_text(venue)
+            fields = [
+                ("author", formatted_authors),
+                ("title", title),
+                ("note", note_val),
+                ("eprint", arxiv_id),
+                ("archiveprefix", "arXiv" if arxiv_id else ""),
+                ("doi", doi),
+                ("year", year),
+                ("url", url),
+            ]
+            entry = _build_entry("unpublished", key, fields)
+        elif preprint_info["is_preprint"]:
+            howpublished = escape_bibtex_text(preprint_info["server"] or venue or "Preprint")
             fields = [
                 ("author", formatted_authors),
                 ("title", title),
@@ -153,19 +134,6 @@ def main() -> None:
                 ("url", url),
             ]
             entry = _build_entry("misc", key, fields)
-        elif _is_arxiv_preprint(pub):
-            note_val = f"arXiv:{arxiv}" if arxiv else escape_bibtex_text(venue)
-            fields = [
-                ("author", formatted_authors),
-                ("title", title),
-                ("note", note_val),
-                ("eprint", arxiv),
-                ("archiveprefix", "arXiv" if arxiv else ""),
-                ("doi", doi),
-                ("year", year),
-                ("url", url),
-            ]
-            entry = _build_entry("unpublished", key, fields)
         else:
             fields = [
                 ("author", formatted_authors),

@@ -1,3 +1,10 @@
+export type PreprintMeta = {
+  server: string
+  id?: string
+  url?: string
+  version?: string
+}
+
 export type PublicationRecord = {
   id: string
   title: string
@@ -8,6 +15,7 @@ export type PublicationRecord = {
   url?: string
   arxiv?: string
   pdfUrl?: string
+  preprint?: PreprintMeta
   abstract?: string
   submitted?: string
   subjects?: string[]

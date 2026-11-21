@@ -87,6 +87,11 @@ export function PublicationsList({ publications, compact = false }: Publications
         pub.title.toLowerCase().includes(query) ||
         pub.authors.some((author) => author.toLowerCase().includes(query)) ||
         (pub.venue && pub.venue.toLowerCase().includes(query)) ||
+        (pub.doi && pub.doi.toLowerCase().includes(query)) ||
+        (pub.arxiv && pub.arxiv.toLowerCase().includes(query)) ||
+        (pub.preprint?.server && pub.preprint.server.toLowerCase().includes(query)) ||
+        (pub.preprint?.id && pub.preprint.id.toLowerCase().includes(query)) ||
+        Boolean(pub.subjects?.some((s) => s.toLowerCase().includes(query))) ||
         (pub.abstract && pub.abstract.toLowerCase().includes(query))
 
       const matchesTopic =

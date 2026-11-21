@@ -482,6 +482,86 @@ def get_research_themes() -> list[dict[str, Any]]:
     return themes
 
 
+_PREPRINT_SERVER_RULES: tuple[tuple[str, tuple[str, ...], tuple[str, ...], tuple[str, ...]], ...] = (
+    ("arXiv", ("10.48550/arxiv.",), ("arxiv.org/",), ("arxiv",)),
+    ("Preprints.org", ("10.20944/preprints",), ("preprints.org/",), ("preprints.org",)),
+    ("Optica Open", ("10.1364/opticaopen",), ("opticaopen.org",), ("optica open",)),
+    ("TechRxiv", ("10.36227/techrxiv",), ("techrxiv.org",), ("techrxiv",)),
+    ("medRxiv", (), ("medrxiv.org",), ("medrxiv",)),
+    ("bioRxiv", ("10.1101/",), ("biorxiv.org",), ("biorxiv",)),
+    ("chemRxiv", ("10.26434/chemrxiv",), ("chemrxiv.org",), ("chemrxiv",)),
+    ("Research Square", ("10.21203/rs.",), ("researchsquare.com",), ("research square",)),
+    ("PsyArXiv", ("10.31234/",), (), ("psyarxiv",)),
+    ("SocArXiv", ("10.31235/",), (), ("socarxiv",)),
+    ("EarthArXiv", ("10.31223/",), (), ("eartharxiv",)),
+    ("OSF Preprints", ("10.31219/",), ("osf.io/preprints", "osf.io/"), ("osf preprints",)),
+    ("SSRN", ("10.2139/ssrn.",), ("ssrn.com",), ("ssrn",)),
+    ("HAL", (), ("hal.science", "hal.archives-ouvertes.fr"), ("hal",)),
+)
+
+_GENERIC_PREPRINT_VENUES = {
+    "",
+    "preprint",
+    "working paper",
+    "posted content",
+    "unspecified venue",
+    "publication",
+    "arxiv preprint",
+}
+
+
+def infer_preprint_info(pub: dict[str, Any]) -> dict[str, Any]:
+    """Normalize preprint status, server name, identifier, and canonical landing URL."""
+    doi = str(pub.get("doi") or "").strip()
+    lower_doi = doi.lower()
+    url = str(pub.get("url") or "").strip()
+    lower_url = url.lower()
+    raw_venue = clean_html_text(str(pub.get("venue") or pub.get("journal") or ""), replace_em_dash=True)
+    lower_venue = raw_venue.lower()
+    pub_type = str(pub.get("type") or "").lower().strip()
+    arxiv_id = str(pub.get("arxiv") or "").strip()
+
+    if not arxiv_id:
+        if lower_doi.startswith("10.48550/arxiv."):
+            arxiv_id = doi[len("10.48550/arxiv.") :].strip()
+        elif "arxiv.org/abs/" in lower_url:
+            arxiv_id = url.split("/abs/")[-1].strip()
+
+    matched_server = str(pub.get("preprintServer") or "").strip()
+    if not matched_server:
+        for server_name, doi_prefixes, host_pats, venue_pats in _PREPRINT_SERVER_RULES:
+            if server_name == "arXiv" and arxiv_id:
+                matched_server = "arXiv"
+                break
+            if any(lower_doi.startswith(p) for p in doi_prefixes):
+                matched_server = server_name
+                break
+            if any(h in lower_url for h in host_pats):
+                matched_server = server_name
+                break
+            if any(v in lower_venue for v in venue_pats):
+                matched_server = server_name
+                break
+
+    is_primary_arxiv = bool(arxiv_id and (not doi or lower_doi.startswith("10.48550/arxiv.")))
+    is_preprint = bool(
+        pub_type in ("preprint", "working-paper", "posted-content")
+        or is_primary_arxiv
+        or "preprint" in lower_venue
+        or "working paper" in lower_venue
+        or "posted content" in lower_venue
+        or (matched_server and matched_server != "arXiv")
+    )
+
+    server = matched_server or (raw_venue if lower_venue not in _GENERIC_PREPRINT_VENUES else "Preprint")
+    return {
+        "is_preprint": is_preprint,
+        "is_arxiv": is_preprint and server == "arXiv" and bool(arxiv_id),
+        "server": server if is_preprint or matched_server else "",
+        "arxiv": arxiv_id,
+    }
+
+
 def get_project_records() -> list[dict[str, Any]]:
     path = ROOT / "lib" / "academic-content.ts"
     if not path.exists():

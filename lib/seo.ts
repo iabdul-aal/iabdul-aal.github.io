@@ -150,6 +150,8 @@ export function generatePublicationsSchema(publications?: PublicationRecord[]) {
     url?: string
     authors: string[]
     abstract?: string
+    status?: "published" | "preprint"
+    type?: string
   }> =
     publications ??
     (publicationsData as Array<{
@@ -160,6 +162,7 @@ export function generatePublicationsSchema(publications?: PublicationRecord[]) {
       url?: string
       authors: string[]
       abstract?: string
+      type?: string
     }>)
 
   return {
@@ -168,24 +171,28 @@ export function generatePublicationsSchema(publications?: PublicationRecord[]) {
     name: `Publications of ${siteConfig.name}`,
     description: "Peer-reviewed journal articles, preprints, and research publications",
     numberOfItems: pubs.length,
-    itemListElement: pubs.map((pub, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "ScholarlyArticle",
-        name: pub.title,
-        headline: pub.title,
-        abstract: pub.abstract,
-        datePublished: pub.year,
-        author: (pub.authors || []).map((name) => ({
-          "@type": "Person",
-          name,
-        })),
-        publisher: pub.venue ? { "@type": "Organization", name: pub.venue } : undefined,
-        sameAs: pub.doi ? `https://doi.org/${pub.doi}` : pub.url,
-        url: pub.url || (pub.doi ? `https://doi.org/${pub.doi}` : undefined),
-      },
-    })),
+    itemListElement: pubs.map((pub, index) => {
+      const isPreprint = pub.status === "preprint" || pub.type === "preprint"
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "ScholarlyArticle",
+          name: pub.title,
+          headline: pub.title,
+          abstract: pub.abstract,
+          datePublished: pub.year,
+          creativeWorkStatus: isPreprint ? "Preprint" : "Published",
+          author: (pub.authors || []).map((name) => ({
+            "@type": "Person",
+            name,
+          })),
+          publisher: pub.venue ? { "@type": "Organization", name: pub.venue } : undefined,
+          sameAs: pub.doi ? `https://doi.org/${pub.doi}` : pub.url,
+          url: pub.url || (pub.doi ? `https://doi.org/${pub.doi}` : undefined),
+        },
+      }
+    }),
   }
 }
 

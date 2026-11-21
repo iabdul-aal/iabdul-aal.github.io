@@ -10,7 +10,7 @@ from typing import Any
 
 import requests
 
-from config_helper import clean_html_text, get_email, get_orcid_id
+from config_helper import clean_html_text, get_email, get_orcid_id, infer_preprint_info
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -167,8 +167,31 @@ def fetch_crossref_metadata(doi: str) -> dict[str, Any]:
         result["pages"] = str(msg["page"]).strip()
 
     cr_type = str(msg.get("type", "")).lower().strip()
-    if cr_type == "posted-content" or lower_doi.startswith("10.20944/preprints"):
+    cr_subtype = str(msg.get("subtype", "")).lower().strip()
+    if cr_type == "posted-content" or cr_subtype == "preprint":
         result["type"] = "preprint"
+
+    for link_item in msg.get("link") or []:
+        if not isinstance(link_item, dict):
+            continue
+        ct = str(link_item.get("content-type", "")).lower()
+        link_url = str(link_item.get("URL", "")).strip()
+        if link_url and ("pdf" in ct or link_url.lower().endswith(".pdf")):
+            result["pdfUrl"] = link_url
+            break
+
+    preprint_info = infer_preprint_info(
+        {
+            "doi": doi,
+            "url": str(msg.get("URL", "")).strip(),
+            "venue": result.get("venue", ""),
+            "type": result.get("type", ""),
+        }
+    )
+    if preprint_info["is_preprint"]:
+        result["type"] = "preprint"
+        if not result.get("venue") or result["venue"].lower().strip() in GENERIC_VENUES:
+            result["venue"] = preprint_info["server"]
 
     return result
 
@@ -210,11 +233,20 @@ def normalize_publication(group: dict[str, Any]) -> dict[str, Any]:
     if date_str:
         record["date"] = date_str
 
-    if doi.lower().startswith("10.20944/preprints") or "preprints.org" in url.lower():
-        record["venue"] = "Preprints.org"
+    preprint_info = infer_preprint_info(
+        {
+            "doi": doi,
+            "url": url,
+            "venue": venue,
+            "type": work_type,
+        }
+    )
+    if preprint_info["is_preprint"]:
         record["type"] = "preprint"
-    elif work_type == "working-paper":
-        record["type"] = "preprint"
+        if not record["venue"] or record["venue"].lower().strip() in GENERIC_VENUES or work_type in ("working-paper", "preprint"):
+            record["venue"] = preprint_info["server"]
+        if preprint_info["arxiv"]:
+            record["arxiv"] = preprint_info["arxiv"]
 
     return record
 
@@ -264,6 +296,14 @@ def _merge_publication(base: dict[str, Any], crossref: dict[str, Any], existing:
         for opt_key in ("arxiv", "volume", "issue", "pages", "abstract", "pdfUrl", "badges", "type"):
             if existing.get(opt_key) and not merged.get(opt_key):
                 merged[opt_key] = existing[opt_key]
+
+    final_preprint = infer_preprint_info(merged)
+    if final_preprint["is_preprint"]:
+        merged["type"] = "preprint"
+        if merged.get("venue", "").lower().strip() in GENERIC_VENUES:
+            merged["venue"] = final_preprint["server"]
+        if final_preprint["arxiv"] and not merged.get("arxiv"):
+            merged["arxiv"] = final_preprint["arxiv"]
 
     return _normalize_entry_fields(merged)
 
